@@ -12,5 +12,5 @@
 
 # Notendahópagreining, kröfulisti og notkunartilvik kláruð,
 # á eftir að fínpússa.
-# Byrjuðum á klasariti og stöðurtiti. 
-# Fengum smá kynningu á 3 laga högun.. 
+# Byrjuðum á klasariti og stöðuriti. 
+# Fengum smá kynningu á 3 laga högun.
