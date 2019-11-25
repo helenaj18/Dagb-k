@@ -6,3 +6,11 @@
 # Kinga: Notendahópagreining
 # Marinella: 
 # Vala: Kröfulisti og notkunartilvik
+
+
+# Kl 15:30
+
+# Notendahópagreining, kröfulisti og notkunartilvik kláruð,
+# á eftir að fínpússa.
+# Byrjuðum á klasariti og stöðurtiti. 
+# Fengum smá kynningu á 3 laga högun.. 
