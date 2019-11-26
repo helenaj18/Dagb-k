@@ -34,3 +34,8 @@ Erla: Viðmót
 Helena: Klasarit og stöðurit
 Kinga: Viðmót
 Vala: Klasarit og stöðurit
+
+Kl 17:26
+Kláruðum nánast wireframe og ákváðum að gera Scrolling window.
+Við breyttum klasaritinu tvisvar, fengum góðar ábendingar og ætlum að halda áfram á morgun.
+Við ætlum einnig að byrja að notendaprófa á morgun.
