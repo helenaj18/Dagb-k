@@ -32,6 +32,7 @@ Við höfum ákveðið að breyta klasaritinu okkar og vinna svo í viðmóti l�
 Við ætlum svo að fara yfir stöðuritið líka og athuga hvort hægt sé að bæta það.
 Erla: Viðmót
 Helena: Klasarit og stöðurit
+Marinella: Viðmót
 Kinga: Viðmót
 Vala: Klasarit og stöðurit
 
@@ -39,3 +40,13 @@ Kl 17:26
 Kláruðum nánast wireframe og ákváðum að gera Scrolling window.
 Við breyttum klasaritinu tvisvar, fengum góðar ábendingar og ætlum að halda áfram á morgun.
 Við ætlum einnig að byrja að notendaprófa á morgun.
+
+
+27.11.2019
+Kl 9:00
+Við þurfum að fínpússa viðmót og klára klasaritið ásamt því að bæta stöðuritið.
+Erla: Viðmót
+Helena: Klasarit og stöðurit
+Marinella:
+Kinga: Viðmót
+Vala: Klasarit og stöðurit
