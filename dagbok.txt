@@ -50,3 +50,12 @@ Helena: Klasarit og stöðurit
 Marinella: Viðmót
 Kinga: Viðmót
 Vala: Klasarit og stöðurit
+
+16:00
+Kláruðum að mestu viðmótið og kláruðum klasaritið og stöðuritið. Settum allt þrennt inn í hönnunarskýsluna 
+og reyndum að láta það líta þokkalega út.
+Prófuðum viðmótið á einum notanda og fengum mjög góðar niðurstöður út úr því. Löguðum viðmótið út frá niðurstöðunum.
+Gerðum líka happy path fyrir öll notkunartilvikin.
+
+Planið fyrir morgundaginn er að taka fleiri notendaprófanir og laga viðmótið betur.
+Að auki ætlum við að fínpússa skýrsluna.
