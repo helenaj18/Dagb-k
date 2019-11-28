@@ -59,3 +59,13 @@ Gerðum líka happy path fyrir öll notkunartilvikin.
 
 Planið fyrir morgundaginn er að taka fleiri notendaprófanir og laga viðmótið betur.
 Að auki ætlum við að fínpússa skýrsluna.
+
+
+Morgunfundur 28.11
+Við ætlum að byrja á því að taka notendaprófanir á amk einum öðrum notanda.
+Við ætlum að fínpússa skýrsluna og bæta við margföldunarþáttum í klasaritið.
+Erla: Fínpússun og notendaprófun
+Helena: Fínpússun og klasarit
+Marinella: Fínpússun og notendaprófun
+Kinga: Fínpússun og notendaprófun
+Vala: Fínpússun og klasarit
