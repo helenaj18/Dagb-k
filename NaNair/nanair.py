@@ -47,6 +47,9 @@ class DestinationUI:
     def __init__(self):
         pass
 
+    def __str__(self):
+        pass 
+
     def show_all_destinations(self):
         '''Shows all destinations of NanAir'''
         pass
@@ -59,6 +62,9 @@ class DestinationUI:
 class AirplaneUI:
 
     def __init__(self):
+        pass
+
+    def __str__(self):
         pass
 
     def show_all_planes(self):
@@ -76,49 +82,15 @@ class VoyageUI:
     def __init__(self):
         pass
 
+    def __str__(self):
+        pass
+
     def show_all_voyages(self,time_period_str):
         '''Shows all voyages for a current time period'''
         pass
 
     def show_one_voyage(self,voyage_ID):
         '''Shows one specific voyage'''
-        pass
-
-
-
-class AirplaneIO:
-
-    def __init__(self,filename):
-        self.__airplane_filename = filename
-
-    def load_airplane_from_file(self):
-        '''Loads existing airplanes from the file'''
-        pass
-
-    def change_airplane_from_file(self):
-        '''Changes an existing airplane in the file'''
-        pass
-
-    def add_airplane_from_file(self):
-        '''Adds a new airplane to the file'''
-        pass
-
-
-class VoyageIO:
-
-    def __init__(self,filename):
-        self.__voyage_filename = filename
-
-    def load_voyage_from_file(self):
-        '''Loads existing voyages from the file'''
-        pass
-
-    def change_voyage_from_file(self):
-        '''Changes an existing voyage in the file'''
-        pass
-
-    def add_voyage_from_file(self):
-        '''Adds a new voyage to the file'''
         pass
 
 
@@ -268,3 +240,38 @@ class AttendantIO:
         '''Adds flight attendant info into file'''
         pass
 
+
+class AirplaneIO:
+
+    def __init__(self,filename):
+        self.__airplane_filename = filename
+
+    def load_airplane_from_file(self):
+        '''Loads existing airplanes from the file'''
+        pass
+
+    def change_airplane_from_file(self):
+        '''Changes an existing airplane in the file'''
+        pass
+
+    def add_airplane_from_file(self):
+        '''Adds a new airplane to the file'''
+        pass
+
+
+class VoyageIO:
+
+    def __init__(self,filename):
+        self.__voyage_filename = filename
+
+    def load_voyage_from_file(self):
+        '''Loads existing voyages from the file'''
+        pass
+
+    def change_voyage_from_file(self):
+        '''Changes an existing voyage in the file'''
+        pass
+
+    def add_voyage_from_file(self):
+        '''Adds a new voyage to the file'''
+        pass
