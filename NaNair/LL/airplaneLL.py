@@ -5,7 +5,8 @@ class AirplaneLL:
         self.airplane = airplane
         self.airplaneIO = airplaneIO
  
-    def getAirplanes(self):
+    def getAirplanes(self, num):
+        '''Fetches list of airplanes and returns a list'''
         pass
    
     def addAirplane(self):
