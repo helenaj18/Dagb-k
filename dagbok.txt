@@ -1,0 +1,91 @@
+25.11.2019 
+Kl 10:20
+
+Erla: Notendahópagreining
+Helena: Kröfulisti og notkunartilvik
+Kinga: Notendahópagreining
+Vala: Kröfulisti og notkunartilvik
+
+
+Kl 15:30
+
+Notendahópagreining, kröfulisti og notkunartilvik kláruð,
+á eftir að fínpússa.
+Byrjuðum á klasariti og stöðuriti. 
+Fengum smá kynningu á 3 laga högun.
+Klárum klarasritið vonandi á morgun, eftir fyrirlesturinn um 3 laga högun! 
+
+Sjáum fram að byrja á Wireframe grunnhönnun eftir að hafa fengið kynningu á TUI.
+
+26.11.2019 morgunfundur
+Kl 09:32
+
+Við komumst að því að æskilegt er að gera notkunartilvik fyrir allar kröfur.
+Við gerðum bara fyrir A kröfur í gær þannig við ætlum að hjálpast að við að gera B kröfur fyrir fyrirlesturinn kl 11:30.
+Tökum stöðuna aftur þegar það er komið.
+
+26.11.2019
+Kl 12:20
+
+Fyrirlestri dagsins lokið.
+Við höfum ákveðið að breyta klasaritinu okkar og vinna svo í viðmóti líka.
+Við ætlum svo að fara yfir stöðuritið líka og athuga hvort hægt sé að bæta það.
+Erla: Viðmót
+Helena: Klasarit og stöðurit
+Marinella: Viðmót
+Kinga: Viðmót
+Vala: Klasarit og stöðurit
+
+Kl 17:26
+Kláruðum nánast wireframe og ákváðum að gera Scrolling window.
+Við breyttum klasaritinu tvisvar, fengum góðar ábendingar og ætlum að halda áfram á morgun.
+Við ætlum einnig að byrja að notendaprófa á morgun.
+
+
+27.11.2019
+Kl 9:00
+Við þurfum að fínpússa viðmót og klára klasaritið ásamt því að bæta stöðuritið.
+Erla: Viðmót
+Helena: Klasarit og stöðurit
+Marinella: Viðmót
+Kinga: Viðmót
+Vala: Klasarit og stöðurit
+
+16:00
+Kláruðum að mestu viðmótið og kláruðum klasaritið og stöðuritið. Settum allt þrennt inn í hönnunarskýsluna 
+og reyndum að láta það líta þokkalega út.
+Prófuðum viðmótið á einum notanda og fengum mjög góðar niðurstöður út úr því. Löguðum viðmótið út frá niðurstöðunum.
+Gerðum líka happy path fyrir öll notkunartilvikin.
+
+Planið fyrir morgundaginn er að taka fleiri notendaprófanir og laga viðmótið betur.
+Að auki ætlum við að fínpússa skýrsluna.
+
+
+Morgunfundur 28.11
+Við ætlum að byrja á því að taka notendaprófanir á amk einum öðrum notanda.
+Við ætlum að fínpússa skýrsluna og bæta við margföldunarþáttum í klasaritið.
+Erla: Fínpússun og notendaprófun
+Helena: Fínpússun og klasarit
+Marinella: Fínpússun og notendaprófun
+Kinga: Fínpússun og notendaprófun
+Vala: Fínpússun og klasarit
+
+
+Kl 12:00
+Erum búnar með skýrsluna! 
+Skilum núna og ef eitthvað kemur upp munum við gera það á morgun.
+Við erum búnar með allt og munum ekki mæta á morgun nema eitthvað komi upp!
+
+
+Morgunfundur 2.12.2019
+Byrja að skilgreina föllin og kommenta þau. 
+Við ætlum að vinna þetta saman af því við erum ekki alveg vissar um hvernig við eigum að gera þetta.
+Ætlum svo að skoða betur hvernig við getum skipt verkum eftir fyrirlesturinn.
+
+
+Eftir fyrirlestur:
+Helena: AttendantIO
+Erla: AirplaneIO
+Kinga: DestinationIO
+Marinella: PilotIO
+Vala: VoyageIO
