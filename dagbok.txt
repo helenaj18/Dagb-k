@@ -89,3 +89,10 @@ Erla: AirplaneIO
 Kinga: DestinationIO
 Marinella: PilotIO
 Vala: VoyageIO
+
+Kl 16:00
+Erum búnar með IO klasana, erum bara bíða eftir að fá öll gögn svo við getum lagað klasana út
+fræa þeim. Einnig erum við byrjaðar að reyna að gera API klasana.
+
+Planið fyrir morgundaginn er að laga klasana út frá gögnum sem við eigum eftir að fá.
+Einnig ætlum við að reyna að klára API klasa á morgun.
