@@ -5,10 +5,10 @@ class VoyageLL:
         self.voyageIO = voyageIO
         pass
  
-    def get_voyage(self,ID):
+    def getVoyage(self,ID):
         pass
  
-    def add_voyage(self):
+    def addVoyage(self):
         pass
  
 

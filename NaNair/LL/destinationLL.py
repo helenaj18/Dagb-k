@@ -2,7 +2,7 @@ class DestinationLL:
     def __init__(self):
         pass
  
-    def get_destination(self):
+    def getDestination(self):
         ''' Gets destination from Destination class'''
         pass
 

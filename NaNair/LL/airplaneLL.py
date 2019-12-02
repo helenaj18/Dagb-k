@@ -5,10 +5,10 @@ class AirplaneLL:
         self.airplane = airplane
         self.airplaneIO = airplaneIO
  
-    def get_airplanes(self):
+    def getAirplanes(self):
         pass
    
-    def add_airplane(self):
+    def addAirplane(self):
         pass
 
 

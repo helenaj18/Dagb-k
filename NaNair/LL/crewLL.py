@@ -3,31 +3,31 @@ class CrewLL:
     def __init__(self):
         pass
  
-    def get_crew(self):
+    def getCrew(self):
         ''' Gets the whole crew '''
         pass
  
-    def get_pilots(self):
+    def getPilots(self):
         ''' Gets pilot from all the pilots (crew)'''
         pass
  
-    def add_pilot(self):
+    def addPilot(self):
         ''' Adds pilot to pilots (crew)'''
         pass
  
-    def edit_pilot(self):
+    def editPilot(self):
         ''' Edits information of a pilot '''
         pass
  
-    def add_flight_attendant(self):
+    def addFlightAttendant(self):
         ''' Adds flight attendant to flight attendants (crew)'''
         pass
  
-    def edit_flight_attendant(self):
+    def editFlightAttendant(self):
         ''' Edits information of a flight attendant '''
         pass
  
-    def get_working_crew(self):
+    def getWorkingCrew(self):
         ''' Gets the working crew '''
         pass
 
