@@ -1,16 +1,33 @@
 class AirplaneIO:
+    def read_file(self):
+        '''Reads file and returns aircraft list'''
+        file_object = open(self.__airplane_filename,'r')
+        airplanes_list = []
 
-    def __init__(self,filename):
-        self.__airplane_filename = filename
+        for line in file_object:
+            line = line.strip().split(',')
+            airplanes_list.append(line)
+        
+        self.airplanes_list = airplanes_list
 
-    def loadAirplaneFromFile(self):
+    def __init__(self):
+        self.__airplane_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/STUDENTDATA/Aircraft.csv'
+
+    def load_airplane_from_file(self):
         '''Loads existing airplanes from the file'''
-        pass
 
-    def changeAirplaneFromFile(self):
+        self.read_file()
+        return self.airplanes_list
+
+    def change_airplane_in_file(self):
         '''Changes an existing airplane in the file'''
         pass
 
-    def addAirplaneFromFile(self):
+    def add_airplane_to_file(self, new_airplane_str):
         '''Adds a new airplane to the file'''
-        pass
+        
+        file_object = open(self.__airplane_filename,'a')
+        file_object.write(new_airplane_str+'\n')
+
+        return file_object
+
