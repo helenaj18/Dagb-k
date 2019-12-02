@@ -1,10 +1,12 @@
+# ATH á að vera inní klasa
+SSN_const = 0
+NAME_const = 1
+ROLE_const = 2
+RANK_const = 3
+LICENSE_const = 4
+
 class AttendantIO:
-    
-    SSN = 0
-    NAME = 1
-    ROLE = 2
-    RANK = 3
-    LICENSE = 4
+
 
     def __init__(self):
         # Muna að breyta í crew.csv!!!
@@ -30,7 +32,7 @@ class AttendantIO:
 
         for i in range(1,len(self.employees_list)):
             # Only pilots have licenses
-            if self.employees_list[i][-1] == 'N/A': # ATH virkar ekki að gera license fastann??
+            if self.employees_list[i][LICENSE_const] == 'N/A':
                 flight_att_list.append(self.employees_list[i])
         
         self.flight_att_list = flight_att_list
