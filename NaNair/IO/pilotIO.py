@@ -9,7 +9,7 @@ class PilotIO:
     
     def __init__(self):
         # Muna að breyta í crew.csv!!!
-        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/STUDENTDATA/Crew.csv'
+        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Crew.csv'
     
 
     # Er hægt að kalla í read file úr attendant????

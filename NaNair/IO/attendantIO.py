@@ -10,7 +10,7 @@ class AttendantIO:
 
     def __init__(self):
         # Muna að breyta í crew.csv!!!
-        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/STUDENTDATA/Crew.csv'
+        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Crew.csv'
 
     
     def read_file(self):
