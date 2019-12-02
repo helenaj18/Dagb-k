@@ -81,3 +81,8 @@ Morgunfundur 2.12.2019
 Byrja að skilgreina föllin og kommenta þau. 
 Við ætlum að vinna þetta saman af því við erum ekki alveg vissar um hvernig við eigum að gera þetta.
 Ætlum svo að skoða betur hvernig við getum skipt verkum eftir fyrirlesturinn.
+<<<<<<< HEAD
+=======
+
+test
+>>>>>>> b8a8c830b27e3303137c4bf9433f041bdf5b9ddc
