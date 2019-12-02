@@ -6,10 +6,13 @@ class AirplaneUI:
     def __str__(self):
         pass
 
-    def show_all_planes(self):
+    def airplaneID(self):
+        pass
+
+    def showAllPlanes(self):
         '''Shows information about all airplanes NanAir owns'''
         pass
 
-    def show_one_plane(self, plane_ID):
+    def showOnePlane(self, plane_ID):
         '''Shows information about one specific airplane'''
         pass

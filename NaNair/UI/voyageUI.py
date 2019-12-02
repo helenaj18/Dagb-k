@@ -6,10 +6,10 @@ class VoyageUI:
     def __str__(self):
         pass
 
-    def show_all_voyages(self,time_period_str):
+    def showAllVoyages(self,time_period_str):
         '''Shows all voyages for a current time period'''
         pass
 
-    def show_one_voyage(self,voyage_ID):
+    def showOneVoyage(self,voyage_ID):
         '''Shows one specific voyage'''
         pass

@@ -6,34 +6,34 @@ class CrewUI:
     def __str__(self):
         pass 
     
-    def show_crew(self):
+    def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         pass
 
-    def show_working_crew(self):
+    def showWorkingCrew(self):
         ''' Shows full list of working crew atm '''        
         pass
 
-    def show_all_pilots(self):
+    def showAllPilots(self):
         ''' Shows full list of pilots regestered'''
         pass
 
-    def show_one_pilot(self, pilot_ID):
+    def showOnePilot(self, pilot_ID):
         ''' Shows details for a specific pilot'''
         pass 
 
-    def show_by_licence(self, licence_ID):
+    def showByLicence(self, licence_ID):
         ''' Shows a list of pilots by their licence '''
         pass
 
-    def show_all_flight_att(self):
+    def showAllFlightAtt(self):
         ''' Shows a full list of all pilots regestered''' 
         pass
   
-    def show_one_flight_att(self, flight_att_ID):
+    def showOneFlightAtt(self, flight_att_ID):
         ''' Shows details for a specific flight attendant'''
         pass
 
-    def show_scedule(self, flight_att_ID):
+    def showScedule(self, flight_att_ID):
         ''' Shows the scedule for a specific flight attendant '''
         pass

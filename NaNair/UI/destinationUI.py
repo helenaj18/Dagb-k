@@ -6,10 +6,10 @@ class DestinationUI:
     def __str__(self):
         pass 
 
-    def show_all_destinations(self):
+    def showAllDestinations(self):
         '''Shows all destinations of NanAir'''
         pass
 
-    def show_one_destination(self,destination_ID):
+    def showOneDestination(self,destination_ID):
         '''Shows information about one destination'''
         pass
