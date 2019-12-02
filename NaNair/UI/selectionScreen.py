@@ -1,7 +1,6 @@
 some_recipe = [ 
     {'option': 'a', 'reason': 'see list of flights'},
-    {'option':'k','reason':'find one flight'  
-    }
+    {'option':'k','reason':'find one flight'}
 ]
 
 some_question = 'What do you want to do? '
