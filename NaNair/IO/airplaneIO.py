@@ -31,8 +31,3 @@ class AirplaneIO:
 
         return file_object
 
-
-a = AirplaneIO()
-print(a.load_airplane_from_file())
-
-a.add_airplane_to_file('TF-BROS, test')
