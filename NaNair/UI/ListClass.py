@@ -1,5 +1,7 @@
 
 class ListClass:
+    ''' List item in a dictionary'''
+
     def __init__(self, fields, objects):
         for item in objects:
             for field in fields:

@@ -1,11 +1,6 @@
 some_recipe = [ 
-    {
-        'option': 'a',
-    'reason': 'see list of flights'
-    },
-    { 
-      'option':'k',
-      'reason':'find one flight'  
+    {'option': 'a', 'reason': 'see list of flights'},
+    {'option':'k','reason':'find one flight'  
     }
 ]
 
