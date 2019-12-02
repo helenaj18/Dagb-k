@@ -10,8 +10,9 @@ class AirplaneIO:
         
         self.airplanes_list = airplanes_list
 
-    def __init__(self):
+    def __init__(self, airplaneID):
         self.__airplane_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/STUDENTDATA/Aircraft.csv'
+        self.__airplaneID = '' #búa til aðferð til að gefa flugvélum id
 
     def load_airplane_from_file(self):
         '''Loads existing airplanes from the file'''
