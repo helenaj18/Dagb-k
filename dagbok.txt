@@ -85,4 +85,9 @@ Við ætlum að vinna þetta saman af því við erum ekki alveg vissar um hvern
 =======
 
 test
+<<<<<<< HEAD
 >>>>>>> b8a8c830b27e3303137c4bf9433f041bdf5b9ddc
+=======
+
+test
+>>>>>>> 7ef07ad03819d5e354121cb7db1dca80e2b1fb5d
