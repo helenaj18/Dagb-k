@@ -26,7 +26,7 @@ class DestinationIO:
 
         destination_list = []
         for i in range(1,len(self.all_destination_list)):
-            destination_list.append(self.all_destination_list[i][DEPARTINGFROM])
+            destination_list.append(self.all_destination_list[i][1]) #ATH FASTAN
         
         destination_list = set(destination_list)
         self.destination_list = destination_list
