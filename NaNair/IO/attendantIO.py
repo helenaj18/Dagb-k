@@ -1,13 +1,19 @@
 class AttendantIO:
+    
+    SSN = 0
+    NAME = 1
+    ROLE = 2
+    RANK = 3
+    LICENSE = 4
 
     def __init__(self):
         # Muna að breyta í crew.csv!!!
-        self.__flight_att_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/STUDENTDATA/Crew.csv'
+        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/STUDENTDATA/Crew.csv'
 
     
     def read_file(self):
         '''Reads file and returns employees list'''
-        file_object = open(self.__flight_att_filename,'r')
+        file_object = open(self.__crew_filename,'r')
         employees_list = []
 
         for line in file_object:
@@ -24,14 +30,14 @@ class AttendantIO:
 
         for i in range(1,len(self.employees_list)):
             # Only pilots have licenses
-            if self.employees_list[i][-1] == 'N/A':
+            if self.employees_list[i][-1] == 'N/A': # ATH virkar ekki að gera license fastann??
                 flight_att_list.append(self.employees_list[i])
         
         self.flight_att_list = flight_att_list
 
 
     def loadFlightAttFromFile(self):
-        '''Gets info of flight attendant from file'''
+        '''Gets flight attendant info from file, returns a list of pilots'''
         self.read_file()
         self.find_flight_att()
 
@@ -41,7 +47,7 @@ class AttendantIO:
     def addFlightAttToFile(self,new_employee_str):
         '''Adds flight attendant info into file'''
 
-        file_object = open(self.__flight_att_filename,'a')
+        file_object = open(self.__crew_filename,'a')
         file_object.write(new_employee_str+'\n')
 
         return file_object
