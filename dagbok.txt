@@ -83,3 +83,5 @@ Við ætlum að vinna þetta saman af því við erum ekki alveg vissar um hvern
 Ætlum svo að skoða betur hvernig við getum skipt verkum eftir fyrirlesturinn.
 
 test
+
+test
