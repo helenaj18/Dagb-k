@@ -1,10 +1,14 @@
+from API.IO_API import IO_API
+
 class DestinationLL:
     def __init__(self):
         pass
  
     def getDestination(self):
         ''' Gets destination from Destination class'''
-        pass
+        destinations = IO_API().loadDestinationFromFile()
+        print(destinations)
+
 
 
 

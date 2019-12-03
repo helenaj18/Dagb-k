@@ -10,7 +10,7 @@ class AttendantIO:
 
     def __init__(self):
         # Muna að breyta í crew.csv!!!
-        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Crew.csv'
+        self.__crew_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/Crew.csv'
 
     
     def read_file(self):
@@ -60,9 +60,3 @@ class AttendantIO:
         pass
 
 
-a = AttendantIO()
-a.addFlightAttToFile('3108982529,Helena,Pilot,Captain,123')
-
-b= a.loadFlightAttFromFile()
-print(b)
-print(a)
