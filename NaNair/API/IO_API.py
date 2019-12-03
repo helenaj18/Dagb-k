@@ -4,6 +4,8 @@ from IO.attendantIO import AttendantIO
 from IO.voyageIO import VoyageIO
 from IO.airplaneIO import AirplaneIO
 
+from LL.crewLL import CrewLL
+
 
 class IO_API:
     '''API class for IO'''
@@ -30,8 +32,11 @@ class IO_API:
         return PilotIO().changePilotInFile()
 
 
-    def addPilotToFile(self):
-        return PilotIO().addPilotToFile()
+    def getPilotInputToAdd(self):
+        return CrewLL().addPilot()
+
+    def addPilotToFile(self, new_employee_str):
+        return PilotIO().addPilotToFile(new_employee_str)
 
     
     def loadFlightAttFromFile(self):
