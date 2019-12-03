@@ -3,8 +3,8 @@ class VoyageIO:
 
     def __init__(self):
         # Muna að breyta í rétt nöfn!
-        self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/UpcomingFlights.csv'
-        self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/PastFlights.csv'
+        self.__upcomingFlights_filename = './NaNair/IO/UPDATEDSTUDENTDATA/UpcomingFlights.csv'
+        self.__pastFlights_filename = './NaNair/IO/UPDATEDSTUDENTDATA/PastFlights.csv'
         self.loadVoyageFromFile()
 
     def get_info(self,file_object):
