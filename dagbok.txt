@@ -110,3 +110,8 @@ IO klasar eru tilbúnir
 Erla er að vinna í API tengingum
 Marinella og Vala eru að vinna í menus
 Helena og Kinga ætla núna að fara að hjálpa Erlu
+
+kl 16:00
+Við erum komnar langt með menus sem að verður UI hlið forrits.
+Löguðum CSV file-a og bættum við því sem vantaði (ss. email og emergency contact)
+Erum að auki komnar vel á leið með API tengingar og ætlum að halda áfram í þeim á morgun.
