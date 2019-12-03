@@ -1,5 +1,5 @@
 # from UI.mainmenu import MainMenu
-from LL.voyageLL import VoyageLL
+from API.LL_API import LL_API
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -10,9 +10,8 @@ class SubMenuEdit:
         print('EDIT EXISTING DATA')
         print('What would you like to edit? ')
 
-        start = True
         
-        while start: 
+        while True: 
             print('1 - Existing voyage')
             print('2 - Destination')
             print('m - Main menu')
@@ -20,17 +19,19 @@ class SubMenuEdit:
             selection = input()
 
             if selection == '1':
-                new_datetime_str = '2019-11-20T15:24:00' #ATH setja input
-                flight_number = 'NA5638' #ATH setja input
+                new_datetime_str = input('Enter new date - (format 2019-11-20T15:24:00)') #ATH setja input
+                flight_number = input('Enter flight voyage - (format NAXXXX)') #ATH setja input
                 #ATH voyage id og breyta í voyage LL líka
-                start = False
-                VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
+                
+                LL_API().change_voyage(new_datetime_str,flight_number)
 
             elif selection == '2':
-                start = False
+                pass
+
+               
             elif selection == 'm':
-                return
-                # next_menu = MainMenu() ATH HVERNIG MAÐUR FER TIL BAKA Í MAIN MENU
-                start = False
+                return # goes back to main menu 
+                
+                
             else:
                 print("Invalid selection")

@@ -37,8 +37,8 @@ class LL_API:
 
     ### VOYAGE LL 
 
-    def change_voyage(self):
-        return VoyageLL().changeVoyage()
+    def change_voyage(self,new_datetime_str,flight_number):
+        return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
 
 
