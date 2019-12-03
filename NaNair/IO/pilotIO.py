@@ -82,8 +82,13 @@ class PilotIO:
                 self.employees_list[i][PHONENUMBER_const] = new_phone_number
         self.changeCrewFile()
     
-    def AddPilotLicense(self,new_license):
-
+    def ChangeLicense(self,personal_id,new_license):
+        '''Changes the License of the pilot in file'''
+        self.__personal_id = personal_id
+        for i in range(len(self.employees_list)):
+            if personal_id == self.employees_list[i][0]:
+                self.employees_list[i][LICENSE_const] = new_license
+        self.changeCrewFile()
 
 
     def changeCrewFile(self):
