@@ -3,12 +3,13 @@ from API.IO_API import IO_API #ath?
 class AirplaneLL:
     ''' LL class for airplane '''
     def __init__(self):
-        self.airplane = IO_API().loadAirplaneFromFile()
+        self.airplane_list = IO_API().loadAirplaneFromFile()
  
     def getAirplanes(self):
         '''Fetches list of airplanes and returns a list'''
-        
-        return print('get airplanes UI - LL í gegn um API')
+        for airplane in airplane_list:
+            airplane_str = str(airplane) #ATH þarf að formatta
+        return airplane_str
         
     def getOneAirplane(self, plane_ID = ''):
         ''' Returns information on one airplane'''
