@@ -2,10 +2,11 @@ class VoyageLL:
     ''' LL class for voyage '''
     def __init__(self, voyage,voyageIO):
         self.voyage_list = IO_API().loadVoyageFromFile()
+        self.upcoming_list = IO_API().read_file()
  
     def getVoyage(self,ID):
         for voyage in self.voyage_list:
-            print(voyage)
+            print(voyage) # þarf að formatta streng
  
     def addVoyage(self):
         pass
@@ -14,11 +15,11 @@ class VoyageLL:
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
         print('In changeDateTimeofVoyage in VoyageLL.py')
-        for i in range(len(self.voyage_list)):
-            if flight_number == self.voyage_list[i][0]:
-                self.voyage_list[i][3] = new_datetime_str
+        for i in range(len(self.upcoming_list)):
+            if flight_number == self.upcoming_list[i][0]:
+                self.upcoming_list[i][3] = new_datetime_str
         
-        VoyageIO().changeVoyageFile(self.voyage_list)
+        VoyageIO().changeVoyageFile(self.upcoming_list)
 
         return 'Change completed'
 

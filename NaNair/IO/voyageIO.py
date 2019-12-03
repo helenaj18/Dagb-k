@@ -30,7 +30,7 @@ class VoyageIO:
 
         self.flights_list = self.upcoming_list + self.past_list
 
-        return self.flights_list
+        return self.upcoming_list
 
     def loadVoyageFromFile(self):
         '''Loads existing voyages from the file'''
