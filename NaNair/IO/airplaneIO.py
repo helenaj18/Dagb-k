@@ -1,5 +1,10 @@
 class AirplaneIO:
-    def read_file(self):
+
+    def __init__(self):
+        self.__airplane_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Aircraft.csv'
+        self.loadAirplaneFromFile()
+
+    def loadAirplaneFromFile(self):
         '''Reads file and returns aircraft list'''
         file_object = open(self.__airplane_filename,'r')
         airplanes_list = []
@@ -10,21 +15,7 @@ class AirplaneIO:
         
         self.airplanes_list = airplanes_list
 
-    def __init__(self, airplaneID):
-        self.__airplane_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/STUDENTDATA/Aircraft.csv'
-        self.__airplaneID = '' #búa til aðferð til að gefa flugvélum id
-
-    def load_airplane_from_file(self):
-        '''Loads existing airplanes from the file'''
-
-        self.read_file()
-        return self.airplanes_list
-
-    def change_airplane_in_file(self):
-        '''Changes an existing airplane in the file'''
-        pass
-
-    def add_airplane_to_file(self, new_airplane_str):
+    def addAirplaneToFile(self, new_airplane_str):
         '''Adds a new airplane to the file'''
         
         file_object = open(self.__airplane_filename,'a')
@@ -32,3 +23,5 @@ class AirplaneIO:
 
         return file_object
 
+a = AirplaneIO()
+a.addAirplaneToFile('profa')
