@@ -30,7 +30,7 @@ class VoyageIO:
 
         self.flights_list = self.upcoming_list + self.past_list
 
-
+        return self.flights_list
 
     def loadVoyageFromFile(self):
         '''Loads existing voyages from the file'''
@@ -38,28 +38,14 @@ class VoyageIO:
         voyage_list = []
         
         for i in range(len(self.flights_list)-2):
-            voyage_list.append(self.flights_list[i]+self.flights_list[i+2])
+            voyage_list.append(self.flights_list[i]+self.flights_list[i+1])
             i += 2
 
         self.voyage_list = voyage_list
+        print(voyage_list)
 
-# miðað við að það sé slegið inn flugnúmer á leið út
-    def changeDepartureDateTimeOfVoyage(self, new_datetime_str,flight_number):
-        '''Changes the departure date and time of an existing voyage in the file'''
-        for i in range(len(self.upcoming_list)):
-            if flight_number == self.upcoming_list[i][0]:
-                self.upcoming_list[i][3] = new_datetime_str
+        return self.voyage_list
 
-        self.changeVoyageFile()
-
-# miðað við að það sé slegið inn flugnúmer á leið út
-    def changeArrivalDateTimeOfVoyage(self, new_datetime_str,flight_number):
-        '''Changes the departure date and time of an existing voyage in the file'''
-        for i in range(len(self.upcoming_list)):
-            if flight_number == self.upcoming_list[i][0]:
-                self.upcoming_list[i][4] = new_datetime_str
-        
-        self.changeVoyageFile()
 
 
     def changeVoyageFile(self):
@@ -82,3 +68,5 @@ class VoyageIO:
 
 
 
+a = VoyageIO()
+a.loadVoyageFromFile()
