@@ -12,7 +12,7 @@ class VoyageLL:
         pass
  
     def changeVoyage(self, ID):
-        pass
+        print('chenge voyage UI - LL í gegn um API')
 
 
 
