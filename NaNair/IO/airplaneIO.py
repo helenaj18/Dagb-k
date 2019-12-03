@@ -22,6 +22,3 @@ class AirplaneIO:
         file_object.write(new_airplane_str+'\n')
 
         return file_object
-
-a = AirplaneIO()
-a.addAirplaneToFile('profa')
