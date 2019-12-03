@@ -32,13 +32,8 @@ class IO_API:
         return PilotIO().changePilotInFile()
 
 
-    def getPilotInputToAdd(self):
-        return CrewLL().addPilot()
-    
-    def gefPilotInputToEdit(self):
-        return CrewLL().editPilot()
 
-    def addPilotToFile(self, new_employee_str):
+    def addPilot(self, new_employee_str):
         return PilotIO().addPilotToFile(new_employee_str)
 
     
@@ -71,7 +66,7 @@ class IO_API:
 
 
     def loadAirplaneFromFile(self):
-        return AirplaneIO().load_airplane_from_file()
+        return AirplaneIO().loadAirplaneFromFile()
 
 
     def changeAirplaneInFile(self):

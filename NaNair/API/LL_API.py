@@ -34,6 +34,7 @@ class LL_API:
 
      ### VANTAR 
     
+
     ### VOYAGE LL 
 
     def get_voyage(self):
@@ -45,6 +46,11 @@ class LL_API:
     # def inputForNewPilot(self):
     #     '''Fetches input from UI layer and puts it in LL layer'''
     #     return CrewUI().addPilot() #some string
+
+    def NewPilot(self, PilotData):
+        '''Fetches input from UI layer and puts it in LL layer'''
+        return CrewLL().addPilot(PilotData) #some string
+
 
     # def inputForEditedPilot(self):
     #     '''Gets input from UI layer and sends it to LL layer'''

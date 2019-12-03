@@ -26,15 +26,13 @@ class CrewLL:
         return pilots
         
  
-    def addPilot(self):
+    def addPilot(self, PilotData):
         ''' Adds pilot to pilots (crew)'''
-        # input from UI layer
-        new_pilot_str = LL_API().inputForNewPilot()
+        # input from UI layer er PilotData
 
+        # Format a pilotData lagað...
 
-        # Format a str lagað...
-
-        return new_pilot_str
+        return IO_API().addPilot(PilotData)
 
 
  
@@ -46,7 +44,7 @@ class CrewLL:
         
         # format a list lagað ef þarf...
 
-        return info_to_edit
+        return IO_API().addPilot(info_to_edit)
  
     def addFlightAttendant(self):
         ''' Adds flight attendant to flight attendants (crew)'''
