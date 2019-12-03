@@ -1,5 +1,4 @@
-from API.IO_API import IO_API
-from API.LL_API import LL_API
+
 
 class CrewLL:
  
@@ -13,12 +12,16 @@ class CrewLL:
 
         total_crew = pilots + flight_att
 
+        # format a crew lagað...
+
         return total_crew
 
  
     def getPilots(self):
         ''' Gets pilot from all the pilots (crew)'''
         pilots = IO_API().loadPilotFromFile()
+
+        #format a pilots lagað...
 
         return pilots
         
@@ -28,17 +31,30 @@ class CrewLL:
         # input from UI layer
         new_pilot_str = LL_API().inputForNewPilot()
 
+
+        # Format a str lagað...
+
         return new_pilot_str
 
 
  
     def editPilot(self):
-        ''' Edits information of a pilot '''
-        pass
+        ''' Takes input from UI layer of info to edit, formats it and 
+        sends to IO layer'''
+        
+        info_to_edit = LL_API().inputForEditedPilot()
+        
+        # format a list lagað ef þarf...
+
+        return info_to_edit
  
     def addFlightAttendant(self):
         ''' Adds flight attendant to flight attendants (crew)'''
-        
+        info_to_add = LL_API().inputForNewFlightAtt()
+
+        # format a info lagað...
+
+        return info_to_add
  
     def editFlightAttendant(self):
         ''' Edits information of a flight attendant '''
