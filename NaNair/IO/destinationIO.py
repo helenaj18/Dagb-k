@@ -1,8 +1,12 @@
+import os
+
 class DestinationIO:
 
     def __init__(self):
-        # Muna að breyta í upcomingflights.csv!!!
-        self.__destination_filename = './NaNair/IO/UPDATEDSTUDENTDATA/Destinations.csv'
+        dirname = os.path.dirname(__file__)
+        self.__destination_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Destinations.csv')
+
+        
         self.loadDestinationFromFile()
 
     def loadDestinationFromFile(self):
