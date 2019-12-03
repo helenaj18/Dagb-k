@@ -5,12 +5,16 @@ class VoyageLL:
         self.voyageIO = voyageIO
         pass
  
-    def getVoyage(self,ID):
+    def getVoyage(self, ID):
         pass
  
     def addVoyage(self):
         pass
  
+    def changeVoyage(self, ID):
+        pass
+
+
 
 class Voyage:
     def __init__(self, airplane, pilot, flight_att, flight_route, voyage_id):

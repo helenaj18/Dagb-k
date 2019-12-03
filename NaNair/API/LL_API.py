@@ -3,7 +3,7 @@ from LL.destinationLL import DestinationLL
 from LL.crewLL import CrewLL
 from LL.voyageLL import VoyageLL
 
-from UI.crewUI import CrewUI
+#from UI.crewUI import CrewUI
 
 class LL_API:
 
@@ -26,20 +26,33 @@ class LL_API:
     
     def get_crew(self):
         ''' Fetches all crew members'''
-
         return CrewLL().getCrew()
+
+    def get_pilots(self):
+        ''' Fetches all pilots '''
+        return CrewLL().getPilots()
+
+     ### VANTAR 
     
-    def inputForNewPilot(self):
-        '''Fetches input from UI layer and puts it in LL layer'''
-        return CrewUI().addPilot() #some string
+    ### VOYAGE LL 
 
-    def inputForEditedPilot(self):
-        '''Gets input from UI layer and sends it to LL layer'''
-        return CrewUI().inputForEditedPilot() #some list
+    def get_voyage(self):
+        return VoyageLL().changeVoyage()
 
-    def inputforNewFlightAtt(self):
-        '''Sends info for new flight attendant'''
-        return CrewUI().addFlightAtt() #string
+
+
+
+    # def inputForNewPilot(self):
+    #     '''Fetches input from UI layer and puts it in LL layer'''
+    #     return CrewUI().addPilot() #some string
+
+    # def inputForEditedPilot(self):
+    #     '''Gets input from UI layer and sends it to LL layer'''
+    #     return CrewUI().inputForEditedPilot() #some list
+
+    # def inputforNewFlightAtt(self):
+    #     '''Sends info for new flight attendant'''
+    #     return CrewUI().addFlightAtt() #string
 
 
     ## DESTINATION LL
