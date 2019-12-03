@@ -97,11 +97,3 @@ class AttendantIO:
         file_object = open(self.__crew_filename,'w')
         file_object.write(a_str)
 
-a = AttendantIO()
-a.loadFlightAttFromFile()
-a.addFlightAttToFile('3108982529,Helena,Pilot,Captain,123')
-a.ChangeEmailAddress('1811931544','johnk20@nanair.is')
-
-b= a.loadFlightAttFromFile()
-print(b)
-print(a)
