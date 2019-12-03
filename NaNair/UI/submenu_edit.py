@@ -19,9 +19,12 @@ class SubMenuEdit:
 
             selection = input()
 
-            if selection == '1': 
+            if selection == '1':
+                new_datetime_str = '2019-11-20T15:24:00' #ATH setja input
+                flight_number = 'NA5638' #ATH setja input
+                #ATH voyage id og breyta í voyage LL líka
                 start = False
-                VoyageLL().changeDateTimeOfVoyage()
+                VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
             elif selection == '2':
                 start = False

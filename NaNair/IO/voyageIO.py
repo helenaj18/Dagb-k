@@ -25,12 +25,12 @@ class VoyageIO:
         upcomingFlights_file_object = open(self.__upcomingFlights_filename,'r')
         pastFlights_file_object = open(self.__pastFlights_filename,'r')
         
-        self.upcoming_list = self.get_info(upcomingFlights_file_object)
-        self.past_list = self.get_info(pastFlights_file_object)
+        upcoming_list = self.get_info(upcomingFlights_file_object)
+        past_list = self.get_info(pastFlights_file_object)
 
-        self.flights_list = self.upcoming_list + self.past_list
+        self.flights_list = upcoming_list + past_list
 
-        return self.upcoming_list
+        return upcoming_list
 
     def loadVoyageFromFile(self):
         '''Loads existing voyages from the file'''
@@ -42,15 +42,15 @@ class VoyageIO:
             i += 2
 
         self.voyage_list = voyage_list
-        print(voyage_list)
+
 
         return self.voyage_list
 
 
-    def changeVoyageFile(self):
+    def changeVoyageFile(self, upcoming_list):
         '''Updates the file with new changes'''
         voyage_str = ''
-        for item in self.upcoming_list:
+        for item in upcoming_list:
             voyage_str += ','.join(item) + '\n'
         
         file_object = open(self.__upcomingFlights_filename,'w')

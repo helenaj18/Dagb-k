@@ -1,6 +1,9 @@
+from API.IO_API import IO_API
+from IO.voyageIO import VoyageIO
+
 class VoyageLL:
     ''' LL class for voyage '''
-    def __init__(self, voyage,voyageIO):
+    def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
         self.upcoming_list = IO_API().read_file()
  
