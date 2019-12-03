@@ -10,8 +10,8 @@ class SubMenuDisplay:
 
         print('1 - Airplanes')
         print('2 - Destinations')
-        print('3 - Employees')
-        print('4 - Voyages')
+        print('3 - Voyages')
+        print('4 - Flight Attendants')
         print('5 - Pilots')
 
         print('m - Main menu')
@@ -21,8 +21,10 @@ class SubMenuDisplay:
         if selection == '1': 
             next_menu = DisplayMenuAirplanes().startDisplayAirplanes()
         elif selection == '2':
+            # fara beint í destination UI 
             pass
         elif selection == '3':
+            # employee
             pass
         elif selection == '4':
             pass

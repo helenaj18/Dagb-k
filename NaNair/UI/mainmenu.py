@@ -2,10 +2,10 @@
 # sys.path.insert(1,'/Users/valaroff/Desktop/T111PROG/verklegt1/NaNair/API')
 # import LL_API
 
-#from UI.API.LL_API import LL_API
-from submenu_register import SubMenuRegister
-from submenu_edit import SubMenuEdit
-from submenu_display import SubMenuDisplay
+from API.LL_API import LL_API
+from UI.submenu_register import SubMenuRegister
+from UI.submenu_edit import SubMenuEdit
+from UI.submenu_display import SubMenuDisplay
 
 
 class MainMenu:

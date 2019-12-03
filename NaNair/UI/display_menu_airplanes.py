@@ -1,4 +1,4 @@
-from airplaneUI import AirplaneUI
+from UI.airplaneUI import AirplaneUI
 
 class DisplayMenuAirplanes: 
     def __init__(self):
