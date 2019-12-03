@@ -39,7 +39,7 @@ class MainMenu:
                 start = False
 
             elif selection =='3':
-                next_menu = SubMenuEdit(self.logic_layer)
+                next_menu = SubMenuEdit(self.logic_layer).startSubMenuEdit()
                 start = False
 
             elif selection == 'q':
