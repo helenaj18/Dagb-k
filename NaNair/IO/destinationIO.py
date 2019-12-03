@@ -29,6 +29,15 @@ class DestinationIO:
         
         self.changeDestinationFile()
     
+    def ChangeEmergencyPhone(self,destination_name,new_emergency_phone):
+        '''Changes the Emergency Contact for destination in file'''
+        self.__destination_name = destination_name
+        for i in range(len(self.destination_list)):
+            if destination_name == self.destination_list[i][1]:
+                self.destination_list[i][-1] = new_emergency_phone
+        
+        self.changeDestinationFile()
+
     def changeDestinationFile(self):
         '''Updates the file with new changes'''
         a_str = ''
@@ -38,14 +47,6 @@ class DestinationIO:
         file_object = open(self.__destination_filename,'w')
         file_object.write(a_str)
 
-    def ChangeEmergencyPhone(self,destination_name,new_emergency_phone):
-        '''Changes the Emergency Contact for destination in file'''
-        self.__destination_name = destination_name
-        for i in range(len(self.destination_list)):
-            if destination_name == self.destination_list[i][1]:
-                self.destination_list[i][-1] = new_emergency_phone
-        
-        self.changeDestinationFile()
 
 
     def addDestinationToFile(self,new_destination_str):
