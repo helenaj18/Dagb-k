@@ -27,6 +27,7 @@ class AttendantIO:
             employees_list.append(line)
         
         self.employees_list = employees_list
+        return employees_list
 
 
     def find_flight_att(self):

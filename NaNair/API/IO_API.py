@@ -54,6 +54,9 @@ class IO_API:
     def getFlightAttInputToAdd(self):
         return CrewLL().editFlightAttendant()
 
+    def getAllStaff(self):
+        return AttendantIO().read_file()
+
 
     # VOYAGES
 

@@ -7,8 +7,7 @@ class CrewLL:
  
     def getCrew(self):
         ''' Gets the whole crew '''
-        pilots = self.getPilots
-        flight_att = IO_API().loadFlightAttFromFile()
+        crew = IO_API().loadFlightAttFromFile()
 
         total_crew = pilots + flight_att
 
