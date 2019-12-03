@@ -1,5 +1,6 @@
 from UI.airplaneUI import AirplaneUI
-from LL.destinationLL import DestinationLL
+from UI.destinationUI import DestinationUI
+from UI.crewUI import CrewUI
 
 
 # a = AirplaneUI()
@@ -7,12 +8,8 @@ from LL.destinationLL import DestinationLL
 # a.showOnePlane()
 
 
-d = DestinationLL()
-
-print(d.getDestination())
-
-
-
+# d = DestinationUI()
+# d.showAllDestinations()
 
 # a = AirplaneUI()
 # a.showAllPlanes()
