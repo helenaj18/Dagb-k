@@ -107,3 +107,6 @@ Kinga ætlar að laga destination klasann og svo þurfum við að gera change fa
 
 kl 11:45
 IO klasar eru tilbúnir
+Erla er að vinna í API tengingum
+Marinella og Vala eru að vinna í menus
+Helena og Kinga ætla núna að fara að hjálpa Erlu
