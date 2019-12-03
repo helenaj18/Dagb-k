@@ -14,7 +14,8 @@ class AirplaneLL:
         return print('get one airplane UI - LL í gegn um API ')
 
     def addAirplane(self):
-        pass
+        ''' Adds new airplane'''
+        return print('add airplane UI - LL í gegn um API')
 
 
 

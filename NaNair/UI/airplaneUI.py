@@ -17,3 +17,6 @@ class AirplaneUI:
         '''Shows information about one specific airplane'''
         LL_API().show_one_plane()
         
+    def addAirplane(self):
+        
+        LL_API().add_airplane()

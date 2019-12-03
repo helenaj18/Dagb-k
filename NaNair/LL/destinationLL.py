@@ -6,8 +6,9 @@ class DestinationLL:
  
     def getDestination(self):
         ''' Gets destination from Destination class'''
-        destinations = IO_API().loadDestinationFromFile()
-        print(destinations)
+        destinations_set = IO_API().loadDestinationFromFile()
+        
+        return destinations_set
 
 
 
