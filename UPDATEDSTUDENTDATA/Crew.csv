@@ -34,4 +34,15 @@ ssn,name,role,rank,licence,address,phonenumber
 1110732819,Arthur Karr,Cabincrew,Flight Attendant,N/A,Fellsmúli 33,8998833
 2602806942,Teresa Thruman,Cabincrew,Flight Attendant,N/A,Fellsmúli 34,8998834
 1107951952,Elizabeth Mcfadden,Cabincrew,Flight Attendant,N/A,Fellsmúli 35,8998835
+<<<<<<< HEAD
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+3108982529,Helena,Pilot,Captain,123
+=======
 
+>>>>>>> fc69d14db4ac7b515550783c524001cccafbaa8a
