@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> b19178271033caa9bbd3ba6f12af1e2571ca79da
 from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 

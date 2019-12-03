@@ -21,3 +21,8 @@ class Destination:
         self.__contact = contact
         self.__emergency_phone_number = emergency_phone_number
         self.__duration = duration
+
+
+d = DestinationLL()
+
+print(d.getDestination())
