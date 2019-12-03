@@ -111,10 +111,9 @@ class PilotIO:
         file_object = open(self.__crew_filename,'w')
         file_object.write(a_str)
 
-    def addPilotToFile(self):
+    def addPilotToFile(self, new_employee_str):
         '''Add pilot info into file'''
 
-        new_employee_str = IO_API().getPilotInputToAdd()
 
         file_object = open(self.__crew_filename,'a')
         file_object.write(new_employee_str+'\n')

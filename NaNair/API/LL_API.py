@@ -29,7 +29,7 @@ class LL_API:
 
         return CrewLL().getCrew()
     
-    def inputForNewPilot(self):
+    def NewPilot(self):
         '''Fetches input from UI layer and puts it in LL layer'''
         return CrewUI().addPilot() #some string
 
