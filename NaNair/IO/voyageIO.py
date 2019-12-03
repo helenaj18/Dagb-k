@@ -1,10 +1,17 @@
+import os
 
 class VoyageIO:
 
     def __init__(self):
         # Muna að breyta í rétt nöfn!
-        self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/UpcomingFlights.csv'
-        self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/PastFlights.csv'
+        dirname = os.path.dirname(__file__)
+        exapmle = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingFlights.csv')
+        # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # print(open(exapmle).readlines())
+        # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # #print(os.listdir("v/"))
+        self.__upcomingFlights_filename = exapmle 
+        self.__pastFlights_filename = '../UPDATEDSTUDENTDATA/PastFlights.csv'
         self.loadVoyageFromFile()
 
     def get_info(self,file_object):
