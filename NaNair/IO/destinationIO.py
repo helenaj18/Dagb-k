@@ -2,10 +2,11 @@ class DestinationIO:
 
     def __init__(self):
         # Muna að breyta í upcomingflights.csv!!!
-        self.__destination_filename = 'Destinations.csv'
+        self.__destination_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Destinations.csv'
+        self.loadDestinationFromFile()
 
-    def read_file(self):
-        '''Reads file and returns employees list'''
+    def loadDestinationFromFile(self):
+        '''Reads file and returns destination list'''
         file_object = open(self.__destination_filename,'r')
         destination_list = []
 
@@ -14,13 +15,6 @@ class DestinationIO:
             destination_list.append(line)
         
         self.destination_list = destination_list
-
-
-    def loadDestinationFromFile(self):
-        '''Fetches destination from a file'''
-        self.read_file()
-
-        return self.destination_list
 
     def ChangeEmergencyContact(self,destination_name,new_emergency_contact):
         '''Changes the Emergency Contact for destination in file'''
@@ -31,7 +25,6 @@ class DestinationIO:
         
         self.changeDestinationFile()
     
-
     def changeDestinationFile(self):
         '''Updates the file with new changes'''
         a_str = ''
@@ -59,11 +52,3 @@ class DestinationIO:
         return file_object
 
 
-
-a = DestinationIO()
-b= a.loadDestinationFromFile()
-a.ChangeEmergencyContact('Kulusuk','Kinga')
-a.ChangeEmergencyPhone('Kulusuk','5812345')
-
-print(b)
-#print(a)
