@@ -1,4 +1,4 @@
-from API.IO_API import IO_API
+from API.IO_API import IO_API #ath?
 
 class AirplaneLL:
     ''' LL class for airplane '''
@@ -7,7 +7,7 @@ class AirplaneLL:
  
     def getAirplanes(self):
         '''Fetches list of airplanes and returns a list'''
-
+        
         return print('get airplanes UI - LL í gegn um API')
         
     def getOneAirplane(self, plane_ID = ''):

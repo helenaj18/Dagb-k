@@ -15,6 +15,8 @@ class AirplaneIO:
         
         self.airplanes_list = airplanes_list
 
+        return self.airplanes_list
+
     def addAirplaneToFile(self, new_airplane_str):
         '''Adds a new airplane to the file'''
         
