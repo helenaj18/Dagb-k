@@ -10,9 +10,10 @@ from LL.crewLL import CrewLL
 class IO_API:
     '''API class for IO'''
 
+    # DESTINATION 
+
     def loadDestinationFromFile(self):
         return DestinationIO().loadDestinationFromFile()
-
 
     def changeEmergencyPhone(self,destination_name,new_emergency_contact):
         return DestinationIO.changeEmergencyPhone()
@@ -24,13 +25,14 @@ class IO_API:
         return DestinationIO.addDestinationToFile()
 
 
+    #CREW
+
     def loadPilotFromFile(self):
         return PilotIO().loadPilotFromFile()
 
 
-    def changePilotInFile(self):
-        return PilotIO().changePilotInFile()
-
+    def changePilot(self, info):
+        return PilotIO().changePilotInFile(info)
 
 
     def addPilot(self, new_employee_str):
@@ -53,6 +55,8 @@ class IO_API:
         return CrewLL().editFlightAttendant()
 
 
+    # VOYAGES
+
     def loadVoyageFromFile(self):
         return VoyageIO().addVoyageToFile()
 
@@ -64,6 +68,8 @@ class IO_API:
     def addVoyageToFile(self):
         return VoyageIO().addVoyageToFile()
 
+
+    # VOYAGE
 
     def loadAirplaneFromFile(self):
         return AirplaneIO().loadAirplaneFromFile()
