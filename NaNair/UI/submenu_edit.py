@@ -29,6 +29,7 @@ class SubMenuEdit:
             elif selection == '2':
                 start = False
             elif selection == 'm':
+                return
                 # next_menu = MainMenu() ATH HVERNIG MAÐUR FER TIL BAKA Í MAIN MENU
                 start = False
             else:

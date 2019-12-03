@@ -16,9 +16,9 @@ class MainMenu:
 
     def start(self):
         print('WELCOME')
-        start = True
+        
 
-        while start: 
+        while True: 
           
             print('What would you like to do?') 
 
@@ -32,15 +32,15 @@ class MainMenu:
 
             if selection == '1':
                 next_menu = SubMenuRegister(self.logic_layer).startSubMenuRegister()
-                start = False
+                #start = False
 
             elif selection == '2':
                 next_menu = SubMenuDisplay(self.logic_layer).startSubMenuDisplay()
-                start = False
+                #start = False
 
             elif selection =='3':
                 next_menu = SubMenuEdit(self.logic_layer).startSubMenuEdit()
-                start = False
+                #start = False
 
             elif selection == 'q':
                 break
