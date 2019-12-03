@@ -1,68 +1,76 @@
+from IO.destinationIO import DestinationIO
+from IO.pilotIO import PilotIO
+from IO.attendantIO import AttendantIO
+from IO.voyageIO import VoyageIO
+from IO.airplaneIO import AirplaneIO
+
 
 class IO_API:
     '''API class for IO'''
 
     def loadDestinationFromFile(self):
-        pass
+        return DestinationIO().loadDestinationFromFile()
 
 
     def changeDestinationInFile(self):
-        pass
+        return DestinationIO().changeDestinationInFile()
+
 
     def addDestinationToFile(self):
-        pass
+        return DestinationIO.addDestinationToFile()
 
 
     def loadPilotFromFile(self):
-        pass
+        return PilotIO().loadPilotFromFile()
 
 
     def changePilotInFile(self):
-        pass
+        return PilotIO().changePilotInFile()
 
 
-    def AddPilotToFile(self):
-        pass
+    def addPilotToFile(self):
+        return PilotIO().addPilotToFile()
 
     
     def loadFlightAttFromFile(self):
-        pass
+        return AttendantIO().loadFlightAttFromFile()
 
 
     def changeFlightAttInFile(self):
-        pass
+        return AttendantIO().changeFlightAttInFile()
 
 
-    def AddFlightAttToFile(self):
-        pass
+    def addFlightAttToFile(self):
+        return AttendantIO().addFlightAttToFile()
 
 
     def loadVoyageFromFile(self):
-        pass
+        return VoyageIO().addVoyageToFile()
 
 
     def changeVoyageInFile(self):
-        pass
+        return VoyageIO().changeVoyageInFile()
 
 
-    def AddVoyageToFile(self):
-        pass
+    def addVoyageToFile(self):
+        return VoyageIO().addVoyageToFile()
 
 
     def loadAirplaneFromFile(self):
-        pass
+        return AirplaneIO().load_airplane_from_file()
 
 
     def changeAirplaneInFile(self):
-        pass
+        return AirplaneIO().change_airplane_in_file()
 
 
-    def AddAirplaneToFile(self):
-        pass
+    def addAirplaneToFile(self):
+        return AirplaneIO().add_airplane_to_file()
 
 
     def getDestinations(self):
         pass
+
 
     def getCrew(self):
         pass
