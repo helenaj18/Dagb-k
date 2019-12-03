@@ -42,6 +42,3 @@ coverage.xml
  
 # Rope
 .ropeproject
-
-#csv
-*.csv
