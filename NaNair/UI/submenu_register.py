@@ -1,9 +1,9 @@
 #from mainmenu import MainMenu
 
 class SubMenuRegister: 
-    def __init__(self): # muna ap taka inn logic layer sem main menu bjó til!!1!!!!!
+    def __init__(self, logic_layer): # muna ap taka inn logic layer sem main menu bjó til!!1!!!!!
         print('sub menu Register')
-        #self.logic.........
+        self.logic_layer = logic_layer
 
 
     def startSubMenuRegister(self):
