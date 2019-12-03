@@ -25,7 +25,6 @@ class IO_API:
         pass
 
     
-    
     def loadFlightAttFromFile(self):
         pass
 
@@ -98,4 +97,3 @@ class IO_API:
     def addAirplane(self):
         pass
 
-    

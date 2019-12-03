@@ -6,15 +6,16 @@ class LL_API:
 
     def show_all_planes(self):
         print('''Fetches all airplanes and returns it''')
-        #return AirplaneLL.getAirplanes(parameter)
-        AirplaneLL.getAirplanes()
+        
+        AirplaneLL().getAirplanes()
         return 
     
-    def show_one_plane(self,plane_id):
+    def show_one_plane(self,plane_ID = ''):
         '''Fetches one specific plane and returns it'''
-        return #airplaneLL.getAirplanes(plane_id)
+        return AirplaneLL().getOneAirplane(plane_ID)
     
     def get_crew(self):
+        ''' Fetches all crew members'''
         pass
 
 #LL_API.show_all_planes()
