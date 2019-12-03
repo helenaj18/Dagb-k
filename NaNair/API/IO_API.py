@@ -34,6 +34,9 @@ class IO_API:
 
     def getPilotInputToAdd(self):
         return CrewLL().addPilot()
+    
+    def gefPilotInputToEdit(self):
+        return CrewLL().editPilot()
 
     def addPilotToFile(self, new_employee_str):
         return PilotIO().addPilotToFile(new_employee_str)
@@ -49,6 +52,10 @@ class IO_API:
 
     def addFlightAttToFile(self):
         return AttendantIO().addFlightAttToFile()
+
+
+    def getFlightAttInputToAdd(self):
+        return CrewLL().editFlightAttendant()
 
 
     def loadVoyageFromFile(self):

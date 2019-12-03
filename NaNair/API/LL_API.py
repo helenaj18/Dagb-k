@@ -33,6 +33,14 @@ class LL_API:
         '''Fetches input from UI layer and puts it in LL layer'''
         return CrewUI().addPilot() #some string
 
+    def inputForEditedPilot(self):
+        '''Gets input from UI layer and sends it to LL layer'''
+        return CrewUI().inputForEditedPilot() #some list
+
+    def inputforNewFlightAtt(self):
+        '''Sends info for new flight attendant'''
+        return CrewUI().addFlightAtt() #string
+
 
     ## DESTINATION LL
 
