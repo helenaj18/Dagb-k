@@ -13,6 +13,7 @@ class SubMenuRegister:
         while start:
             print('1 - New employee')
             print('2 - Add staff to an available voyage')
+            #print('3 - New voyage')
             print('m - Main menu')
 
             selection = input()

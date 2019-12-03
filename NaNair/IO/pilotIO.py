@@ -13,8 +13,7 @@ EMAIL_const = 7
 class PilotIO:
     
     def __init__(self):
-        # Muna að breyta í crew.csv!!!
-        self.__crew_filename = '/Users/kingamaris/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/Crew.csv'
+        self.__crew_filename = './NaNair/IO/UPDATEDSTUDENTDATA/Crew.csv'
     
 
     # Er hægt að kalla í read file úr attendant????
