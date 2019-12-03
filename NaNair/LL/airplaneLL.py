@@ -7,9 +7,12 @@ class AirplaneLL:
  
     def getAirplanes(self):
         '''Fetches list of airplanes and returns a list'''
-        return print('get ap')
+        return print('get airplanes UI - LL í gegn um API')
         
-   
+    def getOneAirplane(self, plane_ID = ''):
+        ''' Returns information on one airplane'''
+        return print('get one airplane UI - LL í gegn um API ')
+
     def addAirplane(self):
         pass
 

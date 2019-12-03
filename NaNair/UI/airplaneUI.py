@@ -13,7 +13,7 @@ class AirplaneUI:
         LL_API().show_all_planes()
         
 
-    def showOnePlane(self, plane_ID):
+    def showOnePlane(self, plane_ID = ''):
         '''Shows information about one specific airplane'''
-        #LL_API.show_one_plane()
-        pass
+        LL_API().show_one_plane()
+        
