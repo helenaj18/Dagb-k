@@ -1,6 +1,9 @@
+from UI.mainmenu import MainMenu
+
 class SubMenuEdit:
-    def __init__(self):
+    def __init__(self, logic_layer):
         print('sub menu Edit')
+        self.logic_layer = logic_layer
 
     def startSubMenuEdit(self):
         print('EDIT EXISTING DATA')
@@ -20,7 +23,7 @@ class SubMenuEdit:
             elif selection == '2':
                 start = False
             elif selection == 'm':
-                #next_menu = MainMenu()
+                next_menu = MainMenu()
                 start = False
             else:
                 print("Invalid selection")
