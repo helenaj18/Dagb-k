@@ -1,4 +1,4 @@
-from UI.mainmenu import MainMenu
+# from UI.mainmenu import MainMenu
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -23,7 +23,7 @@ class SubMenuEdit:
             elif selection == '2':
                 start = False
             elif selection == 'm':
-                next_menu = MainMenu()
+                # next_menu = MainMenu() ATH HVERNIG MAÐUR FER TIL BAKA Í MAIN MENU
                 start = False
             else:
                 print("Invalid selection")

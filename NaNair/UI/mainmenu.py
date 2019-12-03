@@ -11,6 +11,7 @@ from UI.submenu_display import SubMenuDisplay
 class MainMenu:
     def __init__(self):
         self.logic_layer = LL_API()
+        print('IN MAIN MENU')
         
 
     def start(self):
