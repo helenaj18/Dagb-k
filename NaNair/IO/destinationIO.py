@@ -38,11 +38,11 @@ class DestinationIO:
 
         return self.destination_list
 
-    def changeDestinationFromFile(self):
+    def changeDestinationInFile(self):
         '''Change the destination or other destination info in file'''
         pass
 
-    def addDestinationFromFile(self,new_destination_str):
+    def addDestinationToFile(self,new_destination_str):
         '''Adds the destination into file'''
         file_object = open(self.__destination_filename,'a')
         file_object.write(new_destination_str+'\n')
