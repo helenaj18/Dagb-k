@@ -51,7 +51,10 @@ class PilotIO:
 
     def changePilotInFile(self):
         '''Change pilot info in file'''
-        pass
+        
+        info_to_edit = IO_API().gefPilotInputToEdit()
+
+        
 
 
     def addPilotToFile(self):
