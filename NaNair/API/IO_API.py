@@ -69,13 +69,6 @@ class IO_API:
     def addAirplaneToFile(self):
         return AirplaneIO().add_airplane_to_file()
 
-
-    def getDestinations(self):
-        pass
-
-    def getCrew(self):
-        pass
-
     def getPilots(self):
         pass
 
