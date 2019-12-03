@@ -1,13 +1,14 @@
  
 class AirplaneLL:
     ''' LL class for airplane '''
-    def __init__(self, airplane, airplaneIO):
+    def __init__(self, airplane = '', airplaneIO = ''):
         self.airplane = airplane
         self.airplaneIO = airplaneIO
  
-    def getAirplanes(self, num):
+    def getAirplanes(self):
         '''Fetches list of airplanes and returns a list'''
-        pass
+        return print('get ap')
+        
    
     def addAirplane(self):
         pass
