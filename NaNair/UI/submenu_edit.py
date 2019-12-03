@@ -1,4 +1,5 @@
 # from UI.mainmenu import MainMenu
+from LL.voyageLL import VoyageLL
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -20,6 +21,8 @@ class SubMenuEdit:
 
             if selection == '1': 
                 start = False
+                VoyageLL().changeDateTimeOfVoyage()
+
             elif selection == '2':
                 start = False
             elif selection == 'm':
