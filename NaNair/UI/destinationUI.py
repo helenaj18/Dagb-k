@@ -8,8 +8,6 @@ class DestinationUI:
 
     def showAllDestinations(self):
         '''Shows all destinations of NanAir'''
-        pass
+        
+        print(LL_API().get_destination())
 
-    def showOneDestination(self,destination_ID):
-        '''Shows information about one destination'''
-        pass

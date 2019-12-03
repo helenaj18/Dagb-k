@@ -3,8 +3,13 @@ class VoyageIO:
 
     def __init__(self):
         # Muna að breyta í rétt nöfn!
+<<<<<<< HEAD
         self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/PastFlights.csv'
         self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/PastFlights.csv'
+=======
+        self.__upcomingFlights_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/UpcomingFlights.csv'
+        self.__pastFlights_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/PastFlights.csv'
+>>>>>>> 06969d924bb6538a3b104e0b8cce1da53b79d2ca
 
     def get_info(self,file_object):
         a_list = []
@@ -56,7 +61,4 @@ class VoyageIO:
         return file_object
 
 
-a = VoyageIO()
-a.loadVoyageFromFile()
 
-a.addVoyageToFile('NA553,Keflavik,Longyearbyen,12122019,13122019')
