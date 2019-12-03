@@ -15,13 +15,6 @@ class DestinationIO:
         
         self.destination_list = destination_list
 
-    # def find_destination(self):
-    #     '''Finds all destinations in file and returns a list of them'''
-    #     destination_list = []
-    #     for i in range(1,len(self.all_destination_list)):
-    #         destination_list.append(self.all_destination_list[i]) #ATH FASTAN
-        
-    #     self.destination_list = destination_list
 
     def loadDestinationFromFile(self):
         '''Fetches destination from a file'''
@@ -40,6 +33,7 @@ class DestinationIO:
     
 
     def changeDestinationFile(self):
+        '''Updates the file with new changes'''
         a_str = ''
         for item in self.destination_list:
             a_str += ','.join(item) + '\n'
