@@ -6,12 +6,13 @@ class VoyageIO:
         # Muna að breyta í rétt nöfn!
 
         dirname = os.path.dirname(__file__)
-        exapmle = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingFlights.csv')
+        upcomingFlights = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingFlights.csv')
+        pastFlights = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastFlights.csv')
         # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         # print(open(exapmle).readlines())
         # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         # #print(os.listdir("v/"))
-        self.__upcomingFlights_filename = exapmle 
+        self.__upcomingFlights_filename = upcomingFlights 
         self.__pastFlights_filename = '../UPDATEDSTUDENTDATA/PastFlights.csv'
 
         self.loadVoyageFromFile()

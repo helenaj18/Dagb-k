@@ -9,22 +9,24 @@ class SubMenuRegister:
     def startSubMenuRegister(self):
         print('REGISTER')
         print('What would you like to do?')
-        start = True
-        while start:
+
+        while True:
             print('1 - New employee')
             print('2 - Add staff to an available voyage')
-            #print('3 - New voyage')
+            print('3 - New voyage')
             print('m - Main menu')
 
             selection = input()
 
             if selection == '1': 
-                start = False
+                pass
             elif selection == '2':
-                start = False
+                pass
+            elif selection == '3':
+                pass
             elif selection == 'm':
-                #next_menu = MainMenu()
-                start = False
+                return
+
             else:
                 print("Invalid selection")
                 
