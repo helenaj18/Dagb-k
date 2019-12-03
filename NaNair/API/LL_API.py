@@ -29,9 +29,9 @@ class LL_API:
 
         return CrewLL().getCrew()
     
-    def NewPilot(self):
+    def NewPilot(self, PilotData):
         '''Fetches input from UI layer and puts it in LL layer'''
-        return CrewUI().addPilot() #some string
+        return CrewLL().addPilot(PilotData) #some string
 
     def inputForEditedPilot(self):
         '''Gets input from UI layer and sends it to LL layer'''
