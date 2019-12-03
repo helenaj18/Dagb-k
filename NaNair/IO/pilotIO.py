@@ -55,7 +55,18 @@ class PilotIO:
     def changePilotInFile(self):
         '''Change pilot info in file'''
         
-        info_to_edit = IO_API().gefPilotInputToEdit()
+        info_to_edit = IO_API().getPilotInputToEdit()
+
+        # Tékka á völu og marinellu hvernig þetta yrði gert
+        if info_to_edit[0] == 'e':
+            self.ChangeEmailAddress(info_to_edit[0],info_to_edit[1])
+        elif info_to_edit[0] == 'h':
+            self.ChangeHomeAddress(info_to_edit[0],info_to_edit[1])
+        elif info_to_edit[0] == 'p':
+            self.ChangePhoneNumber(info_to_edit[0],info_to_edit[1])
+        elif info_to_edit[0] == 'l':
+            self.ChangeLicense(info_to_edit[0],info_to_edit[1])
+
 
     def ChangeEmailAddress(self,personal_id,new_email_address):
         '''Changes the Emergency Contact for destination in file'''
@@ -100,7 +111,7 @@ class PilotIO:
         file_object = open(self.__crew_filename,'w')
         file_object.write(a_str)
 
-    def addPilotToFile(self,new_employee_str):
+    def addPilotToFile(self):
         '''Add pilot info into file'''
 
         new_employee_str = IO_API().getPilotInputToAdd()
