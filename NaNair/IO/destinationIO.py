@@ -2,7 +2,7 @@ class DestinationIO:
 
     def __init__(self):
         # Muna að breyta í upcomingflights.csv!!!
-        self.__destination_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Destinations.csv'
+        self.__destination_filename = './NaNair/IO/UPDATEDSTUDENTDATA/Destinations.csv'
         self.loadDestinationFromFile()
 
     def loadDestinationFromFile(self):
