@@ -103,3 +103,10 @@ Morgunfundur 3.12.2019 kl 9
 
 Við ætlum að gera API klasana saman og reyna að klára þá í dag.
 Kinga ætlar að laga destination klasann og svo þurfum við að gera change fallið í öllum IO klösum.
+
+
+kl 11:45
+IO klasar eru tilbúnir
+Erla er að vinna í API tengingum
+Marinella og Vala eru að vinna í menus
+Helena og Kinga ætla núna að fara að hjálpa Erlu
