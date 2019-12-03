@@ -26,6 +26,8 @@ class SubMenuEdit:
                 LL_API().change_voyage(new_datetime_str,flight_number)
 
             elif selection == '2':
+                # SETJA INN MENU CHANGE PHONE EÐA NAME 
+                # EDIT MENU DESTINATION 
                 pass
 
                
