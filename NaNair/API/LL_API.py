@@ -37,7 +37,7 @@ class LL_API:
 
     ### VOYAGE LL 
 
-    def get_voyage(self):
+    def change_voyage(self):
         return VoyageLL().changeVoyage()
 
 
@@ -47,9 +47,9 @@ class LL_API:
     #     '''Fetches input from UI layer and puts it in LL layer'''
     #     return CrewUI().addPilot() #some string
 
-    def NewPilot(self, PilotData):
-        '''Fetches input from UI layer and puts it in LL layer'''
-        return CrewLL().addPilot(PilotData) #some string
+    # def NewPilot(self, PilotData):
+    #     '''Fetches input from UI layer and puts it in LL layer'''
+    #     return CrewLL().addPilot(PilotData) #some string
 
 
     # def inputForEditedPilot(self):
