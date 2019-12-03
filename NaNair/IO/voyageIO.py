@@ -3,8 +3,8 @@ class VoyageIO:
 
     def __init__(self):
         # Muna að breyta í rétt nöfn!
-        self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UpcomingFlights.csv'
-        self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/PastFlights.csv'
+        self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/UpcomingFlights.csv'
+        self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/PastFlights.csv'
         self.loadVoyageFromFile()
 
     def get_info(self,file_object):
@@ -25,10 +25,10 @@ class VoyageIO:
         upcomingFlights_file_object = open(self.__upcomingFlights_filename,'r')
         pastFlights_file_object = open(self.__pastFlights_filename,'r')
         
-        upcoming_list = self.get_info(upcomingFlights_file_object)
-        past_list = self.get_info(pastFlights_file_object)
+        self.upcoming_list = self.get_info(upcomingFlights_file_object)
+        self.past_list = self.get_info(pastFlights_file_object)
 
-        self.flights_list = upcoming_list + past_list
+        self.flights_list = self.upcoming_list + self.past_list
 
 
 
@@ -46,18 +46,18 @@ class VoyageIO:
 # miðað við að það sé slegið inn flugnúmer á leið út
     def changeDepartureDateTimeOfVoyage(self, new_datetime_str,flight_number):
         '''Changes the departure date and time of an existing voyage in the file'''
-        for i in range(len(self.flights_list)):
-            if flight_number == self.flights_list[i][0]:
-                self.flights_list[i][3] = new_datetime_str
+        for i in range(len(self.upcoming_list)):
+            if flight_number == self.upcoming_list[i][0]:
+                self.upcoming_list[i][3] = new_datetime_str
 
         self.changeVoyageFile()
 
-    
+# miðað við að það sé slegið inn flugnúmer á leið út
     def changeArrivalDateTimeOfVoyage(self, new_datetime_str,flight_number):
         '''Changes the departure date and time of an existing voyage in the file'''
-        for i in range(len(self.flights_list)):
-            if flight_number == self.flights_list[i][0]:
-                self.flights_list[i][4] = new_datetime_str
+        for i in range(len(self.upcoming_list)):
+            if flight_number == self.upcoming_list[i][0]:
+                self.upcoming_list[i][4] = new_datetime_str
         
         self.changeVoyageFile()
 
@@ -65,7 +65,7 @@ class VoyageIO:
     def changeVoyageFile(self):
         '''Updates the file with new changes'''
         voyage_str = ''
-        for item in self.flights_list:
+        for item in self.upcoming_list:
             voyage_str += ','.join(item) + '\n'
         
         file_object = open(self.__upcomingFlights_filename,'w')
@@ -80,8 +80,5 @@ class VoyageIO:
 
         return file_object
 
-
-a = VoyageIO()
-a.changeArrivalDateTimeOfVoyage('prufa','NA1111')
 
 
