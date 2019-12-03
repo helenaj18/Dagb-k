@@ -13,6 +13,7 @@ class VoyageLL:
 
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
+        print('In changeDateTimeofVoyage in VoyageLL.py')
         for i in range(len(self.voyage_list)):
             if flight_number == self.voyage_list[i][0]:
                 self.voyage_list[i][3] = new_datetime_str

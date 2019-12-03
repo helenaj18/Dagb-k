@@ -47,7 +47,6 @@ class VoyageIO:
         return self.voyage_list
 
 
-
     def changeVoyageFile(self):
         '''Updates the file with new changes'''
         voyage_str = ''
