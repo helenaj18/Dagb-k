@@ -7,8 +7,8 @@ class AirplaneLL:
  
     def getAirplanes(self):
         '''Fetches list of airplanes and returns a list'''
-        for airplane in airplane_list:
-            airplane_str = str(airplane) #ATH þarf að formatta
+        for airplane in self.airplane_list:
+            airplane_str = str(airplane) #ATH þarf að formatta strenginn
         return airplane_str
         
     def getOneAirplane(self, plane_ID = ''):
