@@ -1,3 +1,6 @@
+from API.IO_API import IO_API
+from API.LL_API import LL_API
+
 class CrewLL:
  
     def __init__(self):
@@ -5,15 +8,29 @@ class CrewLL:
  
     def getCrew(self):
         ''' Gets the whole crew '''
-        pass
+        pilots = self.getPilots
+        flight_att = IO_API().loadFlightAttFromFile()
+
+        total_crew = pilots + flight_att
+
+        return total_crew
+
  
     def getPilots(self):
         ''' Gets pilot from all the pilots (crew)'''
-        pass
+        pilots = IO_API().loadPilotFromFile()
+
+        return pilots
+        
  
     def addPilot(self):
         ''' Adds pilot to pilots (crew)'''
-        pass
+        # input from UI layer
+        new_pilot_str = LL_API().inputForNewPilot()
+
+        return new_pilot_str
+
+
  
     def editPilot(self):
         ''' Edits information of a pilot '''
@@ -21,7 +38,7 @@ class CrewLL:
  
     def addFlightAttendant(self):
         ''' Adds flight attendant to flight attendants (crew)'''
-        pass
+        
  
     def editFlightAttendant(self):
         ''' Edits information of a flight attendant '''

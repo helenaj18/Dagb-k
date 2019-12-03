@@ -1,3 +1,5 @@
+from API.IO_API import IO_API
+
 # ATH á að vera inní klasa
 SSN_const = 0
 NAME_const = 1
@@ -9,7 +11,7 @@ class PilotIO:
     
     def __init__(self):
         # Muna að breyta í crew.csv!!!
-        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Crew.csv'
+        self.__crew_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/Crew.csv'
     
 
     # Er hægt að kalla í read file úr attendant????
@@ -49,21 +51,19 @@ class PilotIO:
 
     def changePilotInFile(self):
         '''Change pilot info in file'''
-        pass
+        
+        info_to_edit = IO_API().gefPilotInputToEdit()
+
+        
 
 
-    def addPilotToFile(self,new_employee_str):
+    def addPilotToFile(self):
         '''Add pilot info into file'''
+
+        new_employee_str = IO_API().getPilotInputToAdd()
 
         file_object = open(self.__crew_filename,'a')
         file_object.write(new_employee_str+'\n')
 
         return file_object
 
-
-a = PilotIO()
-a.addPilotToFile('3108982529,Helena,Pilot,Captain,123')
-
-b= a.loadPilotFromFile()
-print(b)
-print(a)

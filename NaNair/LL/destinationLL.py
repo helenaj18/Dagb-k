@@ -1,10 +1,15 @@
+from API.IO_API import IO_API
+
 class DestinationLL:
     def __init__(self):
         pass
  
     def getDestination(self):
         ''' Gets destination from Destination class'''
-        pass
+        destinations_set = IO_API().loadDestinationFromFile()
+        
+        return destinations_set
+
 
 
 
@@ -16,3 +21,5 @@ class Destination:
         self.__contact = contact
         self.__emergency_phone_number = emergency_phone_number
         self.__duration = duration
+
+

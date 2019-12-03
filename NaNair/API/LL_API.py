@@ -1,4 +1,9 @@
 from LL.airplaneLL import AirplaneLL
+from LL.destinationLL import DestinationLL
+from LL.crewLL import CrewLL
+from LL.voyageLL import VoyageLL
+
+from UI.crewUI import CrewUI
 
 class LL_API:
 
@@ -22,6 +27,17 @@ class LL_API:
     def get_crew(self):
         ''' Fetches all crew members'''
 
-        return AirplaneLL
+        return CrewLL().getCrew()
+    
+    def inputForNewPilot(self):
+        '''Fetches input from UI layer and puts it in LL layer'''
+        return CrewUI().addPilot() #some string
+
+
+    ## DESTINATION LL
+
+    def get_destinations(self):
+        '''Gets all destinations NaN Air flies to'''
+        return DestinationLL().getDestination()
 
 #LL_API.show_all_planes()
