@@ -1,6 +1,9 @@
-#from LL import airplaneLL, crewLL, destinationLL, flightroute,voyageLL
-#from UI import airplaneUI, crewUI, destinationUI, voyageUI
+<<<<<<< HEAD
+
+=======
+>>>>>>> b19178271033caa9bbd3ba6f12af1e2571ca79da
 from LL.airplaneLL import AirplaneLL
+from LL.destinationLL import DestinationLL
 
 class LL_API:
 
@@ -25,5 +28,12 @@ class LL_API:
         ''' Fetches all crew members'''
 
         return AirplaneLL
+
+
+    ## DESTINATION LL
+
+    def get_destinations(self):
+        '''Gets all destinations NaN Air flies to'''
+        return DestinationLL().getDestination()
 
 #LL_API.show_all_planes()

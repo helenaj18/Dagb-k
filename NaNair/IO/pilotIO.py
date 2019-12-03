@@ -9,7 +9,7 @@ class PilotIO:
     
     def __init__(self):
         # Muna að breyta í crew.csv!!!
-        self.__crew_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/Crew.csv'
+        self.__crew_filename = '/Users/erlaarnalds/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/Crew.csv'
     
 
     # Er hægt að kalla í read file úr attendant????
@@ -60,10 +60,3 @@ class PilotIO:
 
         return file_object
 
-
-a = PilotIO()
-a.addPilotToFile('3108982529,Helena,Pilot,Captain,123')
-
-b= a.loadPilotFromFile()
-print(b)
-print(a)

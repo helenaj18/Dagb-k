@@ -2,7 +2,7 @@ class DestinationIO:
 
     def __init__(self):
         # Muna að breyta í upcomingflights.csv!!!
-        self.__destination_filename = '/Users/kingamaris/Documents/GitHub/Dagbok/UPDATEDSTUDENTDATA/Destinations.csv'
+        self.__destination_filename = 'Destinations.csv'
 
     def read_file(self):
         '''Reads file and returns employees list'''
