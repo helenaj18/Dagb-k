@@ -1,10 +1,12 @@
-import csv
+import os
 
 class AirplaneIO:
 
     def __init__(self):
-        #self.__airplane_filename = 'Aircraft.csv'
-        self.__airplane_filename = './NaNair/IO/UPDATEDSTUDENTDATA/Aircraft.csv'
+        
+        dirname = os.path.dirname(__file__)
+        self.__airplane_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Aircraft.csv')
+
         self.loadAirplaneFromFile()
 
     def loadAirplaneFromFile(self):
