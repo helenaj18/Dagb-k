@@ -3,8 +3,8 @@ class VoyageIO:
 
     def __init__(self):
         # Muna að breyta í rétt nöfn!
-        self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/UpcomingFlights.csv'
-        self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/UPDATEDSTUDENTDATA/PastFlights.csv'
+        self.__upcomingFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/PastFlights.csv'
+        self.__pastFlights_filename = '/Users/helenajonsdottir/Desktop/Verklegt1/Verklegt/PastFlights.csv'
 
     def get_info(self,file_object):
         a_list = []
@@ -36,10 +36,11 @@ class VoyageIO:
         self.read_file()
         voyage_list = []
         for i in range(len(self.flights_list)):
-            voyage_list.append(self.flights_list[i:i+1])
+            voyage_list.append(self.flights_list[i:i+2])
             i += 2
 
         self.voyage_list = voyage_list
+        print(voyage_list)
 
     def changeVoyageInFile(self):
         '''Changes an existing voyage in the file'''
