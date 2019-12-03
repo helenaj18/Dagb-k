@@ -1,4 +1,5 @@
 #from API.IO_API import IO_API
+import os
 
 # ATH á að vera inní klasa
 SSN_const = 0
@@ -10,10 +11,12 @@ ADDRESS_const = 5
 PHONENUMBER_const = 6
 EMAIL_const = 7
 
+
 class PilotIO:
     
     def __init__(self):
-        self.__crew_filename = './NaNair/IO/UPDATEDSTUDENTDATA/Crew.csv'
+        dirname = os.path.dirname(__file__)
+        self.__crew_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Crew.csv')
     
 
     # Er hægt að kalla í read file úr attendant????
