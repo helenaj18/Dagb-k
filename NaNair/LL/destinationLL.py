@@ -23,6 +23,3 @@ class Destination:
         self.__duration = duration
 
 
-d = DestinationLL()
-
-print(d.getDestination())
