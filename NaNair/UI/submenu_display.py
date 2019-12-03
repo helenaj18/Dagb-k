@@ -1,8 +1,9 @@
-from display_menu_airplanes import DisplayMenuAirplanes
+from UI.display_menu_airplanes import DisplayMenuAirplanes
 
 class SubMenuDisplay: 
-    def __init__(self):
+    def __init__(self, logic_layer):
         print('sub menu Display')
+        self.logic_layer = logic_layer
     
     def startSubMenuDisplay(self):
         print('DISPLAY')
@@ -19,7 +20,7 @@ class SubMenuDisplay:
         selection = input()
 
         if selection == '1': 
-            next_menu = DisplayMenuAirplanes().startDisplayAirplanes()
+            next_menu = DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
         elif selection == '2':
             # fara beint í destination UI 
             pass
