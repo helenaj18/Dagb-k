@@ -10,8 +10,8 @@ class DisplayMenuVoyages:
         print('#'*20)
         print()
 
-        start = True
-        while start: 
+
+        while True: 
             print('What would you like to display?')
             print()
             print('1 - All voyages in a certain time frame')
@@ -23,19 +23,17 @@ class DisplayMenuVoyages:
 
             if selection == '1':
                 #lista upp allar ferðir á ákveðnum tíma
-                voyages = VoyageUI().showAllVoyages()
-                for item in voyages:
-                    print(item)
-                start = False
+                return VoyageUI().showAllVoyages()
+                
 
 
             elif selection == '2':
                 # lista ákveðna ferð
-                start = False
+                pass
 
             elif selection == 'm':
                 # fara aftur á display
                 return 
-                start = False
+            
             else: 
                 print('Invalid selection')
