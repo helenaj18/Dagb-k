@@ -1,36 +1,40 @@
 import os
+from ModelClasses.airplane_model import Airplane
 
 class AirplaneIO:
 
     def __init__(self):
         
         dirname = os.path.dirname(__file__)
-        self.__airplane_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Aircraft.csv')
+        self.__aircraft_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Aircraft.csv')
+        self.__aircraft_type_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/AircraftType.csv')
 
         self.loadAirplaneFromFile()
 
     def loadAirplaneFromFile(self):
         '''Reads file and returns aircraft list'''
-        file_object = open(self.__airplane_filename,'r')
+        aircraft_file = open(self.__aircraft_filename,'r')
+        aircraft_type_file = open(self.__aircraft_type_filename, 'r')
         airplanes_list = []
 
-        for line in file_object:
-            line = line.strip().split(',')
-            airplanes_list.append(line)
+
+        for line in aircraft_file:
+            if i != 0:
+                planeInsignia,planeTypeId_1 = line.strip().split(',')
+            
+            i += 1
         
-        self.airplanes_list = airplanes_list
+        for line in aircraft_type_file:
+            if i != 0:
+                planeTypeId_2,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = line.strip().split(',')
+                if planeTypeId_1 == planeTypeId_2:
+                    airplane_instance = Airplane(planeInsignia, planeTypeId_1,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
+                    airplanes_list.append(airplane_instance)
+            i += 1
 
         return airplanes_list
 
+
     def addAirplaneToFile(self, new_airplane_str):
-        '''Adds a new airplane to the file'''
-        
-        file_object = open(self.__airplane_filename,'a')
-        file_object.write(new_airplane_str+'\n')
+        pass
 
-        return file_object
-
-
-a = AirplaneIO()
-
-print(a.loadAirplaneFromFile())
