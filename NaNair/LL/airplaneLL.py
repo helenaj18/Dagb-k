@@ -8,9 +8,13 @@ class AirplaneLL:
         '''Fetches list of airplanes and returns a list'''
         return AirplaneIO().loadAirplaneFromFile()
         
-    def getOneAirplane(self, plane_ID = ''):
+    def getOneAirplane(self, planeInsignia = ''):
         ''' Returns information on one airplane'''
-        
+        airplane_list = AirplaneIO().loadAirplaneFromFile()
+        for airplane in airplane_list:
+            if planeInsignia == airplane.planeInsignia:
+                print(airplane)
+
         return print('get one airplane UI - LL í gegn um API ')
 
     def addAirplane(self):
