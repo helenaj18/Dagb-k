@@ -1,3 +1,5 @@
+FORMAT_LENGTH_const = 20
+
 class Airplane:
     def __init__(self, planeInsignia, planeTypeId,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan):
         self.planeInsignia = planeInsignia
@@ -15,7 +17,17 @@ class Airplane:
 
 
     def __str__(self):
-        return self.planeInsignia+','+self.planeTypeID+','+self.manufacturer+','+self.model+','+\
-        self.capacity+','+self.emptyWeight+','+self.maxTakeoffWeight+','+self.unitThrust+','+self.serviceCeiling+','+\
-        self.length+','+self.height+','+self.wingspan
+        format_str = '{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}'.format(self.planeInsignia,self.planeTypeID,self.manufacturer,self.model,\
+        self.capacity,self.length,self.height,self.wingspan)
+        
+        return format_str
 
+
+
+    def formatAirplanes(self):
+        '''Formats Airplane lists'''
+        
+        print('#'*20)
+        print('{:^20}'.format('WELCOME'))
+        print('#'*20)
+        print()
