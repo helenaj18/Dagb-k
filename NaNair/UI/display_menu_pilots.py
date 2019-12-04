@@ -33,6 +33,8 @@ class DisplayMenuPilots:
 
             elif selection == '2':
                 # lista upp alla flugmenn eftir hvaða leyfi þeir hafa
+
+                return CrewUI().showSortedByLicense()
                 start = False
 
             elif selection == 'm':
