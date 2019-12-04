@@ -15,6 +15,7 @@ class CrewLL:
         EMAIL_const = 7
 
         self.employees_list = IO_API().readPilotFile()
+        self.pilots_list = IO_API().loadPilotFromFile()
 
  
     def getCrew(self):
@@ -53,13 +54,14 @@ class CrewLL:
 
         return IO_API().addPilot(info)
 
-    def ChangePilotEmailAddress(self,personal_id,new_email_address):
+    def ChangeEmailAddress(self,personal_id,new_email_address):
         '''Changes the email address of a single pilot'''
         for i in range(len(self.employees_list)):
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][EMAIL_const] = new_email_address  
-        
-       PilotIO().changePilotFile(self.employees_list)
+
+       #  change crew file in pilotIO changes the whole crew list
+       PilotIO().changeCrewFile(self.employees_list)
 
 
     def ChangeHomeAddress(self,personal_id,new_home_address):
@@ -68,7 +70,7 @@ class CrewLL:
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][ADDRESS_const] = new_home_address  
         
-        PilotIO().changePilotFile(self.employees_list)
+        PilotIO().changeCrewFile(self.employees_list)
 
     def ChangePhoneNumber(self,personal_id,new_phone_number):
         '''Changes the Emergency Contact for destination in file'''
@@ -76,17 +78,16 @@ class CrewLL:
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][PHONENUMBER_const] = new_phone_number
         
-        PilotIO().changePilotFile(self.employees_list)
+        PilotIO().changeCrewFile(self.employees_list)
     
-    def ChangeLicense(self,personal_id,new_license):
+    def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
 
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][LICENSE_const] = new_license
+        for i in range(len(self.pilots_list)):
+            if personal_id == self.pilots_list[i][0]:
+                self.pilots_list[i][LICENSE_const] = new_license
         
-        PilotIO().changePilotFile(self.employees_list)
-
+        PilotIO().changePilotFile(self.pilots_list)
 
 
 

@@ -61,42 +61,19 @@ class AttendantIO:
         return file_object
 
 
-    def changeFlightAttInFile(self):
-        '''Changes the info of flight attendant'''
-        pass
+    # taka út?? föll í pilotIO geta breytt
 
-    def ChangeEmailAddress(self,personal_id,new_email_address):
-        '''Changes the Emergency Contact for destination in file'''
-        self.__personal_id = personal_id
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][EMAIL_const] = new_email_address  
-        self.changeCrewFile()
-
-
-    def ChangeHomeAddress(self,personal_id,new_home_address):
-        '''Changes the Emergency Contact for destination in file'''
-        self.__personal_id = personal_id
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][ADDRESS_const] = new_home_address  
-        self.changeCrewFile()
-
-    def ChangePhoneNumber(self,personal_id,new_phone_number):
-        '''Changes the Emergency Contact for destination in file'''
-        self.__personal_id = personal_id
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][PHONENUMBER_const] = new_phone_number
-        self.changeCrewFile()
+    # def changeFlightAttInFile(self):
+    #     '''Changes the info of flight attendant'''
+    #     pass
     
 
-    def changeCrewFile(self):
-        '''Updates the file with new changes'''
-        a_str = ''
-        for item in self.employees_list:
-            a_str += ','.join(item) + '\n'
+    # def changeCrewFile(self):
+    #     '''Updates the file with new changes'''
+    #     a_str = ''
+    #     for item in self.employees_list:
+    #         a_str += ','.join(item) + '\n'
 
-        file_object = open(self.__crew_filename,'w')
-        file_object.write(a_str)
+    #     file_object = open(self.__crew_filename,'w')
+    #     file_object.write(a_str)
 

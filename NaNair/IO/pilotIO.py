@@ -24,6 +24,7 @@ class PilotIO:
             employees_list.append(line)
         
         self.employees_list = employees_list
+        return employees_list
 
 
     def find_pilots(self):
@@ -36,7 +37,7 @@ class PilotIO:
             if self.employees_list[i][LICENSE_const] != 'N/A': 
                 pilot_list.append(self.employees_list[i])
         
-        self.pilot_list = pilot_list    
+        self.pilot_list = pilot_list   
 
 
     def loadPilotFromFile(self):
@@ -47,25 +48,15 @@ class PilotIO:
 
         return self.pilot_list
 
-    def changePilotFile(self, upcoming_list):
-        '''Updates file with new changes'''
 
-        pilot_str = ''
-        for item in upcoming_list:
-            pilot_str += ','.join(item) + '\n'
-        
-        file_object = open(self.__crew_filename,'w')
-        file_object.write(pilot_str)
-
-
-    def changeCrewFile(self):
+    def changeCrewFile(self, crew_list):
         '''Updates the file with new changes'''
-        a_str = ''
-        for item in self.employees_list:
-            a_str += ','.join(item) + '\n'
+        crew_str = ''
+        for item in crew_list:
+            crew_str += ','.join(item) + '\n'
 
         file_object = open(self.__crew_filename,'w')
-        file_object.write(a_str)
+        file_object.write(crew_str)
 
     def addPilotToFile(self, new_employee_str):
         '''Add pilot info into file'''
