@@ -1,17 +1,77 @@
 from API.IO_API import IO_API
 from IO.voyageIO import VoyageIO
 
+DEPARTING_DATETIME = 4
+ARRIVING_DATETIME = 8
+
 class VoyageLL:
     ''' LL class for voyage '''
-    KEF = 'KEF'
+
+
 
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
         #self.upcoming_list = IO_API().read_file()
- 
-    def getVoyage(self):
+        
+    def splitDates(self, datetime):
+        date = datetime[:10]
+        year, month, day = date.split('-')
 
-        return IO_API().loadVoyageFromFile()
+        return int(year), int(month), int(day)
+
+
+    def getVoyage(self,start_datetime,end_datetime):
+
+
+        voyages = IO_API().loadVoyageFromFile()
+
+        voyages_on_date = []
+        voyages_on_date_indexes = []
+        #start_date, start_time = start_datetime.spilt('T')
+        #start_year, start_month, start_day = VoyageLL.splitDates(start_datetime)
+        
+        #end_date, end_time = end_datetime.split('T')
+        #end_year, end_month, end_day = VoyageLL.splitDates(end_datetime)
+
+        start_date = start_datetime[:10]
+        end_date = end_datetime[:10]
+            
+        
+        for voyage in voyages:
+
+            departure_datetime = voyage.getDepartureTime()
+            #dep_year, dep_month, dep_day = VoyageLL.splitDates(departure_datetime)
+            departure_date = departure_datetime[:10]
+
+            arrival_datetime = voyage.getArrivalTime()
+            #arr_year, arr_month, arr_day = VoyageLL.splitDates(arrival_datetime)
+            arrival_date = arrival_datetime[:10]
+
+            
+
+
+            if arrival_date == start_date:
+                first_voyage_index = voyages.index(voyage)
+                voyages_on_date_indexes.append(voyages.index(voyage))
+
+            if departure_date == end_date: 
+                voyages_on_date_indexes.append(voyages.index(voyage))
+
+        first_voyage_index = voyages_on_date_indexes[0]
+        last_voyage_index = voyages_on_date_indexes[-1]
+
+        for i in range(first_voyage_index,last_voyage_index+1):
+            voyages_on_date.append(voyages[i])
+        #voyages_on_date.append(voyages[first_voyage_index:last_voyage_index])
+
+
+
+
+        return voyages_on_date
+
+
+
+            
 
         # for voyage in self.voyage_list:
         #     print(voyage) # þarf að formatta streng

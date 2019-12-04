@@ -1,18 +1,24 @@
 from ModelClasses.crew_model import Crew
 
 class Pilot(Crew):
-    def __init__(self, name, crewID, address='', phonenumber='', email='', pilot_license='', captain=False):
+    def __init__(self, name, crewID, address='', phonenumber='', email='', pilot_license='', captain=0):
         Crew.__init__(self, name, crewID, address, phonenumber, email)
-        self.pilot_license = pilot_license
-        self.captain = captain
+        self.__pilot_license = pilot_license
+        self.__captain = bool(int(captain))
+
+    def getLicense(self):
+        return self.__pilot_license
+
+    def getCaptainBool(self):
+        return self.__captain
  
     def __str__(self):
-        string = self.name + ' ' + self.crewID
+        string = '{:<25}{:<20}{:<20}'.format(self._Crew__name,self._Crew__crewID,self.__pilot_license)
 
-        if self.captain:
-            string += ' Captain'
+        if self.__captain:
+            string += '{:<10}'.format('Captain')
         else:
-            string += ' Copilot'
+            string += '{:<10}'.format('Co-pilot')
 
         return string
 

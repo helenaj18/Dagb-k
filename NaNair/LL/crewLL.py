@@ -41,14 +41,14 @@ class CrewLL:
         pilots = self.getPilots()
 
         for pilot in pilots:
-            if pilotID == pilot.crewID:
+            if pilotID == pilot.getCrewID():
                 return pilot
     
     def getOneFlightAttID(self, flight_att_id):
         flight_att = self.getFlightAtt()
 
         for one_att in flight_att:
-            if flight_att_id == one_att.crewID:
+            if flight_att_id == one_att.getCrewID:
                 return one_att
     
     def getLicensedPilots(self, pilot_license):
@@ -57,7 +57,7 @@ class CrewLL:
         licensedPilots = []
 
         for pilot in pilots:
-            if pilot_license == pilot.pilot_license:
+            if pilot_license == pilot.getLicense():
                 licensedPilots.append(pilot)
         
         return licensedPilots
@@ -110,6 +110,24 @@ class CrewLL:
                     print('Not a pilot!')
         
         IO_API().changeCrewFile(self.pilots_list)
+
+    def sortPilotsByLicense(self):
+        '''Sorts all pilots by their license'''
+
+        pilot_list = self.getPilots()
+        sorted_pilots_list = []
+
+        licenses = set()
+        # make a set of all licenses to iterate through
+        for pilot in pilot_list:
+            licenses.add( pilot.getLicense())
+
+        for a_license in licenses:
+            for pilot in pilot_list:
+                if pilot.getLicense() == a_license:
+                    sorted_pilots_list.append(pilot)
+        
+        return sorted_pilots_list
 
 
     def addFlightAttendant(self, info):

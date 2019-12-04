@@ -16,9 +16,9 @@ class LL_API:
         '''Gets a list of airplanes by type'''
         return AirplaneLL().getAirplanesByType(planeTypeId)
     
-    def addAirplane(self):
+    def addAirplane(self,planeInsignia,planeTypeId):
         ''' Sends info for new ariplane to be added'''
-        return AirplaneLL().addAirplane()
+        return AirplaneLL().addAirplane(planeInsignia,planeTypeId)
 
     ### CREW LL 
     
@@ -44,6 +44,11 @@ class LL_API:
     
     def get_licensed_pilots(self, pilot_license):
         return CrewLL().getLicensedPilots(pilot_license)
+    
+    def sortPilotsByLicense(self):
+        
+        return CrewLL().sortPilotsByLicense()
+
 
 
 
@@ -59,8 +64,8 @@ class LL_API:
     def add_voyage(self,destination, time):
         return VoyageLL().addVoyage(destination,time)
 
-    def get_all_voyages(self):
-        return VoyageLL().getVoyage()
+    def get_all_voyages(self,start_date,end_date):
+        return VoyageLL().getVoyage(start_date,end_date)
         
 
 
