@@ -40,6 +40,10 @@ class LL_API:
     def change_voyage(self,new_datetime_str,flight_number):
         return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
+    def add_voyage(self,destination, time):
+        return VoyageLL().addVoyage(destination,time)
+        
+
 
     ### DESTINATION LL
 
