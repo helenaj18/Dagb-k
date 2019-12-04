@@ -13,7 +13,12 @@ class VoyageLL:
         self.voyage_list = IO_API().loadVoyageFromFile()
         #self.upcoming_list = IO_API().read_file()
         
-    #def splitDates(self, date):
+    def splitDates(self, datetime):
+        date = datetime[:10]
+        year, month, day = date.split('-')
+
+        return int(year), int(month), int(day)
+
 
     def getVoyage(self,start_datetime,end_datetime):
 
@@ -22,22 +27,31 @@ class VoyageLL:
 
         voyages_on_date = []
         voyages_on_date_indexes = []
+        #start_date, start_time = start_datetime.spilt('T')
+        #start_year, start_month, start_day = VoyageLL.splitDates(start_datetime)
+        
+        #end_date, end_time = end_datetime.split('T')
+        #end_year, end_month, end_day = VoyageLL.splitDates(end_datetime)
+
+        start_date = start_datetime[:10]
+        end_date = end_datetime[:10]
+            
         
         for voyage in voyages:
+
             departure_datetime = voyage.getDepartureTime()
-            departure_date, departure_time = departure_datetime.split('T')
+            #dep_year, dep_month, dep_day = VoyageLL.splitDates(departure_datetime)
+            departure_date = departure_datetime[:10]
 
             arrival_datetime = voyage.getArrivalTime()
-            arrival_date, arrival_time = arrival_datetime.split('T')
+            #arr_year, arr_month, arr_day = VoyageLL.splitDates(arrival_datetime)
+            arrival_date = arrival_datetime[:10]
 
-            #start_date, start_time = start_datetime.spilt('T')
-            start_date = start_datetime[:10]
             
-            #end_date, end_time = end_datetime.split('T')
-            end_date = start_datetime[:10]
+
 
             if arrival_date == start_date:
-                #first_voyage_index = voyages.index(voyage)
+                first_voyage_index = voyages.index(voyage)
                 voyages_on_date_indexes.append(voyages.index(voyage))
 
             if departure_date == end_date: 
@@ -57,33 +71,7 @@ class VoyageLL:
 
 
 
-
-        # departing_datetime_str = voyage[DEPARTING_DATETIME].departure_time 
-        # departing_date, departing_time = departing_datetime_str.split('T')
-
-        # arriving_datetime_str = voyage[ARRIVING_DATETIME].arrival_time
-        # arriving_date ,arriving_time = arriving_datetime_str.split('T')
-
-        # for voyage in voyages: 
-        #     departing_date ,departing_time = voyage.departure_time.split('T')
-        #     arriving_date ,arriving_time = voyage.arrival_time.split('T')
-
-        #     if start_date == departing_date: #[DEPARTING_DATETIME]:
-        #         first_voyage_index = voyages.index(voyage)
-        #         voyage_date_indexes.append(first_voyage_index)
             
-        #     if end_date == arriving_date:
-        #         last_voyage_index = voyages.index(voyage)
-        #         voyage_date_indexes.append(last_voyage_index)
-
-        # first_voyage_index = voyage_date_indexes[0]
-        # last_voyage_index = voyage_date_indexes[-1]
-
-        # voyages_on_date.append(voyages[first_voyage_index:last_voyage_index])
-
-        
-
-        
 
         # for voyage in self.voyage_list:
         #     print(voyage) # þarf að formatta streng
