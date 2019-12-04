@@ -23,7 +23,7 @@ class DisplayMenuAirplanes:
 
             if selection == '1':
                 #lista upp allar flugvelar 
-                AirplaneUI().ShowAllPlanes()
+                AirplaneUI().showAllPlanes()
                 start = False
 
 

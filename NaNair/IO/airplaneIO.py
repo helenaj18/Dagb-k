@@ -16,20 +16,19 @@ class AirplaneIO:
         aircraft_file = open(self.__aircraft_filename,'r')
         aircraft_type_file = open(self.__aircraft_type_filename, 'r')
         airplanes_list = []
+        i = 0
 
-
-        for line in aircraft_file:
+        for line_aircraft in aircraft_file:
             if i != 0:
-                planeInsignia,planeTypeId_1 = line.strip().split(',')
-            
-            i += 1
+                planeInsignia,planeTypeId_1 = line_aircraft.strip().split(',')
         
-        for line in aircraft_type_file:
-            if i != 0:
-                planeTypeId_2,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = line.strip().split(',')
-                if planeTypeId_1 == planeTypeId_2:
-                    airplane_instance = Airplane(planeInsignia, planeTypeId_1,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
-                    airplanes_list.append(airplane_instance)
+        
+            for line_aircraft_type in aircraft_type_file:
+                if i != 0:
+                    planeTypeId_2,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = line_aircraft_type.strip().split(',')
+                    if planeTypeId_1 == planeTypeId_2:
+                        airplane_instance = Airplane(planeInsignia, planeTypeId_1,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
+                        airplanes_list.append(airplane_instance)
             i += 1
 
         return airplanes_list

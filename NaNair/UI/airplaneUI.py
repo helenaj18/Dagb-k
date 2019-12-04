@@ -3,12 +3,6 @@ from API.LL_API import LL_API
 
 class AirplaneUI:
 
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
     def showAllPlanes(self):
         '''Shows information about all airplanes NanAir owns'''
         LL_API().show_all_planes()
