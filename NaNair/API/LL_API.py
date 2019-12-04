@@ -8,15 +8,15 @@ from LL.voyageLL import VoyageLL
 class LL_API:
 
     ### AIRPLANE LL 
-    def show_all_planes(self):
+    def showAllPlanes(self):
         
         return AirplaneLL().getAirplanes() 
     
-    def show_one_plane(self,plane_ID = ''):
-        '''Fetches one specific plane and returns it'''
-        return AirplaneLL().getOneAirplane(plane_ID)
+    def showAirplanesByType(self, planeTypeId = ''):
+        '''Gets a list of airplanes by type'''
+        return AirplaneLL().getAirplanesByType(planeTypeId)
     
-    def add_airplane(self):
+    def addAirplane(self):
         ''' Sends info for new ariplane to be added'''
         return AirplaneLL().addAirplane()
 
@@ -53,11 +53,14 @@ class LL_API:
 
     ### VOYAGE LL 
 
-    def change_voyage(self,new_datetime_str,flight_number):
+    def change_voyage(self,new_datetime_str,flight_number): # BÆTA INN EH TIME PERIOD
         return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
     def add_voyage(self,destination, time):
         return VoyageLL().addVoyage(destination,time)
+
+    def get_all_voyages(self):
+        return VoyageLL().getVoyage()
         
 
 

@@ -1,3 +1,5 @@
+from API.LL_API import LL_API
+
 class VoyageUI:
 
     def __init__(self):
@@ -6,9 +8,9 @@ class VoyageUI:
     def __str__(self):
         pass
 
-    def showAllVoyages(self,time_period_str):
+    def showAllVoyages(self): # BÆTA INN EH TIME PERIOD
         '''Shows all voyages for a current time period'''
-        pass
+        return LL_API().get_all_voyages()
 
     def showOneVoyage(self,voyage_ID):
         '''Shows one specific voyage'''
