@@ -32,11 +32,11 @@ class SubMenuRegister:
             elif selection == '3':
                 destination_of_voyage = input('Destination: (3char airport code)').upper()
                 print('Departure time')
-                dep_year = input('Year: ')
-                dep_month = input('Month: ')
-                dep_day = input('Day: ')
-                dep_hour = input('Hour: ')
-                dep_minute = input('Minute: ')
+                dep_year = int(input('Year: '))
+                dep_month = int(input('Month: ')
+                dep_day = int(input('Day: '))
+                dep_hour = int(input('Hour: '))
+                dep_minute = int(input('Minute: '))
                 departure_time = datetime.datetime(dep_year,dep_month,dep_day,dep_hour,dep_minute,0).isoformat()
 
 

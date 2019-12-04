@@ -18,7 +18,7 @@ class AirplaneLL:
                 airplanes_type_list.append(airplane)
 
         return airplanes_type_list
-
+ 
     def addAirplane(self):
         ''' Adds new airplane'''
         return print('add airplane UI - LL í gegn um API')
