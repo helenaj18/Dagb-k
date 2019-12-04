@@ -5,6 +5,3 @@ class Crew:
         self.address = address
         self.phonenumber = phonenumber
         self.email = email
-
-    def __str__(self):
-        return 'Þetta er strengur'
