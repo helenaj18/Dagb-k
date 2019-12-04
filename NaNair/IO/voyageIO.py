@@ -6,8 +6,8 @@ class VoyageIO:
         # Muna að breyta í rétt nöfn!
 
         dirname = os.path.dirname(__file__)
-        self.__upcomingFlights_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingFlights.csv')
-        self.__pastFlights_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastFlights.csv')
+        self.__upcomingFlights_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
+        self.__pastFlights_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
 
 
         self.loadVoyageFromFile()
