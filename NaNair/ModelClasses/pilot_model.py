@@ -7,12 +7,12 @@ class Pilot(Crew):
         self.captain = captain
  
     def __str__(self):
-        string = self.name + ' ' + self.crewID
+        string = '{:<25}{:<20}'.format(self.name,self.crewID)
 
         if self.captain:
-            string += ' Captain'
+            string += '{:<10}'.format('Captain')
         else:
-            string += ' Copilot'
+            string += '{:<10}'.format('Co-pilot')
 
         return string
 
