@@ -10,7 +10,7 @@ class DestinationLL:
     def getDestination(self): #skoða, þarf þetta að vera sér fall?
         ''' Gets destination from Destination class'''
 
-        return DestinationIO().loadDestinationFromFile()
+        return IO_API().loadDestinationFromFile()
 
 # Geyma change þangað til við erum búin með get
 
