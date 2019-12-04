@@ -9,17 +9,31 @@ class AirplaneUI:
         print(header_str)
         print('-'*len(header_str))
 
-        airplanes = AirplaneUI().showAllPlanes()
+        airplanes = LL_API().showAllPlanes()
 
         for elem in airplanes:
             print(elem)
 
-        return LL_API().showAllPlanes()
         
 
-    def showAirplanesByType(self, planeTypeId = ''):
+    def showAirplanesByType(self):
         '''Shows information about one specific airplane'''
-        return LL_API().showAirplanesByType(planeTypeId)
+        print('What type would you like to list? Please type one of the following')
+        print('NAFokkerF100')
+        print('NAFokkerF28')
+        print('NABAE146')
+        print()
+        planeTypeID = input()
+
+        airplanes = LL_API().showAirplanesByType(planeTypeID)
+
+        header_str = '{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}'.format('PlaneInsignia','planeTypeId','Manufacturer','Model','Capacity','length','height','wingspan')
+        print(header_str)
+        print('-'*len(header_str))
+
+        for elem in airplanes:
+            print(elem)
+
         
     def addAirplane(self):
         
