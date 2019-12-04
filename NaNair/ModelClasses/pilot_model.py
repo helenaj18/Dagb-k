@@ -6,3 +6,5 @@ class Pilot(Crew):
         self.pilot_license = pilot_license
         self.captain = captain
  
+    def __str__(self):
+        return 'thetta er strengur'

@@ -26,7 +26,11 @@ class DisplayMenuPilots:
 
                 pilot_license = input('Input license: ')
                 
-                return CrewUI().showByLicence(pilot_license)
+                licensed_pilots_list = CrewUI().showByLicence(pilot_license)
+
+                for pilot_instance in licensed_pilots_list:
+                    print(pilot_instance)
+
                 start = False
 
 

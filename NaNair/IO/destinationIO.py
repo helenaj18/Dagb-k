@@ -21,6 +21,7 @@ class DestinationIO:
                 destination_instance = Destination(name,airport,distance,contact,emergency_phone_number,duration)
                 destination_list.append(destination_instance)
             i += 1
+            
         return destination_list
 
 

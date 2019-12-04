@@ -23,7 +23,9 @@ class DisplayMenuVoyages:
 
             if selection == '1':
                 #lista upp allar ferðir á ákveðnum tíma
-                return print(VoyageUI().showAllVoyages())
+                voyages = VoyageUI().showAllVoyages()
+                for item in voyages:
+                    print(item)
                 start = False
 
 
