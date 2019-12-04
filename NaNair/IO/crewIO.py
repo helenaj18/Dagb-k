@@ -1,4 +1,7 @@
 import os
+from ModelClasses.crew_model import Crew
+from ModelClasses.pilot_model import Pilot
+from ModelClasses.flight_att_model import FlightAttendant
 
 class CrewIO:
 
@@ -20,9 +23,12 @@ class CrewIO:
         file_object = open(self.__crew_filename,'r')
         employees_list = []
 
+        i = 0
         for line in file_object:
-            line = line.strip().split(',')
-            employees_list.append(line)
+            if i != 0:
+                line = line.strip().split(',')
+                employees_list.append(line)
+            i += 1
         
         self.employees_list = employees_list
         return employees_list
@@ -32,12 +38,13 @@ class CrewIO:
 
         pilot_list = []
 
-        for i in range(1,len(self.employees_list)):
+        for i in range(len(self.employees_list)):
             # Only pilots have licenses
             if self.employees_list[i][LICENSE_const] != 'N/A': 
                 pilot_list.append(self.employees_list[i])
         
-        self.pilot_list = pilot_list  
+        self.pilot_list = pilot_list
+        return self.pilot_list  
 
 
     def find_flight_att(self):
@@ -45,7 +52,7 @@ class CrewIO:
 
         flight_att_list = []
 
-        for i in range(1,len(self.employees_list)):
+        for i in range(len(self.employees_list)):
             # Only pilots have licenses
             if self.employees_list[i][LICENSE_const] == 'N/A':
                 flight_att_list.append(self.employees_list[i])
@@ -54,19 +61,32 @@ class CrewIO:
 
 
     def loadPilotFromFile(self):
-        '''Gets pilot info from file, returns a list of pilots'''
+        '''Gets pilot info from file, returns a list of pilot instances'''
 
         self.read_file()
-        self.find_pilots()
+        pilot_list =self.find_pilots()
+        pilot_class = []
 
-        return self.pilot_list
+        for line in pilot_list:
+            ssn,name,role,captain,pilot_license,address,phonenumber,email = line
+            pilot_instance = Pilot(name,ssn,address,mobile,email,pilot_license,captain)
+            pilot_class.append(pilot_instance)
+
+        return pilot_class
 
     def loadFlightAttFromFile(self):
         '''Gets flight attendant info from file, returns a list of pilots'''
-        self.find_flight_att()
+        flight_att_list = self.find_flight_att()
 
-        return self.flight_att_list
+        flight_att_class = []
 
+        for line in flight_att_list:
+            ssn,name,role,head_flight_att,licence,address,phonenumber,email = line
+            flight_att_instance = FlightAttendant(name,ssn,address,mobile,email,head_flight_att)
+            flight_att_class.append(pilot_instance)
+
+        return flight_att_class
+        
 
     def changeCrewFile(self, crew_list):
         '''Updates the file with new changes'''
