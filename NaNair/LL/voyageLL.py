@@ -15,19 +15,22 @@ class VoyageLL:
  
     def addVoyage(self,destination, departure_time):
 
-        print('in add voyage LL')
+        return print('in add voyage LL')
 
-        voyage_ID = 10
 
-        # flight_num
-        departing_from = KEF
+        # voyage_ID = 10
+
+        # # flight_num
+        # departing_from = KEF
         
+        # destination_list = IO_API().loadDestinationFromFile()
+        # print(destination_list) ## 
 
 
-        new_voyage_string = voyage_ID + flight_num + departing_from + destination + departure_time + arrival
+        # #new_voyage_string = voyage_ID + flight_num + departing_from + destination + departure_time + arrival
 
 
-        VoyageIO().addVoyageToFile()
+        # VoyageIO().addVoyageToFile()
 
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
@@ -52,3 +55,4 @@ class Voyage:
         self.__flight_route = flight_route
         self.__voyage_id = voyage_id
  
+
