@@ -1,4 +1,4 @@
-from crew_model import Crew
+from ModelClasses.crew_model import Crew
 
 class Pilot(Crew):
     def __init__(self, pilot_license, captain):
