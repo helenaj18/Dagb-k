@@ -8,15 +8,15 @@ from LL.voyageLL import VoyageLL
 class LL_API:
 
     ### AIRPLANE LL 
-    def show_all_planes(self):
+    def showAllPlanes(self):
         
         return AirplaneLL().getAirplanes() 
     
-    def show_one_plane(self,plane_ID = ''):
-        '''Fetches one specific plane and returns it'''
-        return AirplaneLL().getOneAirplane(plane_ID)
+    def showAirplanesByType(self, planeTypeId = ''):
+        '''Gets a list of airplanes by type'''
+        return AirplaneLL().getAirplanesByType(planeTypeId)
     
-    def add_airplane(self):
+    def addAirplane(self):
         ''' Sends info for new ariplane to be added'''
         return AirplaneLL().addAirplane()
 

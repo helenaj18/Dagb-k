@@ -29,7 +29,17 @@ class DisplayMenuAirplanes:
                 start = False
 
             elif selection == '2':
-                # lista eftir typu
+                print('What type would you like to list?')
+                print('NAFokkerF100')
+                print('NAFokkerF28')
+                print('NABAE146')
+                print()
+                
+                planeTypeID = input()
+                airplanes = AirplaneUI().showAirplanesByType(planeTypeID)
+                for elem in airplanes:
+                    print(elem)
+
                 start = False
 
             elif selection == 'm':
