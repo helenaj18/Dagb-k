@@ -1,4 +1,6 @@
 from UI.display_menu_airplanes import DisplayMenuAirplanes
+from UI.display_menu_voyages import DisplayMenuVoyages
+from UI.display_menu_pilots import DisplayMenuPilots
 
 class SubMenuDisplay: 
     def __init__(self, logic_layer):
@@ -25,14 +27,14 @@ class SubMenuDisplay:
             # fara beint í destination UI 
             pass
         elif selection == '3':
-            # employee
-            pass
+            next_menu = DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
         elif selection == '4':
+            #listar upp alla flight attendants
             pass
         elif selection == '5':
-            pass
+            next_menu = DisplayMenuPilots(self.logic_layer).startDisplayPilots()
         elif selection == 'm':
             #next_menu = MainMenu()
-            pass
+            return 
         else:
             print("Invalid selection")

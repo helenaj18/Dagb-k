@@ -1,33 +1,34 @@
-from UI.airplaneUI import AirplaneUI
+from UI.voyageUI import VoyageUI
 
-class DisplayMenuAirplanes: 
+class DisplayMenuVoyages: 
     def __init__(self, logic_layer):
-        print('Display airplanes')
+        print('Display voyages')
 
-    def startDisplayAirplanes(self):
-        print('DISPLAY - Airplanes')
+    def startDisplayVoyages(self):
+        print('DISPLAY - Voyages')
 
         start = True
         while start: 
             print('What would you like to display?')
-            print('1 - List all airplanes')
-            print('2 - List airplanes by type')
+            print('1 - All voyages in a certain time frame')
+            print('2 - A single voyage')
             print('m - Go back to display menu')
 
             selection = input()
 
             if selection == '1':
-                #lista upp allar flugvelar 
-                AirplaneUI().ShowAllPlanes()
+                #lista upp allar ferðir á ákveðnum tíma
+                pass
                 start = False
 
 
             elif selection == '2':
-                # lista eftir typu
+                # lista ákveðna ferð
                 start = False
 
             elif selection == 'm':
                 # fara aftur á display
+                return 
                 start = False
             else: 
                 print('Invalid selection')
