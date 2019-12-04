@@ -16,6 +16,8 @@ class Voyage:
         self.__flight_att_one = flight_att_one
         self.__flight_att_two = flight_att_two
 
+    # GERA GET OG SET FYRIR ÞAÐ SEM Á AÐ VERA 
+
     def __str__(self):
         a_string = str(self.__voyage_ID) +',' + str(self.__flight_no)
     

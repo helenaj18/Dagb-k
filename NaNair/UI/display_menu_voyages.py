@@ -23,10 +23,12 @@ class DisplayMenuVoyages:
 
             if selection == '1':
                 #lista upp allar ferðir á ákveðnum tíma
-                return VoyageUI().showAllVoyages()
+
                 
+                return VoyageUI().showAllVoyages()
 
 
+    
             elif selection == '2':
                 # lista ákveðna ferð
                 pass
