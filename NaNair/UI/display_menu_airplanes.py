@@ -10,8 +10,7 @@ class DisplayMenuAirplanes:
         print('#'*20)
         print()
 
-        start = True
-        while start: 
+        while True: 
             print('What would you like to display?')
             print()
             print('1 - List all airplanes')
@@ -26,14 +25,22 @@ class DisplayMenuAirplanes:
                 airplanes = AirplaneUI().showAllPlanes()
                 for elem in airplanes:
                     print(elem)
-                start = False
 
             elif selection == '2':
-                # lista eftir typu
-                start = False
+                print('What type would you like to list?')
+                print('NAFokkerF100')
+                print('NAFokkerF28')
+                print('NABAE146')
+                print()
+
+                planeTypeID = input()
+                airplanes = AirplaneUI().showAirplanesByType(planeTypeID)
+                for elem in airplanes:
+                    print(elem)
+
 
             elif selection == 'm':
                 # fara aftur á display
-                start = False
+                return
             else: 
                 print('Invalid selection')
