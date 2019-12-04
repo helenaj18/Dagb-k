@@ -27,7 +27,52 @@ class VoyageIO:
         return a_list
 
 
-    # def read_file(self):
+
+    def loadVoyageFromFile(self):
+        '''Loads existing voyages from the file'''
+        voyage_list = []
+
+        voyage_file = open(self.__pastVoyages_filename)
+        
+        reader = csv.DictReader(voyage_file)
+
+        for row in reader: 
+            voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['departingFrom_home'],\
+                row['arrivingAt_out'], row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
+                    row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
+
+            voyage_list.append(voyage_instance)
+
+        return voyage_list
+
+     
+
+
+    def changeVoyageFile(self, upcoming_list):
+        '''Updates the file with new changes'''
+        voyage_str = ''
+        for item in upcoming_list:
+            voyage_str += ','.join(item) + '\n'
+        
+        file_object = open(self.__upcomingVoyages_filename,'w')
+        file_object.write(voyage_str)
+        pass
+
+
+    def addVoyageToFile(self,new_voyage_str):
+        '''Adds a new voyage to the file'''
+
+        file_object = open(self.__upcomingVoyages_filename,'a')
+        file_object.write(new_voyage_str+'\n')
+
+        #return file_object
+        pass
+
+
+
+#VoyageIO().loadVoyageFromFile()
+
+  # def read_file(self):
     #     '''Reads two files and adds them to a list,returns the list'''
 
     #     upcomingVoyages_file_object = open(self.__upcomingVoyages_filename,'r')
@@ -39,77 +84,3 @@ class VoyageIO:
     #     self.flights_list = upcoming_list + past_list
 
     #     return upcoming_list
-
-
-    def loadVoyageFromFile(self):
-        '''Loads existing voyages from the file'''
-        voyage_list = []
-
-        with open(self.__pastVoyages_filename) as voyage_file:
-            reader = csv.DictReader(voyage_file)
-
-            for row in reader: 
-                voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['departingFrom_home'],\
-                    row['arrivingAt_out'], row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
-                        row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
-
-                voyage_list.append(voyage_instance)
-
-        return voyage_list
-
-        #print(reader)
-
-        # file_object = open(self.__allVoyages_filename)
-        # voyage_list = []
-        # i=0
-        # for line in file_object:
-        #     if i!=0:
-        
-
-        #         voyage_ID,flight_no_out,departure_location,destination,\
-        #             departure_time_home,arrival_time,\
-        #                 flight_no_in, departing, arrival_home, departure_time, arrival_time_home,\
-        #                       aircraft_ID,captain,copilot,head_flight_att,flight_att_one,flight_att_two\
-        #                     = line.strip().split(',')
-
-        #         voyage_instance = Voyage(aircraft_ID,)
-
-        #     i +=1
-
-
-
-
-        # self.read_file()
-        # voyage_list = []
-        
-        # for i in range(len(self.flights_list)-2):
-        #     voyage_list.append(self.flights_list[i]+self.flights_list[i+1])
-        #     i += 2
-
-        # self.voyage_list = voyage_list
-
-
-        # return self.voyage_list
-
-
-    def changeVoyageFile(self, upcoming_list):
-        '''Updates the file with new changes'''
-        voyage_str = ''
-        for item in upcoming_list:
-            voyage_str += ','.join(item) + '\n'
-        
-        file_object = open(self.__upcomingVoyages_filename,'w')
-        file_object.write(voyage_str)
-
-
-    def addVoyageToFile(self,new_voyage_str):
-        '''Adds a new voyage to the file'''
-
-        file_object = open(self.__upcomingVoyages_filename,'a')
-        file_object.write(new_voyage_str+'\n')
-
-        return file_object
-
-
-
-VoyageIO().loadVoyageFromFile()
