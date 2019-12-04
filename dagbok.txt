@@ -122,3 +122,11 @@ Við ætlum að byrja daginn á því að laga IO og LL klasa og gera tengingar 
 Erla: PilotIO og CrewLL
 Helena: DestinationIO og DestinationLL
 Valentína og Kinga: VoyageIO og VoyageLL
+
+
+kl 16:10
+Flestar IO og LL API tengingar komnar í stand. Hópurinn er byrjaður á að tengja menu
+viðmótið við UI klasana og reyna að láta allt virka. Erum komnar nokkuð langt á leið
+en þó fer mikill tími í að debugga :(
+Stefnum á að klára að tengja viðmótið á morgun og athuga virkni á öllum A kröfunum úr
+kröfulistanum.
