@@ -1,6 +1,6 @@
 #from API.IO_API import IO_API
-from IO.pilotIO import PilotIO
-from IO.attendantIO import AttendantIO
+from API.IO_API import IO_API
+from IO.crewIO import CrewIO
 
 class CrewLL:
  
@@ -18,14 +18,23 @@ class CrewLL:
         self.pilots_list = IO_API().loadPilotFromFile()
 
  
-    def getCrew(self):
+    def getPilots(self):
+        ''' Gets the pilots '''
+
+        return CrewIO().loadPilotFromFile()
+    
+    
+    def getFlightAtt(self):
+        ''' Gets the flight attendants '''
+
+        return CrewIO().loadFlightAttFromFile()
+
+
+    def getPilots(self):
         ''' Gets the whole crew '''
-        crew = self.employees_list
 
-        # format a crew lagað...
-
-        return crew
-
+        return self.getPilots.append(self.getFlightAtt)
+    
  
     def getPilots(self):
         ''' Gets pilot from all the pilots (crew)'''
