@@ -23,6 +23,10 @@ class DisplayMenuPilots:
 
             if selection == '1':
                 #lista upp flugmenn með x leyfi
+
+                pilot_license = input('Input license: ')
+                
+                return CrewUI().showByLicence(pilot_license)
                 start = False
 
 

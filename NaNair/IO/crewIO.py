@@ -3,20 +3,22 @@ from ModelClasses.crew_model import Crew
 from ModelClasses.pilot_model import Pilot
 from ModelClasses.flight_att_model import FlightAttendant
 
+SSN_const = 0
+NAME_const = 1
+ROLE_const = 2
+RANK_const = 3
+LICENSE_const = 4
+ADDRESS_const = 5
+PHONENUMBER_const = 6
+EMAIL_const = 7
+
+
 class CrewIO:
 
     def __init__(self):
         dirname = os.path.dirname(__file__)
         self.__crew_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Crew.csv')
 
-        SSN_const = 0
-        NAME_const = 1
-        ROLE_const = 2
-        RANK_const = 3
-        LICENSE_const = 4
-        ADDRESS_const = 5
-        PHONENUMBER_const = 6
-        EMAIL_const = 7
 
     def read_file(self):
         '''Reads file and returns employees list'''
@@ -69,7 +71,7 @@ class CrewIO:
 
         for line in pilot_list:
             ssn,name,role,captain,pilot_license,address,phonenumber,email = line
-            pilot_instance = Pilot(name,ssn,address,mobile,email,pilot_license,captain)
+            pilot_instance = Pilot(name,ssn,address,phonenumber,email,pilot_license,captain)
             pilot_class.append(pilot_instance)
 
         return pilot_class
@@ -82,7 +84,7 @@ class CrewIO:
 
         for line in flight_att_list:
             ssn,name,role,head_flight_att,licence,address,phonenumber,email = line
-            flight_att_instance = FlightAttendant(name,ssn,address,mobile,email,head_flight_att)
+            flight_att_instance = FlightAttendant(name,ssn,address,phonenumber,email,head_flight_att)
             flight_att_class.append(pilot_instance)
 
         return flight_att_class
