@@ -9,7 +9,6 @@ class DestinationIO:
         
         self.loadDestinationFromFile()
 
-
     def loadDestinationFromFile(self):
         '''Reads file and returns destination list'''
         file_object = open(self.__destination_filename,'r')
@@ -40,7 +39,6 @@ class DestinationIO:
 
         return file_object
 
-
 class Destination:
     def __init__(self,name,airport,distance,contact,emergency_phone_number,duration):
         self.__name = name
@@ -49,3 +47,38 @@ class Destination:
         self.__contact = contact
         self.__emergency_phone_number = emergency_phone_number
         self.__duration = duration
+
+    def __str__(self):
+        
+        return str(self.__name) +','+str(self.__airport) + ','+str(self.__distance)+','+str(self.__contact)+','+str(self.__emergency_phone_number)+','+str(self.__duration)
+
+
+# HVERNIG GETUR MAÐUR SÓTT UPPL Í
+        # for line in file_object:
+        #     name,airport,distance,contact,emergency_phone_number,duration = line.strip().split(',')
+        #     destination_instance = Destination(name,airport,distance,contact,emergency_phone_number,duration)
+        #     destination_list.append(destination_instance)
+        
+        # return destination_list
+
+
+# class Destination:
+#     def __init__(self,name,airport,distance,contact,emergency_phone_number,duration):
+#         self.__name = name
+#         self.__airport = airport
+#         self.__distance = distance
+#         self.__contact = contact
+#         self.__emergency_phone_number = emergency_phone_number
+#         self.__duration = duration
+
+
+
+        # for line in file_object:
+        #     line = line.strip().split(',')
+        #     destination_list.append(line)
+        
+        # return destination_list
+
+
+a = DestinationIO()
+a.loadDestinationFromFile()
