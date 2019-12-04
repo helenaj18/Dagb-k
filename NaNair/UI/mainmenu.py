@@ -19,7 +19,6 @@ class MainMenu:
         print('{:^20}'.format('WELCOME'))
         print('#'*20)
         print()
-        
 
         while True: 
           

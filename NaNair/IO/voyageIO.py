@@ -1,4 +1,5 @@
 import os
+from ModelClasses.voyage_model import Voyage
 
 class VoyageIO:
 
@@ -6,8 +7,8 @@ class VoyageIO:
         # Muna að breyta í rétt nöfn!
 
         dirname = os.path.dirname(__file__)
-        self.__upcomingFlights_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
-        self.__pastFlights_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
+        self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
+        self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
 
 
         self.loadVoyageFromFile()
@@ -24,32 +25,46 @@ class VoyageIO:
         return a_list
 
 
-    def read_file(self):
-        '''Reads two files and adds them to a list,returns the list'''
+    # def read_file(self):
+    #     '''Reads two files and adds them to a list,returns the list'''
 
-        upcomingFlights_file_object = open(self.__upcomingFlights_filename,'r')
-        pastFlights_file_object = open(self.__pastFlights_filename,'r')
+    #     upcomingVoyages_file_object = open(self.__upcomingVoyages_filename,'r')
+    #     pastVoyages_file_object = open(self.__pastVoyages_filename,'r')
         
-        upcoming_list = self.get_info(upcomingFlights_file_object)
-        past_list = self.get_info(pastFlights_file_object)
+    #     upcoming_list = self.get_info(upcomingVoyages_file_object)
+    #     past_list = self.get_info(pastVoyages_file_object)
 
-        self.flights_list = upcoming_list + past_list
+    #     self.flights_list = upcoming_list + past_list
 
-        return upcoming_list
+    #     return upcoming_list
 
-    def loadVoyageFromFile(self):
+    def open_file(self):
+        file_object = open(self.__upcomingVoyages_filename)
+        return file_object
+
+    def loadVoyageFromFile(self,file_object):
         '''Loads existing voyages from the file'''
-        self.read_file()
         voyage_list = []
+        i=0
+        for line in file_object:
+            if i!=0:
+                voyage_ID,flight_no,departure_location,destination,\
+                    departure_time,arrival_time = line.strip().split(',')
+
+
+
+
+        # self.read_file()
+        # voyage_list = []
         
-        for i in range(len(self.flights_list)-2):
-            voyage_list.append(self.flights_list[i]+self.flights_list[i+1])
-            i += 2
+        # for i in range(len(self.flights_list)-2):
+        #     voyage_list.append(self.flights_list[i]+self.flights_list[i+1])
+        #     i += 2
 
-        self.voyage_list = voyage_list
+        # self.voyage_list = voyage_list
 
 
-        return self.voyage_list
+        # return self.voyage_list
 
 
     def changeVoyageFile(self, upcoming_list):
@@ -72,5 +87,3 @@ class VoyageIO:
 
 
 
-a = VoyageIO()
-a.loadVoyageFromFile()
