@@ -19,9 +19,9 @@ class AirplaneLL:
 
         return airplanes_type_list
  
-    def addAirplane(self):
+    def addAirplane(self,planeInsignia,planeTypeId):
         ''' Adds new airplane'''
-        return print('add airplane UI - LL í gegn um API')
+        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId)
 
 
 
