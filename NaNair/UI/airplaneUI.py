@@ -5,7 +5,7 @@ class AirplaneUI:
 
     def showAllPlanes(self):
         '''Shows information about all airplanes NanAir owns'''
-        return print(LL_API().show_all_planes())
+        return LL_API().show_all_planes()
         
     # ATH KRAFA???
     def showOnePlane(self, plane_ID = ''):

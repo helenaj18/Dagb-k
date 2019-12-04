@@ -23,8 +23,9 @@ class DisplayMenuAirplanes:
 
             if selection == '1':
                 #lista upp allar flugvelar 
-                airpls = AirplaneUI().showAllPlanes()
-                print(airpls)
+                airplanes = AirplaneUI().showAllPlanes()
+                for elem in airplanes:
+                    print(elem)
                 start = False
 
             elif selection == '2':

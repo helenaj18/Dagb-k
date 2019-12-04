@@ -9,6 +9,7 @@ class VoyageIO:
         dirname = os.path.dirname(__file__)
         self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
         self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
+        self.__allVoyages_filename = os.pah.join(dirname,'../UPDATEDSTUDENTDATA/voyages.csv')
 
 
         self.loadVoyageFromFile()
@@ -38,18 +39,20 @@ class VoyageIO:
 
     #     return upcoming_list
 
-    def open_file(self):
-        file_object = open(self.__upcomingVoyages_filename)
-        return file_object
 
-    def loadVoyageFromFile(self,file_object):
+    def loadVoyageFromFile(self):
         '''Loads existing voyages from the file'''
+        file_object = open(self.__allVoyages_filename)
         voyage_list = []
         i=0
         for line in file_object:
             if i!=0:
                 voyage_ID,flight_no,departure_location,destination,\
-                    departure_time,arrival_time = line.strip().split(',')
+                    departure_time,arrival_time,aircraft_ID,captain,copilot,\
+                        head_flight_att,flight_att_one,flight_att_two\
+                             = line.strip().split(',')
+                             
+                voyage_instance = Voyage(aircraft_ID,)
 
 
 
@@ -73,14 +76,14 @@ class VoyageIO:
         for item in upcoming_list:
             voyage_str += ','.join(item) + '\n'
         
-        file_object = open(self.__upcomingFlights_filename,'w')
+        file_object = open(self.__upcomingVoyages_filename,'w')
         file_object.write(voyage_str)
 
 
     def addVoyageToFile(self,new_voyage_str):
         '''Adds a new voyage to the file'''
 
-        file_object = open(self.__upcomingFlights_filename,'a')
+        file_object = open(self.__upcomingVoyages_filename,'a')
         file_object.write(new_voyage_str+'\n')
 
         return file_object
