@@ -10,6 +10,5 @@ class DestinationUI:
 
     def showAllDestinations(self):
         '''Shows all destinations of NanAir'''
-        
         print(LL_API().get_destinations())
 
