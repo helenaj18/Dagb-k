@@ -16,6 +16,7 @@ class DisplayMenuPilots:
             print()
             print('1 - Pilots with a license for a specific airplane')
             print('2 - All pilots sorted by license')
+            print('3 - Single pilot information')
             print('m - Go back to display menu')
             print()
 
@@ -26,16 +27,21 @@ class DisplayMenuPilots:
 
                 pilot_license = input('Input license: ')
                 
-                licensed_pilots_list = CrewUI().showByLicence(pilot_license)
-
-                for pilot_instance in licensed_pilots_list:
-                    print(pilot_instance)
+                return CrewUI().showByLicence(pilot_license)
 
                 start = False
 
 
             elif selection == '2':
                 # lista upp alla flugmenn eftir hvaða leyfi þeir hafa
+
+                return CrewUI().showSortedByLicense()
+                start = False
+
+            elif selection == '3':
+                pilot_ID = input('Input pilot ID: ')
+                #lista upp ákveðinn flugmann
+                return CrewUI().showOnePilot(pilot_ID)
                 start = False
 
             elif selection == 'm':
