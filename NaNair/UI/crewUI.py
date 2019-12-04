@@ -27,9 +27,22 @@ class CrewUI:
         return LL_API().get_pilot_by_id(pilot_ID)
 
     def showByLicence(self, license_ID):
-        ''' Shows a list of pilots by their licence '''
+        ''' Shows a list of pilots that have a specific licence '''
 
-        return LL_API().get_licensed_pilots(license_ID)
+        licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
+
+        print('{:<25}{:<20}{:<20}{:<10}'.format('Name', 'Pilot ID','License', 'Rank'))
+        print('_'*80)
+
+        for pilot_instance in licensed_pilots_list:
+                print(pilot_instance)
+
+
+    def showSortedByLicense(self):
+        '''Shows a list of all pilots sorted by license'''
+
+        return LL_API().sortPilotsByLicense()
+
 
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 

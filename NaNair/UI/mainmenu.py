@@ -23,7 +23,7 @@ class MainMenu:
         while True: 
           
             print('What would you like to do?')
-            print('-'*28)
+            print('_'*28)
             print() 
 
             print('1 - Register')
