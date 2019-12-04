@@ -21,13 +21,13 @@ class CrewLL:
     def getPilots(self):
         ''' Gets the pilots '''
 
-        return CrewIO().loadPilotFromFile()
+        return IO_API().loadPilotFromFile()
     
     
     def getFlightAtt(self):
         ''' Gets the flight attendants '''
 
-        return CrewIO().loadFlightAttFromFile()
+        return IO_API().loadFlightAttFromFile()
 
 
     def getCrew(self):
