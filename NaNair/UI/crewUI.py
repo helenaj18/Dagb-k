@@ -33,7 +33,6 @@ class CrewUI:
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
         print(self.BANNER)
-        print('_'*80)
 
         for pilot_instance in licensed_pilots_list:
                 print(pilot_instance)
