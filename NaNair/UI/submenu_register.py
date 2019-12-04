@@ -17,9 +17,12 @@ class SubMenuRegister:
         print()
 
         while True:
-            print('1 - Add New employee')
-            print('2 - Add staff to an available voyage')
-            print('3 - Add New voyage')
+            print('1 - Add new Employee')
+            print('2 - Add new Voyage')
+            print('3 - Add new Airplane')
+            print('4 - Add new Destination')
+            print('5 - Add staff to an available voyage')
+
             print('m - Main menu')
             print()
 
@@ -30,7 +33,13 @@ class SubMenuRegister:
             elif selection == '2':
                 pass
             elif selection == '3':
-                destination_of_voyage = input('Destination: (3char airport code)').upper()
+                planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ')
+                planeTypeId = input('Enter planeTypeId:')
+
+                LL_API().addAirplane(planeInsignia,planeTypeId)
+
+            elif selection == '4':
+                destination_of_voyage = input('Destination (3char airport code): ').upper()
                 print('Departure time')
                 dep_year = int(input('Year: '))
                 dep_month = int(input('Month: '))
@@ -42,7 +51,8 @@ class SubMenuRegister:
 
                 LL_API().add_voyage(destination_of_voyage,departure_time)
 
-
+            elif selection == '5':
+                pass
                 
             elif selection == 'm':
                 return
