@@ -111,6 +111,24 @@ class CrewLL:
         
         IO_API().changeCrewFile(self.pilots_list)
 
+    def sortPilotsByLicense(self):
+        '''Sorts all pilots by their license'''
+
+        pilot_list = self.getPilots()
+        sorted_pilots_list = []
+
+        licenses = set()
+        # make a set of all licenses to iterate through
+        for pilot in pilot_list:
+            licenses.add( pilot.pilot_license )
+
+        for a_license in licenses:
+            for pilot in pilot_list:
+                if pilot.pilot_license == a_license:
+                    sorted_pilots_list.append(pilot)
+        
+        return sorted_pilots_list
+
 
     def addFlightAttendant(self, info):
         ''' Adds flight attendant to flight attendants (crew)'''

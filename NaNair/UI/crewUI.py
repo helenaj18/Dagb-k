@@ -3,7 +3,7 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        pass
+        self.BANNER = '{:<25}{:<20}{:<20}{:<10}'.format('Name', 'Pilot ID','License', 'Rank')
 
     def __str__(self):
         pass 
@@ -31,7 +31,7 @@ class CrewUI:
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
-        print('{:<25}{:<20}{:<20}{:<10}'.format('Name', 'Pilot ID','License', 'Rank'))
+        print(self.BANNER)
         print('_'*80)
 
         for pilot_instance in licensed_pilots_list:
@@ -41,7 +41,14 @@ class CrewUI:
     def showSortedByLicense(self):
         '''Shows a list of all pilots sorted by license'''
 
-        return LL_API().sortPilotsByLicense()
+        sorted_pilots_list =  LL_API().sortPilotsByLicense()
+
+        print(self.BANNER)
+        
+        for pilot in sorted_pilots_list:
+            print(pilot)
+
+
 
 
     def showAllFlightAtt(self):
