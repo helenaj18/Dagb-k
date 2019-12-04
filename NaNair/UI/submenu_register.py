@@ -7,14 +7,20 @@ class SubMenuRegister:
 
 
     def startSubMenuRegister(self):
-        print('REGISTER')
+        print('#'*20)
+        print('{:^20}'.format('REGISTER'))
+        print('#'*20)
+        print()
+
         print('What would you like to do?')
+        print()
 
         while True:
             print('1 - New employee')
             print('2 - Add staff to an available voyage')
             print('3 - New voyage')
             print('m - Main menu')
+            print()
 
             selection = input()
 

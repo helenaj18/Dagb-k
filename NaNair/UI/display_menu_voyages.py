@@ -5,14 +5,19 @@ class DisplayMenuVoyages:
         print('Display voyages')
 
     def startDisplayVoyages(self):
-        print('DISPLAY - Voyages')
+        print('#'*20)
+        print('{:^20}'.format('DISPLAY - Voyages'))
+        print('#'*20)
+        print()
 
         start = True
         while start: 
             print('What would you like to display?')
+            print()
             print('1 - All voyages in a certain time frame')
             print('2 - A single voyage')
             print('m - Go back to display menu')
+            print()
 
             selection = input()
 

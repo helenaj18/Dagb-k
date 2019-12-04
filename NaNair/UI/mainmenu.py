@@ -15,12 +15,16 @@ class MainMenu:
         
 
     def start(self):
-        print('WELCOME')
+        print('#'*20)
+        print('{:^20}'.format('WELCOME'))
+        print('#'*20)
+        print()
         
 
         while True: 
           
-            print('What would you like to do?') 
+            print('What would you like to do?')
+            print() 
 
             print('1 - Register')
             print('2 - Display')
@@ -46,8 +50,3 @@ class MainMenu:
                 break
             else: 
                 print('Invalid selection')
-
-
-
-
-#MainMenu().start()
