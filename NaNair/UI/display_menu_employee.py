@@ -7,12 +7,17 @@ class DisplayMenuEmployee:
         print('in diplay employee')
 
     def startDisplayMenu(self):
-        print('DISPLAY - Employees')
+        print('#'*20)
+        print('{:^20}'.format('DISPLAY - Employees'))
+        print('#'*20)
+        print()
+
         start = True
 
         while start: 
           
             print('What would you like to display?') 
+            print()
 
             print('1 - All employees)
             print('2 - Single employee ')

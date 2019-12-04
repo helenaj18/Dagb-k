@@ -5,14 +5,19 @@ class DisplayMenuAirplanes:
         print('Display airplanes')
 
     def startDisplayAirplanes(self):
-        print('DISPLAY - Airplanes')
+        print('#'*20)
+        print('{:^20}'.format('DISPLAY - Airplanes'))
+        print('#'*20)
+        print()
 
         start = True
         while start: 
             print('What would you like to display?')
+            print()
             print('1 - List all airplanes')
             print('2 - List airplanes by type')
             print('m - Go back to display menu')
+            print()
 
             selection = input()
 

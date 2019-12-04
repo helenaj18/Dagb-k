@@ -7,7 +7,7 @@ class VoyageIO:
 
         dirname = os.path.dirname(__file__)
         self.__upcomingFlights_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingFlights.csv')
-        self.__pastFlights_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastFlights.csv')
+        #self.__pastFlights_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastFlights.csv')
 
 
         self.loadVoyageFromFile()

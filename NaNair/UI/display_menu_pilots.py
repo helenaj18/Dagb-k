@@ -5,14 +5,19 @@ class DisplayMenuPilots:
         print('Display pilots')
 
     def startDisplayPilots(self):
-        print('DISPLAY - Pilots')
+        print('#'*20)
+        print('{:^20}'.format('DISPLAY - Pilots'))
+        print('#'*20)
+        print()
 
         start = True
         while start: 
             print('What would you like to display?')
+            print()
             print('1 - Pilots with a license for a specific airplane')
             print('2 - All pilots sorted by license')
             print('m - Go back to display menu')
+            print()
 
             selection = input()
 
