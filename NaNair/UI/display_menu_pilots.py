@@ -28,6 +28,9 @@ class DisplayMenuPilots:
                 
                 licensed_pilots_list = CrewUI().showByLicence(pilot_license)
 
+                print('{:<30} {:<25} {:<10}'.format('Name', 'Pilot ID', 'Rank'))
+                print('_'*80)
+
                 for pilot_instance in licensed_pilots_list:
                     print(pilot_instance)
 

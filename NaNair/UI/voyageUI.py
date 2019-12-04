@@ -10,7 +10,9 @@ class VoyageUI:
 
     def showAllVoyages(self): # BÆTA INN EH TIME PERIOD
         '''Shows all voyages for a current time period'''
-        return LL_API().get_all_voyages()
+        voyages = LL_API().get_all_voyages()
+        for item in voyages:
+            print(item)
 
     def showOneVoyage(self,voyage_ID):
         '''Shows one specific voyage'''

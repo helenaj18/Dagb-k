@@ -10,5 +10,7 @@ class DestinationUI:
 
     def showAllDestinations(self):
         '''Shows all destinations of NanAir'''
-        print(LL_API().get_destinations())
+        destinations = LL_API().get_destinations()
+        for item in destinations:
+            print(item)
 
