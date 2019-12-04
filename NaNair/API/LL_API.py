@@ -44,6 +44,11 @@ class LL_API:
     
     def get_licensed_pilots(self, pilot_license):
         return CrewLL().getLicensedPilots(pilot_license)
+    
+    def sortPilotsByLicense(self):
+        
+        return CrewLL().sortPilotsByLicense()
+
 
 
 
