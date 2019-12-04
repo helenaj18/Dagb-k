@@ -33,7 +33,7 @@ class SubMenuRegister:
                 destination_of_voyage = input('Destination: (3char airport code)').upper()
                 print('Departure time')
                 dep_year = int(input('Year: '))
-                dep_month = int(input('Month: ')
+                dep_month = int(input('Month: '))
                 dep_day = int(input('Day: '))
                 dep_hour = int(input('Hour: '))
                 dep_minute = int(input('Minute: '))

@@ -23,14 +23,7 @@ class DisplayMenuAirplanes:
 
             if selection == '1':
                 #lista upp allar flugvelar 
-                airplanes = AirplaneUI().showAllPlanes()
-
-                header_str = '{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}'.format('PlaneInsignia','planeTypeId','Manufacturer','Model','Capacity','length','height','wingspan')
-                print(header_str)
-                print('-'*len(header_str))
-
-                for elem in airplanes:
-                    print(elem)
+                return AirplaneUI().showAllPlanes()
 
             elif selection == '2':
                 print('What type would you like to list? Please type one of the following')
