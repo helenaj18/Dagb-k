@@ -3,6 +3,8 @@ from IO.voyageIO import VoyageIO
 
 class VoyageLL:
     ''' LL class for voyage '''
+    KEF = 'KEF'
+
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
         self.upcoming_list = IO_API().read_file()
@@ -15,7 +17,11 @@ class VoyageLL:
 
         print('in add voyage LL')
 
-        voyage_ID = len(self.voyage_list)*2 + 2 #  
+        voyage_ID = 10
+
+        # flight_num
+        departing_from = KEF
+        
 
 
         new_voyage_string = voyage_ID + flight_num + departing_from + destination + departure_time + arrival
