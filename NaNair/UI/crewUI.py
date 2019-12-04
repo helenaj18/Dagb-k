@@ -3,8 +3,8 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        self.BANNER = '{:<25}{:<20}{:<20}{:<10}'.format('Name', 'Pilot ID','License', 'Rank')
-
+        self.BANNER = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID','License', 'Rank')
+        self.BANNER += '_'*80
     def __str__(self):
         pass 
     
@@ -47,6 +47,8 @@ class CrewUI:
         
         for pilot in sorted_pilots_list:
             print(pilot)
+    
+        print()
 
 
 
