@@ -1,5 +1,6 @@
 import os
-from ModelClasses.voyage_model import Voyage
+#from ModelClasses.voyage_model import Voyage
+import csv
 
 class VoyageIO:
 
@@ -9,7 +10,7 @@ class VoyageIO:
         dirname = os.path.dirname(__file__)
         self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
         self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
-        self.__allVoyages_filename = os.pah.join(dirname,'../UPDATEDSTUDENTDATA/voyages.csv')
+        self.__allVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/voyages.csv')
 
 
         self.loadVoyageFromFile()
@@ -42,17 +43,31 @@ class VoyageIO:
 
     def loadVoyageFromFile(self):
         '''Loads existing voyages from the file'''
-        file_object = open(self.__allVoyages_filename)
-        voyage_list = []
-        i=0
-        for line in file_object:
-            if i!=0:
-                voyage_ID,flight_no,departure_location,destination,\
-                    departure_time,arrival_time,aircraft_ID,captain,copilot,\
-                        head_flight_att,flight_att_one,flight_att_two\
-                             = line.strip().split(',')
-                             
-                voyage_instance = Voyage(aircraft_ID,)
+
+        with open(self.__pastVoyages_filename) as voyage_file:
+            reader = csv.DictReader(voyage_file)
+
+            for row in reader: 
+                print(row['voyageIDnumber'])
+
+        #print(reader)
+
+        # file_object = open(self.__allVoyages_filename)
+        # voyage_list = []
+        # i=0
+        # for line in file_object:
+        #     if i!=0:
+        
+
+        #         voyage_ID,flight_no_out,departure_location,destination,\
+        #             departure_time_home,arrival_time,\
+        #                 flight_no_in, departing, arrival_home, departure_time, arrival_time_home,\
+        #                       aircraft_ID,captain,copilot,head_flight_att,flight_att_one,flight_att_two\
+        #                     = line.strip().split(',')
+
+        #         voyage_instance = Voyage(aircraft_ID,)
+
+        #     i +=1
 
 
 
@@ -90,3 +105,4 @@ class VoyageIO:
 
 
 
+VoyageIO().loadVoyageFromFile()
