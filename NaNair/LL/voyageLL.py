@@ -15,9 +15,10 @@ class VoyageLL:
 
         print('in add voyage LL')
 
+        voyage_ID = len(self.voyage_list)*2 + 2 #  
 
-        new_voyage_string = voyage_ID + flight_num + departing + destination + de
 
+        new_voyage_string = voyage_ID + flight_num + departing_from + destination + departure_time + arrival
 
 
         VoyageIO().addVoyageToFile()

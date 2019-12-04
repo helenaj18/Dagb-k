@@ -24,7 +24,7 @@ class CrewLL:
 
         # format a crew lagað...
 
-        return total_crew
+        return crew
 
  
     def getPilots(self):
