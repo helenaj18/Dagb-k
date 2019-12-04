@@ -34,7 +34,7 @@ class SubMenuRegister:
                 pass
             elif selection == '3':
                 planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ')
-                planeTypeId = input('Enter planeTypeId:')
+                planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ')
 
                 LL_API().addAirplane(planeInsignia,planeTypeId)
 
