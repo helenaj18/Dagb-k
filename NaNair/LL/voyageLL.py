@@ -11,13 +11,22 @@ class VoyageLL:
         for voyage in self.voyage_list:
             print(voyage) # þarf að formatta streng
  
-    def addVoyage(self):
-        pass
+    def addVoyage(self,destination, departure_time):
 
+        print('in add voyage LL')
+
+
+        new_voyage_string = voyage_ID + flight_num + departing + destination + de
+
+
+
+        VoyageIO().addVoyageToFile()
 
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
+
         print('In changeDateTimeofVoyage in VoyageLL.py')
+
         for i in range(len(self.upcoming_list)):
             if flight_number == self.upcoming_list[i][0]:
                 self.upcoming_list[i][3] = new_datetime_str
