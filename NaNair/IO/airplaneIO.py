@@ -18,13 +18,11 @@ class AirplaneIO:
         airplanes_list = []
         i = 0
 
+
         for line_aircraft in aircraft_file:
             if i != 0:
                 planeInsignia,planeTypeId_1 = line_aircraft.strip().split(',')
-        
-        
-            for line_aircraft_type in aircraft_type_file:
-                if i != 0:
+                for line_aircraft_type in aircraft_type_file:
                     planeTypeId_2,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = line_aircraft_type.strip().split(',')
                     if planeTypeId_1 == planeTypeId_2:
                         airplane_instance = Airplane(planeInsignia, planeTypeId_1,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
