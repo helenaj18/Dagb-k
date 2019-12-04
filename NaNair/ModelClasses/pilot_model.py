@@ -7,4 +7,14 @@ class Pilot(Crew):
         self.captain = captain
  
     def __str__(self):
-        return 'thetta er strengur'
+        string = self.name + ' ' + self.crewID
+
+        if self.captain:
+            string += ' Captain'
+        else:
+            string += ' Copilot'
+
+        return string
+
+
+
