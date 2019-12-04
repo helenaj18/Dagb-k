@@ -10,8 +10,7 @@ class LL_API:
     ### AIRPLANE LL 
     def show_all_planes(self):
         
-        AirplaneLL().getAirplanes()
-        return 
+        return AirplaneLL().getAirplanes() 
     
     def show_one_plane(self,plane_ID = ''):
         '''Fetches one specific plane and returns it'''
