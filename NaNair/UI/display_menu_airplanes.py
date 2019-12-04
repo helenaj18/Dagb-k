@@ -33,7 +33,7 @@ class DisplayMenuAirplanes:
                     print(elem)
 
             elif selection == '2':
-                print('What type would you like to list?')
+                print('What type would you like to list? Please type one of the following')
                 print('NAFokkerF100')
                 print('NAFokkerF28')
                 print('NABAE146')
