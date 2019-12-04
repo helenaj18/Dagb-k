@@ -7,11 +7,14 @@ class VoyageLL:
 
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
-        self.upcoming_list = IO_API().read_file()
+        #self.upcoming_list = IO_API().read_file()
  
-    def getVoyage(self,ID):
-        for voyage in self.voyage_list:
-            print(voyage) # þarf að formatta streng
+    def getVoyage(self):
+
+        return IO_API().loadVoyageFromFile()
+
+        # for voyage in self.voyage_list:
+        #     print(voyage) # þarf að formatta streng
  
     def addVoyage(self,destination, departure_time):
 

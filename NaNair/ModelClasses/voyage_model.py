@@ -16,6 +16,11 @@ class Voyage:
         self.__flight_att_one = flight_att_one
         self.__flight_att_two = flight_att_two
 
+    def __str__(self):
+        a_string = str(self.__voyage_ID) +',' + str(self.__flight_no)
+    
+        return a_string
+
 
  
  

@@ -1,5 +1,5 @@
 import os
-#from ModelClasses.voyage_model import Voyage
+from ModelClasses.voyage_model import Voyage
 import csv
 
 class VoyageIO:
@@ -43,12 +43,19 @@ class VoyageIO:
 
     def loadVoyageFromFile(self):
         '''Loads existing voyages from the file'''
+        voyage_list = []
 
         with open(self.__pastVoyages_filename) as voyage_file:
             reader = csv.DictReader(voyage_file)
 
             for row in reader: 
-                print(row['voyageIDnumber'])
+                voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['departingFrom_home'],\
+                    row['arrivingAt_out'], row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
+                        row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
+
+                voyage_list.append(voyage_instance)
+
+        return voyage_list
 
         #print(reader)
 

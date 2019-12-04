@@ -53,11 +53,14 @@ class LL_API:
 
     ### VOYAGE LL 
 
-    def change_voyage(self,new_datetime_str,flight_number):
+    def change_voyage(self,new_datetime_str,flight_number): # BÆTA INN EH TIME PERIOD
         return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
     def add_voyage(self,destination, time):
         return VoyageLL().addVoyage(destination,time)
+
+    def get_all_voyages(self):
+        return VoyageLL().getVoyage()
         
 
 
