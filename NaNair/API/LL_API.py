@@ -9,7 +9,6 @@ class LL_API:
 
     ### AIRPLANE LL 
     def show_all_planes(self):
-        print('''Fetches all airplanes and returns it''')
         
         AirplaneLL().getAirplanes()
         return 
