@@ -15,38 +15,21 @@ class DestinationIO:
         destination_list = []
 
         for line in file_object:
-            line = line.strip().split(',')
-            destination_list.append(line)
+            name,airport,distance,contact,emergency_phone_number,duration = line.strip().split(',')
+            destination_instance = Destination(name,airport,distance,contact,emergency_phone_number,duration)
+            destination_list.append(destination_instance)
         
-        self.destination_list = destination_list
+        return destination_list
 
-    def ChangeEmergencyContact(self,destination_name,new_emergency_contact):
-        '''Changes the Emergency Contact for destination in file'''
-        self.__destination_name = destination_name
-        for i in range(len(self.destination_list)):
-            if destination_name == self.destination_list[i][1]:
-                self.destination_list[i][-2] = new_emergency_contact
-        
-        self.changeDestinationFile()
-    
-    def ChangeEmergencyPhone(self,destination_name,new_emergency_phone):
-        '''Changes the Emergency Contact for destination in file'''
-        self.__destination_name = destination_name
-        for i in range(len(self.destination_list)):
-            if destination_name == self.destination_list[i][1]:
-                self.destination_list[i][-1] = new_emergency_phone
-        
-        self.changeDestinationFile()
 
-    def changeDestinationFile(self):
+    def changeDestinationFile(self,destination_list):
         '''Updates the file with new changes'''
         a_str = ''
-        for item in self.destination_list:
+        for item in destination_list:
             a_str += ','.join(item) + '\n'
 
         file_object = open(self.__destination_filename,'w')
         file_object.write(a_str)
-
 
 
     def addDestinationToFile(self,new_destination_str):
@@ -56,4 +39,46 @@ class DestinationIO:
 
         return file_object
 
+class Destination:
+    def __init__(self,name,airport,distance,contact,emergency_phone_number,duration):
+        self.__name = name
+        self.__airport = airport
+        self.__distance = distance
+        self.__contact = contact
+        self.__emergency_phone_number = emergency_phone_number
+        self.__duration = duration
 
+    def __str__(self):
+        
+        return str(self.__name) +','+str(self.__airport) + ','+str(self.__distance)+','+str(self.__contact)+','+str(self.__emergency_phone_number)+','+str(self.__duration)
+
+
+# HVERNIG GETUR MAÐUR SÓTT UPPL Í
+        # for line in file_object:
+        #     name,airport,distance,contact,emergency_phone_number,duration = line.strip().split(',')
+        #     destination_instance = Destination(name,airport,distance,contact,emergency_phone_number,duration)
+        #     destination_list.append(destination_instance)
+        
+        # return destination_list
+
+
+# class Destination:
+#     def __init__(self,name,airport,distance,contact,emergency_phone_number,duration):
+#         self.__name = name
+#         self.__airport = airport
+#         self.__distance = distance
+#         self.__contact = contact
+#         self.__emergency_phone_number = emergency_phone_number
+#         self.__duration = duration
+
+
+
+        # for line in file_object:
+        #     line = line.strip().split(',')
+        #     destination_list.append(line)
+        
+        # return destination_list
+
+
+a = DestinationIO()
+a.loadDestinationFromFile()
