@@ -1,16 +1,11 @@
-#from API.IO_API import IO_API
 import os
 
-# ATH á að vera inní klasa
+class CrewIO:
 
-
-
-class PilotIO:
-    
     def __init__(self):
         dirname = os.path.dirname(__file__)
         self.__crew_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Crew.csv')
-    
+
         SSN_const = 0
         NAME_const = 1
         ROLE_const = 2
@@ -19,8 +14,6 @@ class PilotIO:
         ADDRESS_const = 5
         PHONENUMBER_const = 6
         EMAIL_const = 7
-
-    # Er hægt að kalla í read file úr attendant????
 
     def read_file(self):
         '''Reads file and returns employees list'''
@@ -33,7 +26,6 @@ class PilotIO:
         
         self.employees_list = employees_list
         return employees_list
-
 
     def find_pilots(self):
         '''Finds all pilots in file and returns a list of them'''
@@ -48,6 +40,19 @@ class PilotIO:
         self.pilot_list = pilot_list  
 
 
+    def find_flight_att(self):
+        '''Finds all flight attendants in file and returns a list of them'''
+
+        flight_att_list = []
+
+        for i in range(1,len(self.employees_list)):
+            # Only pilots have licenses
+            if self.employees_list[i][LICENSE_const] == 'N/A':
+                flight_att_list.append(self.employees_list[i])
+        
+        self.flight_att_list = flight_att_list
+
+
     def loadPilotFromFile(self):
         '''Gets pilot info from file, returns a list of pilots'''
 
@@ -55,6 +60,12 @@ class PilotIO:
         self.find_pilots()
 
         return self.pilot_list
+
+    def loadFlightAttFromFile(self):
+        '''Gets flight attendant info from file, returns a list of pilots'''
+        self.find_flight_att()
+
+        return self.flight_att_list
 
 
     def changeCrewFile(self, crew_list):
@@ -67,8 +78,13 @@ class PilotIO:
         file_object.write(crew_str)
 
 
-    def changePilotFile(self, pilot_list):
-        self.pilot_list = pilot_list
+    def addFlightAttToFile(self,new_employee_str):
+        '''Adds flight attendant info into file'''
+
+        file_object = open(self.__crew_filename,'a')
+        file_object.write(new_employee_str+'\n')
+
+        return file_object
 
     def addPilotToFile(self, new_employee_str):
         '''Add pilot info into file'''
@@ -77,4 +93,3 @@ class PilotIO:
         file_object.write(new_employee_str+'\n')
 
         return file_object
-

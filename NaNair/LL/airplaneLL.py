@@ -4,6 +4,7 @@ class AirplaneLL:
     ''' LL class for airplane '''
     def __init__(self):
         self.airplane_list = IO_API().loadAirplaneFromFile()
+        
  
     def getAirplanes(self):
         '''Fetches list of airplanes and returns a list'''
@@ -13,6 +14,9 @@ class AirplaneLL:
         
     def getOneAirplane(self, plane_ID = ''):
         ''' Returns information on one airplane'''
+
+        
+
         return print('get one airplane UI - LL í gegn um API ')
 
     def addAirplane(self):
@@ -26,3 +30,5 @@ class Airplane:
         self.name = name
         self.seats = seats
         self.airplane_type = airplane_type
+
+
