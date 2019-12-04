@@ -1,5 +1,6 @@
 from API.IO_API import IO_API
 from IO.airplaneIO import AirplaneIO
+from ModelClasses.airplane_model import Airplane
 
 class AirplaneLL:
     ''' LL class for airplane '''
@@ -8,13 +9,14 @@ class AirplaneLL:
         '''Fetches list of airplanes and returns a list'''
         return AirplaneIO().loadAirplaneFromFile()
         
-    def getAirplanesByType(self, planeTypeId = ''):
+    def getAirplanesByType(self, planeTypeID = ''):
         ''' Returns list of airplanes with same Id'''
         airplanes_type_list = []
         airplane_list = AirplaneIO().loadAirplaneFromFile()
 
         for airplane in airplane_list:
-            if planeTypeId == airplane.planeTypeID:
+
+            if planeTypeID == airplane.get_planeTypeID():
                 airplanes_type_list.append(airplane)
 
         return airplanes_type_list
