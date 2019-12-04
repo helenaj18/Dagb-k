@@ -41,8 +41,8 @@ class IO_API:
 
 
 
-    def addFlightAttToFile(self):
-        return CrewIO().addFlightAttToFile()
+    def addFlightAttToFile(self, new_employee_str):
+        return CrewIO().addFlightAttToFile(new_employee_str)
 
 
     def getAllStaff(self):

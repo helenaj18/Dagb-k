@@ -11,6 +11,14 @@ class PilotIO:
         dirname = os.path.dirname(__file__)
         self.__crew_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Crew.csv')
     
+        SSN_const = 0
+        NAME_const = 1
+        ROLE_const = 2
+        RANK_const = 3
+        LICENSE_const = 4
+        ADDRESS_const = 5
+        PHONENUMBER_const = 6
+        EMAIL_const = 7
 
     # Er hægt að kalla í read file úr attendant????
 
@@ -37,7 +45,7 @@ class PilotIO:
             if self.employees_list[i][LICENSE_const] != 'N/A': 
                 pilot_list.append(self.employees_list[i])
         
-        self.pilot_list = pilot_list   
+        self.pilot_list = pilot_list  
 
 
     def loadPilotFromFile(self):
@@ -57,6 +65,10 @@ class PilotIO:
 
         file_object = open(self.__crew_filename,'w')
         file_object.write(crew_str)
+
+
+    def changePilotFile(self, pilot_list):
+        self.pilot_list = pilot_list
 
     def addPilotToFile(self, new_employee_str):
         '''Add pilot info into file'''
