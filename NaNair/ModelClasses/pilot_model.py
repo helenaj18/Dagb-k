@@ -7,7 +7,7 @@ class Pilot(Crew):
         self.captain = captain
  
     def __str__(self):
-        string = '{:<25}{:<20}'.format(self.name,self.crewID)
+        string = '{:<25}{:<20}{:<20}'.format(self.name,self.crewID,self.pilot_license)
 
         if self.captain:
             string += '{:<10}'.format('Captain')
