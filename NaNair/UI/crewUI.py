@@ -31,7 +31,7 @@ class CrewUI:
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
-        print('{:<25}{:<20}{:<10}'.format('Name', 'Pilot ID', 'Rank'))
+        print('{:<25}{:<20}{:<20}{:<10}'.format('Name', 'Pilot ID','License', 'Rank'))
         print('_'*80)
 
         for pilot_instance in licensed_pilots_list:
