@@ -3,6 +3,5 @@ class Crew:
         self.name = name
         self.crewID = crewID
         self.address = address
-        self.landline = landline
         self.mobile = mobile
         self.email = email
