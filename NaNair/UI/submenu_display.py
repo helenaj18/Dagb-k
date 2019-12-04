@@ -1,6 +1,7 @@
 from UI.display_menu_airplanes import DisplayMenuAirplanes
 from UI.display_menu_voyages import DisplayMenuVoyages
 from UI.display_menu_pilots import DisplayMenuPilots
+from API.LL_API import LL_API
 
 class SubMenuDisplay: 
     def __init__(self, logic_layer):
@@ -29,8 +30,9 @@ class SubMenuDisplay:
         if selection == '1': 
             next_menu = DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
         elif selection == '2':
-            # fara beint í destination UI 
-            pass
+            dests = LL_API().get_destinations()
+            for elem in dests:
+                print(elem)
         elif selection == '3':
             next_menu = DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
         elif selection == '4':
