@@ -6,9 +6,6 @@ EMERGENCY_CONTACT_NAME_const = 5
 EMERGENCY_CONTACT_PHONE_const = 6
 
 class DestinationLL:
-    def __init__(self):
-        pass
- 
 
     def getDestination(self): #skoða, þarf þetta að vera sér fall?
         ''' Gets destination from Destination class'''
