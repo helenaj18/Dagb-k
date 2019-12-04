@@ -64,8 +64,8 @@ class LL_API:
     def add_voyage(self,destination, time):
         return VoyageLL().addVoyage(destination,time)
 
-    def get_all_voyages(self):
-        return VoyageLL().getVoyage()
+    def get_all_voyages(self,start_date,end_date):
+        return VoyageLL().getVoyage(start_date,end_date)
         
 
 
