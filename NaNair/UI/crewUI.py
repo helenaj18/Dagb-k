@@ -24,7 +24,8 @@ class CrewUI:
     def showOnePilot(self, pilot_ID):
         ''' Shows details for a specific pilot'''
         
-        return LL_API().get_pilot_by_id(pilot_ID)
+        pilot = LL_API().get_pilot_by_id(pilot_ID)
+        print(pilot)
 
     def showByLicence(self, license_ID):
         ''' Shows a list of pilots that have a specific licence '''
