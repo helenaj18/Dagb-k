@@ -12,19 +12,48 @@ class VoyageLL:
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
         #self.upcoming_list = IO_API().read_file()
- 
-    def getVoyage(self,start_date,end_date):
+        
+    #def splitDates(self, date):
+
+    def getVoyage(self,start_datetime,end_datetime):
+
 
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
+        voyages_on_date_indexes = []
         
         for voyage in voyages:
+            departure_datetime = voyage.getDepartureTime()
+            departure_date, departure_time = departure_datetime.split('T')
+
+            arrival_datetime = voyage.getArrivalTime()
+            arrival_date, arrival_time = arrival_datetime.split('T')
+
+            #start_date, start_time = start_datetime.spilt('T')
+            start_date = start_datetime[:10]
             
+            #end_date, end_time = end_datetime.split('T')
+            end_date = start_datetime[:10]
+
+            if arrival_date == start_date:
+                #first_voyage_index = voyages.index(voyage)
+                voyages_on_date_indexes.append(voyages.index(voyage))
+
+            if departure_date == end_date: 
+                voyages_on_date_indexes.append(voyages.index(voyage))
+
+        first_voyage_index = voyages_on_date_indexes[0]
+        last_voyage_index = voyages_on_date_indexes[-1]
+
+        for i in range(first_voyage_index,last_voyage_index+1):
+            voyages_on_date.append(voyages[i])
+        #voyages_on_date.append(voyages[first_voyage_index:last_voyage_index])
 
 
 
-       return voyages_on_date
+
+        return voyages_on_date
 
 
 
