@@ -9,16 +9,21 @@ class SubMenuDisplay:
         self.logic_layer = logic_layer
     
     def startSubMenuDisplay(self):
-        print('DISPLAY')
+        print('#'*20)
+        print('{:^20}'.format('DISPLAY'))
+        print('#'*20)
+        print()
+
         print('What would you like to display? ')
+        print()
 
         print('1 - Airplanes')
         print('2 - Destinations')
         print('3 - Voyages')
         print('4 - Flight Attendants')
         print('5 - Pilots')
-
         print('m - Main menu')
+        print()
 
         selection = input()
 

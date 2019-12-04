@@ -20,7 +20,7 @@ class AirplaneIO:
         
         self.airplanes_list = airplanes_list
 
-        return self.airplanes_list
+        return airplanes_list
 
     def addAirplaneToFile(self, new_airplane_str):
         '''Adds a new airplane to the file'''
@@ -29,3 +29,8 @@ class AirplaneIO:
         file_object.write(new_airplane_str+'\n')
 
         return file_object
+
+
+a = AirplaneIO()
+
+print(a.loadAirplaneFromFile())

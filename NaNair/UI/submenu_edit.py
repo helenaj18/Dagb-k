@@ -7,10 +7,14 @@ class SubMenuEdit:
         self.logic_layer = logic_layer
 
     def startSubMenuEdit(self):
-        print('EDIT EXISTING DATA')
-        print('What would you like to edit? ')
+        print('#'*20)
+        print('{:^20}'.format('EDIT EXISTING DATA'))
+        print('#'*20)
+        print()
 
-        
+        print('What would you like to edit? ')
+        print()
+
         while True: 
             print('1 - Existing voyage')
             print('2 - Destination')

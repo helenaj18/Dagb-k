@@ -14,17 +14,17 @@ class CrewLL:
         PHONENUMBER_const = 6
         EMAIL_const = 7
 
-        self.employees_list = IO_API().readPilotFile()
+        self.employees_list = IO_API().getAllStaff()
         self.pilots_list = IO_API().loadPilotFromFile()
 
  
     def getCrew(self):
         ''' Gets the whole crew '''
-        crew = IO_API().loadFlightAttFromFile()
+        crew = self.employees_list
 
         # format a crew lagað...
 
-        return total_crew
+        return crew
 
  
     def getPilots(self):
@@ -45,15 +45,6 @@ class CrewLL:
         return IO_API().addPilot(PilotData)
 
 
- 
-    def editPilot(self, info):
-        ''' Takes input from UI layer of info to edit, formats it and 
-        sends to IO layer'''
-        
-        # format a info lagað ef þarf...
-
-        return IO_API().addPilot(info)
-
     def ChangeEmailAddress(self,personal_id,new_email_address):
         '''Changes the email address of a single pilot'''
         for i in range(len(self.employees_list)):
@@ -61,7 +52,7 @@ class CrewLL:
                 self.employees_list[i][EMAIL_const] = new_email_address  
 
         #  change crew file in pilotIO changes the whole crew list
-        PilotIO().changeCrewFile(self.employees_list)
+        IO_API().changeCrewFile(self.employees_list)
 
 
     def ChangeHomeAddress(self,personal_id,new_home_address):
@@ -70,7 +61,7 @@ class CrewLL:
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][ADDRESS_const] = new_home_address  
         
-        PilotIO().changeCrewFile(self.employees_list)
+        IO_API().changeCrewFile(self.employees_list)
 
     def ChangePhoneNumber(self,personal_id,new_phone_number):
         '''Changes the Emergency Contact for destination in file'''
@@ -78,29 +69,29 @@ class CrewLL:
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][PHONENUMBER_const] = new_phone_number
         
-        PilotIO().changeCrewFile(self.employees_list)
+        IO_API().changeCrewFile(self.employees_list)
     
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
 
         for i in range(len(self.pilots_list)):
             if personal_id == self.pilots_list[i][0]:
-                self.pilots_list[i][LICENSE_const] = new_license
+                if self.pilots_list[i][LICENSE_const] != 'N/A':
+                    self.pilots_list[i][LICENSE_const] = new_license
+                else:
+                    print('Not a pilot!')
         
-        PilotIO().changePilotFile(self.pilots_list)
+        IO_API().changeCrewFile(self.pilots_list)
 
 
-    def addFlightAttendant(self):
+    def addFlightAttendant(self, info):
         ''' Adds flight attendant to flight attendants (crew)'''
-        info_to_add = LL_API().inputForNewFlightAtt()
+        #tekur input fra UI
 
         # format a info lagað...
 
-        return info_to_add
+        return IO_API().addFlightAttToFile(info)
  
-    def editFlightAttendant(self):
-        ''' Edits information of a flight attendant '''
-        pass
  
     def getWorkingCrew(self):
         ''' Gets the working crew '''
