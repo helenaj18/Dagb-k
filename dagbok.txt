@@ -115,3 +115,10 @@ kl 16:00
 Við erum komnar langt með menus sem að verður UI hlið forrits.
 Löguðum CSV file-a og bættum við því sem vantaði (ss. email og emergency contact)
 Erum að auki komnar vel á leið með API tengingar og ætlum að halda áfram í þeim á morgun.
+
+
+Morgunfundur 4.12.2019 kl 09:00
+Við ætlum að byrja daginn á því að laga IO og LL klasa og gera tengingar alla leið í gegn.
+Erla: PilotIO og CrewLL
+Helena: DestinationIO og DestinationLL
+Valentína og Kinga: VoyageIO og VoyageLL
