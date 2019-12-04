@@ -29,6 +29,24 @@ class LL_API:
     def get_pilots(self):
         ''' Fetches all pilots '''
         return CrewLL().getPilots()
+    
+    def get_flight_att(self):
+        return CrewLL().getFlightAtt()
+
+    def get_working_crew(self):
+        return CrewLL.getWorkingCrew()
+
+    def get_pilot_by_id(self, pilot_id):
+        return CrewLL().getOnePilotID(pilot_id)
+
+    def flight_att_by_id(self, flight_att_id):
+        return CrewLL().getOneFlightAttID(flight_att_id)
+    
+    def get_licensed_pilots(self, pilot_license):
+        return CrewLL().getLicensedPilots(pilot_license)
+
+
+
 
      ### VANTAR 
     

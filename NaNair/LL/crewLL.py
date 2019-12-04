@@ -30,19 +30,38 @@ class CrewLL:
         return CrewIO().loadFlightAttFromFile()
 
 
-    def getPilots(self):
+    def getCrew(self):
         ''' Gets the whole crew '''
 
         return self.getPilots.append(self.getFlightAtt)
     
  
-    def getPilots(self):
+    def getOnePilotID(self, pilotID):
         ''' Gets pilot from all the pilots (crew)'''
-        pilots = IO_API().loadPilotFromFile()
+        pilots = self.getPilots()
 
-        #format a pilots lagað...
+        for pilot in pilots:
+            if pilotID == pilot.crewID:
+                return pilot
+    
+    def getOneFlightAttID(self, flight_att_id):
+        flight_att = self.getFlightAtt()
 
-        return pilots
+        for one_att in flight_att:
+            if flight_att_id == one_att.crewID:
+                return one_att
+    
+    def getLicensedPilots(self, pilot_license):
+        pilots = self.getPilots()
+
+        licensedPilots = []
+
+        for pilot in pilots:
+            if pilot_license == pilot.pilot_license:
+                licensedPilots.append(pilot)
+        
+        return licensedPilots
+
         
  
     def addPilot(self, PilotData):

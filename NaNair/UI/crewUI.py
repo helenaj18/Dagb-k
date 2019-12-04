@@ -1,3 +1,5 @@
+from API.LL_API import LL_API
+
 class CrewUI:
 
     def __init__(self):
@@ -8,33 +10,39 @@ class CrewUI:
     
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
-        pass
+        crew = LL_API().get_crew()
+        return crew
 
     def showWorkingCrew(self):
         ''' Shows full list of working crew atm '''        
-        pass
+        return LL_API().get_working_crew()
 
     def showAllPilots(self):
-        ''' Shows full list of pilots regestered'''
-        pass
+        ''' Shows full list of pilots registered'''
+        return LL_API().get_pilots()
 
     def showOnePilot(self, pilot_ID):
         ''' Shows details for a specific pilot'''
-        pass 
+        
+        return LL_API().get_pilot_by_id(pilot_ID)
 
-    def showByLicence(self, licence_ID):
+    def showByLicence(self, license_ID):
         ''' Shows a list of pilots by their licence '''
-        pass
+
+        return LL_API().get_licensed_pilots(license_ID)
 
     def showAllFlightAtt(self):
-        ''' Shows a full list of all pilots regestered''' 
-        pass
+        ''' Shows a full list of all pilots registered''' 
+        
+        return LL_API().get_flight_att()
   
     def showOneFlightAtt(self, flight_att_ID):
         ''' Shows details for a specific flight attendant'''
-        pass
+        
+        return LL_API().flight_att_by_id(flight_att_ID)
 
-    def showScedule(self, flight_att_ID):
-        ''' Shows the scedule for a specific flight attendant '''
+    # bíða með þar til crew er skráð á ákv vinnuferðir
+    def showSchedule(self, crew_ID):
+        ''' Shows the schedule for a specific crew member '''
         pass
 
