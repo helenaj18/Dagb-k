@@ -61,7 +61,7 @@ class CrewLL:
                 self.employees_list[i][EMAIL_const] = new_email_address  
 
         #  change crew file in pilotIO changes the whole crew list
-        PilotIO().changeCrewFile(self.employees_list)
+        IO_API().changeCrewFile(self.employees_list)
 
 
     def ChangeHomeAddress(self,personal_id,new_home_address):
@@ -70,7 +70,7 @@ class CrewLL:
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][ADDRESS_const] = new_home_address  
         
-        PilotIO().changeCrewFile(self.employees_list)
+        IO_API().changeCrewFile(self.employees_list)
 
     def ChangePhoneNumber(self,personal_id,new_phone_number):
         '''Changes the Emergency Contact for destination in file'''
@@ -78,16 +78,19 @@ class CrewLL:
             if personal_id == self.employees_list[i][0]:
                 self.employees_list[i][PHONENUMBER_const] = new_phone_number
         
-        PilotIO().changeCrewFile(self.employees_list)
+        IO_API().changeCrewFile(self.employees_list)
     
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
 
         for i in range(len(self.pilots_list)):
             if personal_id == self.pilots_list[i][0]:
-                self.pilots_list[i][LICENSE_const] = new_license
+                if self.pilots_list[i][LICENSE_const] != 'N/A':
+                    self.pilots_list[i][LICENSE_const] = new_license
+                else:
+                    print('Not a pilot!')
         
-        PilotIO().changePilotFile(self.pilots_list)
+        IO_API().changeCrewFile(self.pilots_list)
 
 
     def addFlightAttendant(self):

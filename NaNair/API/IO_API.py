@@ -1,10 +1,7 @@
 from IO.destinationIO import DestinationIO
-from IO.pilotIO import PilotIO
-from IO.attendantIO import AttendantIO
+from IO.crewIO import CrewIO
 from IO.voyageIO import VoyageIO
 from IO.airplaneIO import AirplaneIO
-
-from LL.crewLL import CrewLL
 
 
 class IO_API:
@@ -28,34 +25,28 @@ class IO_API:
     #CREW
 
     def loadPilotFromFile(self):
-        return PilotIO().loadPilotFromFile()
+        return CrewIO().loadPilotFromFile()
 
 
-    def changePilot(self, info):
-        return PilotIO().changePilotInFile(info)
+    def changeCrewFile(self, info):
+        return CrewIO().changeCrewFile(info)
 
 
     def addPilot(self, new_employee_str):
-        return PilotIO().addPilotToFile(new_employee_str)
+        return CrewIO().addPilotToFile(new_employee_str)
 
     
     def loadFlightAttFromFile(self):
-        return AttendantIO().loadFlightAttFromFile()
+        return CrewIO().loadFlightAttFromFile()
 
-
-    def changeFlightAttInFile(self):
-        return AttendantIO().changeFlightAttInFile()
 
 
     def addFlightAttToFile(self):
-        return AttendantIO().addFlightAttToFile()
+        return CrewIO().addFlightAttToFile()
 
-
-    def getFlightAttInputToAdd(self):
-        return CrewLL().editFlightAttendant()
 
     def getAllStaff(self):
-        return AttendantIO().read_file()
+        return CrewIO().read_file()
 
 
     # VOYAGES
