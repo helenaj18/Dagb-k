@@ -1,4 +1,4 @@
-voyageIDnumber,flightNumber,departingFrom,arrivingAt,departure,arrival,flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2
+voyageIDnumber,flightNumber_out,departingFrom_home,arrivingAt_out,departure_time_home,arrival_time_out,flightNumber_home,departingFrom_out,arrivingAt_home,departure_time_out,arrival_time_home,aircraftID,captain,copilot,fsm,fa1,fa2
 001,NA5614,KEF,LYR,2019-11-02T06:21:00,2019-11-02T10:21:00,NA7299,LYR,KEF,2019-11-02T11:21:00,2019-11-02T15:21:00,TF-TYQ,3009907461,2410876598,1600904199,3002688722,0505942924
 002,NA2551,KEF,LYR,2019-11-04T05:32:00,2019-11-04T09:32:00,NA5675,LYR,KEF,2019-11-04T10:32:00,2019-11-04T14:32:00,TF-XZR,2910858778,2211658134,0303758167,3003962187,1110732819
 003,NA1377,KEF,LYR,2019-11-06T05:39:00,2019-11-06T09:39:00,NA6283,LYR,KEF,2019-11-06T10:39:00,2019-11-06T14:39:00,TF-XZR,2910858778,2211658134,0303758167,1311772221,2701886957
