@@ -15,7 +15,6 @@ class AirplaneUI:
             print(elem)
 
         
-
     def showAirplanesByType(self):
         '''Shows information about one specific airplane'''
         print('What type would you like to list? Please type one of the following')

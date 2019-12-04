@@ -22,15 +22,15 @@ class DisplayMenuAirplanes:
             selection = input()
 
             if selection == '1':
-                #lista upp allar flugvelar 
+                '''Gets all airplanes'''
                 return AirplaneUI().showAllPlanes()
 
             elif selection == '2':
-
+                '''Gets all airplanes by type'''
                 return AirplaneUI().showAirplanesByType()
 
             elif selection == 'm':
-                # fara aftur á display
+                '''Goes back to main menu'''
                 return
             else: 
                 print('Invalid selection')
