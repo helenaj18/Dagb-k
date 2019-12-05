@@ -52,9 +52,6 @@ class CrewUI:
     
         print()
 
-
-
-
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 
         
