@@ -23,7 +23,7 @@ class CrewUI:
         print()
     
     def showWorkingCrew(self,date):
-        LL_API.get_working_crew()
+        return LL_API.get_working_crew(date)
 
 
     def showNotWorkingCrew(self,date):
@@ -32,7 +32,25 @@ class CrewUI:
     def showOneCrewMember(self,crew_id):
         print(self.BANNER_crew)
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        print(crew_member)
+        
+        print('Name: {}'.format(crew_member.getName()))
+        print('SSN: {}'.format(crew_member.getCrewID()))
+        print('Address: {}'.format(crew_member.getAddress()))
+        print('Phone number: {}'.format(crew_member.getPhoneNumber()))
+        print('Email: {}'.format(crew_member.getEmail()))
+        
+        try:
+            if crew_member.getCaptain():
+                print('Rank: Captain')
+            else:
+                print('Rank: Co-pilot')
+            print('License: {}'.format(crew_member.getLicense()))
+        except:
+            if crew_member.getHeadFlightAtt():
+                print('Rank: Head service manager')
+            else:
+                print('Rank: Flight attendant')
+
         print()
 
 
