@@ -9,7 +9,7 @@ class Pilot(Crew):
     def getLicense(self):
         return self.__pilot_license
 
-    def getCaptainBool(self):
+    def getCaptain(self):
         return self.__captain
  
     def __str__(self):

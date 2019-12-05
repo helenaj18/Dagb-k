@@ -23,7 +23,7 @@ class CrewUI:
         print()
     
     def showWorkingCrew(self,date):
-        LL_API.get_working_crew()
+        return LL_API().get_working_crew(date)
 
 
     def showNotWorkingCrew(self,date):
@@ -32,7 +32,25 @@ class CrewUI:
     def showOneCrewMember(self,crew_id):
         print(self.BANNER_crew)
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        print(crew_member)
+        
+        print('Name: {}'.format(crew_member.getName()))
+        print('SSN: {}'.format(crew_member.getCrewID()))
+        print('Address: {}'.format(crew_member.getAddress()))
+        print('Phone number: {}'.format(crew_member.getPhoneNumber()))
+        print('Email: {}'.format(crew_member.getEmail()))
+        
+        try:
+            if crew_member.getCaptain():
+                print('Rank: Captain')
+            else:
+                print('Rank: Co-pilot')
+            print('License: {}'.format(crew_member.getLicense()))
+        except:
+            if crew_member.getHeadFlightAtt():
+                print('Rank: Head service manager')
+            else:
+                print('Rank: Flight attendant')
+
         print()
 
 
@@ -44,7 +62,17 @@ class CrewUI:
         ''' Shows details for a specific pilot'''
         
         pilot = LL_API().get_pilot_by_id(pilot_ID)
-        print(pilot)
+        
+        print()
+        print('Name: {}'.format(pilot.getName()))
+        print('SSN: {}'.format(pilot.getCrewID()))
+        print('Address: {}'.format(pilot.getAddress()))
+        print('Phone number: {}'.format(pilot.getPhoneNumber()))
+        print('Email: {}'.format(pilot.getEmail()))
+        if pilot.getCaptain():
+            print('Rank: Captain')
+        else:
+            print('Rank: Co-pilot')
         print()
 
     def showByLicense(self, license_ID):
@@ -85,7 +113,17 @@ class CrewUI:
     def showOneFlightAtt(self, flight_att_ID):
         ''' Shows details for a specific flight attendant'''
         flight_att = LL_API().flight_att_by_id(flight_att_ID)
-        print(flight_att)
+        
+        print()
+        print('Name: {}'.format(flight_att.getName()))
+        print('SSN: {}'.format(flight_att.getCrewID()))
+        print('Address: {}'.format(flight_att.getAddress()))
+        print('Phone number: {}'.format(flight_att.getPhoneNumber()))
+        print('Email: {}'.format(flight_att.getEmail()))
+        if flight_att.getHeadFlightAtt():
+            print('Rank: Head Service Manager')
+        else:
+            print('Rank: Flight Attendant')
         print()
         
 

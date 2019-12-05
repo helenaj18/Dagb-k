@@ -8,12 +8,13 @@ class VoyageIO:
         # Muna að breyta í rétt nöfn!
 
         dirname = os.path.dirname(__file__)
-        self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
-        self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
+        #self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
+        #self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
         self.__allVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/allvoyages.csv')
+        self.__destinations_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/Destinations.csv')
 
 
-        self.loadVoyageFromFile()
+        #self.loadVoyageFromFile()
 
     def get_info(self,file_object):
         a_list = []
@@ -34,14 +35,22 @@ class VoyageIO:
 
         voyage_file = open(self.__allVoyages_filename)
         
-        reader = csv.DictReader(voyage_file)
+        
+        reader_voyage = csv.DictReader(voyage_file)
+        #reader_dest = csv.DictReader(destination_file)
 
-        for row in reader: 
-            voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['flightNumber_home'],row['departingFrom_home'],\
-                row['arrivingAt_out'], row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
-                    row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
+        for row in reader_voyage: 
+            destination_file = open(self.__destinations_filename)
+            reader_dest = csv.DictReader(destination_file)
+            for dest_row in reader_dest:
+                if dest_row['id'] == row['arrivingAt_out']:
 
-            voyage_list.append(voyage_instance)
+
+                    voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['flightNumber_home'],row['departingFrom_home'],\
+                        row['arrivingAt_out'],dest_row['destination'] ,row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
+                            row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
+
+                    voyage_list.append(voyage_instance)
 
         return voyage_list
 
