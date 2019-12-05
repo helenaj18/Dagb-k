@@ -23,6 +23,7 @@ class DisplayMenuEmployee:
             print('1 - All employees')
             print('2 - Pilots')
             print('3 - Flight attendants')
+            print('4 - One Crew Member by ID')
             print('m - back to display menu')
             print()
             selection = input()
@@ -39,7 +40,7 @@ class DisplayMenuEmployee:
 
             elif selection =='4':
                 crew_id = input('Enter the Crew members ID (SSN): ')
-                CrewUI.showOneCrewMember(crew_id)
+                CrewUI().showOneCrewMember(crew_id)
 
             else: 
                 print('Invalid selection')
