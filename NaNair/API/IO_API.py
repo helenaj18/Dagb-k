@@ -76,5 +76,5 @@ class IO_API:
         return AirplaneIO().change_airplane_in_file()
 
 
-    def addAirplaneToFile(self,planeInsignia,planeTypeId):
-        return AirplaneIO().addAirplaneToFile(planeInsignia,planeTypeId)
+    def addAirplaneToFile(self,planeInsignia,planeTypeId,manufacturer,seats):
+        return AirplaneIO().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)

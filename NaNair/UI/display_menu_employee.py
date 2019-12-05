@@ -35,6 +35,7 @@ class DisplayMenuEmployee:
                 CrewUI().showCrew()
 
             elif selection =='2':
+                #Setja inn villuboð
                 crew_id = input('Enter the Crew members ID (SSN): ')
                 CrewUI().showOneCrewMember(crew_id)
 

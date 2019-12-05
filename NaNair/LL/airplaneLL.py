@@ -21,9 +21,9 @@ class AirplaneLL:
 
         return airplanes_type_list
  
-    def addAirplane(self,planeInsignia,planeTypeId):
+    def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
         ''' Adds new airplane'''
-        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId)
+        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
 
 
 
