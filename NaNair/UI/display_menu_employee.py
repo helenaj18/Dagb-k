@@ -1,6 +1,7 @@
 from UI.crewUI import CrewUI
 from UI.display_menu_attendants import DisplayMenuAttendants
 from UI.display_menu_pilots import DisplayMenuPilots
+from UI.display_menu_working_crew import DisplayMenuWorkingCrew
 import datetime
 
 # EMPLOYEE 
@@ -57,12 +58,7 @@ class DisplayMenuEmployee:
                 DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
             
             elif selection == '5':
-                print('Enter the date you want to display')
-                year_int = int(input('Year: '))
-                month_int = int(input('Month: '))
-                day_int = int(input('Day: '))
-                date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
-                CrewUI().showWorkingCrew(date_datetime)
+                DisplayMenuWorkingCrew().startDisplayMenuWorkingCrew()
             
             elif selection == '6':
                 print('Enter the "From date" for work schedule')
