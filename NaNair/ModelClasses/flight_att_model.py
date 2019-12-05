@@ -3,8 +3,22 @@ from ModelClasses.crew_model import Crew
 class FlightAttendant(Crew):
     def __init__(self, name, crewID, address='', phonenumber='', email='', head_flight_att=False):
         Crew.__init__(self, name, crewID, address, phonenumber, email)
-        self.__head_flight_att = bool(int(head_flight_att))
+        self.__head_flight_att = bool(head_flight_att)
+        self.__license = 'N/A'
+        self.__role = 'Cabincrew'
 
+<<<<<<< HEAD
+=======
+    def __str__(self):
+        pass
+        # flight_att_string = '{},{},{}'.format(self.__role,self.__head_flight_att,\
+        #     self.__license)
+        
+        # return Crew(__str__(self) + flight_att_string+ super(__str__().b_string()
+
+        # #return super().__str__().a_string() + flight_att_string+ super().__str__().b_string()
+        # return 'ÞETTA ER FLIGHT ATTENDANT'
+>>>>>>> 7740ce29da6d329dd386331e74858f6b4cc1b174
 
     def getHeadFlightAtt(self):
         return self.__head_flight_att
@@ -18,3 +32,15 @@ class FlightAttendant(Crew):
         else:
             self.__head_flight_att = True
     
+    def setAddress(self, new_address):
+        self.__address = new_address
+        return self.__address
+    
+    def getRole(self):
+        return self.__role
+    
+    def getBool(self):
+        return self.__head_flight_att
+    
+    def getLicense(self):
+        return 'N/A'
