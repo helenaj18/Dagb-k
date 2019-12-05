@@ -23,7 +23,8 @@ class CrewUI:
         print()
     
     def showWorkingCrew(self,date):
-        pass
+        LL_API.get_working_crew()
+
 
     def showNotWorkingCrew(self,date):
         pass
@@ -34,9 +35,6 @@ class CrewUI:
         print(crew_member)
         print()
 
-    def showWorkingCrew(self):
-        ''' Shows full list of working crew atm '''        
-        return LL_API().get_working_crew()
 
     def showAllPilots(self):
         ''' Shows full list of pilots registered'''
@@ -57,7 +55,7 @@ class CrewUI:
         print(self.BANNER_pilot)
 
         for pilot_instance in licensed_pilots_list:
-                print(pilot_instance)
+            print(pilot_instance)
 
         print()
 
