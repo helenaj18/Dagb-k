@@ -18,7 +18,7 @@ class DestinationUI:
         for destination in destinations:
             code = destination.getDestinationName()
             airport = destination.getDestinationAirport()
-            distance = destination.getDestinationDistnace()
+            distance = destination.getDestinationDistance()
             contact = destination.getDestinationContact()
             emergency_phone_number = destination.getDestinationEmergencyPhoneNumber()
             duration = destination.getDestinationDuration()

@@ -18,7 +18,6 @@ class Voyage:
         self.__flight_att_two = flight_att_two
         
 
-    # GERA GET OG SET FYRIR ÞAÐ SEM Á AÐ VERA 
     def getDepartureTime(self):
         return self.__departure_time
 

@@ -15,7 +15,7 @@ class Airplane:
         self.__height = height
         self.__wingspan = wingspan
 
-
+# GET METHODS
     def get_planeTypeID(self):
         return self.__planeTypeID
 
@@ -36,10 +36,3 @@ class Airplane:
 
     def get_planeHeight(self):
         return self.__height
-
-    def get_planeWingspan(self):
-        return self.__wingspan
-
-
-
-
