@@ -19,19 +19,24 @@ class VoyageLL:
 
         return int(year), int(month), int(day)
 
+    def getOneVoyage(self, voyage_ID):
 
-    def getVoyage(self,start_datetime,end_datetime):
+        return VoyageIO().getOneVoyage(voyage_ID)
 
+    def getVoyageDuration(self,voyage_instance):
+        destination_duration_str = voyage.getDestination().getDuration()
+
+
+
+
+
+    def getVoyageInDateRange(self, start_datetime, end_datetime):
 
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
         voyages_on_date_indexes = []
-        #start_date, start_time = start_datetime.spilt('T')
-        #start_year, start_month, start_day = VoyageLL.splitDates(start_datetime)
         
-        #end_date, end_time = end_datetime.split('T')
-        #end_year, end_month, end_day = VoyageLL.splitDates(end_datetime)
 
         start_date = start_datetime[:10]
         end_date = end_datetime[:10]
@@ -40,16 +45,14 @@ class VoyageLL:
         for voyage in voyages:
 
             departure_datetime = voyage.getDepartureTime()
-            #dep_year, dep_month, dep_day = VoyageLL.splitDates(departure_datetime)
+            
             departure_date = departure_datetime[:10]
 
             arrival_datetime = voyage.getArrivalTime()
-            #arr_year, arr_month, arr_day = VoyageLL.splitDates(arrival_datetime)
+            
             arrival_date = arrival_datetime[:10]
 
             
-
-
             if arrival_date == start_date:
                 first_voyage_index = voyages.index(voyage)
                 voyages_on_date_indexes.append(voyages.index(voyage))
@@ -62,11 +65,8 @@ class VoyageLL:
 
         for i in range(first_voyage_index,last_voyage_index+1):
             voyages_on_date.append(voyages[i])
-        #voyages_on_date.append(voyages[first_voyage_index:last_voyage_index])
 
-
-
-
+    
         return voyages_on_date
 
 

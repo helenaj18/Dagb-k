@@ -8,7 +8,6 @@ class Voyage:
         self.__flight_no_home = flight_no_home
         self.__departure_location = departure_location
         self.__destination = destination
-        #self.__destination_name = destination_name
         self.__departure_time = departure_time
         self.__arrival_time = arrival_time
         self.__aircraft_ID = aircraft_ID
@@ -43,6 +42,9 @@ class Voyage:
     def getDestinationName(self):
         return self.__destination_name
 
+    def getVoyageID(self):
+        return self.__voyage_ID
+
     
 
     
@@ -51,7 +53,3 @@ class Voyage:
         a_string = str(self.__voyage_ID) +',' + str(self.__flight_no)
     
         return a_string
-
-
- 
- 
