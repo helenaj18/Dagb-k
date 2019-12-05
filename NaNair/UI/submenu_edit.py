@@ -46,7 +46,7 @@ class SubMenuEdit:
                 CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
 
                 EditEmployeeMenu().startEditEmployeeMenu()
-                EditEmployeeMenu().editSelection()  
+                EditEmployeeMenu().editSelection(crew_id)  
                 start = False
 
 

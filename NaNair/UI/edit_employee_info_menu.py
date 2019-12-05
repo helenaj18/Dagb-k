@@ -23,17 +23,18 @@ class EditEmployeeMenu:
             print('4 - Rank')
             print()
 
-    def editSelection(self):
+    def editSelection(self,crew_id):
         selection = input()
         if selection == '1':
             new_address = input("New address: ")
-            CrewUI()
+            CrewUI().changeEmployeeAddress(crew_id, new_address)
 
         elif selection == '2':
             new_phonenumber = input('New Phone number: ')
 
         elif selection == '3':
-            new_email = input('New email: ')
+            new_email_address = input('New email: ')
+            CrewUI().changeEmployeeEmail(crew_id, new_email_address)
 
         elif selection == '4':
             new_rank = input('Rank: ')
