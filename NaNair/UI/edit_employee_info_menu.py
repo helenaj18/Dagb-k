@@ -25,7 +25,8 @@ class EditEmployeeMenu:
             # print()
 
     def editSelection(self,crew_id):
-        #EditEmployeeMenu().printEditEmployeeMenu(crew_id)
+        self.printEditEmployeeMenu(crew_id)
+        
         
         selection = input()
         if selection == '1':
