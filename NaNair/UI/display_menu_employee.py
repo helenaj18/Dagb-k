@@ -21,7 +21,7 @@ class DisplayMenuEmployee:
             print('What would you like to display?') 
             print()
 
-            print('1 - All employees)
+            print('1 - All employees')
             print('2 - Pilots')
             print('3 - Flight attendants')
             print('m - back to display menu')
