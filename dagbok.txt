@@ -138,3 +138,11 @@ fara yfir allar A-kröfur.
 kl 19:00
 Við erum næstum því búnar með allar A-kröfur. Hópurinn er byrjaður að vinna í villuboðum.
 Við stefnum á því að klára allar A-kröfur fyrir helgi.
+
+kl 20:10 
+Laaaangur daaaaguuuuuuur
+leeeengi að debugga
+erum komnar eitthvað á leið með að breyta employee info, byrjuðum að nota csv writer 
+og næstum alveg komið að bæta við nýju voyagi 
+
+ætlum að kíkja aðeins á þetta í kvöld og klára sem mesta virkni á morgun 

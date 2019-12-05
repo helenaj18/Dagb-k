@@ -28,7 +28,6 @@ class Pilot(Crew):
     def getBool(self):
         return self.__captain
     
-
     def setLicense(self, new_license):
         self.__pilot_license = new_license
     
