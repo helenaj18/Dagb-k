@@ -58,7 +58,7 @@ class LL_API:
     
     def sortPilotsByLicense(self):
         
-        return CrewLL().sortPilotsByLiworkingcense()
+        return CrewLL().sortPilotsByLicense()
 
     def addCrew(self, info_list):
         return CrewLL().addCrew(info_list)
