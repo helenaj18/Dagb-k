@@ -1,5 +1,6 @@
 import os
 from ModelClasses.voyage_model import Voyage
+from ModelClasses.destination_model import Destination
 import csv
 
 class VoyageIO:
@@ -45,9 +46,11 @@ class VoyageIO:
             for dest_row in reader_dest:
                 if dest_row['id'] == row['arrivingAt_out']:
 
+                    destination_instance = Destination(dest_row['destination'],dest_row['id'],dest_row['distance'],\
+                         dest_row['flight_duration'],dest_row['emergency_name'], dest_row['emergency_phone'])
 
                     voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['flightNumber_home'],row['departingFrom_home'],\
-                        row['arrivingAt_out'],dest_row['destination'] ,row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
+                        destination_instance ,row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
                             row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
 
                     voyage_list.append(voyage_instance)
