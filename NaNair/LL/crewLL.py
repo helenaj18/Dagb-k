@@ -211,5 +211,8 @@ class CrewLL:
             crew_address = crew_member.getAddress()
             crew_phone = crew_member.getPhoneNumber()
             format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(crew_name,not_working_crew_id,crew_address,crew_phone)
-        
+    
+    def getWorkSchedule(self,start_date,end_date):
+        pass
+    
         return format_str

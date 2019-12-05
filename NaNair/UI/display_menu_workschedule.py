@@ -5,6 +5,7 @@ import datetime
 class DisplayMenuWorkSchedule():
 
     def startDisplayMenuWorkSchedule(self):
+        user_id = input('Enter employee ID: ')
         print('Enter the "From date" for work schedule')
         start_year_int = int(input('Year: '))
         start_month_int = int(input('Month: '))
@@ -16,7 +17,8 @@ class DisplayMenuWorkSchedule():
         end_day_int = int(input('Day: '))
         end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
 
-        working_crew_list = LL_API().get_working_crew(start_date)
+        name = 
+        #working_crew_list
         name_header_str = '{:<10} {:<10}'.format(name,user_id)
         header_str = 'Working Schedule {}-{}'.format(start_day_int+start_month_int+start_day_int,end_year_int+end_month_int+end_day_int)
         print(name_header_str)
@@ -29,7 +31,7 @@ class DisplayMenuWorkSchedule():
 
             for crew_id in working_crew_per_voyage[0]:
                 if crew_id != 'empty':
-                    crew_member = LL_API().get_crew_member_by_id(crew_id)
+                    crew_member = LL_API().get_work_schedule(start_date,end_date)
                     crew_name = crew_member.getName()
                     crew_address = crew_member.getAddress()
                     crew_phone = crew_member.getPhoneNumber()
