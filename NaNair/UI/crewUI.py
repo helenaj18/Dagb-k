@@ -85,7 +85,16 @@ class CrewUI:
     def showOneFlightAtt(self, flight_att_ID):
         ''' Shows details for a specific flight attendant'''
         flight_att = LL_API().flight_att_by_id(flight_att_ID)
-        print(flight_att)
+        
+        print('Name: {}'.format(flight_att.getName()))
+        print('SSN: '.format(flight_att.getCrewID()))
+        print('Address: '.format(flight_att.getAddress()))
+        print('Phone number: '.format(flight_att.getPhoneNumber()))
+        print('Email: '.format(flight_att.getEmail()))
+        if flight_att.getHeadFlightAtt():
+            print('Rank: Head Service Manager')
+        else:
+            print('Rank: Flight Attendant')
         print()
         
 
