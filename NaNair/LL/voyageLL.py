@@ -24,7 +24,23 @@ class VoyageLL:
         return VoyageIO().getOneVoyage(voyage_ID)
 
     def getVoyageDuration(self,voyage_instance):
-        destination_duration_str = voyage.getDestination().getDuration()
+        destination_duration_str = voyage_instance.getDestination().getDestinationDuration()
+        destination_duration_hrs = int(destination_duration_str[: -4])
+        destination_duration_minutes = int(destination_duration_str[-3: -1])
+        voyage_duration_min = destination_duration_minutes * 2
+
+        voyage_duration_hrs = destination_duration_hrs * 2 + 1 # Both ways plus one hr layover
+
+        if voyage_duration_min == 60:
+            voyage_duration_hrs = voyage_duration_hrs + 1
+            voyage_duration_min = 0 
+        elif voyage_duration_hrs > 60: 
+            voyage_duration_hrs = voyage_duration_hrs + 1
+            voyage_duration_min = voyage_duration_min - 60 
+
+        return voyage_duration_hrs, voyage_duration_min
+
+
 
 
 
