@@ -61,7 +61,27 @@ class SubMenuEdit:
                     print('3 - Email')
                     print('4 - Rank')
                     print()
+
+                selection = input()
+                if selection == '1':
+                    new_address = input("New address: ")
+
+                elif selection == '2':
+                    new_phonenumber = input('New Phone number: ')
+
+                elif selection == '3':
+                    new_email = input('New email: ')
+
+                elif selection == '4':
+                    new_rank = input('Rank: ')
+
+                elif selection == '5':
+                    new_license = input('License: ')
+                    
+                else:
+                    print("Invalid input")    
                 start = False
+
 
             elif selection == 'm':
                 return # goes back to main menu 

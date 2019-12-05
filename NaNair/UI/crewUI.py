@@ -47,8 +47,14 @@ class CrewUI:
         print(format_str)
         print()
 
-    def showNotWorkingCrew(self,date):
-        pass
+    def showNotWorkingCrew(self,date_str):
+        format_str = LL_API().get_not_working_crew(date_str)
+        header_str = '{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number')
+
+        print(header_str)
+        print(len(header_str)*'-')
+        print(format_str)
+        print()
         
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
@@ -123,8 +129,8 @@ class CrewUI:
         info_list = []
         print('Please fill in the following information. Press enter to skip.\n')
 
-        info_list.append(input('Name (required): '))
         info_list.append(input('Personal ID (required): '))
+        info_list.append(input('Name (required): '))
 
         print('Please choose one of the following job titles:')
         print('1 - Captain')
@@ -132,7 +138,7 @@ class CrewUI:
         print('3 - Head service manager')
         print('4 - Flight attendant')
         rank = input()
-        while rank != '1' and '2' and '3' and '4':
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4':
             print('Please choose a number between 1-4')
             rank = input()
                 
