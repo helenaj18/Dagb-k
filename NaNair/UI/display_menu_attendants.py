@@ -37,6 +37,6 @@ class DisplayMenuAttendants:
 
             elif selection == 'm':
                 # fara aftur á display
-                return
+                return 
             else: 
                 print('Invalid selection')
