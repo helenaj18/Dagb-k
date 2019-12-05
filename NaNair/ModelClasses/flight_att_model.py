@@ -7,8 +7,6 @@ class FlightAttendant(Crew):
         self.__license = 'N/A'
         self.__role = 'Cabincrew'
 
-<<<<<<< HEAD
-=======
     def __str__(self):
         pass
         # flight_att_string = '{},{},{}'.format(self.__role,self.__head_flight_att,\
@@ -18,7 +16,6 @@ class FlightAttendant(Crew):
 
         # #return super().__str__().a_string() + flight_att_string+ super().__str__().b_string()
         # return 'ÞETTA ER FLIGHT ATTENDANT'
->>>>>>> 7740ce29da6d329dd386331e74858f6b4cc1b174
 
     def getHeadFlightAtt(self):
         return self.__head_flight_att

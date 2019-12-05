@@ -120,7 +120,7 @@ class CrewLL:
 
         new_employee_str = ','.join(CrewData)
 
-        return IO_API().addCrew(new_employee_instance)
+        return IO_API().addCrew(new_employee_str)
 
 
     def ChangeEmailAddress(self,personal_id,new_email_address):
