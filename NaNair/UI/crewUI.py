@@ -119,6 +119,10 @@ class CrewUI:
 
         LL_API().changeEmployeeAddress(crew_id,new_address)
 
+    def changeEmployeePhonenumber(self,crew_id, new_phonenumber):
+
+        LL_API().changeEmployeePhonenumber(crew_id,new_phonenumber)
+
             
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)

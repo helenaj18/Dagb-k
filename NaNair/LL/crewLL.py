@@ -123,20 +123,11 @@ class CrewLL:
         return IO_API().addCrew(new_employee_instance)
 
 
-    def ChangeEmailAddress(self,personal_id,new_email_address):
-        '''Changes the email address of a single pilot'''
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][CrewLL.EMAIL_const] = new_email_address  
-
-        #  change crew file in pilotIO changes the whole crew list
-        IO_API().changeCrewFile(self.employees_list)
 
 
     def ChangeHomeAddress(self,crew_id,new_home_address):
-        '''Changes the Emergency Contact for destination in file'''
+        '''Changes the home address of crew member'''
         employee = self.getOneCrewMember(crew_id)
-        #employee.setAddress(new_home_address)
         pilots = IO_API().loadPilotFromFile()
         flight_att = IO_API().loadFlightAttFromFile()
         new_employee_list = []
@@ -153,6 +144,25 @@ class CrewLL:
 
         IO_API().changeCrewFile(new_employee_list)
 
+    def ChangeEmailAddress(self,crew_id,new_email_address):
+        '''Changes the email address of a crew member'''
+        employee = self.getOneCrewMember(crew_id)
+        pilots = IO_API().loadPilotFromFile()
+        flight_att = IO_API().loadFlightAttFromFile()
+        new_employee_list = []
+
+        for pilot in pilots:
+            if employee == pilot:
+                pilot.setEmailAddress(new_email_address)
+            new_employee_list.append(pilot)
+        
+        for attendant in flight_att:
+            if employee == attendant:
+                attendant.setEmailAddress(new_email_address)
+            new_employee_list.append(attendant)
+
+        IO_API().changeCrewFile(new_employee_list)
+
 
 
         # for i in range(len(self.employees_list)):
@@ -161,13 +171,24 @@ class CrewLL:
         
         # IO_API().changeCrewFile(self.employees_list)
 
-    def ChangePhoneNumber(self,personal_id,new_phone_number):
-        '''Changes the Emergency Contact for destination in file'''
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][CrewLL.PHONENUMBER_const] = new_phone_number
-        
-        IO_API().changeCrewFile(self.employees_list)
+    def ChangePhonenumber(self,crew_id,new_phone_number):
+        '''Changes the email address of a crew member'''
+        employee = self.getOneCrewMember(crew_id)
+        pilots = IO_API().loadPilotFromFile()
+        flight_att = IO_API().loadFlightAttFromFile()
+        new_employee_list = []
+
+        for pilot in pilots:
+            if employee == pilot:
+                pilot.setPhonenumber(new_phone_number)
+            new_employee_list.append(pilot)
+
+        for attendant in flight_att:
+            if employee == attendant:
+                attendant.setPhonenumber(new_phone_numer)
+            new_employee_list.append(attendant)
+
+        IO_API().changeCrewFile(new_employee_list)
     
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''

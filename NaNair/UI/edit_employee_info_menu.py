@@ -6,6 +6,7 @@ class EditEmployeeMenu:
         pass
 
     def printEditEmployeeMenu(self,crew_id):
+        #crew_member = LL_API().get_crew_member_by_id(crew_id)
         print('What would you like to change?')
         print()
         #try:
@@ -24,7 +25,8 @@ class EditEmployeeMenu:
             # print()
 
     def editSelection(self,crew_id):
-        EditEmployeeMenu().printEditEmployeeMenu(crew_id)
+        #EditEmployeeMenu().printEditEmployeeMenu(crew_id)
+        
         selection = input()
         if selection == '1':
             new_address = input("New address: ")
@@ -32,6 +34,7 @@ class EditEmployeeMenu:
 
         elif selection == '2':
             new_phonenumber = input('New Phone number: ')
+            CrewUI().changeEmployeePhonenumber(crew_id, new_phonenumber)
 
         elif selection == '3':
             new_email_address = input('New email: ')

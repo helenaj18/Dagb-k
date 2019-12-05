@@ -66,8 +66,11 @@ class LL_API:
     def changeEmployeeEmail(self,crew_id,email_address):
         return CrewLL().ChangeEmailAddress(crew_id,email_address)
 
-    def changeEmployeeAddress(self,crew_id,address):
-        return CrewLL().ChangeHomeAddress(crew_id,address)
+    def changeEmployeeAddress(self,crew_id,new_address):
+        return CrewLL().ChangeHomeAddress(crew_id,new_address)
+
+    def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
+        return CrewLL().ChangeHomeAddress(crew_id,new_address)
 
 
 
