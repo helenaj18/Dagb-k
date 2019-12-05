@@ -21,6 +21,12 @@ class CrewUI:
         for employee in crew:
             print(employee)
         print()
+    
+    def showWorkingCrew(self,date):
+        pass
+
+    def showNotWorkingCrew(self,date):
+        pass
         
     def showOneCrewMember(self,crew_id):
         print(self.BANNER_crew)
