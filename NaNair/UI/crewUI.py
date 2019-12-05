@@ -49,7 +49,7 @@ class CrewUI:
         print(pilot)
         print()
 
-    def showByLicence(self, license_ID):
+    def showByLicense(self, license_ID):
         ''' Shows a list of pilots that have a specific licence '''
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
