@@ -47,9 +47,10 @@ class CrewLL:
             print('IN GET ONE CREW MENBER')
             for crew_member in crew:
                 if crew_id == crew_member.getCrewID():
-                    print("inn í getOneCrewMember prentum crew_member: " , crew_member)
+                    #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
+                print('NOT A CREW MENBER')
                 return None
  
     
@@ -132,9 +133,10 @@ class CrewLL:
         IO_API().changeCrewFile(self.employees_list)
 
 
-    def ChangeHomeAddress(self,employee,new_home_address):
+    def ChangeHomeAddress(self,crew_id,new_home_address):
         '''Changes the Emergency Contact for destination in file'''
-        employee.setAddress(new_home_address)
+        employee = self.getOneCrewMember(crew_id)
+        #employee.setAddress(new_home_address)
         pilots = IO_API().loadPilotFromFile()
         flight_att = IO_API().loadFlightAttFromFile()
         new_employee_list = []

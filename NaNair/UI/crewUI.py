@@ -115,8 +115,9 @@ class CrewUI:
         LL_API().changeEmployeeEmail(employee,new_email_address)
 
 
-    def changeEmployeeAddress(self,employee, new_address):
-        LL_API().changeEmployeeAddress(employee,new_address)
+    def changeEmployeeAddress(self,crew_id, new_address):
+
+        LL_API().changeEmployeeAddress(crew_id,new_address)
 
             
     def showOneCrewMember(self,crew_id):

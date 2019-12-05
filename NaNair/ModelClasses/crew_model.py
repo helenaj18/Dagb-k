@@ -24,12 +24,15 @@ class Crew:
 
     def setAddress(self, new_address):
         self.__address = new_address
+        return self.__address
     
     def setPhonenumber(self, new_phonenumber):
-        self.__address = new_phonenumber
-    
+        self.__phonenumber = new_phonenumber
+        return self.__phonenumber
+
     def setEmail(self, new_email):
-        self.__address = new_email
+        self.__email = new_email
+        return self.__email
 
     def __str__(self):
         pass
