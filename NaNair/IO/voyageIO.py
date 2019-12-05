@@ -10,7 +10,7 @@ class VoyageIO:
         dirname = os.path.dirname(__file__)
         self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
         self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
-        self.__allVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/voyages.csv')
+        self.__allVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/allvoyages.csv')
 
 
         self.loadVoyageFromFile()
@@ -32,12 +32,12 @@ class VoyageIO:
         '''Loads existing voyages from the file'''
         voyage_list = []
 
-        voyage_file = open(self.__pastVoyages_filename)
+        voyage_file = open(self.__allVoyages_filename)
         
         reader = csv.DictReader(voyage_file)
 
         for row in reader: 
-            voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['departingFrom_home'],\
+            voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['flightNumber_home'],row['departingFrom_home'],\
                 row['arrivingAt_out'], row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
                     row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
 

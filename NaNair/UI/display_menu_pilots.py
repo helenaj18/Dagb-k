@@ -1,4 +1,5 @@
 from UI.crewUI import CrewUI
+from UI.display_menu_licensed_pilots import DisplayMenuAirplaneType
 
 class DisplayMenuPilots: 
     def __init__(self, logic_layer):
@@ -24,10 +25,8 @@ class DisplayMenuPilots:
 
             if selection == '1':
                 #lista upp flugmenn með x leyfi
-
-                pilot_license = input('Input license: ')
                 
-                CrewUI().showByLicence(pilot_license)
+                DisplayMenuAirplaneType().startDisplayLicensedPilots()
 
                 start = False
 
