@@ -24,10 +24,8 @@ class DisplayMenuPilots:
 
             if selection == '1':
                 #lista upp flugmenn með x leyfi
-
-                pilot_license = input('Input license: ')
                 
-                return CrewUI().showByLicence(pilot_license)
+                CrewUI().showByLicence()
 
                 start = False
 
@@ -35,19 +33,19 @@ class DisplayMenuPilots:
             elif selection == '2':
                 # lista upp alla flugmenn eftir hvaða leyfi þeir hafa
 
-                return CrewUI().showSortedByLicense()
+                CrewUI().showSortedByLicense()
                 start = False
 
             elif selection == '3':
                 pilot_ID = input('Input pilot ID: ')
                 #lista upp ákveðinn flugmann
-                return CrewUI().showOnePilot(pilot_ID)
+                CrewUI().showOnePilot(pilot_ID)
                 start = False
 
             elif selection == 'm':
                 # fara aftur á display
 
-                
                 start = False
+                return
             else: 
                 print('Invalid selection')

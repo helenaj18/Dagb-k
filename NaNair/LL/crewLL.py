@@ -41,7 +41,7 @@ class CrewLL:
     def getOneCrewMember(self,crew_id):
         crew = self.getCrew()
         for crew_member in crew:
-            if crew_id == crew.getCrewID():
+            if crew_id == crew_member.getCrewID():
                 return crew_member
  
     def getOnePilotID(self, pilotID):
