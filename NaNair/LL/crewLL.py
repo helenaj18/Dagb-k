@@ -271,7 +271,6 @@ class CrewLL:
         if voyage_list != None:
             work_schedule_list = []
 
-<<<<<<< HEAD
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 for crew_member_id in crew_on_voyage_list:
@@ -283,14 +282,4 @@ class CrewLL:
                 return None
         else:
             return None
-=======
-        for voyage in voyage_list:
-            crew_on_voyage_list = voyage.getCrewOnVoyage()
-            for crew_id in crew_on_voyage_list:
-                crew_member = self.getOneCrewMember(crew_id)
-                if crew_member.getCrewID() == crew_id:
-                    work_schedule_list.append(voyage)
-        
-        return work_schedule_list
->>>>>>> 8152c5ac63743065f0280d6fbe952b28a5047df2
     

@@ -226,14 +226,11 @@ class CrewUI:
         ''' Shows the schedule for a specific crew member '''
         
         print('Enter the "From date" for work schedule')
+        start_year_int, start_month_int, start_day_int = verifyDate()
         start_year_int = int(input('Year: '))
         start_month_int = int(input('Month: '))
         start_day_int = int(input('Day: '))
-        if len(str(start_year_int)) != 4:
-            print('Invalid date!')
-        elif 0 < start_month_int < 13:
-            print('Invalid date!')
-        elif 0 < start_day_int < 31
+        
         start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
         
         print('Enter the "To date" for work schedule')
