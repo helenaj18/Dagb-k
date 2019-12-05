@@ -123,8 +123,8 @@ class CrewUI:
         info_list = []
         print('Please fill in the following information. Press enter to skip.\n')
 
-        info_list.append(input('Name (required): '))
         info_list.append(input('Personal ID (required): '))
+        info_list.append(input('Name (required): '))
 
         print('Please choose one of the following job titles:')
         print('1 - Captain')
@@ -132,7 +132,7 @@ class CrewUI:
         print('3 - Head service manager')
         print('4 - Flight attendant')
         rank = input()
-        while rank != '1' and rank != '2' and rank !='3' and rank !='4':
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4':
             print('Please choose a number between 1-4')
             rank = input()
                 

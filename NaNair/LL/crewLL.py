@@ -65,6 +65,25 @@ class CrewLL:
     def addCrew(self, CrewData):
         ''' makes string of crew member to add to file'''
 
+        if CrewData[2] == '1':
+            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
+            CrewData[CrewLL.RANK_const] = '1'
+
+        elif CrewData[2] == '2':
+            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
+            CrewData[CrewLL.RANK_const] = '0'
+        
+        elif CrewData[2] == '3':
+            CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
+            CrewData.insert(CrewLL.LICENSE_const, 'N/A')
+            CrewData[CrewLL.RANK_const] = '1'
+        
+        else:
+            CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
+            CrewData.insert(CrewLL.LICENSE_const, 'N/A')
+            CrewData[CrewLL.RANK_const] = '0'
+
+
         new_employee_str = ','.join(CrewData)
 
         return IO_API().addCrew(new_employee_str)
