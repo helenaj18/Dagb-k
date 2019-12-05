@@ -49,6 +49,9 @@ class CrewUI:
 
     def showNotWorkingCrew(self,date):
         pass
+
+    def changeEmployeeInfo(self):
+        
         
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
