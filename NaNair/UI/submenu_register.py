@@ -61,7 +61,9 @@ class SubMenuRegister:
                 if len(info_list) == 7:
                     CrewIO().addPilotToFile(info_list)
                 else:
-                    CrewIO().addFlightAttToFile(info_list)                
+                    CrewIO().addFlightAttToFile(info_list)   
+
+                print('New Employee added!\n')             
 
 
             elif selection == '2':
