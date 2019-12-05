@@ -1,9 +1,9 @@
 class Destination:
-    def __init__(self,name,airport,distance,duration,contact,emergency_phone_number):
+    def __init__(self,name,airport,distance,duration,contact_name,emergency_phone_number):
         self.__name = name
         self.__airport = airport
         self.__distance = distance
-        self.__contact = contact
+        self.__emergency_contact_name = contact_name
         self.__emergency_phone_number = emergency_phone_number
         self.__duration = duration
 
@@ -24,6 +24,13 @@ class Destination:
     
     def getDestinationDuration(self):
         return self.__duration
+
+
+    def setEmergencyContactName(self, new_name):
+        self.__emergency_contact_name = new_name
+    
+    def setEmergencyContactPhone(self, new_phone_number):
+        self.__emergency_phone_number = new_phone_number
 
 
 

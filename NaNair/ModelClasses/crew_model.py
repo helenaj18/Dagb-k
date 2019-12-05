@@ -22,4 +22,13 @@ class Crew:
     def getEmail(self):
         return self.__email
 
+    def setAddress(self, new_address):
+        self.__address = new_address
+    
+    def setPhonenumber(self, new_phonenumber):
+        self.__address = new_phonenumber
+    
+    def setEmail(self, new_email):
+        self.__address = new_email
+
     
