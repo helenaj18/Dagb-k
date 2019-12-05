@@ -3,8 +3,10 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        self.BANNER = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
-        self.BANNER += '_'*80
+        self.BANNER_pilot = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
+        self.BANNER_pilot += '_'*80
+        self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Pilot ID', 'Rank')
+        self.BANNER_att += '_'*80
     def __str__(self):
         pass 
     
@@ -12,7 +14,7 @@ class CrewUI:
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
 
-        print(self.BANNER)
+        print(self.BANNER_pilot)
 
         for employee in crew:
             print(employee)
@@ -40,7 +42,7 @@ class CrewUI:
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
-        print(self.BANNER)
+        print(self.BANNER_pilot)
 
         for pilot_instance in licensed_pilots_list:
                 print(pilot_instance)
@@ -61,7 +63,7 @@ class CrewUI:
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 
         
-        print(self.BANNER)
+        print(self.BANNER_att)
 
         flight_att = LL_API().get_flight_att()
 

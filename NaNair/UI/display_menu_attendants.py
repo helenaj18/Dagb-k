@@ -23,7 +23,7 @@ class DisplayMenuAttendants:
 
             if selection == '1':
                 #lista upp alla flugþjóna
-                return CrewUI.showAllFlightAtt(self)
+                return CrewUI().showAllFlightAtt()
                 start = False
 
 
