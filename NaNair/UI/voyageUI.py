@@ -1,6 +1,9 @@
 from API.LL_API import LL_API
 import datetime
 
+EMPTY = 'empty'
+SEPERATOR = '-'
+
 class VoyageUI:
 
     def __init__(self):
@@ -26,9 +29,43 @@ class VoyageUI:
         end_date = datetime.datetime(end_year,end_month,end_day,0,0,0).isoformat()
 
         voyages_on_dates = LL_API().get_all_voyages(start_date,end_date)
+        print()
+        print('All voyages from {}.{}.{} to {}.{}.{}'.format(year,month,day,end_year,end_month,end_day))
+        print(60*SEPERATOR)
 
-        for item in voyages_on_dates:
-            print(item)
+        for voyage in voyages_on_dates:
+            destination = voyage.getDestination()
+            depature_datetime = voyage.getDepartureTime()
+            return_datetime = voyage.getArrivalTime()
+            flight_no_out, flight_no_home = voyage.getFlightNumbers()
+            crew_on_voyage_list = voyage.getCrewOnVoyage()
+
+
+            if EMPTY in crew_on_voyage_list:
+                voyage_manned = 'Voyage not fully manned'
+            else: 
+                voyage_manned = 'Voyage fully manned'
+
+            aircraft_ID = voyage.getAircraftID()
+
+            if aircraft_ID == EMPTY: 
+                aircraft_ID = 'No aircraft assigned to voyage'
+    
+
+            depature_date = depature_datetime[:10]
+            depature_time = depature_datetime[-8:-3]
+            total_time = return_datetime #- depature_datetime
+
+            print('To '+destination + ' on ' + depature_date + ' at ' + depature_time)
+            print('\t Flight numbers: ' + flight_no_out + ' - ' + flight_no_home)
+            print('\t Total time: ' + total_time)
+            print('\t Aircraft: ' + aircraft_ID)
+            print('\t Status on staff: ' + voyage_manned)
+            print('\t Seats sold: ')
+            print(60*SEPERATOR)
+
+
+            
 
     def showOneVoyage(self,voyage_ID):
         '''Shows one specific voyage'''
