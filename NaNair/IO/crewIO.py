@@ -101,16 +101,8 @@ class CrewIO:
         file_object.write(crew_str)
 
 
-    def addFlightAttToFile(self,new_employee_str):
-        '''Adds flight attendant info into file'''
-
-        file_object = open(self.__crew_filename,'a')
-        file_object.write(new_employee_str+'\n')
-
-        return file_object
-
-    def addPilotToFile(self, new_employee_str):
-        '''Add pilot info into file'''
+    def addCrewToFile(self,new_employee_str):
+        '''Adds new employee info into file'''
 
         file_object = open(self.__crew_filename,'a')
         file_object.write(new_employee_str+'\n')

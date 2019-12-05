@@ -42,9 +42,12 @@ class CrewLL:
     
     def getOneCrewMember(self,crew_id):
         crew = self.getCrew()
-        for crew_member in crew:
-            if crew_id == crew_member.getCrewID():
-                return crew_member
+        while True:
+            for crew_member in crew:
+                if crew_id == crew_member.getCrewID():
+                    return crew_member
+            else: 
+                return None
  
     def getOnePilotID(self, pilotID):
         ''' Gets pilot from all the pilots (crew)'''
@@ -139,6 +142,9 @@ class CrewLL:
         
         return sorted_pilots_list
 
+    def addCrew(self):
+        pass
+
 
     def addFlightAttendant(self, info):
         ''' Adds flight attendant to flight attendants (crew)'''
@@ -159,7 +165,8 @@ class CrewLL:
 
         for voyage in voyage_list:
             crew_on_voyage_list = voyage.getCrewOnVoyage()
-            working_crew_list.append(crew_on_voyage_list)
+            destination_of_voyage = voyage.getDestination()
+            working_crew_list.append((crew_on_voyage_list,destination_of_voyage))
 
         return working_crew_list
     
