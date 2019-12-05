@@ -5,7 +5,7 @@ class EditEmployeeMenu:
     def __init__(self):
         pass
 
-    def printEditEmployeeMenu(self):
+    def printEditEmployeeMenu(self,employee):
         print('What would you like to change?')
         print()
         try:
@@ -23,20 +23,19 @@ class EditEmployeeMenu:
             print('4 - Rank')
             print()
 
-    def editSelection(self,crew_id):
-        EditEmployeeMenu().printEditEmployeeMenu()
-        
+    def editSelection(self,employee):
+        EditEmployeeMenu().printEditEmployeeMenu(employee)
         selection = input()
         if selection == '1':
             new_address = input("New address: ")
-            CrewUI().changeEmployeeAddress(crew_id, new_address)
+            CrewUI().changeEmployeeAddress(employee, new_address)
 
         elif selection == '2':
             new_phonenumber = input('New Phone number: ')
 
         elif selection == '3':
             new_email_address = input('New email: ')
-            CrewUI().changeEmployeeEmail(crew_id, new_email_address)
+            CrewUI().changeEmployeeEmail(employee, new_email_address)
 
         elif selection == '4':
             new_rank = input('Rank: ')

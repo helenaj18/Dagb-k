@@ -129,13 +129,17 @@ class CrewLL:
         IO_API().changeCrewFile(self.employees_list)
 
 
-    def ChangeHomeAddress(self,personal_id,new_home_address):
+    def ChangeHomeAddress(self,employee,new_home_address):
         '''Changes the Emergency Contact for destination in file'''
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
+        employee.setAddress(new_home_address)
+        #IO_API.
+
+
+        # for i in range(len(self.employees_list)):
+        #     if personal_id == self.employees_list[i][0]:
+        #         self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
         
-        IO_API().changeCrewFile(self.employees_list)
+        # IO_API().changeCrewFile(self.employees_list)
 
     def ChangePhoneNumber(self,personal_id,new_phone_number):
         '''Changes the Emergency Contact for destination in file'''
@@ -235,6 +239,7 @@ class CrewLL:
             crew_id = crew_member.getCrewID()
             if crew_id not in self.working_crew_id_list:
                 not_working_crew_id_list.append(crew_id)
+
 
     def getWorkSchedule(self,start_date,end_date,crew_id):
         voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
