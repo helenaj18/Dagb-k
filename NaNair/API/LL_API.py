@@ -54,7 +54,8 @@ class LL_API:
         
         return CrewLL().sortPilotsByLicense()
 
-
+    def addCrew(self, info_list):
+        return CrewLL().addCrew(info_list)
 
 
 
@@ -70,7 +71,7 @@ class LL_API:
         return VoyageLL().addVoyage(destination,time)
 
     def get_all_voyages(self,start_date,end_date):
-        return VoyageLL().getVoyage(start_date,end_date)
+        return VoyageLL().getVoyageInDateRange(start_date,end_date)
         
 
 
