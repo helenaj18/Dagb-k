@@ -5,8 +5,9 @@ from UI.display_menu_pilots import DisplayMenuPilots
 # EMPLOYEE 
 
 class DisplayMenuEmployee: 
-    def __init__(self):
-        print('in diplay employee')
+    def __init__(self, logic_layer):
+        print('Display employees')
+        self.logic_layer = logic_layer
 
     def startDisplayMenu(self):
         print('#'*20)
@@ -21,7 +22,7 @@ class DisplayMenuEmployee:
             print('What would you like to display?') 
             print()
 
-            print('1 - All employees)
+            print('1 - All employees')
             print('2 - Pilots')
             print('3 - Flight attendants')
             print('m - back to display menu')
@@ -34,11 +35,11 @@ class DisplayMenuEmployee:
                 start = False
 
             elif selection == '2':
-                next_menu = DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
+                next_menu = DisplayMenuPilots(self.logic_layer).startDisplayPilots()
                 start = False
 
             elif selection == '3':
-                next_menu = DisplayMenuPilots(self.logic_layer).startDisplayPilots()
+                next_menu = DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
 
             elif selection =='4':
                 next_menu = SubMenuEdit()

@@ -11,7 +11,9 @@ class CrewUI:
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
-        return crew
+        
+        for employee in crew:
+            print(employee)
 
     def showWorkingCrew(self):
         ''' Shows full list of working crew atm '''        
