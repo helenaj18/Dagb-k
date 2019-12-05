@@ -145,6 +145,37 @@ class CrewUI:
         for attendant in flight_att:
             print(attendant)
         print()
+
+    def addCrew(self):
+        print('Please fill in the following information. Press enter to skip.\n')
+
+        info_list.append(input('Name (required): '))
+        info_list.append(input('Personal ID (required): '))
+
+        print('Please choose one of the following job titles:')
+        print('1 - Captain')
+        print('2 - Co-pilot')
+        print('3 - Head service manager')
+        print('4 - Flight attendant')
+        rank = input()
+        while rank != '1' and '2' and '3' and '4':
+            print('Please choose a number between 1-4')
+            rank = input()
+                
+        info_list.append(rank)
+
+        if rank == '1' or rank =='2':
+            info_list.append( input('Pilot license: ') )
+
+        info_list.append( input('Home address: ') )
+        info_list.append( input('Phone number: ') )
+        info_list.append( input('Email: ') )
+
+        LL_API().addCrew(info_list)
+
+        #info_list for pilots is longer because of license
+
+        print('New Employee added!\n') 
   
     # def showOneFlightAtt(self, flight_att_ID):
     #     ''' Shows details for a specific flight attendant'''
