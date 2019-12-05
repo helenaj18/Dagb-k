@@ -5,7 +5,7 @@ class EditEmployeeMenu:
     def __init__(self):
         pass
 
-    def startEditEmployeeMenu(self):
+    def printEditEmployeeMenu(self):
         print('What would you like to change?')
         print()
         try:
@@ -24,6 +24,8 @@ class EditEmployeeMenu:
             print()
 
     def editSelection(self,crew_id):
+        EditEmployeeMenu().printEditEmployeeMenu()
+        
         selection = input()
         if selection == '1':
             new_address = input("New address: ")

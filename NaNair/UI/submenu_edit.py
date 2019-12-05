@@ -45,8 +45,7 @@ class SubMenuEdit:
                 employee = LL_API().get_crew_member_by_id(crew_id)
                 CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
 
-                EditEmployeeMenu().startEditEmployeeMenu()
-                EditEmployeeMenu().editSelection(crew_id)  
+                EditEmployeeMenu().editSelection(employee)  
                 start = False
 
 
