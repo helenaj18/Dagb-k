@@ -12,8 +12,9 @@ class DisplayMenuAirplaneType:
             print()
             selection = input()
 
-            while selection != '1' or '2' or '3':
+            while selection != '1' and '2' and '3':
                 print('Invalid selection')
+                selection = input()
 
             if selection == '1':
                 license_ID = 'NAFokkerF100'
