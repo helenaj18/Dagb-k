@@ -5,6 +5,14 @@ class Pilot(Crew):
         Crew.__init__(self, name, crewID, address, phonenumber, email)
         self.__pilot_license = pilot_license
         self.__captain = bool(int(captain))
+        self.__role = 'Pilot'
+
+
+    def __str__(self):
+        pilot_string = '{},{},{}'.format(self.__role,self.__captain,\
+            self.__pilot_license)
+
+        return super().__str__().a_string() + pilot_string + super().__str__().b_string()
 
     def getLicense(self):
         return self.__pilot_license
