@@ -3,16 +3,17 @@ from API.IO_API import IO_API
 from IO.crewIO import CrewIO
 
 class CrewLL:
- 
+
+    SSN_const = 0
+    NAME_const = 1
+    ROLE_const = 2
+    RANK_const = 3
+    LICENSE_const = 4
+    ADDRESS_const = 5
+    PHONENUMBER_const = 6
+    EMAIL_const = 7
+
     def __init__(self):
-        SSN_const = 0
-        NAME_const = 1
-        ROLE_const = 2
-        RANK_const = 3
-        LICENSE_const = 4
-        ADDRESS_const = 5
-        PHONENUMBER_const = 6
-        EMAIL_const = 7
 
         self.employees_list = IO_API().getAllStaff()
         self.pilots_list = IO_API().loadPilotFromFile()
@@ -85,7 +86,7 @@ class CrewLL:
         '''Changes the email address of a single pilot'''
         for i in range(len(self.employees_list)):
             if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][EMAIL_const] = new_email_address  
+                self.employees_list[i][CrewLL.EMAIL_const] = new_email_address  
 
         #  change crew file in pilotIO changes the whole crew list
         IO_API().changeCrewFile(self.employees_list)
@@ -95,7 +96,7 @@ class CrewLL:
         '''Changes the Emergency Contact for destination in file'''
         for i in range(len(self.employees_list)):
             if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][ADDRESS_const] = new_home_address  
+                self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
         
         IO_API().changeCrewFile(self.employees_list)
 
@@ -103,7 +104,7 @@ class CrewLL:
         '''Changes the Emergency Contact for destination in file'''
         for i in range(len(self.employees_list)):
             if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][PHONENUMBER_const] = new_phone_number
+                self.employees_list[i][CrewLL.PHONENUMBER_const] = new_phone_number
         
         IO_API().changeCrewFile(self.employees_list)
     
@@ -112,8 +113,8 @@ class CrewLL:
 
         for i in range(len(self.pilots_list)):
             if personal_id == self.pilots_list[i][0]:
-                if self.pilots_list[i][LICENSE_const] != 'N/A':
-                    self.pilots_list[i][LICENSE_const] = new_license
+                if self.pilots_list[i][CrewLL.LICENSE_const] != 'N/A':
+                    self.pilots_list[i][CrewLL.LICENSE_const] = new_license
                 else:
                     print('Not a pilot!')
         
@@ -149,6 +150,6 @@ class CrewLL:
  
     def getWorkingCrew(self):
         ''' Gets the working crew '''
-        pass
+        
 
 
