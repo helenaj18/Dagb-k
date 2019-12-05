@@ -226,17 +226,20 @@ class CrewUI:
         ''' Shows the schedule for a specific crew member '''
         
         print('Enter the "From date" for work schedule')
-        start_year_int, start_month_int, start_day_int = verifyDate()
-        start_year_int = int(input('Year: '))
-        start_month_int = int(input('Month: '))
-        start_day_int = int(input('Day: '))
         
+        start_year_str = input('Year: ')
+        start_month_str = input('Month: ')
+        start_day_str = input('Day: ')
+
+        start_year_int, start_month_int, start_day_int = CrewUI().verifyDate(start_year_str, start_month_str, start_day_str)
         start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
         
         print('Enter the "To date" for work schedule')
-        end_year_int = int(input('Year: '))
-        end_month_int = int(input('Month: '))
-        end_day_int = int(input('Day: '))
+        end_year_str = input('Year: ')
+        end_month_str = input('Month: ')
+        end_day_str = input('Day: ')
+
+        end_year_int, end_month_int, end_day_int = CrewUI().verifyDate(end_year_str, end_month_str, end_day_str)
         end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
         
         work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
@@ -257,7 +260,7 @@ class CrewUI:
                 self.prettyprint(voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
                 aircraft_ID)
         else:
-            print('No voyages on this date\n')
+            print('No voyages on this time period\n')
 
             
     def prettyprint(self,voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
