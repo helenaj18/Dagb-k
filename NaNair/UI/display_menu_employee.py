@@ -51,7 +51,6 @@ class DisplayMenuEmployee:
                 day_int = int(input('Day: '))
                 date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
                 CrewUI().showWorkingCrew(date_datetime)
-
             
             elif selection == 'm':
                 return
