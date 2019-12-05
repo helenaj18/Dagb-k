@@ -1,7 +1,9 @@
 from UI.display_menu_airplanes import DisplayMenuAirplanes
 from UI.display_menu_voyages import DisplayMenuVoyages
 from UI.display_menu_pilots import DisplayMenuPilots
+from UI.display_menu_attendants import DisplayMenuAttendants
 from UI.destinationUI import DestinationUI
+from UI.display_menu_employee import DisplayMenuEmployee
 from API.LL_API import LL_API
 
 class SubMenuDisplay: 
@@ -21,8 +23,7 @@ class SubMenuDisplay:
         print('1 - Airplanes')
         print('2 - Destinations')
         print('3 - Voyages')
-        print('4 - Flight Attendants')
-        print('5 - Pilots')
+        print('4 - Employees')
         print('m - Main menu')
         print()
 
@@ -40,11 +41,9 @@ class SubMenuDisplay:
             next_menu = DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
 
         elif selection == '4':
-            #listar upp alla flight attendants
-            pass
-        elif selection == '5':
-            next_menu = DisplayMenuPilots(self.logic_layer).startDisplayPilots()
-
+            #fer í employee menu
+            next_menu = DisplayMenuEmployee(self.logic_layer).startDisplayMenu()
+       
         elif selection == 'm':
             #next_menu = MainMenu()
             return 

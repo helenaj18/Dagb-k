@@ -33,7 +33,10 @@ class CrewLL:
     def getCrew(self):
         ''' Gets the whole crew '''
 
-        return self.getPilots.append(self.getFlightAtt)
+        pilots = self.getPilots()
+        flight_att = self.getFlightAtt()
+
+        return pilots + flight_att
     
  
     def getOnePilotID(self, pilotID):

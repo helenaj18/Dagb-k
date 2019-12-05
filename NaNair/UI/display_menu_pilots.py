@@ -46,6 +46,8 @@ class DisplayMenuPilots:
 
             elif selection == 'm':
                 # fara aftur á display
+
+                
                 start = False
             else: 
                 print('Invalid selection')
