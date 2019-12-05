@@ -43,9 +43,6 @@ class VoyageLL:
 
 
 
-
-
-
     def getVoyageInDateRange(self, start_datetime, end_datetime):
 
         voyages = IO_API().loadVoyageFromFile()

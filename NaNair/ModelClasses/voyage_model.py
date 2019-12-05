@@ -45,11 +45,34 @@ class Voyage:
     def getVoyageID(self):
         return self.__voyage_ID
 
-    
-
-    
 
     def __str__(self):
         a_string = str(self.__voyage_ID) +',' + str(self.__flight_no)
     
         return a_string
+
+
+    # SET METHODS
+    def setDepartureTime(self, new_time):
+        self.__departure_time = new_time
+    
+    def setArrivalTime(self, new_time):
+        self.__arrival_time = new_time
+    
+    def setAircraftID(self, new_id):
+        self.__aircraft_ID = new_id
+    
+    def setCaptain(self, new_capt):
+        self.__captain = new_capt
+    
+    def setCopilot(self, new_copilot):
+        self.__copilot = new_copilot
+    
+    def setHeadFlightAtt(self, new_head):
+        self.__head_flight_att = new_head
+
+    def setFlightAttOne(self, new_att):
+        self.__flight_att_one = new_att
+    
+    def setFlightAttTwo(self, new_att):
+        self.__flight_att_two = new_att

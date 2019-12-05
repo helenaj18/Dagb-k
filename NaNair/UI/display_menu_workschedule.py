@@ -17,10 +17,11 @@ class DisplayMenuWorkSchedule():
         end_day_int = int(input('Day: '))
         end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
 
-        #name = 
+        employee = LL_API().get_crew_member_by_id(user_id)
+        name = employee.getName()
         #working_crew_list
         name_header_str = '{:<10} {:<10}'.format(name,user_id)
-        header_str = 'Working Schedule {}-{}'.format(start_day_int+start_month_int+start_day_int,end_year_int+end_month_int+end_day_int)
+        header_str = 'Working Schedule {}-{}'.format(str(start_day_int)+str(start_month_int)+str(start_day_int),str(end_year_int)+str(end_month_int)+str(end_day_int))
         print(name_header_str)
         print(header_str)
         print(len(header_str)*'-')
