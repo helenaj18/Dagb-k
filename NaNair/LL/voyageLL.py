@@ -73,14 +73,18 @@ class VoyageLL:
             if departure_date == end_date: 
                 voyages_on_date_indexes.append(voyages.index(voyage))
 
-        first_voyage_index = voyages_on_date_indexes[0]
-        last_voyage_index = voyages_on_date_indexes[-1]
+        if len(voyages_on_date_indexes) != 0:
+            first_voyage_index = voyages_on_date_indexes[0]
+            last_voyage_index = voyages_on_date_indexes[-1]
 
-        for i in range(first_voyage_index,last_voyage_index+1):
-            voyages_on_date.append(voyages[i])
+            for i in range(first_voyage_index,last_voyage_index+1):
+                voyages_on_date.append(voyages[i])
 
     
-        return voyages_on_date
+            return voyages_on_date
+            
+        else:
+            return None
 
 
 

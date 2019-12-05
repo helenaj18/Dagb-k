@@ -41,30 +41,26 @@ class CrewUI:
 
     def showWorkingCrew(self,date_str):
         format_str = LL_API().get_working_crew(date_str)
-        print('#'*30)
-        print('{:^30}'.format('Working Crew'))
-        print()
-        print('#'*30)
-        header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number','Destination')
-
-        print(header_str)
-        print(len(header_str)*'-')
-        print(format_str)
-        print()
-
+        self.printCrew(format_str)
 
     def showNotWorkingCrew(self,date_str):
         format_str = LL_API().get_not_working_crew(date_str)
-        print('#'*30)
-        print('{:^30}'.format('Not Working Crew'))
-        print('#'*30)
-        print()
-        header_str = '{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number')
+        self.printCrew(format_str)
 
-        print(header_str)
-        print(len(header_str)*'-')
-        print(format_str)
-        print()
+    def printCrew(self,format_str):
+        if format_str != None:
+            print('#'*30)
+            print('{:^30}'.format('Working Crew'))
+            print()
+            print('#'*30)
+            header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number','Destination')
+
+            print(header_str)
+            print(len(header_str)*'-')
+            print(format_str)
+            print()
+        else:
+            print('\nNo voyages on this day\n')
 
     def changeEmployeeEmail(self, employee,new_email_address):
         LL_API().changeEmployeeEmail(employee,new_email_address)
