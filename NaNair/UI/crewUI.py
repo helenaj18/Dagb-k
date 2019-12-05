@@ -66,12 +66,6 @@ class CrewUI:
         print(format_str)
         print()
 
-<<<<<<< HEAD
-    def showNotWorkingCrew(self,date):
-        pass
-=======
->>>>>>> c2ad2a3cdca9ad26a6e84dd8283f6eb640482531
-
     def changeEmployeeEmail(self, employee,new_email_address):
         LL_API().changeEmployeeEmail(employee,new_email_address)
 
@@ -79,12 +73,7 @@ class CrewUI:
     def changeEmployeeAddress(self,employee, new_address):
         LL_API().changeEmployeeAddress(employee,new_address)
 
-        
-<<<<<<< HEAD
-
-=======
->>>>>>> c2ad2a3cdca9ad26a6e84dd8283f6eb640482531
-        
+            
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
         print('-'*50)
@@ -206,31 +195,29 @@ class CrewUI:
         
         work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
 
-        for voyage in work_schedule_list:
-            prettyprint(self,voyage)
-
-            
-        def prettyprint(self,voyage,\
-            voyage_duration_min):
-            flight_no_out,flight_no_home = voyage.getFlightNumbers()
-            voyage_duration_hrs = voyage.getDestination().getDestinationDuration()*2+1
-
-
-            print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(), voyage.getDestination().getDestinationAirport(),\
-                    voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
-            print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
-            print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,voyage_duration_min))
-
-
         employee = LL_API().get_crew_member_by_id(crew_ID)
-        name = employee.getName()
         #working_crew_list
-        name_header_str = '{:<10} {:<10}'.format(name,crew_ID)
-        header_str = 'Working Schedule {}.{}.{}-{}.{}.{}'.format(start_day_int,start_month_int,start_day_int,end_year_int,end_month_int,end_day_int)
+        name_header_str = '{:<10} {:<10}'.format(employee.getName(),crew_ID)
+        header_str = 'Working Schedule {}.{}.{}-{}.{}.{}'.format(start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
+        print()
         print(name_header_str)
         print(header_str)
         print(len(header_str)*'-')
 
+        for voyage in work_schedule_list:
+            flight_no_out,flight_no_home = voyage.getFlightNumbers()
+            voyage_duration_hrs, voyage_duration_min = LL_API().get_voyage_duration(voyage)
+            aircraft_ID = voyage.getAircraftID()
+            self.prettyprint(voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
+            aircraft_ID)
 
-        pass
+            
+    def prettyprint(self,voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
+        aircraft_ID):
+
+        print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(), voyage.getDestination().getDestinationAirport(),\
+                voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+        print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
+        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,voyage_duration_min))
+        print('\t Aircraft: {}'.format(aircraft_ID))
 

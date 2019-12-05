@@ -181,9 +181,6 @@ class CrewLL:
  
     def getWorkingCrew(self,date_str):
         ''' Gets the working crew '''
-        # pilots = IO_API().loadPilotFromFile()
-        # flight_atts = IO_API().loadFlightAttFromFile()
-        # crew = pilots + flight_atts
         
         working_crew_id_list = self.getWorkingCrewIdList(date_str)
         format_str = ''
@@ -247,9 +244,8 @@ class CrewLL:
 
         for voyage in voyage_list:
             crew_on_voyage_list = voyage.getCrewOnVoyage()
-            for crew_id in crew_on_voyage_list:
-                crew_member = self.getOneCrewMember(crew_id)
-                if crew_member.getCrewID() == crew_id:
+            for crew_member_id in crew_on_voyage_list:
+                if crew_member_id == crew_id:
                     work_schedule_list.append(voyage)
         
         return work_schedule_list
