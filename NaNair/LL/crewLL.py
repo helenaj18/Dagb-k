@@ -177,9 +177,6 @@ class CrewLL:
  
     def getWorkingCrew(self,date_str):
         ''' Gets the working crew '''
-        # pilots = IO_API().loadPilotFromFile()
-        # flight_atts = IO_API().loadFlightAttFromFile()
-        # crew = pilots + flight_atts
         
         working_crew_id_list = self.getWorkingCrewIdList(date_str)
         format_str = ''
