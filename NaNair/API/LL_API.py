@@ -16,6 +16,8 @@ class LL_API:
         '''Gets a list of airplanes by type'''
         return AirplaneLL().getAirplanesByType(planeTypeId)
     
+
+    
     def addAirplane(self,planeInsignia,planeTypeId):
         ''' Sends info for new ariplane to be added'''
         return AirplaneLL().addAirplane(planeInsignia,planeTypeId)
