@@ -51,6 +51,7 @@ class CrewUI:
         print(format_str)
         print()
 
+<<<<<<< HEAD
     def showNotWorkingCrew(self,date_str):
         format_str = LL_API().get_not_working_crew(date_str)
         print('#'*30)
@@ -63,6 +64,15 @@ class CrewUI:
         print(len(header_str)*'-')
         print(format_str)
         print()
+=======
+    def showNotWorkingCrew(self,date):
+        pass
+
+    def changeEmployeeEmail(self, crew_id,new_email_address):
+        LL_API().changeEmployeeEmail(crew_id,new_email_address)
+
+        
+>>>>>>> 1c274afd0b22b9450ad415b6178f29f13f9a9940
         
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
