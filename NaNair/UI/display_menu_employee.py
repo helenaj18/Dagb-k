@@ -1,10 +1,13 @@
 from UI.crewUI import CrewUI
+from UI.display_menu_attendants import DisplayMenuAttendants
+from UI.display_menu_pilots import DisplayMenuPilots
 
 # EMPLOYEE 
 
 class DisplayMenuEmployee: 
-    def __init__(self):
-        print('in diplay employee')
+    def __init__(self, logic_layer):
+        print('Display employees')
+        self.logic_layer = logic_layer
 
     def startDisplayMenu(self):
         print('#'*20)
@@ -12,34 +15,35 @@ class DisplayMenuEmployee:
         print('#'*20)
         print()
 
-        start = True
-
-        while start: 
+        while True: 
           
             print('What would you like to display?') 
             print()
 
-            print('1 - All employees)
-            print('2 - Single employee ')
-            print('3 - Working status on a certain date'')
+            print('1 - All employees')
+            print('2 - Single employee')
+            print('3 - Pilots')
+            print('4 - Flight attendants')
             print('m - back to display menu')
             print()
             selection = input()
             
 
             if selection == '1':
-                next_menu = CrewUI().showCrew()
-                start = False
+                CrewUI().showCrew()
 
-            elif selection == '2':
-                next_menu = CrewUI().
-                start = False
+            elif selection =='2':
+                crew_id = input('Enter the Crew members ID (SSN): ')
+                CrewUI().showOneCrewMember(crew_id)
 
-            elif selection =='3':
-                next_menu = SubMenuEdit()
-                start = False
+            elif selection == '3':
+                DisplayMenuPilots(self.logic_layer).startDisplayPilots()
 
-            elif selection == 'q':
-                break
+            elif selection == '4':
+                DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
+            
+            elif selection == 'm':
+                return
+
             else: 
                 print('Invalid selection')

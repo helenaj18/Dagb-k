@@ -1,5 +1,6 @@
 # from UI.mainmenu import MainMenu
 from API.LL_API import LL_API
+from UI.crewUI import CrewUI
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -15,9 +16,11 @@ class SubMenuEdit:
         print('What would you like to edit? ')
         print()
 
-        while True: 
+        start = True
+        while start: 
             print('1 - Existing voyage')
             print('2 - Destination')
+            print('3 - Employee')
             print('m - Main menu')
 
             selection = input()
@@ -30,11 +33,18 @@ class SubMenuEdit:
                 LL_API().change_voyage(new_datetime_str,flight_number)
 
             elif selection == '2':
-                # SETJA INN MENU CHANGE PHONE EÐA NAME 
+                # prenta Destination upplýsingar
+                # SETJA INN MENU HVERJU ÞÚ VILT BREYTA 
                 # EDIT MENU DESTINATION 
                 pass
 
-               
+            elif selection == '3':
+                crew_id = 'Input employee ID: '
+                CrewUI().showOneCrewMember(crew_id)
+
+                #lista upplýsingar um starfsmanninn
+                #menu - hverju viltu breyta
+
             elif selection == 'm':
                 return # goes back to main menu 
                 
