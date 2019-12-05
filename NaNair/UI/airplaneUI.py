@@ -14,17 +14,11 @@ class AirplaneUI:
 
         for elem in airplanes:
             print(elem)
+        print()
 
         
-    def showAirplanesByType(self):
+    def showAirplanesByType(self,planeTypeID):
         '''Shows Airplanes by type'''
-
-        print('What type would you like to list? Please type one of the following')
-        print('NAFokkerF100')
-        print('NAFokkerF28')
-        print('NABAE146')
-        print()
-        planeTypeID = input()
 
         airplanes = LL_API().showAirplanesByType(planeTypeID)
 
@@ -34,6 +28,7 @@ class AirplaneUI:
 
         for elem in airplanes:
             print(elem)
+        print()
 
         
     def addAirplane(self):
