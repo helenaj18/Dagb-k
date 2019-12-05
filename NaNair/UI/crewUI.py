@@ -16,6 +16,10 @@ class CrewUI:
         
         for employee in crew:
             print(employee)
+        
+    def showOneCrewMember(self,crew_id):
+        crew_member = LL_API().get_crew_member_by_id()
+        print(crew_member)
 
     def showWorkingCrew(self):
         ''' Shows full list of working crew atm '''        
