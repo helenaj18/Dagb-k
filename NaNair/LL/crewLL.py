@@ -225,16 +225,15 @@ class CrewLL:
     def getWorkingCrewIdList(self,date_str):
 
         voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
+        self.working_crew_id_list = []
         if voyage_list != None:
-            working_crew_id_list = []
-
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 destination_of_voyage = voyage.getDestination()
-                working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
+                self.working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
 
-            if len(working_crew_id_list) != 0:
-                return working_crew_id_list
+            if len(self.working_crew_id_list) != 0:
+                return self.working_crew_id_list
             else:
                 return None
         else:
@@ -271,14 +270,18 @@ class CrewLL:
 
     def getWorkSchedule(self,start_date,end_date,crew_id):
         voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
-        work_schedule_list = []
+        if voyage_list != None:
+            work_schedule_list = []
 
-        for voyage in voyage_list:
-            crew_on_voyage_list = voyage.getCrewOnVoyage()
-            for crew_id in crew_on_voyage_list:
-                crew_member = self.getOneCrewMember(crew_id)
-                if crew_member.getCrewID() == crew_id:
-                    work_schedule_list.append(voyage)
-        
-        return work_schedule_list
+            for voyage in voyage_list:
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                for crew_member_id in crew_on_voyage_list:
+                    if crew_member_id == crew_id:
+                        work_schedule_list.append(voyage)
+            if len(work_schedule_list) != 0:
+                return work_schedule_list
+            else:
+                return None
+        else:
+            return None
     

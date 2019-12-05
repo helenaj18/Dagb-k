@@ -13,11 +13,14 @@ class DisplayMenuWorkingCrew:
 
             selection = input()
             print('Enter the date you want to display')
-            year_int = int(input('Year: '))
-            month_int = int(input('Month: '))
-            day_int = int(input('Day: '))
+            year_str = input('Year: ')
+            month_str = input('Month: ')
+            day_str = input('Day: ')
+
+            year_int,month_int,day_int = CrewUI().verifyDate(year_str,month_str,day_str)
+
             date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
-  
+
             if selection == '1':
                 return CrewUI().showWorkingCrew(date_datetime)
 
