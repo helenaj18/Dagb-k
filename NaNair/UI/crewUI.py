@@ -74,6 +74,7 @@ class CrewUI:
             print('Address: {}'.format(crew_member.getAddress()))
             print('Phone number: {}'.format(crew_member.getPhoneNumber()))
             print('Email: {}'.format(crew_member.getEmail()))
+            print()
             
             try:
                 if crew_member.getCaptain():
@@ -94,22 +95,6 @@ class CrewUI:
         ''' Shows full list of pilots registered'''
         return LL_API().get_pilots()
 
-    # def showOnePilot(self, pilot_ID):
-    #     ''' Shows details for a specific pilot'''
-        
-    #     pilot = LL_API().get_pilot_by_id(pilot_ID)
-        
-    #     print()
-    #     print('Name: {}'.format(pilot.getName()))
-    #     print('SSN: {}'.format(pilot.getCrewID()))
-    #     print('Address: {}'.format(pilot.getAddress()))
-    #     print('Phone number: {}'.format(pilot.getPhoneNumber()))
-    #     print('Email: {}'.format(pilot.getEmail()))
-    #     if pilot.getCaptain():
-    #         print('Rank: Captain')
-    #     else:
-    #         print('Rank: Co-pilot')
-    #     print()
 
     def showByLicense(self, license_ID):
         ''' Shows a list of pilots that have a specific licence '''
@@ -176,22 +161,6 @@ class CrewUI:
         #info_list for pilots is longer because of license
 
         print('New Employee added!\n') 
-  
-    # def showOneFlightAtt(self, flight_att_ID):
-    #     ''' Shows details for a specific flight attendant'''
-    #     flight_att = LL_API().flight_att_by_id(flight_att_ID)
-        
-    #     print()
-    #     print('Name: {}'.format(flight_att.getName()))
-    #     print('SSN: {}'.format(flight_att.getCrewID()))
-    #     print('Address: {}'.format(flight_att.getAddress()))
-    #     print('Phone number: {}'.format(flight_att.getPhoneNumber()))
-    #     print('Email: {}'.format(flight_att.getEmail()))
-    #     if flight_att.getHeadFlightAtt():
-    #         print('Rank: Head Service Manager')
-    #     else:
-    #         print('Rank: Flight Attendant')
-    #     print()
         
 
     # bíða með þar til crew er skráð á ákv vinnuferðir
