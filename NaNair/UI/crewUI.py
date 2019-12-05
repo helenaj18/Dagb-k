@@ -7,7 +7,8 @@ class CrewUI:
         self.BANNER_pilot += '_'*80
         self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Flight Att. ID', 'Rank')
         self.BANNER_att += '_'*80
-        self.BANNER_crew = '{:<25}{:<20}{:<20}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
+        self.BANNER_crew = '{:<25}{:<20}{:<25}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
+        self.BANNER_crew += '_'*85
     def __str__(self):
         pass 
     
