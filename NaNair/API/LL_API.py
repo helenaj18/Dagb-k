@@ -71,6 +71,9 @@ class LL_API:
 
     def get_all_voyages(self,start_date,end_date):
         return VoyageLL().getVoyageInDateRange(start_date,end_date)
+
+    def get_voyage_duration(self,voyage):
+        return VoyageLL().getVoyageDuration(voyage)
         
 
 
