@@ -236,12 +236,16 @@ class CrewLL:
             if crew_id not in self.working_crew_id_list:
                 not_working_crew_id_list.append(crew_id)
 
-    def getWorkSchedule(self,start_date,end_date):
-        pass
-<<<<<<< HEAD
+    def getWorkSchedule(self,start_date,end_date,crew_id):
+        voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
+        work_schedule_list = []
 
-        return format_str
-=======
+        for voyage in voyage_list:
+            crew_on_voyage_list = voyage.getCrewOnVoyage()
+            for crew_id in crew_on_voyage_list:
+                crew_member = self.getOneCrewMember(crew_id)
+                if crew_member.getCrewID() == crew_id:
+                    work_schedule_list.append(voyage)
+        
+        return work_schedule_list
     
-        #return format_str
->>>>>>> 466c865cf0e48ad6a8f3390347ad79f1d041dad5

@@ -61,7 +61,18 @@ class DisplayMenuEmployee:
                 return DisplayMenuWorkingCrew().startDisplayMenuWorkingCrew()
             
             elif selection == '6':
-                DisplayMenuWorkSchedule().startDisplayMenuWorkSchedule()
+                #ATH try
+                while True:
+                    crew_id = input('Enter the Crew members ID (SSN): ')
+                    
+                    try:
+                        int(crew_id)
+                        if len(crew_id) == 10:
+                            return CrewUI().showSchedule(crew_id)
+                        else:
+                            print('Invalid SSN')
+                    except ValueError:
+                        print('Invalid SSN')
             
             elif selection == 'm':
                 return
