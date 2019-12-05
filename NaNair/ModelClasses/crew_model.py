@@ -6,6 +6,9 @@ class Crew:
         self.__phonenumber = phonenumber
         self.__email = email
 
+    def __str__(self):
+        return str(self.__crewID) + str(self.__name) + str(self.__address) + str(self.__phonenumber) + str(self.__email)
+
     def getName(self):
         return self.__name
     
@@ -20,3 +23,5 @@ class Crew:
 
     def getEmail(self):
         return self.__email
+
+    
