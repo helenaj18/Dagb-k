@@ -79,7 +79,7 @@ class CrewIO:
         return pilot_class
 
     def loadFlightAttFromFile(self):
-        '''Gets flight attendant info from file, returns a list of pilots'''
+        '''Gets flight attendant info from file, returns a list of flight attendants'''
         flight_att_list = self.find_flight_att()
 
         flight_att_class = []
