@@ -3,26 +3,41 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        self.BANNER_pilot = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
+        self.BANNER_pilot = '{:<25}{:<20}{:<25}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
         self.BANNER_pilot += '_'*80
         self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Flight Att. ID', 'Rank')
         self.BANNER_att += '_'*80
         self.BANNER_crew = '{:<25}{:<20}{:<25}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
-        self.BANNER_crew += '_'*85
+        self.BANNER_crew += '_'*80
     def __str__(self):
         pass 
     
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
+        string = ''
 
         print(self.BANNER_pilot)
 
         for employee in crew:
-            print(employee)
+            string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
+
+            try:
+                if employee.getCaptain():
+                    string += '{:<25}{:<10}'.format('Captain', employee.getLicense())
+                else:
+                    string += '{:<25}{:<10}'.format('Co-pilot', employee.getLicense())
+            except AttributeError:
+                if employee.getHeadFlightAtt():
+                    string += '{:<15}'.format('Head service manager')
+                else:
+                    string += '{:<15}'.format('Flight attendant')
+            
+            print(string)
+
         print()
     
-    def showWorkingCrew(self,date):
+    def showWorkingCrew(self,datse):
         return LL_API.get_working_crew(date)
 
 
@@ -30,7 +45,6 @@ class CrewUI:
         pass
         
     def showOneCrewMember(self,crew_id):
-        print(self.BANNER_crew)
         crew_member = LL_API().get_crew_member_by_id(crew_id)
         
         print('Name: {}'.format(crew_member.getName()))
