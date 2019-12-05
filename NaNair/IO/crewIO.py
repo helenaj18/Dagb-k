@@ -33,12 +33,12 @@ class CrewIO:
             i += 1
         
         self.employees_list = employees_list
-        return employees_list
 
     def find_pilots(self):
         '''Finds all pilots in file and returns a list of them'''
 
         pilot_list = []
+        self.read_file()
 
         for i in range(len(self.employees_list)):
             # Only pilots have licenses
@@ -53,6 +53,7 @@ class CrewIO:
         '''Finds all flight attendants in file and returns a list of them'''
 
         flight_att_list = []
+        self.read_file()
 
         for i in range(len(self.employees_list)):
             # Only pilots have licenses
@@ -60,6 +61,7 @@ class CrewIO:
                 flight_att_list.append(self.employees_list[i])
         
         self.flight_att_list = flight_att_list
+        return self.flight_att_list
 
 
     def loadPilotFromFile(self):
@@ -77,7 +79,7 @@ class CrewIO:
         return pilot_class
 
     def loadFlightAttFromFile(self):
-        '''Gets flight attendant info from file, returns a list of pilots'''
+        '''Gets flight attendant info from file, returns a list of flight attendants'''
         flight_att_list = self.find_flight_att()
 
         flight_att_class = []
@@ -85,7 +87,7 @@ class CrewIO:
         for line in flight_att_list:
             ssn,name,role,head_flight_att,licence,address,phonenumber,email = line
             flight_att_instance = FlightAttendant(name,ssn,address,phonenumber,email,head_flight_att)
-            flight_att_class.append(pilot_instance)
+            flight_att_class.append(flight_att_instance)
 
         return flight_att_class
         

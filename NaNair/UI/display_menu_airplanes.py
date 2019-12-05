@@ -1,5 +1,5 @@
 from UI.airplaneUI import AirplaneUI
-
+from UI.display_menu_airplane_type import DisplayMenuAirplaneType
 
 class DisplayMenuAirplanes: 
     def __init__(self, logic_layer):
@@ -23,11 +23,11 @@ class DisplayMenuAirplanes:
 
             if selection == '1':
                 '''Gets all airplanes'''
-                return AirplaneUI().showAllPlanes()
+                AirplaneUI().showAllPlanes()
 
             elif selection == '2':
                 '''Gets all airplanes by type'''
-                return AirplaneUI().showAirplanesByType()
+                DisplayMenuAirplaneType().startDisplayAirplaneType()
 
             elif selection == 'm':
                 '''Goes back to main menu'''

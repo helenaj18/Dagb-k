@@ -23,8 +23,7 @@ class DisplayMenuAttendants:
 
             if selection == '1':
                 #lista upp alla flugþjóna
-
-
+                return CrewUI.showAllFlightAtt(self)
                 start = False
 
 
@@ -36,6 +35,6 @@ class DisplayMenuAttendants:
 
             elif selection == 'm':
                 # fara aftur á display
-                start = False
+                return
             else: 
                 print('Invalid selection')
