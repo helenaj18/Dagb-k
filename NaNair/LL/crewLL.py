@@ -184,32 +184,40 @@ class CrewLL:
         
         working_crew_id_list = self.getWorkingCrewIdList(date_str)
         format_str = ''
+        if working_crew_id_list != None:
+            for working_crew_per_voyage in working_crew_id_list:
+                destination_instance = working_crew_per_voyage[1]
+                destination_name = destination_instance.getDestinationName()
 
-        for working_crew_per_voyage in working_crew_id_list:
-            destination_instance = working_crew_per_voyage[1]
-            destination_name = destination_instance.getDestinationName()
+                for crew_id in working_crew_per_voyage[0]:
+                    if crew_id != 'empty':
+                        crew_member = self.getOneCrewMember(crew_id)
+                        format_str += '{:<20}{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),crew_id,crew_member.getAddress(),crew_member.getPhoneNumber(),destination_name)
+            
+            self.working_crew_id_list = working_crew_id_list
 
-            for crew_id in working_crew_per_voyage[0]:
-                if crew_id != 'empty':
-                    crew_member = self.getOneCrewMember(crew_id)
-                    format_str += '{:<20}{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),crew_id,crew_member.getAddress(),crew_member.getPhoneNumber(),destination_name)
-        
-        self.working_crew_id_list = working_crew_id_list
-
-        return format_str
+            return format_str
+        else:
+            return None
 
 
     def getWorkingCrewIdList(self,date_str):
 
         voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
-        working_crew_id_list = []
+        if voyage_list != None:
+            working_crew_id_list = []
 
-        for voyage in voyage_list:
-            crew_on_voyage_list = voyage.getCrewOnVoyage()
-            destination_of_voyage = voyage.getDestination()
-            working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
+            for voyage in voyage_list:
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                destination_of_voyage = voyage.getDestination()
+                working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
 
-        return working_crew_id_list
+            if len(working_crew_id_list) != 0:
+                return working_crew_id_list
+            else:
+                return None
+        else:
+            return None
 
     def getNotWorkingCrew(self,date_str):
         
@@ -222,12 +230,14 @@ class CrewLL:
 
         self.appendNotWorkingCrewList(flight_atts,not_working_crew_id_list)
         self.appendNotWorkingCrewList(pilots,not_working_crew_id_list)
-
-        for not_working_crew_id in not_working_crew_id_list:
-            crew_member = self.getOneCrewMember(not_working_crew_id)
-            format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),not_working_crew_id,crew_member.getAddress(),crew_member.getPhoneNumber())
-        
-        return format_str
+        if len(not_working_crew_id_list) != 0:
+            for not_working_crew_id in not_working_crew_id_list:
+                crew_member = self.getOneCrewMember(not_working_crew_id)
+                format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),not_working_crew_id,crew_member.getAddress(),crew_member.getPhoneNumber())
+            
+            return format_str
+        else:
+            return None
 
 
     def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
