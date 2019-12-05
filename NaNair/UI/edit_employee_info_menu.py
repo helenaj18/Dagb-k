@@ -8,20 +8,15 @@ class EditEmployeeMenu:
     def startEditEmployeeMenu(self):
         print('What would you like to change?')
         print()
-        try:
-            employee.getCaptain()
-            print('1 - Address')
-            print('2 - Phone number')
-            print('3 - Email')
-            print('4 - Rank')
+    
+
+        print('1 - Address')
+        print('2 - Phone number')
+        print('3 - Email')
+        print('4 - Rank')
+        if employee.getCaptain():
             print('5 - License')
-            print()
-        except AttributeError:
-            print('1 - Address')
-            print('2 - Phone number')
-            print('3 - Email')
-            print('4 - Rank')
-            print()
+
 
     def editSelection(self,crew_id):
         selection = input()
