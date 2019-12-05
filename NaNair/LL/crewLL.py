@@ -148,7 +148,7 @@ class CrewLL:
         return IO_API().addFlightAttToFile(info)
  
  
-    def getWorkingCrew(self):
+    def getWorkingCrew(self,date_str):
         ''' Gets the working crew '''
         
 
