@@ -17,7 +17,7 @@ class DisplayMenuWorkSchedule():
         end_day_int = int(input('Day: '))
         end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
 
-        name = 
+        #name = 
         #working_crew_list
         name_header_str = '{:<10} {:<10}'.format(name,user_id)
         header_str = 'Working Schedule {}-{}'.format(start_day_int+start_month_int+start_day_int,end_year_int+end_month_int+end_day_int)
