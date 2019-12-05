@@ -34,7 +34,7 @@ class DisplayMenuEmployee:
 
             elif selection =='2':
                 crew_id = input('Enter the Crew members ID (SSN): ')
-                CrewUI.showOneCrewMember(crew_id)
+                CrewUI().showOneCrewMember(crew_id)
 
             elif selection == '3':
                 DisplayMenuPilots(self.logic_layer).startDisplayPilots()

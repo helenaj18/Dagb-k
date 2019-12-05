@@ -7,6 +7,7 @@ class CrewUI:
         self.BANNER_pilot += '_'*80
         self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Flight Att. ID', 'Rank')
         self.BANNER_att += '_'*80
+        self.BANNER_crew = '{:<25}{:<20}{:<20}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
     def __str__(self):
         pass 
     
@@ -21,6 +22,7 @@ class CrewUI:
         print()
         
     def showOneCrewMember(self,crew_id):
+        print(self.BANNER_crew)
         crew_member = LL_API().get_crew_member_by_id(crew_id)
         print(crew_member)
         print()
