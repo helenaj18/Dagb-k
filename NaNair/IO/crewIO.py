@@ -30,7 +30,7 @@ class CrewIO:
                 line = line.strip().split(',')
                 employees_list.append(line)
             i += 1
-        
+
         self.employees_list = employees_list
 
     def find_pilots(self):
@@ -41,11 +41,11 @@ class CrewIO:
 
         for i in range(len(self.employees_list)):
             # Only pilots have licenses
-            if self.employees_list[i][CrewIO.LICENSE_const] != 'N/A': 
+            if self.employees_list[i][CrewIO.LICENSE_const] != 'N/A':
                 pilot_list.append(self.employees_list[i])
-        
+
         self.pilot_list = pilot_list
-        return self.pilot_list  
+        return self.pilot_list
 
 
     def find_flight_att(self):
@@ -58,7 +58,7 @@ class CrewIO:
             # Only pilots have licenses
             if self.employees_list[i][CrewIO.LICENSE_const] == 'N/A':
                 flight_att_list.append(self.employees_list[i])
-        
+
         self.flight_att_list = flight_att_list
         return self.flight_att_list
 
@@ -89,16 +89,23 @@ class CrewIO:
             flight_att_instance_list.append(flight_att_instance)
 
         return flight_att_instance_list
-        
 
-    def changeCrewFile(self, crew_list):
+
+    def changeCrewFile(self, new_employee_list):
         '''Updates the file with new changes'''
-        crew_str = ''
-        for item in crew_list:
-            crew_str += ','.join(item) + '\n'
-
         file_object = open(self.__crew_filename,'w')
-        file_object.write(crew_str)
+        for employee in new_employee_list: 
+            file_object.write(str(employee))
+
+
+
+
+        # crew_str = ''
+        # for item in crew_list:
+        #     crew_str += ','.join(item) + '\n'
+
+        # file_object = open(self.__crew_filename,'w')
+        # file_object.write(crew_str)
 
 
     def addCrewToFile(self,new_employee_str):
