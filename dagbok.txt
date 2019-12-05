@@ -119,7 +119,7 @@ Erum að auki komnar vel á leið með API tengingar og ætlum að halda áfram 
 
 Morgunfundur 4.12.2019 kl 09:00
 Við ætlum að byrja daginn á því að laga IO og LL klasa og gera tengingar alla leið í gegn.
-Erla: PilotIO og CrewLL
+Erla og Marinella: PilotIO og CrewLL
 Helena: DestinationIO og DestinationLL
 Valentína og Kinga: VoyageIO og VoyageLL
 
@@ -130,3 +130,7 @@ viðmótið við UI klasana og reyna að láta allt virka. Erum komnar nokkuð l
 en þó fer mikill tími í að debugga :(
 Stefnum á að klára að tengja viðmótið á morgun og athuga virkni á öllum A kröfunum úr
 kröfulistanum.
+
+Morgunfundur 5.12.2019 kl 09:00
+Erum enþá að vinna í UI klösum. Ætlum að halda áfram að tengja viðmótið og svo taka smá fund og 
+fara yfir allar A-kröfur.
