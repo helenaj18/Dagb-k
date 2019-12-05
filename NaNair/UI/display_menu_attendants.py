@@ -30,7 +30,9 @@ class DisplayMenuAttendants:
             elif selection == '2':
                 # lista stakan flugþjón eftir kennitölu
 
-                return CrewUI().showSortedByLicense()
+                attendant_id = input('Input flight attendant ID: ')
+
+                return CrewUI().showOneFlightAtt(attendant_id)
                 start = False
 
             elif selection == 'm':
