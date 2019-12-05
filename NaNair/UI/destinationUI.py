@@ -15,6 +15,16 @@ class DestinationUI:
         header_str = '{:<15}{:<15}{:<10}{:<12}{:<20}{:<12}'.format('Airport Code','Destination','Duration','Distance','Emergency Contact ','Phone Number')
         print(header_str)
         print('-'*len(header_str))
-        for item in destinations:
-            print(item)
+        for destination in destinations:
+            code = destination.getDestinationName()
+            airport = destination.getDestinationAirport()
+            distance = destination.getDestinationDistnace()
+            contact = destination.getDestinationContact()
+            emergency_phone_number = destination.getDestinationEmergencyPhoneNumber()
+            duration = destination.getDestinationDuration()
+            
+            format_str = '{:<15}{:<15}{:<10}{:<12}{:<15}{:>12}'.format(code,airport,distance,duration,contact,emergency_phone_number)
+            print(format_str)
+
+            
 

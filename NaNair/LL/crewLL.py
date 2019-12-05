@@ -151,10 +151,16 @@ class CrewLL:
  
     def getWorkingCrew(self,date_str):
         ''' Gets the working crew '''
-        pilots = IO_API.loadPilotFromFile()
-        flight_atts = IO_API.loadFlightAttFromFile()
-        crew = pilots + flight_atts
-        voyage_ = VoyageLL().get_all_voyages(date_str,date_str)
-        
+        # pilots = IO_API().loadPilotFromFile()
+        # flight_atts = IO_API().loadFlightAttFromFile()
+        # crew = pilots + flight_atts
+        voyage_list = VoyageLL().getVoyage(date_str,date_str)
+        working_crew_list = []
 
+        for voyage in voyage_list:
+            crew_on_voyage_list = voyage.getCrewOnVoyage()
+            working_crew_list.append(crew_on_voyage_list)
+
+        return working_crew_list
+    
 
