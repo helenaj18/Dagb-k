@@ -32,7 +32,10 @@ class Crew:
         self.__address = new_email
 
     def __str__(self):
-        a_string = '{},{},'.format(self.__crewID,self.__name)
-        b_string = '{},{},{}'.format(self.__address,self.__phonenumber,self.__email)
+        def a_string():
+            return '{},{},'.format(self.__crewID,self.__name)
+        def b_string():
+            return '{},{},{}'.format(self.__address,self.__phonenumber,self.__email)
+    
 
     

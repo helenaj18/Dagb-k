@@ -4,16 +4,14 @@ class FlightAttendant(Crew):
     def __init__(self, name, crewID, address='', phonenumber='', email='', head_flight_att=False):
         Crew.__init__(self, name, crewID, address, phonenumber, email)
         self.__head_flight_att = bool(int(head_flight_att))
+        self.__license = 'N/A'
+        self.__role = 'Cabincrew'
 
     def __str__(self):
-        string = '{:<25}{:<20}'.format(self._Crew__name,self._Crew__crewID)
+        flight_att_string = '{},{},{}'.format(self.__role,self.__head_flight_att,\
+            self.__license)
 
-        if self.__head_flight_att:
-            string += '{:<10}'.format('Head service manager')
-        else:
-            string += '{:<10}'.format('Flight attendant')
-
-        return string
+        return super(FlightAttendant,self).__str__().a_string() + flight_att_string+ super(FlightAttendant,self).__str__().b_string()
 
 
     def getHeadFlightAtt(self):
