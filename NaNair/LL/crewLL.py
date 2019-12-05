@@ -95,7 +95,6 @@ class CrewLL:
     def addCrew(self, CrewData):
         ''' makes instance of crew member to add to file'''
 
-<<<<<<< HEAD
         if CrewData[2] == '1':
             CrewData.insert(CrewLL.ROLE_const, 'Pilot')
             CrewData[CrewLL.RANK_const] = '1'
@@ -116,9 +115,6 @@ class CrewLL:
 
 
         new_employee_str = ','.join(CrewData)
-=======
-        new_employee_instance = self.makeInstance(CrewData)
->>>>>>> 7213a452ffa243a81eacc850a1059ed936c958d9
 
         return IO_API().addCrew(new_employee_instance)
 
@@ -237,5 +233,5 @@ class CrewLL:
     
     def getWorkSchedule(self,start_date,end_date):
         pass
-    
+
         return format_str
