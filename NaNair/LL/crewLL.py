@@ -132,14 +132,31 @@ class CrewLL:
         # pilots = IO_API().loadPilotFromFile()
         # flight_atts = IO_API().loadFlightAttFromFile()
         # crew = pilots + flight_atts
-        voyage_list = VoyageLL().getVoyage(date_str,date_str)
+        voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
         working_crew_list = []
+        format_str = ''
 
         for voyage in voyage_list:
             crew_on_voyage_list = voyage.getCrewOnVoyage()
             destination_of_voyage = voyage.getDestination()
             working_crew_list.append((crew_on_voyage_list,destination_of_voyage))
+        
+        self.working_crew_list = working_crew_list
 
-        return working_crew_list
+    def getFormatString(self,date_str):
+
+        self.getWorkingCrew(date_str)
+        
+        for working_crew_per_voyage in self.working_crew_list:
+            destination_instance = working_crew_per_voyage[1]
+            destination_name = destination_instance.getDestinationName()
+
+            for crew_id in working_crew_per_voyage[0]:
+                if crew_id != 'empty':
+                    crew_member = self.getOneCrewMember(crew_id)
+                    crew_name = crew_member.getName()
+                    crew_address = crew_member.getAddress()
+                    crew_phone = crew_member.getPhoneNumber()
+                    format_str += '{:<20}{:<20}{:<20}{:<20}{:<20}\n'.format(crew_name,crew_id,crew_address,crew_phone,destination_name)
     
 
