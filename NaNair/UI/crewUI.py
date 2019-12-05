@@ -13,12 +13,12 @@ class CrewUI:
         crew = LL_API().get_crew()
 
         print(self.BANNER)
-        
+
         for employee in crew:
             print(employee)
         
     def showOneCrewMember(self,crew_id):
-        crew_member = LL_API().get_crew_member_by_id()
+        crew_member = LL_API().get_crew_member_by_id(crew_id)
         print(crew_member)
 
     def showWorkingCrew(self):
@@ -61,7 +61,12 @@ class CrewUI:
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 
         
-        return LL_API().get_flight_att()
+        print(self.BANNER)
+
+        flight_att = LL_API().get_flight_att()
+
+        for attendant in flight_att:
+            print(attendant)
   
     def showOneFlightAtt(self, flight_att_ID):
         ''' Shows details for a specific flight attendant'''
