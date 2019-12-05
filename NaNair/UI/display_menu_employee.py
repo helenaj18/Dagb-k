@@ -1,4 +1,6 @@
 from UI.crewUI import CrewUI
+from UI.display_menu_attendants import DisplayMenuAttendants
+from UI.display_menu_pilots import DisplayMenuPilots
 
 # EMPLOYEE 
 
@@ -20,8 +22,8 @@ class DisplayMenuEmployee:
             print()
 
             print('1 - All employees)
-            print('2 - Single employee ')
-            print('3 - Working status on a certain date'')
+            print('2 - Pilots')
+            print('3 - Flight attendants')
             print('m - back to display menu')
             print()
             selection = input()
@@ -32,10 +34,13 @@ class DisplayMenuEmployee:
                 start = False
 
             elif selection == '2':
-                next_menu = CrewUI().
+                next_menu = DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
                 start = False
 
-            elif selection =='3':
+            elif selection == '3':
+                next_menu = DisplayMenuPilots(self.logic_layer).startDisplayPilots()
+
+            elif selection =='4':
                 next_menu = SubMenuEdit()
                 start = False
 
