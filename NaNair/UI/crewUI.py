@@ -44,7 +44,17 @@ class CrewUI:
         ''' Shows details for a specific pilot'''
         
         pilot = LL_API().get_pilot_by_id(pilot_ID)
-        print(pilot)
+        
+        print()
+        print('Name: {}'.format(pilot.getName()))
+        print('SSN: {}'.format(pilot.getCrewID()))
+        print('Address: {}'.format(pilot.getAddress()))
+        print('Phone number: {}'.format(pilot.getPhoneNumber()))
+        print('Email: {}'.format(pilot.getEmail()))
+        if pilot.getCaptain():
+            print('Rank: Captain')
+        else:
+            print('Rank: Co-pilot')
         print()
 
     def showByLicense(self, license_ID):
@@ -86,11 +96,12 @@ class CrewUI:
         ''' Shows details for a specific flight attendant'''
         flight_att = LL_API().flight_att_by_id(flight_att_ID)
         
+        print()
         print('Name: {}'.format(flight_att.getName()))
-        print('SSN: '.format(flight_att.getCrewID()))
-        print('Address: '.format(flight_att.getAddress()))
-        print('Phone number: '.format(flight_att.getPhoneNumber()))
-        print('Email: '.format(flight_att.getEmail()))
+        print('SSN: {}'.format(flight_att.getCrewID()))
+        print('Address: {}'.format(flight_att.getAddress()))
+        print('Phone number: {}'.format(flight_att.getPhoneNumber()))
+        print('Email: {}'.format(flight_att.getEmail()))
         if flight_att.getHeadFlightAtt():
             print('Rank: Head Service Manager')
         else:
