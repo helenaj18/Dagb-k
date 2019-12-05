@@ -18,9 +18,9 @@ class LL_API:
     
 
     
-    def addAirplane(self,planeInsignia,planeTypeId):
+    def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
         ''' Sends info for new ariplane to be added'''
-        return AirplaneLL().addAirplane(planeInsignia,planeTypeId)
+        return AirplaneLL().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
 
     ### CREW LL 
     

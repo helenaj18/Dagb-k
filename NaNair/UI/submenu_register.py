@@ -35,8 +35,17 @@ class SubMenuRegister:
             elif selection == '3':
                 planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ')
                 planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ')
-
-                LL_API().addAirplane(planeInsignia,planeTypeId)
+                
+                if planeTypeId == 'NAFokkerF100':
+                    manufacturer = 'Fokker'
+                    seats = '100'
+                elif planeTypeId == 'NABAE146':
+                    manufacturer = 'BAE'
+                    seats = '82'
+                else:
+                    manufacturer = 'Fokker'
+                    seats = '65'
+                LL_API().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
 
             elif selection == '4':
                 destination_of_voyage = input('Destination (3char airport code): ').upper()
