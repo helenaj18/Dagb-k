@@ -45,15 +45,18 @@ class CrewUI:
         print(len(header_str)*'-')
 
         for working_crew_per_voyage in working_crew_list:
-            destination = working_crew_per_voyage[1]
+            destination_instance = working_crew_per_voyage[1]
+            destination_name = destination_instance.getDestinationName()
+
             for crew_id in working_crew_per_voyage[0]:
                 if crew_id != 'empty':
                     crew_member = LL_API().get_crew_member_by_id(crew_id)
                     crew_name = crew_member.getName()
                     crew_address = crew_member.getAddress()
                     crew_phone = crew_member.getPhoneNumber()
-                    format_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format(crew_name,crew_id,crew_address,crew_phone,destination)
+                    format_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format(crew_name,crew_id,crew_address,crew_phone,destination_name)
                     print(format_str)
+            print()
 
 
     def showNotWorkingCrew(self,date):
