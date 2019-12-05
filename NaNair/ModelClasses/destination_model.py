@@ -13,11 +13,11 @@ class Destination:
     def getDestinationAirport(self):
         return self.__airport
 
-    def getDestinationDistnace(self):
+    def getDestinationDistance(self):
         return self.__distance
     
     def getDestinationContact(self):
-        return self.__contact
+        return self.__emergency_contact_name
 
     def getDestinationEmergencyPhoneNumber(self):
         return self.__emergency_phone_number

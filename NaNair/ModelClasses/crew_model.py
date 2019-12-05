@@ -31,4 +31,8 @@ class Crew:
     def setEmail(self, new_email):
         self.__address = new_email
 
+    def __str__(self):
+        a_string = '{},{},'.format(self.__crewID,self.__name)
+        b_string = '{},{},{}'.format(self.__address,self.__phonenumber,self.__email)
+
     

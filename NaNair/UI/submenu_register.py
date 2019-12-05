@@ -1,6 +1,7 @@
 from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 import datetime
+from UI.register_menu_voyage import RegisterMenuVoyage
 
 class SubMenuRegister: 
     def __init__(self, logic_layer): # muna ap taka inn logic layer sem main menu bjó til!!1!!!!!
@@ -30,11 +31,11 @@ class SubMenuRegister:
             selection = input()
 
             if selection == '1': 
-                info_list = []
                 CrewUI().addCrew()
 
             elif selection == '2':
-                pass
+                RegisterMenuVoyage().startRegisterVoyage()
+                
             elif selection == '3':
                 planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ')
                 planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ')
