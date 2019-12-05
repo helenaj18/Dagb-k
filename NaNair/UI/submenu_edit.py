@@ -1,6 +1,7 @@
 # from UI.mainmenu import MainMenu
 from API.LL_API import LL_API
 from UI.crewUI import CrewUI
+from UI.edit_employee_info_menu import EditEmployeeMenu
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -42,44 +43,10 @@ class SubMenuEdit:
                 crew_id = input('Input employee ID: ')
                 #lista upplýsingar um starfsmanninn
                 employee = LL_API().get_crew_member_by_id(crew_id)
-                CrewUI().showOneCrewMember(crew_id)
-                #menu - hverju viltu breyta
-                print('What would you like to change?')
-                print()
-                #ef flugmaður
-                try:
-                    employee.getCaptain()
-                    print('1 - Address')
-                    print('2 - Phone number')
-                    print('3 - Email')
-                    print('4 - Rank')
-                    print('5 - License')
-                    print()
-                except AttributeError:
-                    print('1 - Address')
-                    print('2 - Phone number')
-                    print('3 - Email')
-                    print('4 - Rank')
-                    print()
+                CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
 
-                selection = input()
-                if selection == '1':
-                    new_address = input("New address: ")
-
-                elif selection == '2':
-                    new_phonenumber = input('New Phone number: ')
-
-                elif selection == '3':
-                    new_email = input('New email: ')
-
-                elif selection == '4':
-                    new_rank = input('Rank: ')
-
-                elif selection == '5':
-                    new_license = input('License: ')
-                    
-                else:
-                    print("Invalid input")    
+                EditEmployeeMenu().startEditEmployeeMenu()
+                EditEmployeeMenu().editSelection()  
                 start = False
 
 

@@ -26,6 +26,9 @@ class IO_API:
 
     def loadPilotFromFile(self):
         return CrewIO().loadPilotFromFile()
+    
+    def loadFlightAttFromFile(self):
+        return CrewIO().loadFlightAttFromFile()
 
 
     def changeCrewFile(self, info):
