@@ -1,5 +1,6 @@
 # from UI.mainmenu import MainMenu
 from API.LL_API import LL_API
+from UI.crewUI import CrewUI
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -38,7 +39,9 @@ class SubMenuEdit:
                 pass
 
             elif selection == '3':
-                employee = 'Input employee ID: '
+                crew_id = 'Input employee ID: '
+                CrewUI().showOneCrewMember(crew_id)
+
                 #lista upplýsingar um starfsmanninn
                 #menu - hverju viltu breyta
 
