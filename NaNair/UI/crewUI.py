@@ -38,26 +38,14 @@ class CrewUI:
         print()
     
 
-    def showWorkingCrew(self,date):
-        working_crew_list = LL_API().get_working_crew(date)
-        header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Id','Address','Phone Number','Destination')
+    def showWorkingCrew(self,date_str):
+        format_str = LL_API().get_working_crew(date_str)
+        header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number','Destination')
+
         print(header_str)
         print(len(header_str)*'-')
-
-        for working_crew_per_voyage in working_crew_list:
-            destination_instance = working_crew_per_voyage[1]
-            destination_name = destination_instance.getDestinationName()
-
-            for crew_id in working_crew_per_voyage[0]:
-                if crew_id != 'empty':
-                    crew_member = LL_API().get_crew_member_by_id(crew_id)
-                    crew_name = crew_member.getName()
-                    crew_address = crew_member.getAddress()
-                    crew_phone = crew_member.getPhoneNumber()
-                    format_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format(crew_name,crew_id,crew_address,crew_phone,destination_name)
-                    print(format_str)
-            print()
-
+        print(format_str)
+        print()
 
     def showNotWorkingCrew(self,date):
         pass
@@ -132,6 +120,7 @@ class CrewUI:
         print()
 
     def addCrew(self):
+        info_list = []
         print('Please fill in the following information. Press enter to skip.\n')
 
         info_list.append(input('Name (required): '))
