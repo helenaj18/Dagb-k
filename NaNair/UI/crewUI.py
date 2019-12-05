@@ -40,10 +40,20 @@ class CrewUI:
 
     def showWorkingCrew(self,date):
         working_crew_list = LL_API().get_working_crew(date)
-        for working_crew_per_voyage in working_crew_list:
-            for crew_member in working_crew_per_voyage:
-                print(crew_member)
+        header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Id','Address','Phone Number','Destination')
+        print(header_str)
+        print(len(header_str)*'-')
 
+        for working_crew_per_voyage in working_crew_list:
+            destination = working_crew_per_voyage[1]
+            for crew_id in working_crew_per_voyage[0]:
+                if crew_id != 'empty':
+                    crew_member = LL_API().get_crew_member_by_id(crew_id)
+                    crew_name = crew_member.getName()
+                    crew_address = crew_member.getAddress()
+                    crew_phone = crew_member.getPhoneNumber()
+                    format_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format(crew_name,crew_id,crew_address,crew_phone,destination)
+                    print(format_str)
 
 
     def showNotWorkingCrew(self,date):
@@ -51,26 +61,30 @@ class CrewUI:
         
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        
-        print('Name: {}'.format(crew_member.getName()))
-        print('SSN: {}'.format(crew_member.getCrewID()))
-        print('Address: {}'.format(crew_member.getAddress()))
-        print('Phone number: {}'.format(crew_member.getPhoneNumber()))
-        print('Email: {}'.format(crew_member.getEmail()))
-        
-        try:
-            if crew_member.getCaptain():
-                print('Rank: Captain')
-            else:
-                print('Rank: Co-pilot')
-            print('License: {}'.format(crew_member.getLicense()))
-        except:
-            if crew_member.getHeadFlightAtt():
-                print('Rank: Head service manager')
-            else:
-                print('Rank: Flight attendant')
 
-        print()
+        if crew_member == None:
+            print('Employee with this id not found!')
+            print()
+        else:
+            print('Name: {}'.format(crew_member.getName()))
+            print('SSN: {}'.format(crew_member.getCrewID()))
+            print('Address: {}'.format(crew_member.getAddress()))
+            print('Phone number: {}'.format(crew_member.getPhoneNumber()))
+            print('Email: {}'.format(crew_member.getEmail()))
+            
+            try:
+                if crew_member.getCaptain():
+                    print('Rank: Captain')
+                else:
+                    print('Rank: Co-pilot')
+                print('License: {}'.format(crew_member.getLicense()))
+            except:
+                if crew_member.getHeadFlightAtt():
+                    print('Rank: Head service manager')
+                else:
+                    print('Rank: Flight attendant')
+
+            print()
 
 
     def showAllPilots(self):
