@@ -129,13 +129,17 @@ class CrewLL:
         IO_API().changeCrewFile(self.employees_list)
 
 
-    def ChangeHomeAddress(self,personal_id,new_home_address):
+    def ChangeHomeAddress(self,employee,new_home_address):
         '''Changes the Emergency Contact for destination in file'''
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
+        employee.setAddress(new_home_address)
+        #IO_API.
+
+
+        # for i in range(len(self.employees_list)):
+        #     if personal_id == self.employees_list[i][0]:
+        #         self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
         
-        IO_API().changeCrewFile(self.employees_list)
+        # IO_API().changeCrewFile(self.employees_list)
 
     def ChangePhoneNumber(self,personal_id,new_phone_number):
         '''Changes the Emergency Contact for destination in file'''
