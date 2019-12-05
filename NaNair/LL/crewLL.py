@@ -1,6 +1,7 @@
 #from API.IO_API import IO_API
 from API.IO_API import IO_API
 from IO.crewIO import CrewIO
+from LL.voyageLL import VoyageLL
 
 class CrewLL:
 
@@ -150,6 +151,10 @@ class CrewLL:
  
     def getWorkingCrew(self,date_str):
         ''' Gets the working crew '''
+        pilots = IO_API.loadPilotFromFile()
+        flight_atts = IO_API.loadFlightAttFromFile()
+        crew = pilots + flight_atts
+        voyage_ = VoyageLL().get_all_voyages(date_str,date_str)
         
 
 
