@@ -36,13 +36,9 @@ class IO_API:
         return CrewIO().addPilotToFile(new_employee_str)
 
     
-    def loadFlightAttFromFile(self):
-        return CrewIO().loadFlightAttFromFile()
+    def addCrew(self, new_employee_str):
+        return CrewIO().addCrewToFile(new_employee_str)
 
-
-
-    def addFlightAttToFile(self, new_employee_str):
-        return CrewIO().addFlightAttToFile(new_employee_str)
 
 
     def getAllStaff(self):

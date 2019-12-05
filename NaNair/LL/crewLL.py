@@ -95,7 +95,30 @@ class CrewLL:
     def addCrew(self, CrewData):
         ''' makes instance of crew member to add to file'''
 
+<<<<<<< HEAD
+        if CrewData[2] == '1':
+            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
+            CrewData[CrewLL.RANK_const] = '1'
+
+        elif CrewData[2] == '2':
+            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
+            CrewData[CrewLL.RANK_const] = '0'
+        
+        elif CrewData[2] == '3':
+            CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
+            CrewData.insert(CrewLL.LICENSE_const, 'N/A')
+            CrewData[CrewLL.RANK_const] = '1'
+        
+        else:
+            CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
+            CrewData.insert(CrewLL.LICENSE_const, 'N/A')
+            CrewData[CrewLL.RANK_const] = '0'
+
+
+        new_employee_str = ','.join(CrewData)
+=======
         new_employee_instance = self.makeInstance(CrewData)
+>>>>>>> 7213a452ffa243a81eacc850a1059ed936c958d9
 
         return IO_API().addCrew(new_employee_instance)
 
