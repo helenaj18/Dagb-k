@@ -70,7 +70,7 @@ class LL_API:
         return CrewLL().ChangeHomeAddress(crew_id,new_address)
 
     def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
-        return CrewLL().ChangeHomeAddress(crew_id,new_address)
+        return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
 
 
 
