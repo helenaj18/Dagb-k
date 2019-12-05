@@ -41,8 +41,8 @@ class LL_API:
     def get_not_working_crew(self,date_str):
         return CrewLL().getNotWorkingCrew(date_str)
     
-    def get_work_schedule(self,start_date,end_date):
-        return CrewLL().getWorkSchedule(start_date,end_date)
+    def get_work_schedule(self,start_date,end_date,crew_id):
+        return CrewLL().getWorkSchedule(start_date,end_date,crew_id)
 
     def get_pilot_by_id(self, pilot_id):
         return CrewLL().getOnePilotID(pilot_id)

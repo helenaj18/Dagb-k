@@ -1,4 +1,5 @@
 from API.LL_API import LL_API
+import datetime
 
 class CrewUI:
 
@@ -65,8 +66,11 @@ class CrewUI:
         print(format_str)
         print()
 
+<<<<<<< HEAD
     def showNotWorkingCrew(self,date):
         pass
+=======
+>>>>>>> c2ad2a3cdca9ad26a6e84dd8283f6eb640482531
 
     def changeEmployeeEmail(self, employee,new_email_address):
         LL_API().changeEmployeeEmail(employee,new_email_address)
@@ -76,7 +80,10 @@ class CrewUI:
         LL_API().changeEmployeeAddress(employee,new_address)
 
         
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2ad2a3cdca9ad26a6e84dd8283f6eb640482531
         
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
@@ -183,5 +190,47 @@ class CrewUI:
     # bíða með þar til crew er skráð á ákv vinnuferðir
     def showSchedule(self, crew_ID):
         ''' Shows the schedule for a specific crew member '''
+        
+        print('Enter the "From date" for work schedule')
+
+        start_year_int = int(input('Year: '))
+        start_month_int = int(input('Month: '))
+        start_day_int = int(input('Day: '))
+        start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
+        
+        print('Enter the "To date" for work schedule')
+        end_year_int = int(input('Year: '))
+        end_month_int = int(input('Month: '))
+        end_day_int = int(input('Day: '))
+        end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
+        
+        work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
+
+        for voyage in work_schedule_list:
+            prettyprint(self,voyage)
+
+            
+        def prettyprint(self,voyage,\
+            voyage_duration_min):
+            flight_no_out,flight_no_home = voyage.getFlightNumbers()
+            voyage_duration_hrs = voyage.getDestination().getDestinationDuration()*2+1
+
+
+            print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(), voyage.getDestination().getDestinationAirport(),\
+                    voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+            print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
+            print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,voyage_duration_min))
+
+
+        employee = LL_API().get_crew_member_by_id(crew_ID)
+        name = employee.getName()
+        #working_crew_list
+        name_header_str = '{:<10} {:<10}'.format(name,crew_ID)
+        header_str = 'Working Schedule {}.{}.{}-{}.{}.{}'.format(start_day_int,start_month_int,start_day_int,end_year_int,end_month_int,end_day_int)
+        print(name_header_str)
+        print(header_str)
+        print(len(header_str)*'-')
+
+
         pass
 
