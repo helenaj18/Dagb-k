@@ -19,18 +19,27 @@ class Airplane:
     def get_planeTypeID(self):
         return self.__planeTypeID
 
-    def __str__(self):
-        format_str = '{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}'.format(self.__planeInsignia,self.__planeTypeID,self.__manufacturer,self.__model,\
-        self.__capacity,self.__length,self.__height,self.__wingspan)
-        
-        return format_str
+    def get_planeInsignia(self):
+        return self.__planeInsignia
+
+    def get_planeManufacturer(self):
+        return self.__manufacturer
+
+    def get_planeModel(self):
+        return self.__model
+
+    def get_planeCapacity(self):
+        return self.__capacity
+    
+    def get_planeLength(self):
+        return self.__length
+
+    def get_planeHeight(self):
+        return self.__height
+
+    def get_planeWingspan(self):
+        return self.__wingspan
 
 
 
-    # def formatAirplanes(self):
-    #     '''Formats Airplane lists'''
-        
-    #     print('#'*20)
-    #     print('{:^20}'.format('WELCOME'))
-    #     print('#'*20)
-    #     print()
+

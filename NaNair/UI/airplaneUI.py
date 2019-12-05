@@ -1,6 +1,7 @@
 #from NaNair import API
 from API.LL_API import LL_API
 
+
 class AirplaneUI:
 
     def showAllPlanes(self):
@@ -26,8 +27,19 @@ class AirplaneUI:
         print(header_str)
         print('-'*len(header_str))
 
-        for elem in airplanes:
-            print(elem)
+        for airplane in airplanes:
+            planeInsignia = airplane.get_planeInsignia()
+            planeTypeID = airplane.get_planeTypeID()
+            manufacturer = airplane.get_planeManufacturer()
+            model = airplane.get_planeModel()
+            capacity = airplane.get_planeCapacity()
+            length = airplane.get_planeCapacity()
+            height = airplane.get_planeHeight()
+            wingspan = airplane.get_planeWingspan()
+            
+            format_str = '{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}{:<15}'.format(planeInsignia,planeTypeID,manufacturer,model,capacity,length,height,wingspan)       
+            print(format_str)
+            
         print()
 
         

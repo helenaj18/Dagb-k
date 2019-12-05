@@ -18,9 +18,9 @@ class LL_API:
     
 
     
-    def addAirplane(self,planeInsignia,planeTypeId):
+    def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
         ''' Sends info for new ariplane to be added'''
-        return AirplaneLL().addAirplane(planeInsignia,planeTypeId)
+        return AirplaneLL().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
 
     ### CREW LL 
     
@@ -36,7 +36,7 @@ class LL_API:
         return CrewLL().getFlightAtt()
 
     def get_working_crew(self,date_str):
-        return CrewLL.getWorkingCrew(date_str)
+        return CrewLL().getWorkingCrew(date_str)
 
     def get_pilot_by_id(self, pilot_id):
         return CrewLL().getOnePilotID(pilot_id)

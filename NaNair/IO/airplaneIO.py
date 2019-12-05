@@ -21,7 +21,7 @@ class AirplaneIO:
         for line_aircraft in aircraft_file:
             aircraft_type_file = open(self.__aircraft_type_filename, 'r')
             if i != 0:
-                planeInsignia,planeTypeId_1 = line_aircraft.strip().split(',')
+                planeInsignia,planeTypeId_1,manufacturer,seats = line_aircraft.strip().split(',')
                 for line_aircraft_type in aircraft_type_file:
                     planeTypeId_2,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = line_aircraft_type.strip().split(',')
                     if planeTypeId_1 == planeTypeId_2:
@@ -33,9 +33,9 @@ class AirplaneIO:
         return airplanes_list
 
 
-    def addAirplaneToFile(self, planeInsignia,planeTypeId):
+    def addAirplaneToFile(self, planeInsignia,planeTypeId,manufacturer,seats):
         aircraft_file = open(self.__aircraft_filename,'a')
-        aircraft_file.write(planeInsignia+','+planeTypeId)
+        aircraft_file.write(planeInsignia+','+planeTypeId+','+manufacturer+','+seats)
         return aircraft_file
 
 

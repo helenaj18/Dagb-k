@@ -37,8 +37,13 @@ class CrewUI:
 
         print()
     
+<<<<<<< HEAD
     def showWorkingCrew(self,datse):
         return LL_API.get_working_crew(date)
+=======
+    def showWorkingCrew(self,date):
+        return LL_API().get_working_crew(date)
+>>>>>>> 8db7b4f07b5b084f86e86235b3285f533d4e42bd
 
 
     def showNotWorkingCrew(self,date):
