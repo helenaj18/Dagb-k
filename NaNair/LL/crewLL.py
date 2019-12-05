@@ -267,8 +267,22 @@ class CrewLL:
 
     def getWorkSchedule(self,start_date,end_date,crew_id):
         voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
-        work_schedule_list = []
+        if voyage_list != None:
+            work_schedule_list = []
 
+<<<<<<< HEAD
+            for voyage in voyage_list:
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                for crew_member_id in crew_on_voyage_list:
+                    if crew_member_id == crew_id:
+                        work_schedule_list.append(voyage)
+            if len(work_schedule_list) != 0:
+                return work_schedule_list
+            else:
+                return None
+        else:
+            return None
+=======
         for voyage in voyage_list:
             crew_on_voyage_list = voyage.getCrewOnVoyage()
             for crew_id in crew_on_voyage_list:
@@ -277,4 +291,5 @@ class CrewLL:
                     work_schedule_list.append(voyage)
         
         return work_schedule_list
+>>>>>>> 8152c5ac63743065f0280d6fbe952b28a5047df2
     
