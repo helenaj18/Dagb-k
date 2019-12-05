@@ -46,10 +46,11 @@ class DisplayMenuEmployee:
             
             elif selection == '5':
                 print('Enter the date you want to display')
-                year = input('Year: ')
-                month = input('Month: ')
-                day = input('Day: ')
-                date = year+':'+month+':'+day
+                year_str = input('Year: ')
+                month_str = input('Month: ')
+                day_str = input('Day: ')
+                date_str = year_str+':'+month_str+':'+day_str
+                CrewUI().showWorkingCrew(date_str)
 
             
             elif selection == 'm':
