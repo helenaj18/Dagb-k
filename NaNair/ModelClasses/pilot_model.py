@@ -12,7 +12,8 @@ class Pilot(Crew):
         pilot_string = '{},{},{}'.format(self.__role,self.__captain,\
             self.__pilot_license)
 
-        return super().__str__().a_string() + pilot_string + super().__str__().b_string()
+        #return super().__str__().a_string() + pilot_string + super().__str__().b_string()
+        return '{}'.format(self.__pilot_license)
 
     def getLicense(self):
         return self.__pilot_license

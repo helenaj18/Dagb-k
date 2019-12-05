@@ -94,18 +94,12 @@ class CrewIO:
     def changeCrewFile(self, new_employee_list):
         '''Updates the file with new changes'''
         file_object = open(self.__crew_filename,'w')
+
         for employee in new_employee_list: 
-            file_object.write(str(employee))
+            #file_object.write(str(employee))
+            print(employee)
 
 
-
-
-        # crew_str = ''
-        # for item in crew_list:
-        #     crew_str += ','.join(item) + '\n'
-
-        # file_object = open(self.__crew_filename,'w')
-        # file_object.write(crew_str)
 
 
     def addCrewToFile(self,new_employee_str):

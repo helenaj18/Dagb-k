@@ -42,9 +42,12 @@ class CrewLL:
     
     def getOneCrewMember(self,crew_id):
         crew = self.getCrew()
+        print(crew)
         while True:
+            print('IN GET ONE CREW MENBER')
             for crew_member in crew:
                 if crew_id == crew_member.getCrewID():
+                    print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
                 return None

@@ -8,11 +8,14 @@ class FlightAttendant(Crew):
         self.__role = 'Cabincrew'
 
     def __str__(self):
-        flight_att_string = '{},{},{}'.format(self.__role,self.__head_flight_att,\
-            self.__license)
+        pass
+        # flight_att_string = '{},{},{}'.format(self.__role,self.__head_flight_att,\
+        #     self.__license)
+        
+        # return Crew(__str__(self) + flight_att_string+ super(__str__().b_string()
 
-        return super(FlightAttendant,self).__str__().a_string() + flight_att_string+ super(FlightAttendant,self).__str__().b_string()
-
+        # #return super().__str__().a_string() + flight_att_string+ super().__str__().b_string()
+        # return 'ÞETTA ER FLIGHT ATTENDANT'
 
     def getHeadFlightAtt(self):
         return self.__head_flight_att
