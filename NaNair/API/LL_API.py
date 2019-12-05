@@ -44,6 +44,9 @@ class LL_API:
     def flight_att_by_id(self, flight_att_id):
         return CrewLL().getOneFlightAttID(flight_att_id)
     
+    def get_crew_member_by_id(self,crew_id):
+        return CrewLL().getOneCrewMember(crew_id)
+    
     def get_licensed_pilots(self, pilot_license):
         return CrewLL().getLicensedPilots(pilot_license)
     

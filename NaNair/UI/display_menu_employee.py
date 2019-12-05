@@ -15,9 +15,7 @@ class DisplayMenuEmployee:
         print('#'*20)
         print()
 
-        start = True
-
-        while start: 
+        while True: 
           
             print('What would you like to display?') 
             print()
@@ -31,21 +29,17 @@ class DisplayMenuEmployee:
             
 
             if selection == '1':
-                next_menu = CrewUI().showCrew()
-                start = False
+                CrewUI().showCrew()
 
             elif selection == '2':
-                next_menu = DisplayMenuPilots(self.logic_layer).startDisplayPilots()
-                start = False
+                DisplayMenuPilots(self.logic_layer).startDisplayPilots()
 
             elif selection == '3':
-                next_menu = DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
+                DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
 
             elif selection =='4':
-                next_menu = SubMenuEdit()
-                start = False
+                crew_id = input('Enter the Crew members ID (SSN): ')
+                CrewUI.showOneCrewMember(crew_id)
 
-            elif selection == 'q':
-                break
             else: 
                 print('Invalid selection')

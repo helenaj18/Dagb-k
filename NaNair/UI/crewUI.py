@@ -3,17 +3,25 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        self.BANNER = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID','License', 'Rank')
-        self.BANNER += '_'*80
+        self.BANNER_pilot = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
+        self.BANNER_pilot += '_'*80
+        self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Pilot ID', 'Rank')
+        self.BANNER_att += '_'*80
     def __str__(self):
         pass 
     
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
-        
+
+        print(self.BANNER_pilot)
+
         for employee in crew:
             print(employee)
+        
+    def showOneCrewMember(self,crew_id):
+        crew_member = LL_API().get_crew_member_by_id(crew_id)
+        print(crew_member)
 
     def showWorkingCrew(self):
         ''' Shows full list of working crew atm '''        
@@ -34,7 +42,7 @@ class CrewUI:
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
-        print(self.BANNER)
+        print(self.BANNER_pilot)
 
         for pilot_instance in licensed_pilots_list:
                 print(pilot_instance)
@@ -55,7 +63,12 @@ class CrewUI:
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 
         
-        return LL_API().get_flight_att()
+        print(self.BANNER_att)
+
+        flight_att = LL_API().get_flight_att()
+
+        for attendant in flight_att:
+            print(attendant)
   
     def showOneFlightAtt(self, flight_att_ID):
         ''' Shows details for a specific flight attendant'''
