@@ -13,7 +13,7 @@ class AirplaneIO:
     def loadAirplaneFromFile(self):
         '''Reads file and returns aircraft list'''
         aircraft_file = open(self.__aircraft_filename,'r')
-        aircraft_type_file = open(self.__aircraft_type_filename, 'r')
+        #aircraft_type_file = open(self.__aircraft_type_filename, 'r')
         airplanes_list = []
         i = 0
 

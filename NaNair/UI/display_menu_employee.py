@@ -1,6 +1,7 @@
 from UI.crewUI import CrewUI
 from UI.display_menu_attendants import DisplayMenuAttendants
 from UI.display_menu_pilots import DisplayMenuPilots
+import datetime
 
 # EMPLOYEE 
 
@@ -24,6 +25,7 @@ class DisplayMenuEmployee:
             print('2 - Single employee')
             print('3 - Pilots')
             print('4 - Flight attendants')
+            print('5 - Working status by date')
             print('m - back to display menu')
             print()
             selection = input()
@@ -41,6 +43,14 @@ class DisplayMenuEmployee:
 
             elif selection == '4':
                 DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
+            
+            elif selection == '5':
+                print('Enter the date you want to display')
+                year = input('Year: ')
+                month = input('Month: ')
+                day = input('Day: ')
+                date = year+':'+month+':'+day
+
             
             elif selection == 'm':
                 return
