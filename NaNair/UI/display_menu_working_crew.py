@@ -1,4 +1,4 @@
-from UI.CrewUI import CrewUI
+from UI.crewUI import CrewUI
 import datetime
 
 class DisplayMenuWorkingCrew:

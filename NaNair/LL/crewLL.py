@@ -162,7 +162,7 @@ class CrewLL:
         # pilots = IO_API().loadPilotFromFile()
         # flight_atts = IO_API().loadFlightAttFromFile()
         # crew = pilots + flight_atts
-        voyage_list = VoyageLL().getVoyage(date_str,date_str)
+        voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
         working_crew_list = []
 
         for voyage in voyage_list:
