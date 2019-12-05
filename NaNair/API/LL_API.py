@@ -62,6 +62,9 @@ class LL_API:
 
     def addCrew(self, info_list):
         return CrewLL().addCrew(info_list)
+    
+    def changeEmployeeEmail(self,crew_id,email):
+        return CrewLL().ChangeEmailAddress(crew_id,new_email_address)
 
 
 
