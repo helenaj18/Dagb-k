@@ -3,7 +3,7 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        self.BANNER = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID','License', 'Rank')
+        self.BANNER = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
         self.BANNER += '_'*80
     def __str__(self):
         pass 
@@ -11,6 +11,8 @@ class CrewUI:
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
+
+        print(self.BANNER)
         
         for employee in crew:
             print(employee)
