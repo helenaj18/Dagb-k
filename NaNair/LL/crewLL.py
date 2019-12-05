@@ -57,7 +57,7 @@ class CrewLL:
         flight_att = self.getFlightAtt()
 
         for one_att in flight_att:
-            if flight_att_id == one_att.getCrewID:
+            if flight_att_id == one_att.getCrewID():
                 return one_att
     
     def getLicensedPilots(self, pilot_license):
