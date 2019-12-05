@@ -12,7 +12,7 @@ class DisplayMenuAirplaneType:
             print()
             selection = input()
 
-            while selection != '1' and '2' and '3':
+            while selection != '1' and selection != '2' and selection != '3':
                 print('Invalid selection')
                 selection = input()
 

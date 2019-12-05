@@ -91,3 +91,24 @@ class VoyageUI:
     def showOneVoyage(self,voyage_ID):
         '''Shows one specific voyage'''
         pass
+
+    def addVoyage(self):
+
+        destinations_class_list = LL_API().get_destinations()
+        print('Please choose a destination. Available destinations are:')
+
+        for destination in destinations_class_list:
+            print('{:<3}: {:<10}'.format(destination.getDestinationName(), destination.getDestinationAirport()))
+
+        print()
+        dest = input('Your destination (3 letters): ')
+        print('Enter departure time: ')
+        date = input('Date (dd/mm/yyyy): ')
+        time = input('Time (hh:mm): ')
+
+        day, month, year = date.split('/')
+        hour, min = time.split(':')
+
+        departure_time = datetime.datetime(int(year), int(month), int(day), int(hour), int(min), 0)
+
+        LL_API().add_voyage(dest, departure_time)

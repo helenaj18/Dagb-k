@@ -32,7 +32,7 @@ class DisplayMenuAttendants:
 
                 attendant_id = input('Input flight attendant ID: ')
 
-                return CrewUI().showOneFlightAtt(attendant_id)
+                return CrewUI().showOneCrewMember(attendant_id)
                 start = False
 
             elif selection == 'm':

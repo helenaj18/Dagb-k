@@ -116,7 +116,13 @@ class CrewUI:
         print(self.BANNER_pilot)
 
         for pilot_instance in licensed_pilots_list:
-            print(pilot_instance)
+            
+            if pilot_instance.getCaptain():
+                rank = 'Captain'
+            else:
+                rank = 'Copilot'
+
+            print('{:<25}{:<20}{:<25}{:<10}'.format(pilot_instance.getName(), pilot_instance.getCrewID(), rank, pilot_instance.getLicense()))
 
         print()
 
@@ -128,7 +134,13 @@ class CrewUI:
         print(self.BANNER_pilot)
         
         for pilot in sorted_pilots_list:
-            print(pilot)
+            
+            if pilot.getCaptain():
+                rank = 'Captain'
+            else:
+                rank = 'Copilot'
+
+            print('{:<25}{:<20}{:<25}{:<10}'.format(pilot.getName(), pilot.getCrewID(), rank, pilot.getLicense()))
     
         print()
 
@@ -140,7 +152,13 @@ class CrewUI:
         flight_att = LL_API().get_flight_att()
 
         for attendant in flight_att:
-            print(attendant)
+
+            if attendant.getHeadFlightAtt():
+                rank = 'Head service manager'
+            else:
+                rank = 'Flight attendant'
+
+            print('{:<25}{:<20}{:<20}'.format(attendant.getName(), attendant.getCrewID(), rank ))
         print()
 
     def addCrew(self):
