@@ -21,15 +21,9 @@ class DisplayMenuEmployee:
             print()
 
             print('1 - All employees')
-<<<<<<< HEAD
             print('2 - Single employee')
             print('3 - Pilots')
             print('4 - Flight attendants')
-=======
-            print('2 - Pilots')
-            print('3 - Flight attendants')
-            print('4 - One Crew Member by ID')
->>>>>>> efef86ae2099928cf555e46cf974e2e2d9b1bba4
             print('m - back to display menu')
             print()
             selection = input()
