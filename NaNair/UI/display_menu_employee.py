@@ -35,9 +35,19 @@ class DisplayMenuEmployee:
                 CrewUI().showCrew()
 
             elif selection =='2':
-                #Setja inn villuboð
-                crew_id = input('Enter the Crew members ID (SSN): ')
-                CrewUI().showOneCrewMember(crew_id)
+                #Setja inn villuboð - ath má vera svona mikið í try?
+                while True:
+                    crew_id = input('Enter the Crew members ID (SSN): ')
+                    print()
+                    try:
+                        int(crew_id)
+                        if len(crew_id) == 10:
+                            return CrewUI().showOneCrewMember(crew_id)
+                        else:
+                            print('Invalid SSN')
+                    except ValueError:
+                        print('Invalid SSN')
+            
 
             elif selection == '3':
                 DisplayMenuPilots(self.logic_layer).startDisplayPilots()
