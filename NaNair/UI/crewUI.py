@@ -64,6 +64,7 @@ class CrewUI:
         
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
+        print('-'*50)
 
         if crew_member == None:
             print('Employee with this id not found!')
@@ -74,8 +75,7 @@ class CrewUI:
             print('Address: {}'.format(crew_member.getAddress()))
             print('Phone number: {}'.format(crew_member.getPhoneNumber()))
             print('Email: {}'.format(crew_member.getEmail()))
-            print()
-            
+
             try:
                 if crew_member.getCaptain():
                     print('Rank: Captain')

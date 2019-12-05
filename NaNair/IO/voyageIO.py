@@ -82,17 +82,9 @@ class VoyageIO:
 
 
 
-#VoyageIO().loadVoyageFromFile()
-
-  # def read_file(self):
-    #     '''Reads two files and adds them to a list,returns the list'''
-
-    #     upcomingVoyages_file_object = open(self.__upcomingVoyages_filename,'r')
-    #     pastVoyages_file_object = open(self.__pastVoyages_filename,'r')
-        
-    #     upcoming_list = self.get_info(upcomingVoyages_file_object)
-    #     past_list = self.get_info(pastVoyages_file_object)
-
-    #     self.flights_list = upcoming_list + past_list
-
-    #     return upcoming_list
+    def getOneVoyage(self, voyage_to_get_ID):
+        voyage_list = VoyageIO().loadVoyageFromFile()
+        for voyage in voyage_list:
+            voyage_ID = Voyage.getVoyageID
+            if voyage_ID == voyage_to_get_ID: 
+                return voyage

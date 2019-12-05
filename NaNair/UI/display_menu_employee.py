@@ -39,7 +39,7 @@ class DisplayMenuEmployee:
                 #Setja inn villuboð - ath má vera svona mikið í try?
                 while True:
                     crew_id = input('Enter the Crew members ID (SSN): ')
-                    print()
+                    
                     try:
                         int(crew_id)
                         if len(crew_id) == 10:
