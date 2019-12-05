@@ -1,10 +1,11 @@
 from API.LL_API import LL_API
 import datetime
 
-EMPTY = 'empty'
-SEPERATOR = '-'
+
 
 class VoyageUI:
+    EMPTY = 'empty'
+    SEPERATOR = '-'
 
     def __init__(self):
         pass
@@ -31,7 +32,7 @@ class VoyageUI:
         voyages_on_dates = LL_API().get_all_voyages(start_date,end_date)
         print()
         print('All voyages from {}.{}.{} to {}.{}.{}'.format(year,month,day,end_year,end_month,end_day))
-        print(60*SEPERATOR)
+        print(60*VoyageUI.SEPERATOR)
 
         for voyage in voyages_on_dates:
             destination = voyage.getDestination()
@@ -51,10 +52,11 @@ class VoyageUI:
             if aircraft_ID == EMPTY: 
                 aircraft_ID = 'No aircraft assigned to voyage'
     
+            #year
 
             depature_date = depature_datetime[:10]
             depature_time = depature_datetime[-8:-3]
-            total_time = return_datetime #- depature_datetime
+            total_time = return_datetime - depature_datetime
 
             print('To '+destination + ' on ' + depature_date + ' at ' + depature_time)
             print('\t Flight numbers: ' + flight_no_out + ' - ' + flight_no_home)
@@ -62,7 +64,7 @@ class VoyageUI:
             print('\t Aircraft: ' + aircraft_ID)
             print('\t Status on staff: ' + voyage_manned)
             print('\t Seats sold: ')
-            print(60*SEPERATOR)
+            print(60*VoyageUI.SEPERATOR)
 
 
             
