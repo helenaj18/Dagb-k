@@ -2,6 +2,7 @@ from UI.crewUI import CrewUI
 from UI.display_menu_attendants import DisplayMenuAttendants
 from UI.display_menu_pilots import DisplayMenuPilots
 from UI.display_menu_working_crew import DisplayMenuWorkingCrew
+from UI.display_menu_workschedule import DisplayMenuWorkSchedule
 import datetime
 
 # EMPLOYEE 
@@ -28,13 +29,12 @@ class DisplayMenuEmployee:
             print('4 - Flight attendants')
             print('5 - Working status by date')
             print('6 - Work Schedule for employee by ID')
-            print('m - back to display menu')
             print()
             selection = input()
             
 
             if selection == '1':
-                CrewUI().showCrew()
+                return CrewUI().showCrew()
 
             elif selection =='2':
                 #Setja inn villuboð - ath má vera svona mikið í try?
@@ -52,26 +52,16 @@ class DisplayMenuEmployee:
             
 
             elif selection == '3':
-                DisplayMenuPilots(self.logic_layer).startDisplayPilots()
+                return DisplayMenuPilots(self.logic_layer).startDisplayPilots()
 
             elif selection == '4':
-                DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
+                return DisplayMenuAttendants(self.logic_layer).startDisplayAttendants()
             
             elif selection == '5':
-                DisplayMenuWorkingCrew().startDisplayMenuWorkingCrew()
+                return DisplayMenuWorkingCrew().startDisplayMenuWorkingCrew()
             
             elif selection == '6':
-                print('Enter the "From date" for work schedule')
-                start_year_int = int(input('Year: '))
-                start_month_int = int(input('Month: '))
-                start_day_int = int(input('Day: '))
-                start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
-                print('Enter the "To date" for work schedule')
-                end_year_int = int(input('Year: '))
-                end_month_int = int(input('Month: '))
-                end_day_int = int(input('Day: '))
-                end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
-                
+                DisplayMenuWorkSchedule().startDisplayMenuWorkSchedule()
             
             elif selection == 'm':
                 return
