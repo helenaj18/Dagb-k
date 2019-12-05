@@ -3,34 +3,53 @@ from API.LL_API import LL_API
 class CrewUI:
 
     def __init__(self):
-        self.BANNER_pilot = '{:<25}{:<20}{:<20}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
+        self.BANNER_pilot = '{:<25}{:<20}{:<25}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
         self.BANNER_pilot += '_'*80
         self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Flight Att. ID', 'Rank')
         self.BANNER_att += '_'*80
         self.BANNER_crew = '{:<25}{:<20}{:<25}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
-        self.BANNER_crew += '_'*85
+        self.BANNER_crew += '_'*80
     def __str__(self):
         pass 
     
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
+        string = ''
 
         print(self.BANNER_pilot)
 
         for employee in crew:
-            print(employee)
+            string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
+
+            try:
+                if employee.getCaptain():
+                    string += '{:<25}{:<10}'.format('Captain', employee.getLicense())
+                else:
+                    string += '{:<25}{:<10}'.format('Co-pilot', employee.getLicense())
+            except AttributeError:
+                if employee.getHeadFlightAtt():
+                    string += '{:<15}'.format('Head service manager')
+                else:
+                    string += '{:<15}'.format('Flight attendant')
+            
+            print(string)
+
         print()
     
+
     def showWorkingCrew(self,date):
-        return LL_API().get_working_crew(date)
+        working_crew_list = LL_API().get_working_crew(date)
+        for working_crew_per_voyage in working_crew_list:
+            for crew_member in working_crew_per_voyage:
+                print(crew_member)
+
 
 
     def showNotWorkingCrew(self,date):
         pass
         
     def showOneCrewMember(self,crew_id):
-        print(self.BANNER_crew)
         crew_member = LL_API().get_crew_member_by_id(crew_id)
         
         print('Name: {}'.format(crew_member.getName()))
@@ -58,22 +77,22 @@ class CrewUI:
         ''' Shows full list of pilots registered'''
         return LL_API().get_pilots()
 
-    def showOnePilot(self, pilot_ID):
-        ''' Shows details for a specific pilot'''
+    # def showOnePilot(self, pilot_ID):
+    #     ''' Shows details for a specific pilot'''
         
-        pilot = LL_API().get_pilot_by_id(pilot_ID)
+    #     pilot = LL_API().get_pilot_by_id(pilot_ID)
         
-        print()
-        print('Name: {}'.format(pilot.getName()))
-        print('SSN: {}'.format(pilot.getCrewID()))
-        print('Address: {}'.format(pilot.getAddress()))
-        print('Phone number: {}'.format(pilot.getPhoneNumber()))
-        print('Email: {}'.format(pilot.getEmail()))
-        if pilot.getCaptain():
-            print('Rank: Captain')
-        else:
-            print('Rank: Co-pilot')
-        print()
+    #     print()
+    #     print('Name: {}'.format(pilot.getName()))
+    #     print('SSN: {}'.format(pilot.getCrewID()))
+    #     print('Address: {}'.format(pilot.getAddress()))
+    #     print('Phone number: {}'.format(pilot.getPhoneNumber()))
+    #     print('Email: {}'.format(pilot.getEmail()))
+    #     if pilot.getCaptain():
+    #         print('Rank: Captain')
+    #     else:
+    #         print('Rank: Co-pilot')
+    #     print()
 
     def showByLicense(self, license_ID):
         ''' Shows a list of pilots that have a specific licence '''
@@ -110,21 +129,21 @@ class CrewUI:
             print(attendant)
         print()
   
-    def showOneFlightAtt(self, flight_att_ID):
-        ''' Shows details for a specific flight attendant'''
-        flight_att = LL_API().flight_att_by_id(flight_att_ID)
+    # def showOneFlightAtt(self, flight_att_ID):
+    #     ''' Shows details for a specific flight attendant'''
+    #     flight_att = LL_API().flight_att_by_id(flight_att_ID)
         
-        print()
-        print('Name: {}'.format(flight_att.getName()))
-        print('SSN: {}'.format(flight_att.getCrewID()))
-        print('Address: {}'.format(flight_att.getAddress()))
-        print('Phone number: {}'.format(flight_att.getPhoneNumber()))
-        print('Email: {}'.format(flight_att.getEmail()))
-        if flight_att.getHeadFlightAtt():
-            print('Rank: Head Service Manager')
-        else:
-            print('Rank: Flight Attendant')
-        print()
+    #     print()
+    #     print('Name: {}'.format(flight_att.getName()))
+    #     print('SSN: {}'.format(flight_att.getCrewID()))
+    #     print('Address: {}'.format(flight_att.getAddress()))
+    #     print('Phone number: {}'.format(flight_att.getPhoneNumber()))
+    #     print('Email: {}'.format(flight_att.getEmail()))
+    #     if flight_att.getHeadFlightAtt():
+    #         print('Rank: Head Service Manager')
+    #     else:
+    #         print('Rank: Flight Attendant')
+    #     print()
         
 
     # bíða með þar til crew er skráð á ákv vinnuferðir

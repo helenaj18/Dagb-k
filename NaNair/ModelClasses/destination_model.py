@@ -1,5 +1,5 @@
 class Destination:
-    def __init__(self,name,airport,distance,duration,contact,emergency_phone_number,):
+    def __init__(self,name,airport,distance,duration,contact,emergency_phone_number):
         self.__name = name
         self.__airport = airport
         self.__distance = distance
