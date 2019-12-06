@@ -72,6 +72,8 @@ class LL_API:
     def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
         return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
 
+    def changePilotLicense(self,crew_id,new_license):
+        return CrewLL().ChangePilotLicense(crew_id,new_license)
 
 
 
