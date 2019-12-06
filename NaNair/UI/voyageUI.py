@@ -1,5 +1,6 @@
 from API.LL_API import LL_API
 import datetime
+from UI.airplaneUI import AirplaneUI
 
 
 
@@ -23,7 +24,6 @@ class VoyageUI:
     
     def getDateWithTime(self):
 
-        print('Enter departure time: ')
         year = int(input('Year: '))
         month = int(input('Month: '))
         day = int(input('Day: '))
@@ -126,9 +126,11 @@ class VoyageUI:
             dest = input()
 
 
+
     def addVoyage(self):
 
         dest = self.getDest()
+        print('Enter departure time: ')
 
         departure_time = self.getDateWithTime()
 
@@ -137,10 +139,9 @@ class VoyageUI:
         
         airplanes_class_list = LL_API().showAllPlanes()
 
-
         print('Please choose an airplane. Available airplanes are:')
-        for plane in airplanes_class_list:
-            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(), plane.get_planeTypeID()))
+        
+        AirplaneUI().showAirplanesByDateTime(departure_time)
         
         print()
         plane_name = input('Chosen plane (type name of plane): ')
