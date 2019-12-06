@@ -146,3 +146,7 @@ erum komnar eitthvað á leið með að breyta employee info, byrjuðum að nota
 og næstum alveg komið að bæta við nýju voyagi 
 
 ætlum að kíkja aðeins á þetta í kvöld og klára sem mesta virkni á morgun 
+
+Morgunfundur 6.12.2019 kl 09:00
+Náðum að breyta info fyrir employee og að bæta nýjum employee í gærkvöldi.
+Stefnum á því að klára allar A-kröfur í dag og byrja á B-kröfum.
