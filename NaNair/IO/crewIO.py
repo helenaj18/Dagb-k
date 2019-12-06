@@ -6,14 +6,6 @@ from ModelClasses.flight_att_model import FlightAttendant
 
 
 class CrewIO:
-    # SSN_const = 0
-    # NAME_const = 1
-    # ROLE_const = 2
-    # RANK_const = 3
-    # LICENSE_const = 4
-    # ADDRESS_const = 5
-    # PHONENUMBER_const = 6
-    # EMAIL_const = 7
     PILOT = 'Pilot'
     CABINCREW = 'Cabincrew'
 
@@ -49,37 +41,45 @@ class CrewIO:
         allEmps = self.loadCrewFromFile()
 
         file_object = open(self.__crew_filename,'w')
+        print(updated_employee.getLicense())
         with file_object:
             #header
-            fieldnames = ['ssn','name','role','captain/head_flight_attendant','license', 'address','phonenumber','email']
+            fieldnames = ['ssn','name','role','captain/head_flight_attendant',\
+                'license', 'address','phonenumber','email']
             writer = csv.DictWriter(file_object, fieldnames=fieldnames)
             writer.writeheader()
             
             for emp in allEmps:
-                if emp.getCrewID() == updated_employee.getCrewID():
-                    #writer.writerow(updated_employee)
-                    writer.writerow({'ssn':updated_employee.getCrewID(),'name':updated_employee.getName(),'role':updated_employee.getRole(),\
-                        'captain/head_flight_attendant':updated_employee.getBool(),'license':updated_employee.getLicense(),\
-                            'address':updated_employee.getAddress(),'phonenumber':updated_employee.getPhoneNumber(),'email':updated_employee.getEmail()})
-                    # writer.writerow([updated_employee.getCrewID(),updated_employee.getName(),updated_employee.getRole(),\
-                    #     updated_employee.getBool(),updated_employee.getLicense(),updated_employee.getAddress(),\
-                    #         updated_employee.getPhoneNumber(), updated_employee.getEmail()])
-                else:
-                    writer.writerow({'ssn':emp.getCrewID(),'name':emp.getName(),'role':emp.getRole(),\
-                        'captain/head_flight_attendant':updated_employee.getBool(),'license':updated_employee.getLicense(),\
-                            'address':emp.getAddress(),'phonenumber':emp.getPhoneNumber(),'email':emp.getEmail()})
-
-                    # writer.writerow([emp.getCrewID(),emp.getName(),emp.getRole(),\
-                    #     emp.getBool(),emp.getLicense(),emp.getAddress(),emp.getPhoneNumber(), emp.getEmail()])
-                
-            #self.addCrewToFile(emp)
-        
-        
+                emp_id=emp.getCrewID()
+                updated_employee_id = updated_employee.getCrewID()
+                if emp_id == updated_employee_id:
+                    
+                    writer.writerow({
+                        'ssn':updated_employee.getCrewID(),
+                        'name':updated_employee.getName(),
+                        'role':updated_employee.getRole(),
+                        'captain/head_flight_attendant':updated_employee.getBool(),
+                        'license':updated_employee.getLicense(),
+                        'address':updated_employee.getAddress(),
+                        'phonenumber':updated_employee.getPhoneNumber(),
+                        'email':updated_employee.getEmail()
+                    })
             
-        #gamalt
-        #for employee in new_employee_list:
-            #writer.writerow([employee.getCrewID(),employee.getName(),employee.getRole(),employee.getBool(),employee.getLicense(),employee.getAddress(),employee.getPhoneNumber(), employee.getEmail()])
+                else:
 
+                    writer.writerow({
+                        'ssn':emp.getCrewID(),
+                        'name':emp.getName(),
+                        'role':emp.getRole(),
+                        'captain/head_flight_attendant':emp.getBool(),
+                        'license':emp.getLicense(),
+                        'address':emp.getAddress(),
+                        'phonenumber':emp.getPhoneNumber(),
+                        'email':emp.getEmail()
+                    })
+
+                 
+        
 
     def addCrewToFile(self,new_employee_str):
         '''Adds new employee info into file'''
