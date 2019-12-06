@@ -34,7 +34,15 @@ class SubMenuEdit:
                 LL_API().change_voyage(new_datetime_str,flight_number)
 
             elif selection == '2':
-                # prenta Destination upplýsingar
+                print('1 - Change emergency contact')
+                print('2 - Change emergency phone number')
+                user_selection = input()
+                if user_selection == '1':
+                    LL_API().changeDestinationEmergencyContact()
+                elif user_selection == '2':
+                    LL_API().changeDestinationEmergencyPhone()
+                else:
+                    print()
                 # SETJA INN MENU HVERJU ÞÚ VILT BREYTA 
                 # EDIT MENU DESTINATION 
                 pass
