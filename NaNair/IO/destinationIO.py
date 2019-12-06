@@ -18,8 +18,8 @@ class DestinationIO:
         i = 0
         for line in file_object:
             if i != 0:
-                name,airport,distance,contact,emergency_phone_number,duration = line.strip().split(',')
-                destination_instance = Destination(name,airport,distance,contact,emergency_phone_number,duration)
+                airport,name,duration,distance,contact,emergency_phone_number = line.strip().split(',')
+                destination_instance = Destination(name,airport,duration,distance,contact,emergency_phone_number)
                 destination_list.append(destination_instance)
             i += 1
             
@@ -36,7 +36,7 @@ class DestinationIO:
             writer.writerow(['id','destination','flight_duration','distance','emergency_name','emergency_phone'])
         
             for destination in new_destination_list:
-                writer.writerow([destination.getDestinationName(),destination.getDestinationAirport(),destination.getDestinationDuration(),destination.getDestinationDistance(),destination.getDestinationContact(),destination.getDestinationEmergencyPhoneNumber()])
+                writer.writerow([destination.getDestinationAirport(),destination.getDestinationName(),destination.getDestinationDuration(),destination.getDestinationDistance(),destination.getDestinationContact(),destination.getDestinationEmergencyPhoneNumber()])
 
 
     def addDestinationToFile(self,new_destination_str):

@@ -28,7 +28,7 @@ class DestinationLL:
         new_destination_list = []
 
         for destination in destination_list:
-            if destination_name == destination.getDestinationName():
+            if destination_name == destination.getDestinationAirport():
                 destination.setEmergencyContactName(new_emergency_contact)
             new_destination_list.append(destination)
         
@@ -41,7 +41,7 @@ class DestinationLL:
         new_destination_list = []
 
         for destination in destination_list:
-            if destination_name == destination.getDestinationName():
+            if destination_name == destination.getDestinationAirport():
                 destination.setEmergencyContactPhone(new_emergency_phone)
             new_destination_list.append(destination)
             

@@ -39,6 +39,9 @@ class VoyageUI:
         
         return datetimestring[:10]
 
+    def totalSeats(aircraft_ID):
+        pass
+
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
                 flight_no_out, flight_no_home, voyage_duration_min):
 
@@ -49,7 +52,7 @@ class VoyageUI:
 
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
-        print('\t Seats sold: {}'.format('ATH no info'))
+        print('\t Seats sold: {}/{}'.format('ATH no info','total seats'))
         
 
 
