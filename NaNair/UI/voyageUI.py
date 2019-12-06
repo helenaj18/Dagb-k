@@ -145,10 +145,6 @@ class VoyageUI:
         departure_time = self.getDateWithTime()
 
         print('Please choose an airplane.')
-<<<<<<< HEAD
-=======
-
->>>>>>> e0546dd4d265ffd96dbb087806e1f09b43cfe968
 
         airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
 
