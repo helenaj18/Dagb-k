@@ -105,10 +105,22 @@ class VoyageUI:
         print('Enter departure time: ')
         date = input('Date (dd/mm/yyyy): ')
         time = input('Time (hh:mm): ')
+        print()
+        # bæta við þegar hægt er að prenta velar lausar a ehv tima
+        
+        airplanes_class_list = LL_API().showAllPlanes()
 
+
+        print('Please choose an airplane. Available airplanes are:')
+        for plane in airplanes_class_list:
+            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(), plane.get_planeTypeID()))
+        
+        print()
+        plane_name = input('Chosen plane (type name of plane): ')
+        
         day, month, year = date.split('/')
         hour, min = time.split(':')
 
         departure_time = datetime.datetime(int(year), int(month), int(day), int(hour), int(min), 0)
 
-        LL_API().add_voyage(dest, departure_time)
+        LL_API().add_voyage(dest, departure_time, plane_name)

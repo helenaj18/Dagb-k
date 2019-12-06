@@ -102,7 +102,7 @@ class VoyageLL:
  
         new_id = int(last_voyageID) + 1
  
-        return new_id
+        return str(new_id)
  
     def assignFlightNo(self, destination, depart_time):
         '''assigns a departing and arriving flight number based on a location'''
@@ -134,6 +134,20 @@ class VoyageLL:
         return departing_num, arriving_num
 
 
+    def TimeDifference(self, time, dest_code):
+        '''calculates time difference from iceland time'''
+        if dest_code == 'LYR':
+            time = time + timedelta(hours=1)
+        elif dest_code == 'GOH' or dest_code == 'KUS':
+            time = time + timedelta(hours=-3)
+
+        # time in faroe islands (FAE) and tingwall (LWK) is gmt so no need to change
+
+        return time
+
+
+
+
     def findArrivalTime(self, dest_code, depart_time):
         destinations_instances = DestinationLL().getDestination()
 
@@ -141,42 +155,69 @@ class VoyageLL:
             if dest_code == destination.getDestinationName():
                 duration = destination.getDestinationDuration()
         
-        hrs = duration[0]
-        mins = duration[1:2]
+        hrs = int(duration[0])
+        mins = int(duration[2:3])
         
         arrival_time = depart_time + timedelta(hours=hrs, minutes=mins)
 
-
-
+        return arrival_time
 
 
  
- 
- 
- 
-    def addVoyage(self,destination, departure_time):
-        
+    def addVoyage(self,destination, departure_time, plane):
+    
+        info_list = []
+        # DEPARTING TRIP
         #voyage id found from last voyage in file
-        voyage_ID = self.assignVoyageID()
+        voyage_id = self.assignVoyageID()
+
+        info_list.append( voyage_id )
 
         # Flight number
         flight_depart_num, flight_arrive_num = self.assignFlightNo(destination, departure_time)
 
+        info_list.append(flight_depart_num)
+
+        #departing airport added to info
+        info_list.append('KEF')
+        info_list. append(destination)
+
+        info_list.append( departure_time.isoformat() )
+
+        arrival_time_gmt = self.findArrivalTime(destination, departure_time)
+
+        # arrival time in other country added
+        arrival_time_out = self.TimeDifference(arrival_time_gmt, destination)
+        info_list.append( arrival_time_out.isoformat() )
+
+        info_list.append(flight_arrive_num)
+
+        #ARRIVING TRIP
+
+        # departing from and arriving at when on return trip appended
+        info_list.append(destination)
+        info_list.append('KEF')
+
+        # depart time added to list
+        # plane stops at destination for 1 hour 
+        departure_time_back = arrival_time_out + timedelta(hours=1)
+        info_list.append( departure_time_back.isoformat() )
+
+        arrival_time_back = self.findArrivalTime(destination, departure_time_back)
+        info_list.append( arrival_time_back.isoformat() )
+
+        info_list.append(plane)
+
+        # staff not yet added so those values will be empty
+        for i in range(5):
+            info_list.append('empty')
+        
+        new_voyage_str = ','.join(info_list)
+
         # airport found from dest code (3 letter code)
-        airport = DestinationLL().getAirport(destination)
+        # airport = DestinationLL().getAirport(destination)
 
-        #departing airport
-        departing_from = KEF
-
-
-    
-
- 
- 
-        # #new_voyage_string = voyage_ID + flight_num + departing_from + destination + departure_time + arrival
- 
- 
-        # VoyageIO().addVoyageToFile()
+        IO_API().addVoyageToFile(new_voyage_str)
 
 
 
