@@ -58,12 +58,9 @@ class SubMenuEdit:
                     else: 
                         crew_id = input('Input employee ID: ')
 
-                        
-
-
             elif selection == 'm':
-                return # goes back to main menu 
-                
+                # Back to main menu
+                return 
                 
             else:
                 print("Invalid selection")
