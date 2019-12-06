@@ -122,5 +122,11 @@ class LL_API:
     def get_destinations(self):
         '''Gets all destinations NaN Air flies to'''
         return DestinationLL().getDestination()
+    
+    def changeDestinationEmergencyContact():
+        return None
+
+    def changeDestinationEmergencyPhone():
+        retunr None
 
 #LL_API.show_all_planes()
