@@ -47,16 +47,17 @@ class CrewLL:
 
         return IO_API().loadCrewFromFile()
     
-    def getOneCrewMember(self,crew_id):
+    def getOneCrewMember(self,input_crew_id):
         crew = self.getCrew()
         while True:
             for crew_member in crew:
-                if crew_id == crew_member.getCrewID():
+                crew_id = crew_member.getCrewID()
+                if input_crew_id == crew_id:
                     #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
                 print('CREW MEMBER NOT FOUND')
-                 return None
+                return None
  
     
     def getLicensedPilots(self, pilot_license):
@@ -108,7 +109,7 @@ class CrewLL:
         #     else:
         #         new_employee_list.append(crew_member) 
 
-        IO_API().ChangeCrewInfo(employee)
+        IO_API().changeCrewInfo(employee)
 
 
     def ChangeHomeAddress(self,crew_id,new_home_address):

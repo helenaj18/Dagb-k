@@ -1,5 +1,7 @@
 from UI.crewUI import CrewUI
 from API.LL_API import LL_API
+from ModelClasses.flight_att_model import FlightAttendant
+from ModelClasses.pilot_model import Pilot
 
 
 class EditEmployeeMenu:
@@ -18,7 +20,7 @@ class EditEmployeeMenu:
             print('4 - Rank')
             print('5 - License')
             
-        elif type(employee) == Pilot:
+        elif type(employee) == FlightAttendant:
             print('1 - Address')
             print('2 - Phone number')
             print('3 - Email')
@@ -35,7 +37,7 @@ class EditEmployeeMenu:
         if selection == '1':
             new_address = input("New address: ")
             #employee.changeEmployeeAddress(new_address)
-            employee.setAdress(new_address)
+            employee.setAddress(new_address)
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '2':
