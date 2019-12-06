@@ -145,7 +145,8 @@ class VoyageUI:
         airplanes_class_list = LL_API().showAllPlanes()
 
         print('Please choose an airplane.')
-        AirplaneUI().showAirplanesByDateTime(departure_time.isoformat())
+        a = departure_time.isoformat()
+        available_planes = LL_API().showAirplanesByDateTime(departure_time.isoformat())
         
         
 
