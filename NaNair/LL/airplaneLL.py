@@ -189,7 +189,10 @@ class AirplaneLL:
         # Gets a tuple of info about airplanes that are in use on a date
         # Returns None if there are no airplanes in use on this date
         airplanes_on_date = self.getAirplanesByDate(datetime_str)
+
+        # Gets a list of all airplanes as instances
         all_airplanes = self.getAirplanes()
+
         not_available_airplanes_list = []
         available_airplanes_list = []
 
