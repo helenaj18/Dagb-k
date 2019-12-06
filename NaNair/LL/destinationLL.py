@@ -12,6 +12,14 @@ class DestinationLL:
 
         return IO_API().loadDestinationFromFile()
 
+    def getAirport(self, dest_code):
+        destinations_instances = self.getDestination()
+
+        for destination in destinations_instances:
+            if dest_code == destination.getDestinationName():
+                return destination.getDestinationAirport()
+
+
 # Geyma change þangað til við erum búin með get
 
     def changeEmergencyContactName(self,destination_name,new_emergency_contact):

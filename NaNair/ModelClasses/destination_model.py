@@ -1,6 +1,6 @@
 class Destination:
     def __init__(self,name,airport,distance,duration,contact_name,emergency_phone_number):
-        self.__name = name
+        self.__name = name # 3 stafa kodi
         self.__airport = airport
         self.__distance = distance
         self.__emergency_contact_name = contact_name

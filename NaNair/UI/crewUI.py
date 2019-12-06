@@ -127,7 +127,7 @@ class CrewUI:
         pass
 
     def changePilotLicense(self,crew_id,new_license):
-        LL_API().changePilotLicense(self,crew_id,new_license)
+        LL_API().changePilotLicense(crew_id,new_license)
 
             
     def showOneCrewMember(self,crew_id):
