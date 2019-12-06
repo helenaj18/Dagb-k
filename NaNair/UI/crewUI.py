@@ -123,6 +123,12 @@ class CrewUI:
 
         LL_API().changeEmployeePhonenumber(crew_id,new_phonenumber)
 
+    def changeEmployeeRank(self,crew_id,new_rank):
+        pass
+
+    def changePilotLicense(self,crew_id,new_license):
+        LL_API().changePilotLicense(self,crew_id,new_license)
+
             
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
