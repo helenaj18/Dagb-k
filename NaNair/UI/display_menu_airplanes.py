@@ -1,6 +1,7 @@
 from UI.airplaneUI import AirplaneUI
 from UI.display_menu_airplane_type import DisplayMenuAirplaneType
 import datetime
+from API.LL_API import LL_API
 
 class DisplayMenuAirplanes: 
     def __init__(self, logic_layer):
@@ -40,9 +41,9 @@ class DisplayMenuAirplanes:
                 hour_str = input('Hour: ')
                 minute_str = input('Minute: ')
 
-                year_int,month_int,day_int = AirplaneUI().VerifyDate(year_str,month_str,day_str)
+                year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
 
-                hour_int,minute_int = AirplaneUI().VerifyTime(hour_str,minute_str)
+                hour_int,minute_int = LL_API().verifyTime(hour_str,minute_str)
 
                 datetime_str = datetime.datetime(year_int,month_int,day_int,hour_int,minute_int).isoformat()
 
