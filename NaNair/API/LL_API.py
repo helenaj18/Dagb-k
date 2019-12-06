@@ -78,6 +78,8 @@ class LL_API:
     def changePilotLicense(self,crew_id,new_license):
         return CrewLL().ChangePilotLicense(crew_id,new_license)
 
+    def changeCrewInfo(self,employee):
+        return CrewLL().ChangeCrewInfo(employee)
 
 
      ### VANTAR 

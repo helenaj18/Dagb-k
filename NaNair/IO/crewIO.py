@@ -63,6 +63,11 @@ class CrewIO:
         self.flight_att_list = flight_att_list
         return self.flight_att_list
 
+    def get_all_crew(self):
+        flight_att = self.find_flight_att()
+        pilots = self.find_pilots()
+        all_crew = flight_att + pilots
+        return pilots
 
     def loadPilotFromFile(self):
         '''Gets pilot info from file, returns a list of pilot instances'''

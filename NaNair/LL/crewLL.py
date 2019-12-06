@@ -47,8 +47,8 @@ class CrewLL:
                 if crew_id == crew_member.getCrewID():
                     #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
-            else: 
-                return None
+            # else: 
+            #     return None
  
     
     def getLicensedPilots(self, pilot_license):
@@ -89,6 +89,17 @@ class CrewLL:
         return IO_API().addCrew(new_employee_str)
 
 
+
+    def ChangeCrewInfo(self,employee):
+        pilots = IO_API().loadPilotFromFile()
+        flight_att = IO_API().loadFlightAttFromFile()
+        all_crew = 
+        new_employee_list = []
+
+        for pilot in 
+
+
+        IO_API().ChangeCrewInfo(employee_list)
 
 
     def ChangeHomeAddress(self,crew_id,new_home_address):
@@ -131,12 +142,6 @@ class CrewLL:
         IO_API().changeCrewFile(new_employee_list)
 
 
-
-        # for i in range(len(self.employees_list)):
-        #     if personal_id == self.employees_list[i][0]:
-        #         self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
-        
-        # IO_API().changeCrewFile(self.employees_list)
 
     def ChangePhonenumber(self,crew_id,new_phone_number):
         '''Changes the email address of a crew member'''

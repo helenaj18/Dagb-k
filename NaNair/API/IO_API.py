@@ -41,8 +41,7 @@ class IO_API:
     
     def addCrew(self, new_employee_str):
         return CrewIO().addCrewToFile(new_employee_str)
-
-
+ 
 
     def getAllStaff(self):
         return CrewIO().read_file()
