@@ -24,11 +24,17 @@ class IO_API:
 
     #CREW
 
-    def loadPilotFromFile(self):
-        return CrewIO().loadPilotFromFile()
+    def loadCrewFromFile(self):
+        return CrewIO().loadCrewFromFile()
+
+    # def loadPilotFromFile(self):
+    #     return CrewIO().loadPilotFromFile()
     
-    def loadFlightAttFromFile(self):
-        return CrewIO().loadFlightAttFromFile()
+    # def loadFlightAttFromFile(self):
+    #     return CrewIO().loadFlightAttFromFile()
+
+    def changeCrewInfo(self,employee):
+        return CrewIO().changeCrewFile(employee)
 
 
     def changeCrewFile(self,updatedPilot):
@@ -43,8 +49,6 @@ class IO_API:
         return CrewIO().addCrewToFile(new_employee_str)
  
 
-    def getAllStaff(self):
-        return CrewIO().read_file()
 
 
     # VOYAGES
@@ -52,8 +56,8 @@ class IO_API:
     def loadVoyageFromFile(self):
         return VoyageIO().loadVoyageFromFile()
     
-    def read_file(self):
-        return VoyageIO().read_file()
+    # def read_file(self):  EKKI Í NOTKUN 
+    #     return VoyageIO().read_file()
 
 
     def changeVoyageInFile(self):

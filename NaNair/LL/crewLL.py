@@ -16,29 +16,36 @@ class CrewLL:
 
     def __init__(self):
 
-        self.employees_list = IO_API().getAllStaff()
-        self.pilots_list = IO_API().loadPilotFromFile()
+        #self.employees_list = IO_API().loadCrewFromFile()
+        #self.pilots_list = IO_API().loadPilotFromFile()
+        pass
 
- 
     def getPilots(self):
         ''' Gets the pilots '''
+        crew_list = IO_API().loadPilotFromFile()
+        pilot_list = []
+        for employee in self.crew_list:
+            if type(employee) == Pilot:
+                pilot_list.append(employee)
 
-        return IO_API().loadPilotFromFile()
+        return pilot_list
     
     
     def getFlightAtt(self):
         ''' Gets the flight attendants '''
-
-        return IO_API().loadFlightAttFromFile()
+        crew_list = IO_API().loadCrewFromFile()
+        flight_att_list = []
+        for employee in crew_list:
+            if type(employee) == FlightAttendant:
+                flight_att_list.append(employee)
+        
+        return flight_att_list
 
 
     def getCrew(self):
         ''' Gets the whole crew '''
 
-        pilots = self.getPilots()
-        flight_att = self.getFlightAtt()
-
-        return pilots + flight_att
+        return IO_API().loadCrewFromFile()
     
     def getOneCrewMember(self,crew_id):
         crew = self.getCrew()
@@ -47,8 +54,9 @@ class CrewLL:
                 if crew_id == crew_member.getCrewID():
                     #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
-            # else: 
-            #     return None
+            else: 
+                print('CREW MEMBER NOT FOUND')
+                 return None
  
     
     def getLicensedPilots(self, pilot_license):
@@ -91,15 +99,16 @@ class CrewLL:
 
 
     def ChangeCrewInfo(self,employee):
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        all_crew = 
-        new_employee_list = []
+        # all_crew = IO_API().loadCrewFromFile()
+        # new_employee_list = []
 
-        for pilot in 
+        # for crew_member in all_crew:
+        #     if employee.getCrewID() == crew_member.getCrewID():
+        #         new_employee_list.append(employee)
+        #     else:
+        #         new_employee_list.append(crew_member) 
 
-
-        IO_API().ChangeCrewInfo(employee_list)
+        IO_API().ChangeCrewInfo(employee)
 
 
     def ChangeHomeAddress(self,crew_id,new_home_address):

@@ -111,21 +111,25 @@ class CrewUI:
         else:
             return None
 
-    def changeEmployeeEmail(self, employee,new_email_address):
-        LL_API().changeEmployeeEmail(employee,new_email_address)
+
+    def changeEmployeeInfo(self,employee):
+        LL_API().changeCrewInfo(employee)
+
+    # def changeEmployeeEmail(self, employee,new_email_address):
+    #     LL_API().changeEmployeeEmail(employee,new_email_address)
 
 
-    def changeEmployeeAddress(self,crew_id, new_address):
+    # def changeEmployeeAddress(self,crew_id, new_address):
 
-        LL_API().changeEmployeeAddress(crew_id,new_address)
+    #     LL_API().changeEmployeeAddress(crew_id,new_address)
 
-    def changeEmployeePhonenumber(self,crew_id, new_phonenumber):
-        employee = LL_API().get_crew_member_by_id()
+    # def changeEmployeePhonenumber(self,crew_id, new_phonenumber):
+    #     employee = LL_API().get_crew_member_by_id()
 
-        LL_API().changeEmployeePhonenumber(crew_id,new_phonenumber)
+    #     LL_API().changeEmployeePhonenumber(crew_id,new_phonenumber)
 
-    def changeEmployeeRank(self,crew_id,new_rank):
-        pass
+    # def changeEmployeeRank(self,crew_id,new_rank):
+    #     pass
 
     def changePilotLicense(self,crew_id,new_license):
         LL_API().changePilotLicense(crew_id,new_license)
