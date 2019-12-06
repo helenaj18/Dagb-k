@@ -1,7 +1,7 @@
 from ModelClasses.crew_model import Crew
 
 class FlightAttendant(Crew):
-    def __init__(self, name, crewID, address='', phonenumber='', email='', head_flight_att=False):
+    def __init__(self, name, crewID, address='', phonenumber='', email='', head_flight_att=False, role = ''):
         Crew.__init__(self, name, crewID, address, phonenumber, email)
         self.__head_flight_att = bool(head_flight_att)
         self.__license = 'N/A'
