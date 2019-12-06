@@ -152,7 +152,7 @@ class VoyageLL:
         destinations_instances = DestinationLL().getDestination()
 
         for destination in destinations_instances:
-            if dest_code == destination.getDestinationName():
+            if dest_code == destination.getDestinationAirport():
                 duration = destination.getDestinationDuration()
         
         hrs = int(duration[0])
@@ -218,6 +218,19 @@ class VoyageLL:
         # airport = DestinationLL().getAirport(destination)
 
         IO_API().addVoyageToFile(new_voyage_str)
+
+    def checkDestInput(self, dest_input):
+        '''Checks if destination IATA code is valid'''
+
+        destinations_instances = DestinationLL().getDestination()
+        boolOutcome = False
+
+        if len(dest_input) == 3:
+            for destination in destinations_instances:
+                if dest_input == destination.getDestinationAirport():
+                    boolOutcome = True
+        
+        return boolOutcome
 
 
 

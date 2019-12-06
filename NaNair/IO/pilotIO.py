@@ -22,17 +22,17 @@ class PilotIO:
 
     # Er hægt að kalla í read file úr attendant????
 
-    def read_file(self):
-        '''Reads file and returns employees list'''
-        file_object = open(self.__crew_filename,'r')
-        employees_list = []
+    # def read_file(self):
+    #     '''Reads file and returns employees list'''
+    #     file_object = open(self.__crew_filename,'r')
+    #     employees_list = []
 
-        for line in file_object:
-            line = line.strip().split(',')
-            employees_list.append(line)
+    #     for line in file_object:
+    #         line = line.strip().split(',')
+    #         employees_list.append(line)
         
-        self.employees_list = employees_list
-        return employees_list
+    #     self.employees_list = employees_list
+    #     return employees_list
 
 
     def find_pilots(self):
