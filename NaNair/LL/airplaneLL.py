@@ -169,13 +169,19 @@ class AirplaneLL:
             # Go through all voyages on the date and match it with an airplane
             for voyage in voyages_on_date:
                 for airplane in airplane_list:
-                    if voyage.getAircraftID() == airplane.get_planeInsignia():
-                        # Add the airplane and information tuple to the list of airplanes 
-                        # that are in use that day
-                        airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
-                            voyage.getDepartureTime(),voyage.getArrivalTimeOut(),voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
-            
-            return airplanes_on_date_list
+                    if voyage.getAircraftID() != 'empty':
+                        if voyage.getAircraftID() == airplane.get_planeInsignia():
+                            # Add the airplane and information tuple to the list of airplanes 
+                            # that are in use that day
+                            airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
+                                voyage.getDepartureTime(),voyage.getArrivalTimeOut(),voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
+                    else:
+                        break
+            else:
+                if len(airplanes_on_date_list) != 0:
+                    return airplanes_on_date_list
+                else:
+                    return None
         else:
             # All airplanes are free if there's no voyage at the date
             return None
@@ -197,30 +203,30 @@ class AirplaneLL:
         available_airplanes_list = []
 
         if airplanes_on_date != None:
-
+            # Gets the hour out of the datetime string
             hour_int = int(datetime_str[11:13])
 
             for item in airplanes_on_date:
                 airplane = item[0]
                 destination = item[1]
-                departure_time = item[2]
-                arrival_time_out = item[3]
-                arrival_time_home = item[4]
+                departure_time_datetime_str = item[2]
+                arrival_time_out_datetime_str  = item[3]
+                arrival_time_home_datetime_str  = item[4]
                 flight_number_out,flight_number_home = item[5]
 
-                departure_hour_int = int(departure_time[11:13])
-                arrival_hour_out_int = int(arrival_time_out[11:13])
-                arrival_hour_home_int = int(arrival_time_home[11:13])
+                departure_hour_int = int(departure_time_datetime_str [11:13])
+                arrival_hour_out_int = int(arrival_time_out_datetime_str [11:13])
+                arrival_hour_home_int = int(arrival_time_home_datetime_str [11:13])
 
                 if departure_hour_int<=hour_int<=arrival_hour_home_int:
                     # If the hours is between departure hour and arrival at destination,
                     # the flight number out is added
                     if departure_hour_int<=hour_int<=arrival_hour_out_int:
-                        not_available_airplanes_list.append((airplane,destination,arrival_time_home,flight_number_out))
+                        not_available_airplanes_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_out))
                     
                     # Else the flight number home is added
                     else:
-                        not_available_airplanes_list.append((airplane,destination,arrival_time_home,flight_number_home))
+                        not_available_airplanes_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_home))
                 else:
                     available_airplanes_list.append(airplane)
 

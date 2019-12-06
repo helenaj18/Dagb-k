@@ -145,17 +145,28 @@ class VoyageUI:
         airplanes_class_list = LL_API().showAllPlanes()
 
         print('Please choose an airplane.')
+<<<<<<< HEAD
         available_planes = LL_API().showAirplanesByDateTime(departure_time.isoformat())
         
         
+=======
+>>>>>>> f07495e2ac8fb5498c7882085c629c5e73178dde
 
-        print()
-        plane_name = input('Chosen plane (type name of plane): ')
+        available_tuple = LL_API().showAirplanesByDateTime(departure_time.isoformat())
         
+        if available_tuple != None:
+            not_available_planes,available_planes = available_tuple
+        
+            print()
+            plane_name = input('Chosen plane (type name of plane): ')
+            
 
 
-        LL_API().add_voyage(dest, departure_time, plane_name)
+            LL_API().add_voyage(dest, departure_time, plane_name)
 
-        print()
+            print()
 
-        print('New voyage succesfully added!\n')
+            print('New voyage succesfully added!\n')
+        
+        else:
+            all_airplanes = LL_API().showAllPlanes()
