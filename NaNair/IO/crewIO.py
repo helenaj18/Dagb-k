@@ -29,10 +29,16 @@ class CrewIO:
         for line in file_object:
             if i != 0:
                 line = line.strip().split(',')
-                employees_list.append(line)
+                if line[2] == "Pilot":
+                    p = Pilot(line[1],line[0],line[5],line[6],line[7],line[4],line[3],line[2])
+                    employees_list.append(p)
+                else:
+                    f = FlightAttendant(line[1],line[0],line[5],line[6],line[7],line[4],line[3],line[2])
+                    employees_list.append(f)
             i += 1
 
         self.employees_list = employees_list
+        return employees_list
 
     def find_pilots(self):
         '''Finds all pilots in file and returns a list of them'''
@@ -92,17 +98,33 @@ class CrewIO:
         return flight_att_instance_list
 
 
-    def changeCrewFile(self, new_employee_list):
+    def changeCrewFile(self, updatedPilot):
         '''Updates the file with new changes'''
+        allEmps = self.read_file()
+        for elem in allEmps:
+            print(elem)
+        print(len(allEmps))
+
         file_object = open(self.__crew_filename,'w')
         with file_object:
-            writer = csv.writer(file_object)
-            # Header 
-            writer.writerow(['ssn','name','role','captain/head_flight_attendant','license',\
-                'address','phonenumber','email'])
-    
-            for employee in new_employee_list:
-                writer.writerow([employee.getCrewID(),employee.getName(),employee.getRole(),employee.getBool(),employee.getLicense(),employee.getAddress(),employee.getPhoneNumber(), employee.getEmail()])
+            #header
+            fieldnames = ['ssn','name','role','captain/head_flight_attendant','license', 'address','phonenumber','email']
+            writer = csv.DictWriter(file_object, fieldnames=fieldnames)
+            writer.writeheader()
+            
+        for emp in allEmps:
+            if emp.getCrewID() == updatedPilot.getCrewID():
+                writer.writerow(updatedPilot)
+            else:
+                writer.writerow(emp)
+                
+            #self.addCrewToFile(emp)
+        
+        
+            
+        #gamalt
+        #for employee in new_employee_list:
+            #writer.writerow([employee.getCrewID(),employee.getName(),employee.getRole(),employee.getBool(),employee.getLicense(),employee.getAddress(),employee.getPhoneNumber(), employee.getEmail()])
 
 
     def addCrewToFile(self,new_employee_str):
