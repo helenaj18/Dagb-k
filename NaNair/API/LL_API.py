@@ -88,8 +88,8 @@ class LL_API:
     def change_voyage(self,new_datetime_str,flight_number): # BÆTA INN EH TIME PERIOD
         return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
-    def add_voyage(self,destination, time):
-        return VoyageLL().addVoyage(destination,time)
+    def add_voyage(self,destination, time, plane):
+        return VoyageLL().addVoyage(destination,time, plane)
 
     def get_all_voyages(self,start_date,end_date):
         return VoyageLL().getVoyageInDateRange(start_date,end_date)
@@ -131,11 +131,15 @@ class LL_API:
     def changeDestinationEmergencyContact(self):
         destination_name = input('Enter airport code (IATA): ')
         new_emergency_contact = input('Enter new emergency contact: ')
+        print('\nNew Emergency Contact ({}) for {} has been saved.\n'.format(new_emergency_contact,destination_name))
+        
         return DestinationLL().changeEmergencyContactName(destination_name,new_emergency_contact)
 
     def changeDestinationEmergencyPhone(self):
         destination_name = input('Enter airport code (IATA): ')
-        new_emergency_phone = input('Enter new emergency phone number: ')        
+        new_emergency_phone = input('Enter new emergency phone number: ') 
+        print('\nNew Emergency Phone Number ({}) for {} has been saved.\n'.format(new_emergency_phone,destination_name))
+               
         return DestinationLL().changeEmergencyContactPhone(destination_name,new_emergency_phone)
 
 #LL_API.show_all_planes()

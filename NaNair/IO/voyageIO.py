@@ -66,15 +66,15 @@ class VoyageIO:
         for item in upcoming_list:
             voyage_str += ','.join(item) + '\n'
         
-        file_object = open(self.__upcomingVoyages_filename,'w')
+        file_object = open(self.__allVoyages_filename,'w')
         file_object.write(voyage_str)
         pass
 
 
-    def addVoyageToFile(self,new_voyage_str):
+    def addVoyageToFile(self, new_voyage_str):
         '''Adds a new voyage to the file'''
 
-        file_object = open(self.__upcomingVoyages_filename,'a')
+        file_object = open(self.__allVoyages_filename,'a')
         file_object.write(new_voyage_str+'\n')
 
         #return file_object

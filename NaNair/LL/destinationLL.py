@@ -44,7 +44,7 @@ class DestinationLL:
             if destination_name == destination.getDestinationName():
                 destination.setEmergencyContactPhone(new_emergency_phone)
             new_destination_list.append(destination)
-        
+            
         DestinationIO().changeDestinationFile(new_destination_list)
         
 
