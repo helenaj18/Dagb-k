@@ -137,6 +137,7 @@ class CrewUI:
         if crew_member == None:
             print('Employee with this id not found!')
             print()
+            return False
         else:
             print('Name: {}'.format(crew_member.getName()))
             print('SSN: {}'.format(crew_member.getCrewID()))
@@ -157,6 +158,7 @@ class CrewUI:
                     print('Rank: Flight attendant')
 
             print()
+            return True
 
 
     def showAllPilots(self):

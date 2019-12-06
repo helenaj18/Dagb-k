@@ -49,12 +49,16 @@ class SubMenuEdit:
 
             elif selection == '3':
                 crew_id = input('Input employee ID: ')
-                #lista upplýsingar um starfsmanninn
-                #employee = LL_API().get_crew_member_by_id(crew_id)
-                CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
+                while True:
+                    #lista upplýsingar um starfsmanninn
+                    #employee = LL_API().get_crew_member_by_id(crew_id)
+                    crew_member_found = CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
+                    if crew_member_found: 
+                        return EditEmployeeMenu().editSelection(crew_id)    
+                    else: 
+                        crew_id = input('Input employee ID: ')
 
-                EditEmployeeMenu().editSelection(crew_id)  
-                start = False
+                        
 
 
             elif selection == 'm':
