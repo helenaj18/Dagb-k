@@ -96,6 +96,9 @@ class LL_API:
 
     def get_voyage_duration(self,voyage):
         return VoyageLL().getVoyageDuration(voyage)
+
+    def checkDestInput(self, dest_input):
+        return VoyageLL().checkDestInput(dest_input)
         
 
 

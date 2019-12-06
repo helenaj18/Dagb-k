@@ -219,6 +219,19 @@ class VoyageLL:
 
         IO_API().addVoyageToFile(new_voyage_str)
 
+    def checkDestInput(dest_input):
+        '''Checks if destination IATA code is valid'''
+
+        destinations_instances = DestinationLL().getDestination()
+        boolOutcome = False
+
+        if len(dest_input) == 3:
+            for destination in destinations_instances:
+                if dest_code == destination.getDestinationName():
+                    boolOutcome = True
+        
+        return boolOutcome
+
 
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
