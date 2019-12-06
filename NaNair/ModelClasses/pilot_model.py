@@ -1,7 +1,7 @@
 from ModelClasses.crew_model import Crew
 
 class Pilot(Crew):
-    def __init__(self, name, crewID, address='', phonenumber='', email='', pilot_license='', captain=0):
+    def __init__(self, name, crewID, address='', phonenumber='', email='', pilot_license='', captain=0,role=''):
         Crew.__init__(self, name, crewID, address, phonenumber, email)
         self.__pilot_license = pilot_license
         self.__captain = bool(captain)

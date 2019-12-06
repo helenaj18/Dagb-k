@@ -90,8 +90,8 @@ class LL_API:
     def change_voyage(self,new_datetime_str,flight_number): # BÆTA INN EH TIME PERIOD
         return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
 
-    def add_voyage(self,destination, time):
-        return VoyageLL().addVoyage(destination,time)
+    def add_voyage(self,destination, time, plane):
+        return VoyageLL().addVoyage(destination,time, plane)
 
     def get_all_voyages(self,start_date,end_date):
         return VoyageLL().getVoyageInDateRange(start_date,end_date)
