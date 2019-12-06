@@ -120,10 +120,15 @@ class VoyageUI:
 
         print()
         dest = input('Your destination (3 letters): ').upper()
+        check = LL_API().checkDestInput(dest)
         
-        while not LL_API().checkDestInput(dest):
+        while check == False:
             print('Please enter a valid destination!')
-            dest = input()
+            dest = input().upper()
+            check = LL_API().checkDestInput(dest)
+        
+        return dest
+
 
 
 
@@ -139,12 +144,15 @@ class VoyageUI:
         
         airplanes_class_list = LL_API().showAllPlanes()
 
-        print('Please choose an airplane. Available airplanes are:')
+        print('Please choose an airplane.')
+        AirplaneUI().showAirplanesByDateTime(departure_time.isoformat())
         
-        AirplaneUI().showAirplanesByDateTime(departure_time)
         
+
         print()
         plane_name = input('Chosen plane (type name of plane): ')
+        
+
 
         LL_API().add_voyage(dest, departure_time, plane_name)
 
