@@ -1,7 +1,7 @@
 id,destination,flight_duration,distance,emergency_name,emergency_phone
-LYR,Longyearbyean,3h00m,1200km,John Johnson,5812345
-GOH,Nuuk,3h00m,2000km,Anna Ann,5551234
-KUS,Kulusuk,3h00m,1300km,Kinga,5812345
-FAE,Thorshavn,3h00m,3200km,Bob Bobson,7751234
-LWK,Tingwall,3h00m,1300km,Rob Robertson,6611234
-KEF,Keflavik,3h00m,1500km,Tom Tomson,6901234
+LYR,Longyearbyean,1200km,3h00m,John Johnson,5812388
+GOH,Nuuk,2000km,3h00m,Anna Ann,5551234
+KUS,Kulusuk,1300km,3h00m,Ella Ellton,5812345
+FAE,Thorshavn,3200km,3h00m,Bob Bobson,7751234
+LWK,Tingwall,1300km,3h00m,Rob Robertson,6611234
+KEF,Keflavik,1500km,3h00m,Lola Loll,6901122

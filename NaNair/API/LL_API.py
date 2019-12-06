@@ -15,6 +15,9 @@ class LL_API:
     def showAirplanesByType(self, planeTypeId = ''):
         '''Gets a list of airplanes by type'''
         return AirplaneLL().getAirplanesByType(planeTypeId)
+
+    def showAirplanesByDateTime(self,date_str):
+        return AirplaneLL().getAirplanesByDateTime(date_str)
     
 
     
@@ -126,9 +129,17 @@ class LL_API:
         return DestinationLL().getDestination()
     
     def changeDestinationEmergencyContact(self):
-        return None
+        destination_name = input('Enter airport code (IATA): ')
+        new_emergency_contact = input('Enter new emergency contact: ')
+        print('\nNew Emergency Contact ({}) for {} has been saved.\n'.format(new_emergency_contact,destination_name))
+        
+        return DestinationLL().changeEmergencyContactName(destination_name,new_emergency_contact)
 
     def changeDestinationEmergencyPhone(self):
-        return None
+        destination_name = input('Enter airport code (IATA): ')
+        new_emergency_phone = input('Enter new emergency phone number: ') 
+        print('\nNew Emergency Phone Number ({}) for {} has been saved.\n'.format(new_emergency_phone,destination_name))
+               
+        return DestinationLL().changeEmergencyContactPhone(destination_name,new_emergency_phone)
 
 #LL_API.show_all_planes()
