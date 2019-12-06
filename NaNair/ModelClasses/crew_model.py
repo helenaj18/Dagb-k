@@ -36,10 +36,6 @@ class Crew:
 
     def __str__(self):
         pass
-        # def a_string(self):
-        #     return '{},{},'.format(self.__crewID,self.__name)
-        # def b_string(self):
-        #     return '{},{},{}'.format(self.__address,self.__phonenumber,self.__email)
-        # #return 'CREW MEMBER'
+       
 
     

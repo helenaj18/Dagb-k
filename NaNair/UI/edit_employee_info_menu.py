@@ -36,7 +36,6 @@ class EditEmployeeMenu:
         selection = input()
         if selection == '1':
             new_address = input("New address: ")
-            #employee.changeEmployeeAddress(new_address)
             employee.setAddress(new_address)
             CrewUI().changeEmployeeInfo(employee)
 
@@ -51,7 +50,13 @@ class EditEmployeeMenu:
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '4':
+            if type(employee) == Pilot:
+                print('Rank is 1 for Captain and 0 for Pilot')
+            else: 
+                print('Rank is 1 for Head Flight Attendant and 0 for Flight Attendant')
             new_rank = input('Rank: ')
+            employee.setRank(new_rank)
+            CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '5':
             new_license = input('License: ')
