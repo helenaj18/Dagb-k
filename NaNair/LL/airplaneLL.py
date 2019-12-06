@@ -169,13 +169,19 @@ class AirplaneLL:
             # Go through all voyages on the date and match it with an airplane
             for voyage in voyages_on_date:
                 for airplane in airplane_list:
-                    if voyage.getAircraftID() == airplane.get_planeInsignia():
-                        # Add the airplane and information tuple to the list of airplanes 
-                        # that are in use that day
-                        airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
-                            voyage.getDepartureTime(),voyage.getArrivalTimeOut(),voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
-            
-            return airplanes_on_date_list
+                    if voyage.getAircraftID() != 'empty':
+                        if voyage.getAircraftID() == airplane.get_planeInsignia():
+                            # Add the airplane and information tuple to the list of airplanes 
+                            # that are in use that day
+                            airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
+                                voyage.getDepartureTime(),voyage.getArrivalTimeOut(),voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
+                    else:
+                        break
+            else:
+                if len(airplanes_on_date_list) != 0:
+                    return airplanes_on_date_list
+                else:
+                    return None
         else:
             # All airplanes are free if there's no voyage at the date
             return None
