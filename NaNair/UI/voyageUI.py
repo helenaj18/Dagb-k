@@ -20,6 +20,19 @@ class VoyageUI:
         day = int(input('Day: '))
 
         return datetime.datetime(year,month,day,0,0,0).isoformat()
+    
+    def getDateWithTime(self):
+
+        print('Enter departure time: ')
+        year = int(input('Year: '))
+        month = int(input('Month: '))
+        day = int(input('Day: '))
+        time = input('Time (hh:mm): ')
+        print()
+
+        hour, min = time.split(':')
+
+        return datetime.datetime(year, month, day, int(hour), int(min), 0)
 
 
     def seperateDatetimeString(self, datetimestring):
@@ -92,20 +105,31 @@ class VoyageUI:
         '''Shows one specific voyage'''
         pass
 
-    def addVoyage(self):
+    def getDest(self):
+        '''Gets user input for a 3 letter destination code'''
 
         destinations_class_list = LL_API().get_destinations()
+        print()
         print('Please choose a destination. Available destinations are:')
 
         for destination in destinations_class_list:
-            print('{:<3}: {:<10}'.format(destination.getDestinationName(), destination.getDestinationAirport()))
+            print('\t{:<3}: {:<10}'.format(destination.getDestinationName(), destination.getDestinationAirport()))
 
         print()
-        dest = input('Your destination (3 letters): ')
-        print('Enter departure time: ')
-        date = input('Date (dd/mm/yyyy): ')
-        time = input('Time (hh:mm): ')
-        print()
+        dest = input('Your destination (3 letters): ').upper()
+        
+        while not LL_API().checkDestInput(dest):
+            print('Please enter a valid destination!')
+            dest = input()
+
+
+    def addVoyage(self):
+
+        dest = self.getDest()
+
+        departure_time = self.getDateWithTime()
+
+    
         # bæta við þegar hægt er að prenta velar lausar a ehv tima
         
         airplanes_class_list = LL_API().showAllPlanes()
@@ -117,10 +141,9 @@ class VoyageUI:
         
         print()
         plane_name = input('Chosen plane (type name of plane): ')
-        
-        day, month, year = date.split('/')
-        hour, min = time.split(':')
-
-        departure_time = datetime.datetime(int(year), int(month), int(day), int(hour), int(min), 0)
 
         LL_API().add_voyage(dest, departure_time, plane_name)
+
+        print()
+
+        print('New voyage succesfully added!\n')

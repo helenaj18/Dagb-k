@@ -16,10 +16,11 @@ class SubMenuRegister:
         print('#'*20)
         print()
 
-        print('What would you like to do?')
-        print()
+
 
         while True:
+            print('What would you like to do?')
+            print()
             print('1 - Add new Employee')
             print('2 - Add new Voyage')
             print('3 - Add new Airplane')
