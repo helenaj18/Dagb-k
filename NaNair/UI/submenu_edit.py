@@ -9,6 +9,7 @@ class SubMenuEdit:
         self.logic_layer = logic_layer
 
     def startSubMenuEdit(self):
+        # Header
         print('#'*20)
         print('{:^20}'.format('EDIT EXISTING DATA'))
         print('#'*20)
@@ -27,13 +28,15 @@ class SubMenuEdit:
             selection = input()
 
             if selection == '1':
-                new_datetime_str = input('Enter new date - (format 2019-11-20T15:24:00)') #ATH setja input
-                flight_number = input('Enter flight voyage - (format NAXXXX)') #ATH setja input
+                # Change existing voyage
+                new_datetime_str = input('Enter new date - (format 2019-11-20T15:24:00)') 
+                flight_number = input('Enter flight voyage - (format NAXXXX)') 
                 #ATH voyage id og breyta í voyage LL líka
                 
                 LL_API().change_voyage(new_datetime_str,flight_number)
 
             elif selection == '2':
+                # Change destination emergency contact
                 print('1 - Change emergency contact')
                 print('2 - Change emergency phone number')
                 user_selection = input()
@@ -43,9 +46,6 @@ class SubMenuEdit:
                     LL_API().changeDestinationEmergencyPhone()
                 else:
                     print('Invalid selection!')
-                # SETJA INN MENU HVERJU ÞÚ VILT BREYTA 
-                # EDIT MENU DESTINATION 
-                pass
 
             elif selection == '3':
                 crew_id = input('Input employee ID: ')
@@ -58,12 +58,9 @@ class SubMenuEdit:
                     else: 
                         crew_id = input('Input employee ID: ')
 
-                        
-
-
             elif selection == 'm':
-                return # goes back to main menu 
-                
+                # Back to main menu
+                return 
                 
             else:
                 print("Invalid selection")

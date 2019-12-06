@@ -10,11 +10,10 @@ from UI.submenu_display import SubMenuDisplay
 
 class MainMenu:
     def __init__(self):
-        self.logic_layer = LL_API()
-        print('IN MAIN MENU')
-        
+        self.logic_layer = LL_API()        
 
     def start(self):
+        # Header
         print('#'*20)
         print('{:^20}'.format('WELCOME'))
         print('#'*20)
@@ -35,18 +34,20 @@ class MainMenu:
             
 
             if selection == '1':
-                next_menu = SubMenuRegister(self.logic_layer).startSubMenuRegister()
-                #start = False
+                # Register Menu
+                SubMenuRegister(self.logic_layer).startSubMenuRegister()
 
             elif selection == '2':
-                next_menu = SubMenuDisplay(self.logic_layer).startSubMenuDisplay()
-                #start = False
+                # Display Menu
+                SubMenuDisplay(self.logic_layer).startSubMenuDisplay()
 
             elif selection =='3':
-                next_menu = SubMenuEdit(self.logic_layer).startSubMenuEdit()
-                #start = False
+                # Edit Menu
+                SubMenuEdit(self.logic_layer).startSubMenuEdit()
 
             elif selection == 'q':
+                # Quit the program
                 break
+
             else: 
                 print('Invalid selection')
