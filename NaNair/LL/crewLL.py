@@ -160,11 +160,12 @@ class CrewLL:
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
 
-        for pilot in self.getCrew():
-            if pilot.getCrewID == personal_id:
-                pilot.setLicense(new_license)
-        
-        IO_API().changeCrewFile(self.pilots_list)
+        #for pilot in self.getCrew():
+        #    if pilot.getCrewID == personal_id:
+        #        pilot.setLicense(new_license)
+        pilot = self.getOneCrewMember(personal_id)
+        pilot.setLicense(new_license)
+        IO_API().changeCrewFile(pilot)
 
     def sortPilotsByLicense(self):
         '''Sorts all pilots by their license'''

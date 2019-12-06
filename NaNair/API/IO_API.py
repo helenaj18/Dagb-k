@@ -31,8 +31,8 @@ class IO_API:
         return CrewIO().loadFlightAttFromFile()
 
 
-    def changeCrewFile(self,new_employee_list):
-        return CrewIO().changeCrewFile(new_employee_list)
+    def changeCrewFile(self,updatedPilot):
+        return CrewIO().changeCrewFile(updatedPilot)
 
 
     def addPilot(self, new_employee_str):
