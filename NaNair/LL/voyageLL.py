@@ -1,5 +1,7 @@
 from API.IO_API import IO_API
 from IO.voyageIO import VoyageIO
+from LL.destinationLL import DestinationLL
+from datetime import timedelta
 
 DEPARTING_DATETIME = 4
 ARRIVING_DATETIME = 8
@@ -93,24 +95,89 @@ class VoyageLL:
         # for voyage in self.voyage_list:
         #     print(voyage) # þarf að formatta streng
  
-    def addVoyage(self,destination, departure_time):
 
-        return print('in add voyage LL')
+    def assignVoyageID(self):
+        # Find last voyage id in file by finding id of last voyage
+        last_voyageID = self.voyage_list[-1].getVoyageID()
+ 
+        new_id = int(last_voyageID) + 1
+ 
+        return new_id
+ 
+    def assignFlightNo(self, destination, depart_time):
+        '''assigns a departing and arriving flight number based on a location'''
+    
 
-
-        # voyage_ID = 10
-
-        # # flight_num
-        # departing_from = KEF
+        if destination == 'LYR':
+           first_two = '01'
+        elif destination == 'GOH':
+           first_two = '02'
+        elif destination == 'KUS':
+           first_two = '03'
+        elif destination == 'FAE':
+           first_two = '04'
+        else:
+           first_two = '05'
         
-        # destination_list = IO_API().loadDestinationFromFile()
-        # print(destination_list) ## 
+        #þarf að tekka a ef flug eru á sama degi
+        # for voyage in self.voyage_list:
+        #     time = voyage.getDepartureTime()
+            
+        #     if time.date() == depart_time.date():
+
+        latter_two_depart = '00'
+        latter_two_arrive = '01'
+
+        departing_num = 'NA' + first_two + latter_two_depart
+        arriving_num = 'NA' + first_two + latter_two_arrive
+
+        return departing_num, arriving_num
 
 
+    def findArrivalTime(self, dest_code, depart_time):
+        destinations_instances = DestinationLL().getDestination()
+
+        for destination in destinations_instances:
+            if dest_code == destination.getDestinationName():
+                duration = destination.getDestinationDuration()
+        
+        hrs = duration[0]
+        mins = duration[1:2]
+        
+        arrival_time = depart_time + timedelta(hours=hrs, minutes=mins)
+
+
+
+
+
+ 
+ 
+ 
+ 
+    def addVoyage(self,destination, departure_time):
+        
+        #voyage id found from last voyage in file
+        voyage_ID = self.assignVoyageID()
+
+        # Flight number
+        flight_depart_num, flight_arrive_num = self.assignFlightNo(destination, departure_time)
+
+        # airport found from dest code (3 letter code)
+        airport = DestinationLL().getAirport(destination)
+
+        #departing airport
+        departing_from = KEF
+
+
+    
+
+ 
+ 
         # #new_voyage_string = voyage_ID + flight_num + departing_from + destination + departure_time + arrival
-
-
+ 
+ 
         # VoyageIO().addVoyageToFile()
+
 
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
