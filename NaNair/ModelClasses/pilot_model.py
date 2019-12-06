@@ -23,6 +23,10 @@ class Pilot(Crew):
     def getBool(self):
         return self.__captain
 
+    def setLicense(self,new_license):
+        self.__pilot_license = new_license
+        return self.__pilot_license
+
     
     def changeCaptainBool(self): #fannst setcaptain of oljost ef hann er nu þegar captain
         '''If pilot is a captain (and captain = True) this method will make him a
