@@ -70,18 +70,20 @@ class LL_API:
     def addCrew(self, info_list):
         return CrewLL().addCrew(info_list)
     
-    def changeEmployeeEmail(self,crew_id,email_address):
-        return CrewLL().ChangeEmailAddress(crew_id,email_address)
+    # def changeEmployeeEmail(self,crew_id,email_address):
+    #     return CrewLL().ChangeEmailAddress(crew_id,email_address)
 
-    def changeEmployeeAddress(self,crew_id,new_address):
-        return CrewLL().ChangeHomeAddress(crew_id,new_address)
+    # def changeEmployeeAddress(self,crew_id,new_address):
+    #     return CrewLL().ChangeHomeAddress(crew_id,new_address)
 
-    def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
-        return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
+    # def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
+    #     return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
 
-    def changePilotLicense(self,crew_id,new_license):
-        return CrewLL().ChangePilotLicense(crew_id,new_license)
+    # def changePilotLicense(self,crew_id,new_license):
+    #     return CrewLL().ChangePilotLicense(crew_id,new_license)
 
+    def changeCrewInfo(self,employee):
+        return CrewLL().ChangeCrewInfo(employee)
 
 
      ### VANTAR 

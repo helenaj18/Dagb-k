@@ -146,6 +146,7 @@ class VoyageUI:
 
         print('Please choose an airplane.')
 
+
         available_tuple = LL_API().showAirplanesByDateTime(departure_time.isoformat())
         
         if available_tuple != None:

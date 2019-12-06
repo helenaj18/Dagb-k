@@ -2,6 +2,8 @@
 from API.IO_API import IO_API
 from IO.crewIO import CrewIO
 from LL.voyageLL import VoyageLL
+from ModelClasses.flight_att_model import FlightAttendant
+from ModelClasses.pilot_model import Pilot
 
 class CrewLL:
 
@@ -16,39 +18,47 @@ class CrewLL:
 
     def __init__(self):
 
-        self.employees_list = IO_API().getAllStaff()
-        self.pilots_list = IO_API().loadPilotFromFile()
+        #self.employees_list = IO_API().loadCrewFromFile()
+        #self.pilots_list = IO_API().loadPilotFromFile()
+        pass
 
- 
     def getPilots(self):
-        ''' Returns a list of class instances for all pilots '''
+        ''' Gets the pilots '''
+        crew_list = IO_API().loadPilotFromFile()
+        pilot_list = []
+        for employee in self.crew_list:
+            if type(employee) == Pilot:
+                pilot_list.append(employee)
 
-        return IO_API().loadPilotFromFile()
+        return pilot_list
     
     
     def getFlightAtt(self):
-        ''' Returns a list of class instances of flight attendants '''
-
-        return IO_API().loadFlightAttFromFile()
+        ''' Gets the flight attendants '''
+        crew_list = IO_API().loadCrewFromFile()
+        flight_att_list = []
+        for employee in crew_list:
+            if type(employee) == FlightAttendant:
+                flight_att_list.append(employee)
+        
+        return flight_att_list
 
 
     def getCrew(self):
         ''' Returns a list of class instances for all crew '''
 
-        pilots = self.getPilots()
-        flight_att = self.getFlightAtt()
-
-        return pilots + flight_att
+        return IO_API().loadCrewFromFile()
     
-    def getOneCrewMember(self,crew_id):
-        '''Returns a class instance of one crew member found by inputted ID'''
-        
-        crew_instances_list = self.getCrew()
+    def getOneCrewMember(self,input_crew_id):
+        crew = self.getCrew()
         while True:
-            for crew_member in crew_instances_list:
-                if crew_id == crew_member.getCrewID():
+            for crew_member in crew:
+                crew_id = crew_member.getCrewID()
+                if input_crew_id == crew_id:
+                    #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
+                print('CREW MEMBER NOT FOUND')
                 return None
  
     
@@ -100,6 +110,18 @@ class CrewLL:
 
 
 
+    def ChangeCrewInfo(self,employee):
+        # all_crew = IO_API().loadCrewFromFile()
+        # new_employee_list = []
+
+        # for crew_member in all_crew:
+        #     if employee.getCrewID() == crew_member.getCrewID():
+        #         new_employee_list.append(employee)
+        #     else:
+        #         new_employee_list.append(crew_member) 
+
+        IO_API().changeCrewInfo(employee)
+
 
     def ChangeHomeAddress(self,crew_id,new_home_address):
         '''Changes the home address of crew member'''
@@ -141,12 +163,6 @@ class CrewLL:
         IO_API().changeCrewFile(new_employee_list)
 
 
-
-        # for i in range(len(self.employees_list)):
-        #     if personal_id == self.employees_list[i][0]:
-        #         self.employees_list[i][CrewLL.ADDRESS_const] = new_home_address  
-        
-        # IO_API().changeCrewFile(self.employees_list)
 
     def ChangePhonenumber(self,crew_id,new_phone_number):
         '''Changes the email address of a crew member'''
