@@ -150,3 +150,16 @@ og næstum alveg komið að bæta við nýju voyagi
 Morgunfundur 6.12.2019 kl 09:00
 Náðum að breyta info fyrir employee og að bæta nýjum employee í gærkvöldi.
 Stefnum á því að klára allar A-kröfur í dag og byrja á B-kröfum.
+
+
+kl 18:30
+Change föll komin fyrir employee, búið að lagfæra airplane klasa og bæta við
+að það sé hægt að skoða flugvélar sem eru lausnar á ákveðnum degi og tíma.
+Nánast allar A kröfur komnar, erum að vinna síðustu um leið og við gerum einhverjar B kröfur.
+
+Hittumst á sunnudag
+- Laga menus, þurfum að geta farið til baka alls staðar! Vantar á mörgum stöðum
+- KLÁRA A KRÖFUR - Voyages!!!!
+- Loka öllum skrám þar sem þær eru opnaðar
+- Laga breytunöfn og kommenta ef vantar
+- Laga fasta þar sem við á
