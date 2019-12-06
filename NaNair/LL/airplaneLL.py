@@ -6,33 +6,6 @@ from LL.voyageLL import VoyageLL
 class AirplaneLL:
     ''' LL class for airplane '''
 
-    def getAirplanes(self):
-        '''Returns a list of airplane instances'''
-        return AirplaneIO().loadAirplaneFromFile()
-    
-    def getAirplanesByDate(self,datetime_str):
-        airplane_list = AirplaneIO().loadAirplaneFromFile()
-        date_str = datetime_str[:10]
-        voyages_on_date = VoyageLL().getVoyageInDateRange(date_str,date_str)
-        airplanes_on_date = []
-
-        if voyages_on_date != None:
-            for voyage in voyages_on_date:
-                voyage_destination = voyage.getDestination().getDestinationName()
-                voyage_departure_time = voyage.getDepartureTime()
-                voyage_arrival_time_out = voyage.getArrivalTimeOut()
-                voyage_arrival_time_home = voyage.getArrivalTimeHome()
-                voyage_flight_numbers = voyage.getFlightNumbers()
-                for airplane in airplane_list:
-                    if voyage.getAircraftID() == airplane.get_planeInsignia():
-                        airplanes_on_date.append((airplane,voyage_destination,voyage_departure_time,voyage_arrival_time_out,voyage_arrival_time_home,voyage_flight_numbers))
-            
-            return airplanes_on_date
-        else:
-            # All airplanes are free if there's no voyage at the date
-            return None
-    
-
     def checkIfDateValid(self,year_int,month_int,day_int):
         '''Checks if date is valid, returns a tuple with the date if valid 
            else it returns None'''
@@ -76,6 +49,7 @@ class AirplaneLL:
         
         else:
             return None
+
 
     def isLeapYear(self,year_int):
         '''Checks if a year is a leap year,
@@ -172,6 +146,41 @@ class AirplaneLL:
             return None
 
 
+    def getAirplanes(self):
+        '''Returns a list of airplane instances'''
+        return AirplaneIO().loadAirplaneFromFile()
+    
+
+    def getAirplanesByDate(self,datetime_str):
+        '''Returns a list with tuples with airplanes that are flying on a date
+           and information about the voyage they're in.
+           Returns None if there are no voyages on the date'''
+
+        # Gets a list of all airplanes NanAir has
+        airplane_list = self.getAirplanes()
+        date_str = datetime_str[:10]
+
+        # Returns a list of voyages on a date, returns None if there are
+        # no voyages on that date
+        voyages_on_date = VoyageLL().getVoyageInDateRange(date_str,date_str)
+        airplanes_on_date_list = []
+
+        if voyages_on_date != None:
+            # Go through all voyages on the date and match it with an airplane
+            for voyage in voyages_on_date:
+                for airplane in airplane_list:
+                    if voyage.getAircraftID() == airplane.get_planeInsignia():
+                        # Add the airplane and information tuple to the list of airplanes 
+                        # that are in use that day
+                        airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
+                            voyage.getDepartureTime(),voyage.getArrivalTimeOut(),voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
+            
+            return airplanes_on_date_list
+        else:
+            # All airplanes are free if there's no voyage at the date
+            return None
+
+
     def getAirplanesByDateTime(self,datetime_str):
         '''Gets a tuple of two lists, one with available airplanes 
         and one with not available. Returns None if all airplanes are 
@@ -180,11 +189,13 @@ class AirplaneLL:
         # Gets a tuple of info about airplanes that are in use on a date
         # Returns None if there are no airplanes in use on this date
         airplanes_on_date = self.getAirplanesByDate(datetime_str)
+        all_airplanes = self.getAirplanes()
+        not_available_airplanes_list = []
+        available_airplanes_list = []
 
         if airplanes_on_date != None:
+
             hour_int = int(datetime_str[11:13])
-            not_available_airplanes_list = []
-            available_airplanes_list = []
 
             for item in airplanes_on_date:
                 airplane = item[0]
@@ -199,23 +210,36 @@ class AirplaneLL:
                 arrival_hour_home_int = int(arrival_time_home[11:13])
 
                 if departure_hour_int<=hour_int<=arrival_hour_home_int:
+                    # If the hours is between departure hour and arrival at destination,
+                    # the flight number out is added
                     if departure_hour_int<=hour_int<=arrival_hour_out_int:
                         not_available_airplanes_list.append((airplane,destination,arrival_time_home,flight_number_out))
+                    
+                    # Else the flight number home is added
                     else:
                         not_available_airplanes_list.append((airplane,destination,arrival_time_home,flight_number_home))
                 else:
-                    available_airplanes_list.append((airplane))
+                    available_airplanes_list.append(airplane)
 
+            for airplane in all_airplanes:
+                for i in range(len(not_available_airplanes_list)):
+                    if airplane.get_planeInsignia() not in not_available_airplanes_list[i][0].get_planeInsignia():
+                        if airplane not in available_airplanes_list:
+                            available_airplanes_list.append(airplane)
+                    
             return not_available_airplanes_list,available_airplanes_list
         
         else:
             # All airplanes are available, returns None
             return None
 
+
     def getAirplanesByType(self, planeTypeID = ''):
         ''' Returns list of airplanes with same Id'''
+
         airplanes_type_list = []
-        airplane_list = AirplaneIO().loadAirplaneFromFile()
+        # Gets all airplanes
+        airplane_list = self.getAirplanes()
 
         for airplane in airplane_list:
 
@@ -224,6 +248,7 @@ class AirplaneLL:
 
         return airplanes_type_list
  
+
     def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
         ''' Adds new airplane'''
         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)

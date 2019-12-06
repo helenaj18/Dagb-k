@@ -23,6 +23,7 @@ class DestinationUI:
             emergency_phone_number = destination.getDestinationEmergencyPhoneNumber()
             duration = destination.getDestinationDuration()
             
+
             format_str = '{:<15}{:<15}{:<10}{:<12}{:<15}{:>12}'.format(code,airport,distance,duration,contact,emergency_phone_number)
             print(format_str)
 

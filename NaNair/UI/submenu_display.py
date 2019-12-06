@@ -12,6 +12,7 @@ class SubMenuDisplay:
         self.logic_layer = logic_layer
     
     def startSubMenuDisplay(self):
+        # Header
         print('#'*20)
         print('{:^20}'.format('DISPLAY'))
         print('#'*20)
@@ -30,22 +31,24 @@ class SubMenuDisplay:
         selection = input()
 
         if selection == '1': 
-            next_menu = DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
+            # Display Airplanes
+            DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
+        
         elif selection == '2':
+            # Display Destination
             return DestinationUI().showAllDestinations()
-            # dests = LL_API().get_destinations()
-            # for elem in dests:
-            #     print(elem)
 
         elif selection == '3':
-            next_menu = DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
+            # Display Menu Voyages
+            DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
 
         elif selection == '4':
-            #fer í employee menu
-            next_menu = DisplayMenuEmployee(self.logic_layer).startDisplayMenu()
+            # Display Menu Employees
+            DisplayMenuEmployee(self.logic_layer).startDisplayMenu()
        
         elif selection == 'm':
-            #next_menu = MainMenu()
+            # Back to main menu
             return 
+
         else:
             print("Invalid selection")
