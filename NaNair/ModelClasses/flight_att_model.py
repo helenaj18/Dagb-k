@@ -37,3 +37,8 @@ class FlightAttendant(Crew):
     
     def getLicense(self):
         return 'N/A'
+
+    def setRank(self,new_rank):
+        self.__head_flight_att = new_rank
+        return self.__head_flight_att
+        #á eftir gera þetta fall
