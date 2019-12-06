@@ -169,6 +169,8 @@ class AirplaneLL:
             # Go through all voyages on the date and match it with an airplane
             for voyage in voyages_on_date:
                 for airplane in airplane_list:
+                    # If the voyage hasn't been assigned to an airplane, 
+                    # break and go to the next voyage
                     if voyage.getAircraftID() != 'empty':
                         if voyage.getAircraftID() == airplane.get_planeInsignia():
                             # Add the airplane and information tuple to the list of airplanes 
@@ -178,6 +180,7 @@ class AirplaneLL:
                     else:
                         break
             else:
+                # All airplanes are free if the airplanes on date list is empty
                 if len(airplanes_on_date_list) != 0:
                     return airplanes_on_date_list
                 else:
@@ -229,7 +232,9 @@ class AirplaneLL:
                         not_available_airplanes_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_home))
                 else:
                     available_airplanes_list.append(airplane)
-
+            
+            # If the airplane is not in the not available airplanes list
+            # add it to the available airplane list if it's not there already
             for airplane in all_airplanes:
                 for i in range(len(not_available_airplanes_list)):
                     if airplane.get_planeInsignia() not in not_available_airplanes_list[i][0].get_planeInsignia():
@@ -247,6 +252,7 @@ class AirplaneLL:
         ''' Returns list of airplanes with same Id'''
 
         airplanes_type_list = []
+        
         # Gets all airplanes
         airplane_list = self.getAirplanes()
 

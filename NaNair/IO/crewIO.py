@@ -6,104 +6,47 @@ from ModelClasses.flight_att_model import FlightAttendant
 
 
 class CrewIO:
-    SSN_const = 0
-    NAME_const = 1
-    ROLE_const = 2
-    RANK_const = 3
-    LICENSE_const = 4
-    ADDRESS_const = 5
-    PHONENUMBER_const = 6
-    EMAIL_const = 7
+    # SSN_const = 0
+    # NAME_const = 1
+    # ROLE_const = 2
+    # RANK_const = 3
+    # LICENSE_const = 4
+    # ADDRESS_const = 5
+    # PHONENUMBER_const = 6
+    # EMAIL_const = 7
+    PILOT = 'Pilot'
+    CABINCREW = 'Cabincrew'
 
     def __init__(self):
         dirname = os.path.dirname(__file__)
         self.__crew_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Crew.csv')
 
+    def loadCrewFromFile(self):
+        '''list of all crewmembers'''
+        crew_list = []
 
-    def read_file(self):
-        '''Reads file and returns employees list'''
-        file_object = open(self.__crew_filename,'r')
-        employees_list = []
+        crew_file= open(self.__crew_filename,'r')
 
-        i = 0
-        for line in file_object:
-            if i != 0:
-                line = line.strip().split(',')
-                if line[2] == "Pilot":
-                    p = Pilot(line[1],line[0],line[5],line[6],line[7],line[4],line[3],line[2])
-                    employees_list.append(p)
-                else:
-                    f = FlightAttendant(line[1],line[0],line[5],line[6],line[7],line[4],line[3],line[2])
-                    employees_list.append(f)
-            i += 1
+        reader_crew= csv.DictReader(crew_file)
 
-        self.employees_list = employees_list
-        return employees_list
-
-    def find_pilots(self):
-        '''Finds all pilots in file and returns a list of them'''
-
-        pilot_list = []
-        self.read_file()
-
-        for i in range(len(self.employees_list)):
-            # Only pilots have licenses
-            if self.employees_list[i][CrewIO.LICENSE_const] != 'N/A':
-                pilot_list.append(self.employees_list[i])
-
-        self.pilot_list = pilot_list
-        return self.pilot_list
+        for row in reader_crew:
+            if row['role'] == CrewIO.PILOT:
+                
+                pilot = Pilot(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
+                    row['license'],row['captain/head_flight_attendant'],row['role'])
+                crew_list.append(pilot)
+                
+            elif row['role'] == CrewIO.CABINCREW:
+                crewmember = FlightAttendant(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
+                    row['license'],row['captain/head_flight_attendant'],row['role'])
+                crew_list.append(crewmember)
+                
+        return crew_list
 
 
-    def find_flight_att(self):
-        '''Finds all flight attendants in file and returns a list of them'''
-
-        flight_att_list = []
-        self.read_file()
-
-        for i in range(len(self.employees_list)):
-            # Only pilots have licenses
-            if self.employees_list[i][CrewIO.LICENSE_const] == 'N/A':
-                flight_att_list.append(self.employees_list[i])
-
-        self.flight_att_list = flight_att_list
-        return self.flight_att_list
-
-
-    def loadPilotFromFile(self):
-        '''Gets pilot info from file, returns a list of pilot instances'''
-
-        self.read_file()
-        pilot_list =self.find_pilots()
-        pilot_instance_list = []
-
-        for line in pilot_list:
-            ssn,name,role,captain,pilot_license,address,phonenumber,email = line
-            pilot_instance = Pilot(name,ssn,address,phonenumber,email,pilot_license,captain)
-            pilot_instance_list.append(pilot_instance)
-
-        return pilot_instance_list
-
-    def loadFlightAttFromFile(self):
-        '''Gets flight attendant info from file, returns a list of flight attendants'''
-        flight_att_list = self.find_flight_att()
-
-        flight_att_instance_list = []
-
-        for line in flight_att_list:
-            ssn,name,role,head_flight_att,licence,address,phonenumber,email = line
-            flight_att_instance = FlightAttendant(name,ssn,address,phonenumber,email,head_flight_att)
-            flight_att_instance_list.append(flight_att_instance)
-
-        return flight_att_instance_list
-
-
-    def changeCrewFile(self, updatedPilot):
+    def changeCrewFile(self, updated_employee):
         '''Updates the file with new changes'''
-        allEmps = self.read_file()
-        for elem in allEmps:
-            print(elem)
-        print(len(allEmps))
+        allEmps = self.loadCrewFromFile()
 
         file_object = open(self.__crew_filename,'w')
         with file_object:
@@ -112,11 +55,22 @@ class CrewIO:
             writer = csv.DictWriter(file_object, fieldnames=fieldnames)
             writer.writeheader()
             
-        for emp in allEmps:
-            if emp.getCrewID() == updatedPilot.getCrewID():
-                writer.writerow(updatedPilot)
-            else:
-                writer.writerow(emp)
+            for emp in allEmps:
+                if emp.getCrewID() == updated_employee.getCrewID():
+                    #writer.writerow(updated_employee)
+                    writer.writerow({'ssn':updated_employee.getCrewID(),'name':updated_employee.getName(),'role':updated_employee.getRole(),\
+                        'captain/head_flight_attendant':updated_employee.getBool(),'license':updated_employee.getLicense(),\
+                            'address':updated_employee.getAddress(),'phonenumber':updated_employee.getPhoneNumber(),'email':updated_employee.getEmail()})
+                    # writer.writerow([updated_employee.getCrewID(),updated_employee.getName(),updated_employee.getRole(),\
+                    #     updated_employee.getBool(),updated_employee.getLicense(),updated_employee.getAddress(),\
+                    #         updated_employee.getPhoneNumber(), updated_employee.getEmail()])
+                else:
+                    writer.writerow({'ssn':emp.getCrewID(),'name':emp.getName(),'role':emp.getRole(),\
+                        'captain/head_flight_attendant':updated_employee.getBool(),'license':updated_employee.getLicense(),\
+                            'address':emp.getAddress(),'phonenumber':emp.getPhoneNumber(),'email':emp.getEmail()})
+
+                    # writer.writerow([emp.getCrewID(),emp.getName(),emp.getRole(),\
+                    #     emp.getBool(),emp.getLicense(),emp.getAddress(),emp.getPhoneNumber(), emp.getEmail()])
                 
             #self.addCrewToFile(emp)
         

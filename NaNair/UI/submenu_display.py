@@ -31,7 +31,7 @@ class SubMenuDisplay:
         selection = input()
 
         if selection == '1': 
-            # Display Airplanes
+            # Display Menu Airplanes
             DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
         
         elif selection == '2':
