@@ -19,7 +19,11 @@ class LL_API:
     def showAirplanesByDateTime(self,date_str):
         return AirplaneLL().getAirplanesByDateTime(date_str)
     
+    def verifyDate(self,year_str,month_str,day_str):
+        return AirplaneLL().verifyDate(year_str,month_str,day_str)
 
+    def verifyTime(self,hour_str,minute_str):
+        return AirplaneLL().verifyTime(hour_str,minute_str)
     
     def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
         ''' Sends info for new ariplane to be added'''
