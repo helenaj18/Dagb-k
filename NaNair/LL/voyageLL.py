@@ -63,7 +63,7 @@ class VoyageLL:
             
             departure_date = departure_datetime[:10]
 
-            arrival_datetime = voyage.getArrivalTime()
+            arrival_datetime = voyage.getArrivalTimeHome()
             
             arrival_date = arrival_datetime[:10]
 

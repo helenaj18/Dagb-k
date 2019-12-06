@@ -50,7 +50,7 @@ class VoyageIO:
                          dest_row['flight_duration'],dest_row['emergency_name'], dest_row['emergency_phone'])
 
                     voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['flightNumber_home'],row['departingFrom_home'],\
-                        destination_instance ,row['departure_time_home'],row['arrival_time_home'], row['aircraftID'],\
+                        destination_instance ,row['departure_time_home'],row['arrival_time_out'],row['arrival_time_home'], row['aircraftID'],\
                             row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
 
                     voyage_list.append(voyage_instance)
