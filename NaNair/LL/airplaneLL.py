@@ -1,7 +1,7 @@
 from API.IO_API import IO_API
 from IO.airplaneIO import AirplaneIO
 from ModelClasses.airplane_model import Airplane
-from LL.voyageLL import VoyageLL
+
 
 class AirplaneLL:
     ''' LL class for airplane '''
@@ -263,6 +263,6 @@ class AirplaneLL:
         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
 
 
-
-
+# BANNAÐ AÐ FÆRA, VERÐUR AÐ VERA NEÐST
+from LL.voyageLL import VoyageLL
 
