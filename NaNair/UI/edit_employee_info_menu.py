@@ -12,19 +12,13 @@ class EditEmployeeMenu:
         #crew_member = LL_API().get_crew_member_by_id(crew_id)
         print('What would you like to change?')
         print()
+        print('1 - Address')
+        print('2 - Phone number')
+        print('3 - Email')
+        print('4 - Rank')
+
         if type(employee) == Pilot:
-        #    employee.getCaptain()
-            print('1 - Address')
-            print('2 - Phone number')
-            print('3 - Email')
-            print('4 - Rank')
             print('5 - License')
-            
-        elif type(employee) == FlightAttendant:
-            print('1 - Address')
-            print('2 - Phone number')
-            print('3 - Email')
-            print('4 - Rank')
             
         print()
 
@@ -55,8 +49,9 @@ class EditEmployeeMenu:
             else: 
                 print('Rank is 1 for Head Flight Attendant and 0 for Flight Attendant')
             new_rank = input('Rank: ')
-            employee.setRank(new_rank)
+            employee.setRank(self,new_rank)
             CrewUI().changeEmployeeInfo(employee)
+            
 
         elif selection == '5':
             new_license = input('License: ')

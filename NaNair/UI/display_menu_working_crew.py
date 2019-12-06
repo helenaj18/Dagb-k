@@ -1,4 +1,5 @@
 from UI.crewUI import CrewUI
+from LL.airplaneLL import AirplaneLL
 import datetime
 
 class DisplayMenuWorkingCrew:
@@ -17,7 +18,7 @@ class DisplayMenuWorkingCrew:
             month_str = input('Month: ')
             day_str = input('Day: ')
 
-            year_int,month_int,day_int = CrewUI().verifyDate(year_str,month_str,day_str)
+            year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 
             date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
 

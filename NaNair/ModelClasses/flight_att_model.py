@@ -41,3 +41,4 @@ class FlightAttendant(Crew):
     
     def getLicense(self):
         return self.__license
+
