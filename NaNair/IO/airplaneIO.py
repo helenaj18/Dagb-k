@@ -11,7 +11,7 @@ class AirplaneIO:
         self.__aircraft_type_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/AircraftType.csv')
 
     def loadAirplaneFromFile(self):
-        '''Reads file and returns aircraft list'''
+        '''Reads file and returns a list of airplane instances'''
         aircraft_file = open(self.__aircraft_filename,'r')
         #aircraft_type_file = open(self.__aircraft_type_filename, 'r')
         airplanes_list = []
@@ -31,6 +31,7 @@ class AirplaneIO:
             aircraft_type_file.close()
 
         return airplanes_list
+
 
 
     def addAirplaneToFile(self, planeInsignia,planeTypeId,manufacturer,seats):

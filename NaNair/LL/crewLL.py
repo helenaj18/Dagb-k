@@ -160,12 +160,9 @@ class CrewLL:
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
 
-        for i in range(len(self.pilots_list)):
-            if personal_id == self.pilots_list[i][0]:
-                if self.pilots_list[i][CrewLL.LICENSE_const] != 'N/A':
-                    self.pilots_list[i][CrewLL.LICENSE_const] = new_license
-                else:
-                    print('Not a pilot!')
+        for pilot in self.getCrew():
+            if pilot.getCrewID == personal_id:
+                pilot.setLicense(new_license)
         
         IO_API().changeCrewFile(self.pilots_list)
 

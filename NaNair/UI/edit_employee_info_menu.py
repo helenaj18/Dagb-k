@@ -46,7 +46,7 @@ class EditEmployeeMenu:
 
         elif selection == '5':
             new_license = input('License: ')
-            CrewUI.changePilotLicense(crew_id,new_license)
+            CrewUI().changePilotLicense(crew_id,new_license)
 
         else:
             print("Invalid input")  
