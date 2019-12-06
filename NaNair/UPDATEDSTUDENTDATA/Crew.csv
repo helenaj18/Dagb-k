@@ -1,3 +1,6 @@
+ssn,name,role,captain/head_flight_attendant,license,address,phonenumber,email
+3009907461,William Carillo,Pilot,True,NAFokkerF100,Fellsmúli 1,8998801,william20@nanair.is
+2910858778,Virginia Ho,Pilot,True,NABAE146,Fellsmúli 2,8998802,virginia20@nanair.is
 2706838569,Gerard Nelson,Pilot,True,NAFokkerF100,Fellsmúli 3,8998803,gerard20@nanair.is
 2209955782,Allen Ley,Pilot,True,NABAE146,Fellsmúli 4,8998804,allen20@nanair.is
 2907675667,Felecia Moye,Pilot,True,NABAE146,Fellsmúli 5,8998805,felicia20@nanair.is

@@ -97,6 +97,10 @@ class CrewIO:
         file_object = open(self.__crew_filename,'w')
         with file_object:
             writer = csv.writer(file_object)
+            # Header 
+            writer.writerow(['ssn','name','role','captain/head_flight_attendant','license',\
+                'address','phonenumber','email'])
+    
             for employee in new_employee_list:
                 writer.writerow([employee.getCrewID(),employee.getName(),employee.getRole(),employee.getBool(),employee.getLicense(),employee.getAddress(),employee.getPhoneNumber(), employee.getEmail()])
 

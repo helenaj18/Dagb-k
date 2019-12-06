@@ -29,17 +29,17 @@ class FlightAttendant(Crew):
         else:
             self.__head_flight_att = True
     
-    def setAddress(self, new_address):
-        self.__address = new_address
-        return self.__address
+    # def setAddress(self, new_address):
+    #     self.__address = new_address
+    #     return self.__address
     
-    def setEmailAddress(self, new_email_address):
-        self.__email = new_email_address
-        return self.__email
+    # def setEmailAddress(self, new_email_address):
+    #     self.__email = new_email_address
+    #     return self.__email
 
-    def setPhonenumber(self, new_phone_number):
-        self.__phonenumber = new_phone_number
-        return self.__phonenumber
+    # def setPhonenumber(self, new_phone_number):
+    #     self.__phonenumber = new_phone_number
+    #     return self.__phonenumber
     
     def getRole(self):
         return self.__role

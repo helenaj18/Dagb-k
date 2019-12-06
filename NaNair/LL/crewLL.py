@@ -42,15 +42,12 @@ class CrewLL:
     
     def getOneCrewMember(self,crew_id):
         crew = self.getCrew()
-        print(crew)
         while True:
-            print('IN GET ONE CREW MENBER')
             for crew_member in crew:
                 if crew_id == crew_member.getCrewID():
                     #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
-                print('NOT A CREW MENBER')
                 return None
  
     
@@ -127,18 +124,19 @@ class CrewLL:
 
     def ChangeHomeAddress(self,crew_id,new_home_address):
         '''Changes the home address of crew member'''
-        employee = self.getOneCrewMember(crew_id)
+        #employee = self.getOneCrewMember(crew_id)
         pilots = IO_API().loadPilotFromFile()
         flight_att = IO_API().loadFlightAttFromFile()
         new_employee_list = []
 
         for pilot in pilots:
-            if employee == pilot:
+            if crew_id == pilot:
                 pilot.setAddress(new_home_address)
             new_employee_list.append(pilot)
         
         for attendant in flight_att:
-            if employee == attendant:
+            att_id = attendant.getCrewID()
+            if crew_id == att_id:
                 attendant.setAddress(new_home_address)
             new_employee_list.append(attendant)
 

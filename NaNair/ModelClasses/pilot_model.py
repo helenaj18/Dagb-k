@@ -23,17 +23,17 @@ class Pilot(Crew):
     def getBool(self):
         return self.__captain
     
-    def setAddress(self, new_address):
-        self.__address = new_address
-        return self.__address
+    # def setAddress(self, new_address):
+    #     self.__address = new_address
+    #     return self.__address
     
-    def setEmailAddress(self, new_email_address):
-        self.__email = new_email_address
-        return self.__email
+    # def setEmailAddress(self, new_email_address):
+    #     self.__email = new_email_address
+    #     return self.__email
 
-    def setPhonenumber(self, new_phone_number):
-        self.__phonenumber = new_phone_number
-        return self.__phonenumber
+    # def setPhonenumber(self, new_phone_number):
+    #     self.__phonenumber = new_phone_number
+    #     return self.__phonenumber
     
     def changeCaptainBool(self): #fannst setcaptain of oljost ef hann er nu þegar captain
         '''If pilot is a captain (and captain = True) this method will make him a
