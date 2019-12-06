@@ -52,6 +52,9 @@ class EditEmployeeMenu:
 
         elif selection == '4':
             new_rank = input('Rank: ')
+            employee.setRank(self,new_rank)
+            CrewUI().changeEmployeeInfo(employee)
+            # ekki tilbúið
 
         elif selection == '5':
             new_license = input('License: ')
