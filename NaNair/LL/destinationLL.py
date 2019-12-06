@@ -16,22 +16,30 @@ class DestinationLL:
 
     def changeEmergencyContactName(self,destination_name,new_emergency_contact):
         '''Changes the Emergency Contact name for destination in file'''
+        destination_list = IO_API().loadDestinationFromFile()
+        new_destination_list = []
 
-        for i in range(len(self.__destination_list)):
-            if destination_name == self.__destination_list[i][DESTINATION_NAME_const]:
-                self.__destination_list[i][EMERGENCY_CONTACT_NAME_const] = new_emergency_contact
+        for destination in destination_list:
+            if destination_name == destination.getDestinationName():
+                destination.setEmergencyContactName(new_emergency_contact)
+            new_destination_list.append(destination)
         
-        DestinationIO().changeDestinationFile(self.__destination_list)
+        DestinationIO().changeDestinationFile(new_destination_list)
     
 
     def changeEmergencyContactPhone(self,destination_name,new_emergency_phone):
         '''Changes the Emergency Contact Phone number for destination in file'''
+        destination_list = IO_API().loadDestinationFromFile()
+        new_destination_list = []
+
+        for destination in destination_list:
+            if destination_name == destination.getDestinationName():
+                destination.setEmergencyContactPhone(new_emergency_phone)
+            new_destination_list.append(destination)
         
-        for i in range(len(self.__destination_list)):
-            if destination_name == self.__destination_list[i][DESTINATION_NAME_const]:
-                self.__destination_list[i][EMERGENCY_CONTACT_PHONE_const] = new_emergency_phone
+        DestinationIO().changeDestinationFile(new_destination_list)
         
-        DestinationIO().changeDestinationFile(self.__destination_list)
+
 
     # LINKA VIÐ EDIT_MENU DESTINATION
 

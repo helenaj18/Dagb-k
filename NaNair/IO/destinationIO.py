@@ -1,5 +1,6 @@
 import os
 from ModelClasses.destination_model import Destination
+import csv 
 
 class DestinationIO:
 
@@ -25,14 +26,17 @@ class DestinationIO:
         return destination_list
 
 
-    def changeDestinationFile(self,destination_list):
+    def changeDestinationFile(self,new_destination_list):
         '''Updates the file with new changes'''
-        a_str = ''
-        for item in destination_list:
-            a_str += ','.join(item) + '\n'
 
         file_object = open(self.__destination_filename,'w')
-        file_object.write(a_str)
+
+        with file_object:
+            writer = csv.writer(file_object)
+            writer.writerow(['id','destination','flight_duration','distance','emergency_name','emergency_phone'])
+        
+            for destination in new_destination_list:
+                writer.writerow([destination.getDestinationName(),destination.getDestinationAirport(),destination.getDestinationDuration(),destination.getDestinationDistance(),destination.getDestinationContact(),destination.getDestinationEmergencyPhoneNumber()])
 
 
     def addDestinationToFile(self,new_destination_str):
