@@ -27,7 +27,7 @@ class DestinationIO:
 
 
     def changeDestinationFile(self,new_destination_list):
-        '''Updates the file with new changes'''
+        '''Updates the file with new changes (overwrites the old file)'''
 
         file_object = open(self.__destination_filename,'w')
 

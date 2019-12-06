@@ -1,5 +1,6 @@
 from API.LL_API import LL_API
 import datetime
+from UI.airplaneUI import AirplaneUI
 
 
 
@@ -23,7 +24,6 @@ class VoyageUI:
     
     def getDateWithTime(self):
 
-        print('Enter departure time: ')
         year = int(input('Year: '))
         month = int(input('Month: '))
         day = int(input('Day: '))
@@ -120,15 +120,22 @@ class VoyageUI:
 
         print()
         dest = input('Your destination (3 letters): ').upper()
+        check = LL_API().checkDestInput(dest)
         
-        while not LL_API().checkDestInput(dest):
+        while check == False:
             print('Please enter a valid destination!')
-            dest = input()
+            dest = input().upper()
+            check = LL_API().checkDestInput(dest)
+        
+        return dest
+
+
 
 
     def addVoyage(self):
 
         dest = self.getDest()
+        print('Enter departure time: ')
 
         departure_time = self.getDateWithTime()
 
@@ -137,16 +144,24 @@ class VoyageUI:
         
         airplanes_class_list = LL_API().showAllPlanes()
 
+        print('Please choose an airplane.')
 
-        print('Please choose an airplane. Available airplanes are:')
-        for plane in airplanes_class_list:
-            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(), plane.get_planeTypeID()))
+
+        available_tuple = LL_API().showAirplanesByDateTime(departure_time.isoformat())
         
-        print()
-        plane_name = input('Chosen plane (type name of plane): ')
+        if available_tuple != None:
+            not_available_planes,available_planes = available_tuple
+        
+            print()
+            plane_name = input('Chosen plane (type name of plane): ')
+            
 
-        LL_API().add_voyage(dest, departure_time, plane_name)
 
-        print()
+            LL_API().add_voyage(dest, departure_time, plane_name)
 
-        print('New voyage succesfully added!\n')
+            print()
+
+            print('New voyage succesfully added!\n')
+        
+        else:
+            all_airplanes = LL_API().showAllPlanes()

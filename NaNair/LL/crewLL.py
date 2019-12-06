@@ -2,6 +2,8 @@
 from API.IO_API import IO_API
 from IO.crewIO import CrewIO
 from LL.voyageLL import VoyageLL
+from ModelClasses.flight_att_model import FlightAttendant
+from ModelClasses.pilot_model import Pilot
 
 class CrewLL:
 
@@ -43,7 +45,7 @@ class CrewLL:
 
 
     def getCrew(self):
-        ''' Gets the whole crew '''
+        ''' Returns a list of class instances for all crew '''
 
         return IO_API().loadCrewFromFile()
     
@@ -61,32 +63,41 @@ class CrewLL:
  
     
     def getLicensedPilots(self, pilot_license):
-        pilots = self.getPilots()
+        '''Takes in a pilot license and finds all pilots who have the inputted license.
+        Returns a list of class instances'''
+
+        pilots_instances_list = self.getPilots()
 
         licensedPilots = []
 
-        for pilot in pilots:
+        # Checks all pilots if they have inputted license. IF they do they are added to a list
+        for pilot in pilots_instances_list:
             if pilot_license == pilot.getLicense():
                 licensedPilots.append(pilot)
         
         return licensedPilots
  
     def addCrew(self, CrewData):
-        ''' makes instance of crew member to add to file'''
+        '''Takes in a list of data and formats it to a string to add to file.
+        '''
 
-        if CrewData[2] == '1':
+        # if 'Captain' was selected in UI layer
+        if CrewData[2] == '1': 
             CrewData.insert(CrewLL.ROLE_const, 'Pilot')
             CrewData[CrewLL.RANK_const] = '1'
 
+        # if 'Copilot' was selected in UI layer
         elif CrewData[2] == '2':
             CrewData.insert(CrewLL.ROLE_const, 'Pilot')
             CrewData[CrewLL.RANK_const] = '0'
-        
+
+        # if 'Head service manager' was selected in UI layer
         elif CrewData[2] == '3':
             CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
             CrewData.insert(CrewLL.LICENSE_const, 'N/A')
             CrewData[CrewLL.RANK_const] = '1'
         
+        # if 'Flight Attendant' was selected in UI layer
         else:
             CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
             CrewData.insert(CrewLL.LICENSE_const, 'N/A')

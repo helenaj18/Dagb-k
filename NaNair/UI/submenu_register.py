@@ -5,12 +5,13 @@ import datetime
 
 
 class SubMenuRegister: 
-    def __init__(self, logic_layer): # muna ap taka inn logic layer sem main menu bjó til!!1!!!!!
-        print('sub menu Register')
+    def __init__(self, logic_layer): 
+        print('Register Menu')
         self.logic_layer = logic_layer
 
 
     def startSubMenuRegister(self):
+        # Header
         print('#'*20)
         print('{:^20}'.format('REGISTER'))
         print('#'*20)
@@ -33,12 +34,15 @@ class SubMenuRegister:
             selection = input()
 
             if selection == '1': 
+                # Add new employee
                 CrewUI().addCrew()
 
             elif selection == '2':
+                # Add new voyage
                 VoyageUI().addVoyage()
                 
             elif selection == '3':
+                # Add new Airplane
                 planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ')
                 planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ')
                 
@@ -51,9 +55,12 @@ class SubMenuRegister:
                 else:
                     manufacturer = 'Fokker'
                     seats = '65'
+
+                # Add airplane to logic layer  
                 LL_API().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
 
             elif selection == '4':
+                # Add new destination
                 destination_of_voyage = input('Destination (3char airport code): ').upper()
                 print('Departure time')
                 dep_year = int(input('Year: '))
@@ -63,13 +70,15 @@ class SubMenuRegister:
                 dep_minute = int(input('Minute: '))
                 departure_time = datetime.datetime(dep_year,dep_month,dep_day,dep_hour,dep_minute,0).isoformat()
 
-
+                # Add voyage to logic layer
                 LL_API().add_voyage(destination_of_voyage,departure_time)
 
             elif selection == '5':
+                # Add staff to an available voyage
                 pass
                 
             elif selection == 'm':
+                # Back to main menu
                 return
 
             else:
