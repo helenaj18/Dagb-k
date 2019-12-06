@@ -61,37 +61,6 @@ class CrewLL:
                 licensedPilots.append(pilot)
         
         return licensedPilots
-
-    def makeInstance(info_list):
-        '''Makes a pilot or flight attendant instance from list of data'''
-
-        if len(PilotData) == 7:
-            #crew member is pilot
-            new_employee_instance = Pilot()
-            new_employee_instance.setLicense( CrewData[CrewLL.LICENSE_const] )
-            
-            # rank placement
-            if CrewData[ CrewLL.RANK_const ] == '1':
-                new_employee_instance.setCaptain(True)
-            else: 
-                new_employee_instance.setCaptain(False)
-        else: # if crew member is flight attendant
-            new_employee_instance = FlightAttendant()
-
-            # rank placement
-            if CrewData[ CrewLL.RANK_const ] == '3':
-                new_employee_instance.setHeadFlightAtt(True)
-            else:
-                new_employee_instance.setHeadFlightAtt(True)
-
-            
-            new_employee_instance.setName( CrewData[ CrewLL.NAME_const ] )
-            new_employee_instance.setCrewID( CrewData[ CrewLL.SSN_const ] )
-            new_employee_instance.setAddress( CrewData[ CrewLL.ADDRESS_const ] )
-            new_employee_instance.setPhone( CrewData[ CrewLL.PHONENUMBER_const ] )
-            new_employee_instance.setEmail( CrewData[ CrewLL.EMAIL_const ] )
-
-            return new_employee_instance
  
     def addCrew(self, CrewData):
         ''' makes instance of crew member to add to file'''
@@ -191,12 +160,9 @@ class CrewLL:
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
 
-        for i in range(len(self.pilots_list)):
-            if personal_id == self.pilots_list[i][0]:
-                if self.pilots_list[i][CrewLL.LICENSE_const] != 'N/A':
-                    self.pilots_list[i][CrewLL.LICENSE_const] = new_license
-                else:
-                    print('Not a pilot!')
+        for pilot in self.getCrew():
+            if pilot.getCrewID == personal_id:
+                pilot.setLicense(new_license)
         
         IO_API().changeCrewFile(self.pilots_list)
 

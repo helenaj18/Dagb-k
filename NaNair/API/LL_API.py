@@ -72,6 +72,8 @@ class LL_API:
     def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
         return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
 
+    def changePilotLicense(self,crew_id,new_license):
+        return CrewLL().ChangePilotLicense(crew_id,new_license)
 
 
 
@@ -122,5 +124,11 @@ class LL_API:
     def get_destinations(self):
         '''Gets all destinations NaN Air flies to'''
         return DestinationLL().getDestination()
+    
+    def changeDestinationEmergencyContact(self):
+        return None
+
+    def changeDestinationEmergencyPhone(self):
+        return None
 
 #LL_API.show_all_planes()

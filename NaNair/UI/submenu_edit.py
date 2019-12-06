@@ -34,19 +34,31 @@ class SubMenuEdit:
                 LL_API().change_voyage(new_datetime_str,flight_number)
 
             elif selection == '2':
-                # prenta Destination upplýsingar
+                print('1 - Change emergency contact')
+                print('2 - Change emergency phone number')
+                user_selection = input()
+                if user_selection == '1':
+                    LL_API().changeDestinationEmergencyContact()
+                elif user_selection == '2':
+                    LL_API().changeDestinationEmergencyPhone()
+                else:
+                    print('Invalid selection!')
                 # SETJA INN MENU HVERJU ÞÚ VILT BREYTA 
                 # EDIT MENU DESTINATION 
                 pass
 
             elif selection == '3':
                 crew_id = input('Input employee ID: ')
-                #lista upplýsingar um starfsmanninn
-                #employee = LL_API().get_crew_member_by_id(crew_id)
-                CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
+                while True:
+                    #lista upplýsingar um starfsmanninn
+                    #employee = LL_API().get_crew_member_by_id(crew_id)
+                    crew_member_found = CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
+                    if crew_member_found: 
+                        return EditEmployeeMenu().editSelection(crew_id)    
+                    else: 
+                        crew_id = input('Input employee ID: ')
 
-                EditEmployeeMenu().editSelection(crew_id)  
-                start = False
+                        
 
 
             elif selection == 'm':
