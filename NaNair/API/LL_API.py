@@ -127,6 +127,6 @@ class LL_API:
         return None
 
     def changeDestinationEmergencyPhone():
-        retunr None
+        return None
 
 #LL_API.show_all_planes()

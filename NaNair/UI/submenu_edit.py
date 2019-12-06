@@ -42,7 +42,7 @@ class SubMenuEdit:
                 elif user_selection == '2':
                     LL_API().changeDestinationEmergencyPhone()
                 else:
-                    print()
+                    print('Invalid selection!')
                 # SETJA INN MENU HVERJU ÞÚ VILT BREYTA 
                 # EDIT MENU DESTINATION 
                 pass
