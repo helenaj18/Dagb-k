@@ -58,16 +58,19 @@ class LL_API:
     
     def sortPilotsByLicense(self):
         
-        return CrewLL().sortPilotsByLiworkingcense()
+        return CrewLL().sortPilotsByLicense()
 
     def addCrew(self, info_list):
         return CrewLL().addCrew(info_list)
     
-    def changeEmployeeEmail(self,employee,email_address):
-        return CrewLL().ChangeEmailAddress(employee,email_address)
+    def changeEmployeeEmail(self,crew_id,email_address):
+        return CrewLL().ChangeEmailAddress(crew_id,email_address)
 
-    def changeEmployeeAddress(self,employee,address):
-        return CrewLL().ChangeHomeAddress(employee,address)
+    def changeEmployeeAddress(self,crew_id,new_address):
+        return CrewLL().ChangeHomeAddress(crew_id,new_address)
+
+    def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
+        return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
 
 
 

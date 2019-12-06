@@ -42,11 +42,15 @@ class CrewLL:
     
     def getOneCrewMember(self,crew_id):
         crew = self.getCrew()
+        print(crew)
         while True:
+            print('IN GET ONE CREW MENBER')
             for crew_member in crew:
                 if crew_id == crew_member.getCrewID():
+                    #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
+                print('NOT A CREW MENBER')
                 return None
  
     
@@ -116,22 +120,14 @@ class CrewLL:
 
         new_employee_str = ','.join(CrewData)
 
-        return IO_API().addCrew(new_employee_instance)
+        return IO_API().addCrew(new_employee_str)
 
 
-    def ChangeEmailAddress(self,personal_id,new_email_address):
-        '''Changes the email address of a single pilot'''
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][CrewLL.EMAIL_const] = new_email_address  
-
-        #  change crew file in pilotIO changes the whole crew list
-        IO_API().changeCrewFile(self.employees_list)
 
 
-    def ChangeHomeAddress(self,employee,new_home_address):
-        '''Changes the Emergency Contact for destination in file'''
-        employee.setAddress(new_home_address)
+    def ChangeHomeAddress(self,crew_id,new_home_address):
+        '''Changes the home address of crew member'''
+        employee = self.getOneCrewMember(crew_id)
         pilots = IO_API().loadPilotFromFile()
         flight_att = IO_API().loadFlightAttFromFile()
         new_employee_list = []
@@ -148,6 +144,25 @@ class CrewLL:
 
         IO_API().changeCrewFile(new_employee_list)
 
+    def ChangeEmailAddress(self,crew_id,new_email_address):
+        '''Changes the email address of a crew member'''
+        employee = self.getOneCrewMember(crew_id)
+        pilots = IO_API().loadPilotFromFile()
+        flight_att = IO_API().loadFlightAttFromFile()
+        new_employee_list = []
+
+        for pilot in pilots:
+            if employee == pilot:
+                pilot.setEmailAddress(new_email_address)
+            new_employee_list.append(pilot)
+        
+        for attendant in flight_att:
+            if employee == attendant:
+                attendant.setEmailAddress(new_email_address)
+            new_employee_list.append(attendant)
+
+        IO_API().changeCrewFile(new_employee_list)
+
 
 
         # for i in range(len(self.employees_list)):
@@ -156,13 +171,24 @@ class CrewLL:
         
         # IO_API().changeCrewFile(self.employees_list)
 
-    def ChangePhoneNumber(self,personal_id,new_phone_number):
-        '''Changes the Emergency Contact for destination in file'''
-        for i in range(len(self.employees_list)):
-            if personal_id == self.employees_list[i][0]:
-                self.employees_list[i][CrewLL.PHONENUMBER_const] = new_phone_number
-        
-        IO_API().changeCrewFile(self.employees_list)
+    def ChangePhonenumber(self,crew_id,new_phone_number):
+        '''Changes the email address of a crew member'''
+        employee = self.getOneCrewMember(crew_id)
+        pilots = IO_API().loadPilotFromFile()
+        flight_att = IO_API().loadFlightAttFromFile()
+        new_employee_list = []
+
+        for pilot in pilots:
+            if employee == pilot:
+                pilot.setPhonenumber(new_phone_number)
+            new_employee_list.append(pilot)
+
+        for attendant in flight_att:
+            if employee == attendant:
+                attendant.setPhonenumber(new_phone_numer)
+            new_employee_list.append(attendant)
+
+        IO_API().changeCrewFile(new_employee_list)
     
     def ChangePilotLicense(self,personal_id,new_license):
         '''Changes the License of the pilot in file'''
@@ -222,16 +248,15 @@ class CrewLL:
     def getWorkingCrewIdList(self,date_str):
 
         voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
+        self.working_crew_id_list = []
         if voyage_list != None:
-            working_crew_id_list = []
-
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 destination_of_voyage = voyage.getDestination()
-                working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
+                self.working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
 
-            if len(working_crew_id_list) != 0:
-                return working_crew_id_list
+            if len(self.working_crew_id_list) != 0:
+                return self.working_crew_id_list
             else:
                 return None
         else:
@@ -268,14 +293,18 @@ class CrewLL:
 
     def getWorkSchedule(self,start_date,end_date,crew_id):
         voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
-        work_schedule_list = []
+        if voyage_list != None:
+            work_schedule_list = []
 
-        for voyage in voyage_list:
-            crew_on_voyage_list = voyage.getCrewOnVoyage()
-            for crew_id in crew_on_voyage_list:
-                crew_member = self.getOneCrewMember(crew_id)
-                if crew_member.getCrewID() == crew_id:
-                    work_schedule_list.append(voyage)
-        
-        return work_schedule_list
+            for voyage in voyage_list:
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                for crew_member_id in crew_on_voyage_list:
+                    if crew_member_id == crew_id:
+                        work_schedule_list.append(voyage)
+            if len(work_schedule_list) != 0:
+                return work_schedule_list
+            else:
+                return None
+        else:
+            return None
     

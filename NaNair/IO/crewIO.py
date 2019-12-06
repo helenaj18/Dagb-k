@@ -1,4 +1,5 @@
 import os
+import csv
 from ModelClasses.crew_model import Crew
 from ModelClasses.pilot_model import Pilot
 from ModelClasses.flight_att_model import FlightAttendant
@@ -94,18 +95,10 @@ class CrewIO:
     def changeCrewFile(self, new_employee_list):
         '''Updates the file with new changes'''
         file_object = open(self.__crew_filename,'w')
-        for employee in new_employee_list: 
-            file_object.write(str(employee))
-
-
-
-
-        # crew_str = ''
-        # for item in crew_list:
-        #     crew_str += ','.join(item) + '\n'
-
-        # file_object = open(self.__crew_filename,'w')
-        # file_object.write(crew_str)
+        with file_object:
+            writer = csv.writer(file_object)
+            for employee in new_employee_list:
+                writer.writerow([employee.getCrewID(),employee.getName(),employee.getRole(),employee.getBool(),employee.getLicense(),employee.getAddress(),employee.getPhoneNumber(), employee.getEmail()])
 
 
     def addCrewToFile(self,new_employee_str):
