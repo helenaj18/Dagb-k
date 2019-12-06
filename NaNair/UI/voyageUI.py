@@ -24,15 +24,19 @@ class VoyageUI:
     
     def getDateWithTime(self):
 
-        year = int(input('Year: '))
-        month = int(input('Month: '))
-        day = int(input('Day: '))
-        time = input('Time (hh:mm): ')
+        year = input('Year: ')
+        month = input('Month: ')
+        day = input('Day: ')
+        
+        year, month, day = LL_API().verifyDate(year, month, day)
+
+        hour = input('Hour: ')
+        min = input('Minute: ')
         print()
 
-        hour, min = time.split(':')
+        hour, min = LL_API().verifyTime(hour, min)
 
-        return datetime.datetime(year, month, day, int(hour), int(min), 0)
+        return datetime.datetime(int(year), int(month), int(day), int(hour), int(min), 0)
 
 
     def seperateDatetimeString(self, datetimestring):
@@ -108,6 +112,7 @@ class VoyageUI:
         '''Shows one specific voyage'''
         pass
 
+    
     def getDest(self):
         '''Gets user input for a 3 letter destination code'''
 
@@ -115,7 +120,7 @@ class VoyageUI:
         print()
         print('Please choose a destination. Available destinations are:')
 
-        for destination in destinations_class_list:
+        for destination in destinations_class_list[:-1]:
             print('\t{:<3}: {:<10}'.format(destination.getDestinationName(), destination.getDestinationAirport()))
 
         print()
@@ -139,29 +144,27 @@ class VoyageUI:
 
         departure_time = self.getDateWithTime()
 
-    
-        # bæta við þegar hægt er að prenta velar lausar a ehv tima
-        
-        airplanes_class_list = LL_API().showAllPlanes()
-
         print('Please choose an airplane.')
+<<<<<<< HEAD
+=======
 
+>>>>>>> e0546dd4d265ffd96dbb087806e1f09b43cfe968
 
-        available_tuple = LL_API().showAirplanesByDateTime(departure_time.isoformat())
-        
-        if available_tuple != None:
-            not_available_planes,available_planes = available_tuple
-        
-            print()
-            plane_name = input('Chosen plane (type name of plane): ')
-            
+        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
 
+        for plane in airplanes_class_list:
+            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(), plane.get_planeTypeID()))        
 
-            LL_API().add_voyage(dest, departure_time, plane_name)
+        plane_name = input('Chosen plane (type name of plane): ').upper()
+        check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
-            print()
+        while check == False:
+            print('Please choose one of the listed planes.')
+            plane_name = input()
+            check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
-            print('New voyage succesfully added!\n')
-        
-        else:
-            all_airplanes = LL_API().showAllPlanes()
+        LL_API().add_voyage(dest, departure_time, plane_name)
+
+        print()
+
+        print('New voyage succesfully added!\n')

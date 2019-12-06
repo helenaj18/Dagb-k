@@ -1,5 +1,6 @@
 from API.IO_API import IO_API
 from IO.voyageIO import VoyageIO
+from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 from datetime import timedelta
 
@@ -162,6 +163,31 @@ class VoyageLL:
 
         return arrival_time
 
+
+    def showPlanes(self, departure_time):
+        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time.isoformat())
+        
+        if available_tuple != None:
+            not_available_planes,available_planes = available_tuple
+            
+            airplanes_class_list = available_planes
+            
+        else:
+            all_airplanes = AirplaneLL().getAirplanes()
+            
+            airplanes_class_list = AirplaneLL().getAirplanes()
+        
+        return airplanes_class_list
+
+
+    def checkPlaneInput(self, plane_input, list_of_planes):
+        
+        BoolCheck = False
+        for plane in list_of_planes:
+            if plane_input == plane.get_planeInsignia():
+                BoolCheck = True
+        
+        return BoolCheck
 
  
     def addVoyage(self,destination, departure_time, plane):
