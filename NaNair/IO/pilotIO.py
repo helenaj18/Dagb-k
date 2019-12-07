@@ -1,5 +1,9 @@
 #from API.IO_API import IO_API
 import os
+import csv
+from ModelClasses.crew_model import Crew
+from ModelClasses.pilot_model import Pilot
+from IO.crewIO import CrewIO
 
 # ATH á að vera inní klasa
 
@@ -22,27 +26,34 @@ class PilotIO:
 
     # Er hægt að kalla í read file úr attendant????
 
-    # def read_file(self):
-    #     '''Reads file and returns employees list'''
-    #     file_object = open(self.__crew_filename,'r')
-    #     employees_list = []
+    def read_file(self):
 
-    #     for line in file_object:
-    #         line = line.strip().split(',')
-    #         employees_list.append(line)
-        
-    #     self.employees_list = employees_list
-    #     return employees_list
+        '''list of all pilots'''
+        pilot_list = []
+
+        crew_file= open(self.__crew_filename,'r')
+
+        reader_crew= csv.DictReader(crew_file)
+
+        for row in reader_crew:
+            if row['role'] == CrewIO.PILOT:
+                
+                pilot = Pilot(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
+                    row['license'],row['captain/head_flight_attendant'],row['role'])
+                pilot_list.append(pilot)
+                
+        return pilot_list
 
 
     def find_pilots(self):
         '''Finds all pilots in file and returns a list of them'''
 
         pilot_list = []
-
+        self.loadPilotFromFile()
         for i in range(1,len(self.employees_list)):
             # Only pilots have licenses
-            if self.employees_list[i][LICENSE_const] != 'N/A': 
+            print(self.employees_list[i])
+            if self.employees_list[i]["LICENSE_const"] != 'N/A': 
                 pilot_list.append(self.employees_list[i])
         
         self.pilot_list = pilot_list  
@@ -50,11 +61,7 @@ class PilotIO:
 
     def loadPilotFromFile(self):
         '''Gets pilot info from file, returns a list of pilots'''
-
-        self.read_file()
-        self.find_pilots()
-
-        return self.pilot_list
+        return self.read_file()
 
 
     def changeCrewFile(self, crew_list):

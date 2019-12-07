@@ -1,3 +1,4 @@
+
 class Voyage:
     def __init__(self,voyage_ID,flight_no,flight_no_home,departure_location,destination,\
                     departure_time,arrival_time_out,arrival_time_home,aircraft_ID,captain,copilot,\
@@ -67,9 +68,19 @@ class Voyage:
         self.__aircraft_ID = new_id
     
     def setCaptain(self, new_capt):
+        
+        airplane_type = "NAFokkerF28" ##taka út harðkóðun
+        if not new_capt.canFly(airplane_type):
+            raise Exception("Pilot can not fly this type")
+    
         self.__captain = new_capt
     
     def setCopilot(self, new_copilot):
+        
+        airplane_type = "NAFokkerF28" ##taka út harðkóðun
+        if not new_copilot.canFly(airplane_type):
+            raise Exception("Copilot can not fly this type")
+    
         self.__copilot = new_copilot
     
     def setHeadFlightAtt(self, new_head):
@@ -80,3 +91,16 @@ class Voyage:
     
     def setFlightAttTwo(self, new_att):
         self.__flight_att_two = new_att
+
+    def setPilot(self, pilot):
+        if pilot.isCaptain():
+            self.setCaptain(pilot)
+        else:
+            self.setCopilot(pilot)
+
+    def addCrewMember(self, crew_member):
+        role = crew_member.getRole()
+        if role == "Pilot":
+            self.setPilot(crew_member)
+        elif role == "Flightasdfasd":
+            pass

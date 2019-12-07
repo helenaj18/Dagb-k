@@ -1,4 +1,8 @@
 import os
+import csv
+from ModelClasses.crew_model import Crew
+from ModelClasses.flight_att_model import FlightAttendant
+from IO.crewIO import CrewIO
 
 # ATH á að vera inní klasa
 SSN_const = 0
@@ -19,37 +23,43 @@ class AttendantIO:
      
         self.read_file()
     
-    # def read_file(self):
-    #     '''Reads file and returns employees list'''
-    #     file_object = open(self.__crew_filename,'r')
-    #     employees_list = []
+    def read_file(self):
+        '''Reads file and returns flight attendant list'''
+        '''list of all crewmembers'''
+        flight_att_list = []
 
-    #     for line in file_object:
-    #         line = line.strip().split(',')
-    #         employees_list.append(line)
-        
-    #     self.employees_list = employees_list
-    #     return employees_list
+        crew_file= open(self.__crew_filename,'r')
+
+        reader_crew= csv.DictReader(crew_file)
+
+        for row in reader_crew:
+            if row['role'] == CrewIO.CABINCREW:
+                crewmember = FlightAttendant(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
+                    row['license'],row['captain/head_flight_attendant'],row['role'])
+                flight_att_list.append(crewmember)
+                
+        return flight_att_list
 
 
     def find_flight_att(self):
         '''Finds all flight attendants in file and returns a list of them'''
 
-        flight_att_list = []
+        # flight_att_list = []
 
-        for i in range(1,len(self.employees_list)):
-            # Only pilots have licenses
-            if self.employees_list[i][LICENSE_const] == 'N/A':
-                flight_att_list.append(self.employees_list[i])
+        # for i in range(1,len(self.employees_list)):
+        #     # Only pilots have licenses
+        #     if self.employees_list[i][LICENSE_const] == 'N/A':
+        #         flight_att_list.append(self.employees_list[i])
         
-        self.flight_att_list = flight_att_list
+        # self.flight_att_list = flight_att_list
+        return self.read_file()
 
 
     def loadFlightAttFromFile(self):
         '''Gets flight attendant info from file, returns a list of pilots'''
-        self.find_flight_att()
+        
 
-        return self.flight_att_list
+        return self.find_flight_att()
 
 
     def addFlightAttToFile(self,new_employee_str):

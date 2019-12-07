@@ -264,6 +264,9 @@ class AirplaneLL:
         return airplanes_type_list
  
 
+    def getOneAirplane(self, id):
+        return IO_API()
+
     def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
         ''' Adds new airplane'''
         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)

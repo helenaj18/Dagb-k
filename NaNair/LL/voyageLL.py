@@ -44,7 +44,22 @@ class VoyageLL:
         return voyage_duration_hrs, voyage_duration_min
 
 
+    def isEmployeeWorkingOnDate(self, date, employee_id):
 
+        voyages = self.getVoyageInDateRange(date, date)
+        for voyage in voyages:
+            if employee_id in voyage.getCrewOnVoyage():
+                return True
+        False
+
+    def addCaptain(self, voyage_id, date, employee_id):
+        is_unavailable = self.isEmployeeWorkingOnDate(date, employee_id)
+        if is_unavailable:
+            raise Exception("Staff member notavailable on this date")
+        voyage = VoyageIO.getOneVoyage(voyage_id)
+        if voyage is None:
+            raise Exception("Voyage not found")
+        voyage.setCaptain(employee_id)
 
     def getVoyageInDateRange(self, start_datetime, end_datetime):
 

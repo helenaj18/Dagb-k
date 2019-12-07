@@ -257,18 +257,26 @@ class CrewLL:
         
         format_str = ''
         self.getWorkingCrew(date_str)
-        not_working_crew_id_list = []
-
+        not_working_crew_list = []
         flight_atts = IO_API().loadFlightAttFromFile()
         pilots = IO_API().loadPilotFromFile()
 
-        self.appendNotWorkingCrewList(flight_atts,not_working_crew_id_list)
-        self.appendNotWorkingCrewList(pilots,not_working_crew_id_list)
-        if len(not_working_crew_id_list) != 0:
-            for not_working_crew_id in not_working_crew_id_list:
-                crew_member = self.getOneCrewMember(not_working_crew_id)
-                format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),not_working_crew_id,crew_member.getAddress(),crew_member.getPhoneNumber())
-            
+        # self.appendNotWorkingCrewList(flight_atts, not_working_crew_id_list)
+        # self.appendNotWorkingCrewList(pilots, not_working_crew_id_list)
+        all_crew = flight_atts + pilots
+
+        if len(all_crew) != 0:
+            for crew_member in all_crew:
+                if crew_member.getCrewID() not in self.working_crew_id_list:
+                    not_working_crew_list.append(crew_member)
+
+            for crew_member in not_working_crew_list:
+                format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(
+                    crew_member.getName(),
+                    crew_member.getCrewID(),
+                    crew_member.getAddress(),
+                    crew_member.getPhoneNumber()
+                )
             return format_str
         else:
             return None

@@ -1,7 +1,7 @@
 from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
-
+from LL.voyageLL import VoyageLL
 
 
 class VoyageUI:
@@ -57,7 +57,21 @@ class VoyageUI:
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
         print('\t Seats sold: {}/{}'.format('ATH no info','total seats'))
+        print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
+    def queryOneVoyage(self):
+        '''Helps user find one voyage and returns it'''
+
+        self.showAllVoyages()
+        voyage = None;
+        while voyage is None:
+            voyage_id = input("Enter voyage ID to select: ")
+            voyage = VoyageLL().getOneVoyage(voyage_id)
+            if voyage:
+                return voyage
+            print("Invalid voyage id")
+            
+            
 
 
     def showAllVoyages(self): # BÆTA INN EH TIME PERIOD

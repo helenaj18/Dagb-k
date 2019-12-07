@@ -85,6 +85,6 @@ class VoyageIO:
     def getOneVoyage(self, voyage_to_get_ID):
         voyage_list = VoyageIO().loadVoyageFromFile()
         for voyage in voyage_list:
-            voyage_ID = Voyage.getVoyageID
+            voyage_ID = voyage.getVoyageID()
             if voyage_ID == voyage_to_get_ID: 
                 return voyage

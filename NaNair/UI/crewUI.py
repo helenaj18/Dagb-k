@@ -1,5 +1,6 @@
 from API.LL_API import LL_API
 from LL.airplaneLL import AirplaneLL
+from LL.crewLL import CrewLL
 import datetime
 
 class CrewUI:
@@ -42,16 +43,31 @@ class CrewUI:
 
     def showWorkingCrew(self,date_str):
         format_str = LL_API().get_working_crew(date_str)
+        print(format_str)
         self.printCrew(format_str)
+
 
     def showNotWorkingCrew(self,date_str):
         format_str = LL_API().get_not_working_crew(date_str)
-        self.printCrew(format_str)
+        self.printCrew(format_str, False)
 
-    def printCrew(self,format_str):
+    def queryShowNotWorkingCrew(self, date_str):
+        self.showNotWorkingCrew(date_str)
+        keep_asking = True
+        while keep_asking:
+            customer_input = input("What staff member do you want to pick from the list above (Employee ID): ")
+            employee = CrewLL().getOneCrewMember(customer_input)
+            if employee:
+                return employee
+            print("Employee not found, try again")
+        
+
+
+    def printCrew(self,format_str, not_working):
+        header = 'Working Crew' if not_working else 'Not Working crew'
         if format_str != None:
             print('#'*30)
-            print('{:^30}'.format('Working Crew'))
+            print('{:^30}'.format(header))
             print()
             print('#'*30)
             header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number','Destination')

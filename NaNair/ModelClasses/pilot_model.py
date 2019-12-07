@@ -13,6 +13,9 @@ class Pilot(Crew):
     def getLicense(self):
         return self.__pilot_license
 
+    def canFly(self, type_of_airplane):
+        return self.getLicense() == type_of_airplane
+
     def getCaptain(self):
         return self.__captain
     
@@ -21,6 +24,9 @@ class Pilot(Crew):
         
     def getBool(self):
         return self.__captain
+
+    def isCaptain(self):
+        return True if self.__captain else False
 
     def setLicense(self,new_license):
         self.__pilot_license = new_license

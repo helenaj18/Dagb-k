@@ -2,6 +2,8 @@ from IO.destinationIO import DestinationIO
 from IO.crewIO import CrewIO
 from IO.voyageIO import VoyageIO
 from IO.airplaneIO import AirplaneIO
+from IO.attendantIO import AttendantIO
+from IO.pilotIO import PilotIO
 
 
 class IO_API:
@@ -27,11 +29,11 @@ class IO_API:
     def loadCrewFromFile(self):
         return CrewIO().loadCrewFromFile()
 
-    # def loadPilotFromFile(self):
-    #     return CrewIO().loadPilotFromFile()
+    def loadPilotFromFile(self):
+         return PilotIO().loadPilotFromFile()
     
-    # def loadFlightAttFromFile(self):
-    #     return CrewIO().loadFlightAttFromFile()
+    def loadFlightAttFromFile(self):
+         return AttendantIO().loadFlightAttFromFile()
 
     def changeCrewInfo(self,employee):
         return CrewIO().changeCrewFile(employee)
