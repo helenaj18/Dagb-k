@@ -44,7 +44,7 @@ class CrewUI:
     def showWorkingCrew(self,date_str):
         format_str = LL_API().get_working_crew(date_str)
         print(format_str)
-        self.printCrew(format_str)
+        self.printCrew(format_str,True)
 
 
     def showNotWorkingCrew(self,date_str):
