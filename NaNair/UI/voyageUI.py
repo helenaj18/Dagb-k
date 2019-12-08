@@ -167,6 +167,7 @@ class VoyageUI:
             start_datetime = VoyageUI().getDateInput()
 
 
+
         if end_datetime == '':
             print('Enter end date for time period')
             print()
