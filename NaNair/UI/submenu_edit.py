@@ -3,6 +3,7 @@ from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 from UI.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
+from Ui.airplaneUI import airplaneUI
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -32,34 +33,43 @@ class SubMenuEdit:
                 print("Select date range to find a voyage to edit")
                 voyage = VoyageUI().queryOneVoyage()
 
-                keep_editing = True
-                while keep_editing:
+                
+                while True:
                     print("\nWhat do you want to change in voyage {}".format(voyage.getVoyageID()))
                     # Change existing voyage
-                    print('1 - Register employee on a voyage')
-                    print('2 - Change date')
-                    print("m - go back")
+                    print('1 - Add an airplane to a voyage')
+                    print('2 - Add employees to a voyage')
+                    print('3 - Change date')
+                    print("m - Back to main menu")
                     user_selection = input()
-
                     if user_selection == '1':
+                        airplaneUI().showAirplanesByDateTime(voyage.getDepartureTime())
+                        voyage.setAircraftID()
+                        
+                        
 
-                
+                    elif user_selection == '2':
 
                         #crew_on_voyage_list = voyage.getCrewOnVoyage()
                         CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
                         print('You must add 1 captain, 1 copilot, 1 flight atttendant')
                         print()
-                        VoyageUI().addCrewToVoyage(voyage)
+                        return VoyageUI().addCrewToVoyage(voyage)
                         
-
                                             
-                    elif selection == '2':
+                    elif selection == '3':
                         # change date
                         new_datetime_str = input('Enter new date - (format 2019-11-20T15:24:00)') 
                         flight_number = input('Enter flight voyage - (format NAXXXX)') 
                         #ATH voyage id og breyta í voyage LL líka
                         
-                        LL_API().change_voyage_dates(new_datetime_str,flight_number)
+                        return LL_API().change_voyage_dates(new_datetime_str,flight_number)
+                    
+                    elif selection == 'm':
+                        return
+                    
+                    else:
+                        print('Invalid selection')
 
 
             elif selection == '2':

@@ -115,7 +115,8 @@ class LL_API:
     def checkTimeInput(self, year, month, day, hour, min):
         return VoyageLL().checkTimeInput(year, month, day, hour, min)
         
-
+    def getOneVoyage(self,voyage_id):
+        return VoyageLL().getOneVoyage()
 
     ### DESTINATION LL
 

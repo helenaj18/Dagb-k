@@ -108,3 +108,5 @@ class Voyage:
                 self.setCopilot(crew_member)
         elif role == 'Cabincrew':
             self.setHeadFlightAtt(crew_member)
+
+
