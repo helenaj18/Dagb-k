@@ -41,7 +41,9 @@ class SubMenuEdit:
                     user_selection = input()
 
                     if user_selection == '1':
+                        print('You must add 1 captain, 1 copilot, 1 flight atttendant')
                         crew_member = CrewUI().queryShowNotWorkingCrew(voyage.getDepartureTime())
+#                        while 
                         try:
                             voyage.addCrewMember(crew_member)
                             print('{} - {}, was added to voyage {}'.format(

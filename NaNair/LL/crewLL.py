@@ -22,6 +22,7 @@ class CrewLL:
         #self.pilots_list = IO_API().loadPilotFromFile()
         pass
 
+
     def getPilots(self):
         ''' Gets the pilots '''
         crew_list = IO_API().loadPilotFromFile()
@@ -49,6 +50,7 @@ class CrewLL:
 
         return IO_API().loadCrewFromFile()
     
+
     def getOneCrewMember(self,input_crew_id):
         crew = self.getCrew()
         while True:
@@ -58,7 +60,6 @@ class CrewLL:
                     #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
-                print('CREW MEMBER NOT FOUND')
                 return None
  
     
@@ -77,32 +78,32 @@ class CrewLL:
         
         return licensedPilots
  
+ 
     def addCrew(self, CrewData):
         '''Takes in a list of data and formats it to a string to add to file.
         '''
-
+        # add necessary data that can be found from user input
         # if 'Captain' was selected in UI layer
         if CrewData[2] == '1': 
-            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
-            CrewData[CrewLL.RANK_const] = '1'
+            CrewData.insert(self.ROLE_const, 'Pilot')
+            CrewData[self.RANK_const] = '1'
 
         # if 'Copilot' was selected in UI layer
         elif CrewData[2] == '2':
-            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
-            CrewData[CrewLL.RANK_const] = '0'
+            CrewData.insert(self.ROLE_const, 'Pilot')
+            CrewData[self.RANK_const] = '0'
 
         # if 'Head service manager' was selected in UI layer
         elif CrewData[2] == '3':
-            CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
-            CrewData.insert(CrewLL.LICENSE_const, 'N/A')
-            CrewData[CrewLL.RANK_const] = '1'
+            CrewData.insert(self.ROLE_const, 'Cabincrew')
+            CrewData.insert(self.LICENSE_const, 'N/A')
+            CrewData[self.RANK_const] = '1'
         
         # if 'Flight Attendant' was selected in UI layer
         else:
-            CrewData.insert(CrewLL.ROLE_const, 'Cabincrew')
-            CrewData.insert(CrewLL.LICENSE_const, 'N/A')
-            CrewData[CrewLL.RANK_const] = '0'
-
+            CrewData.insert(self.ROLE_const, 'Cabincrew')
+            CrewData.insert(self.LICENSE_const, 'N/A')
+            CrewData[self.RANK_const] = '0'
 
         new_employee_str = ','.join(CrewData)
 
@@ -111,87 +112,9 @@ class CrewLL:
 
 
     def ChangeCrewInfo(self,employee):
-        # all_crew = IO_API().loadCrewFromFile()
-        # new_employee_list = []
-
-        # for crew_member in all_crew:
-        #     if employee.getCrewID() == crew_member.getCrewID():
-        #         new_employee_list.append(employee)
-        #     else:
-        #         new_employee_list.append(crew_member) 
-
         IO_API().changeCrewInfo(employee)
 
 
-    def ChangeHomeAddress(self,crew_id,new_home_address):
-        '''Changes the home address of crew member'''
-        #employee = self.getOneCrewMember(crew_id)
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        new_employee_list = []
-
-        for pilot in pilots:
-            if crew_id == pilot:
-                pilot.setAddress(new_home_address)
-            new_employee_list.append(pilot)
-        
-        for attendant in flight_att:
-            att_id = attendant.getCrewID()
-            if crew_id == att_id:
-                attendant.setAddress(new_home_address)
-            new_employee_list.append(attendant)
-
-        IO_API().changeCrewFile(new_employee_list)
-
-    def ChangeEmailAddress(self,crew_id,new_email_address):
-        '''Changes the email address of a crew member'''
-        employee = self.getOneCrewMember(crew_id)
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        new_employee_list = []
-
-        for pilot in pilots:
-            if employee == pilot:
-                pilot.setEmailAddress(new_email_address)
-            new_employee_list.append(pilot)
-        
-        for attendant in flight_att:
-            if employee == attendant:
-                attendant.setEmailAddress(new_email_address)
-            new_employee_list.append(attendant)
-
-        IO_API().changeCrewFile(new_employee_list)
-
-
-
-    def ChangePhonenumber(self,crew_id,new_phone_number):
-        '''Changes the email address of a crew member'''
-        employee = self.getOneCrewMember(crew_id)
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        new_employee_list = []
-
-        for pilot in pilots:
-            if employee == pilot:
-                pilot.setPhonenumber(new_phone_number)
-            new_employee_list.append(pilot)
-
-        for attendant in flight_att:
-            if employee == attendant:
-                attendant.setPhonenumber(new_phone_numer)
-            new_employee_list.append(attendant)
-
-        IO_API().changeCrewFile(new_employee_list)
-    
-    def ChangePilotLicense(self,personal_id,new_license):
-        '''Changes the License of the pilot in file'''
-
-        #for pilot in self.getCrew():
-        #    if pilot.getCrewID == personal_id:
-        #        pilot.setLicense(new_license)
-        pilot = self.getOneCrewMember(personal_id)
-        pilot.setLicense(new_license)
-        IO_API().changeCrewFile(pilot)
 
     def sortPilotsByLicense(self):
         '''Sorts all pilots by their license'''
@@ -202,8 +125,9 @@ class CrewLL:
         licenses = set()
         # make a set of all licenses to iterate through
         for pilot in pilot_list:
-            licenses.add( pilot.getLicense())
+            licenses.add( pilot.getLicense() )
 
+        # checks if a pilot has a specific license and append them to a list if so  
         for a_license in licenses:
             for pilot in pilot_list:
                 if pilot.getLicense() == a_license:
@@ -211,14 +135,14 @@ class CrewLL:
         
         return sorted_pilots_list
  
+
     def getWorkingCrew(self,date_str):
-        ''' Gets the working crew '''
-        # pilots = IO_API().loadPilotFromFile()
-        # flight_atts = IO_API().loadFlightAttFromFile()
-        # crew = pilots + flight_atts
+        ''' Returns a string of the working crew on a date inputted by user'''
         
+        # gets a list of the people working on inputted date and destination
         working_crew_id_list = self.getWorkingCrewIdList(date_str)
         format_str = ''
+
         if working_crew_id_list != None:
             for working_crew_per_voyage in working_crew_id_list:
                 destination_instance = working_crew_per_voyage[1]
@@ -227,19 +151,28 @@ class CrewLL:
                 for crew_id in working_crew_per_voyage[0]:
                     if crew_id != 'empty':
                         crew_member = self.getOneCrewMember(crew_id)
-                        format_str += '{:<20}{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),crew_id,crew_member.getAddress(),crew_member.getPhoneNumber(),destination_name)
+                        format_str += '{:<20}{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),
+                                                                                crew_id,crew_member.getAddress(),
+                                                                                crew_member.getPhoneNumber(),
+                                                                                destination_name)
             
             self.working_crew_id_list = working_crew_id_list
 
             return format_str
+        #if no one is working on the inputted date
         else:
             return None
 
 
     def getWorkingCrewIdList(self,date_str):
+        '''Takes in a date and returns a list of IDs for the people working on that date'''
 
+        # Voyages on a specific date:
         voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
         self.working_crew_id_list = []
+        
+        #iterates through voyages on a specific date and adds the IDs of working crew 
+        # to list as well as the voyage destination
         if voyage_list != None:
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -248,36 +181,27 @@ class CrewLL:
 
             if len(self.working_crew_id_list) != 0:
                 return self.working_crew_id_list
+            # if no crew was assigned to the voyages
             else:
                 return None
+        # if there are no voyages on a chosen date
         else:
             return None
 
+
     def getNotWorkingCrew(self,date_str):
         
-        format_str = ''
+        #format_str = ''
         self.getWorkingCrew(date_str)
         not_working_crew_list = []
-        flight_atts = IO_API().loadFlightAttFromFile()
-        pilots = IO_API().loadPilotFromFile()
+        all_crew = IO_API().loadCrewFromFile()
 
-        # self.appendNotWorkingCrewList(flight_atts, not_working_crew_id_list)
-        # self.appendNotWorkingCrewList(pilots, not_working_crew_id_list)
-        all_crew = flight_atts + pilots
 
         if len(all_crew) != 0:
             for crew_member in all_crew:
                 if crew_member.getCrewID() not in self.working_crew_id_list:
                     not_working_crew_list.append(crew_member)
-
-            for crew_member in not_working_crew_list:
-                format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(
-                    crew_member.getName(),
-                    crew_member.getCrewID(),
-                    crew_member.getAddress(),
-                    crew_member.getPhoneNumber()
-                )
-            return format_str
+            return not_working_crew_list
         else:
             return None
 
