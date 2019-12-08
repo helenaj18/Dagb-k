@@ -4,8 +4,7 @@ from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 from datetime import timedelta
 
-# DEPARTING_DATETIME = 4
-# ARRIVING_DATETIME = 8
+
 
 class VoyageLL:
     ''' LL class for voyage '''

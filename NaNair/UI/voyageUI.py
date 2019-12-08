@@ -8,14 +8,8 @@ class VoyageUI:
     EMPTY = 'empty'
     SEPERATOR = '-'
 
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
     def getDateInput(self):
-
+        '''Gets a date input from the user'''
 
         year_str = input('Year: ')
         month_str = input('Month: ')
@@ -26,6 +20,7 @@ class VoyageUI:
         return datetime.datetime(year_int,month_int,day_int,0,0,0)
     
     def getDateWithTime(self):
+        '''Gets a date input from the user with time'''
 
         year = input('Year: ')
         month = input('Month: ')
@@ -43,12 +38,13 @@ class VoyageUI:
 
 
     def seperateDatetimeString(self, datetimestring):
-        
+        '''Seperates a datetime string and returns the date part'''
         return datetimestring[:10]
 
 
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
                 flight_no_out, flight_no_home, voyage_duration_min):
+        '''Prints out a voyage'''
 
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
             voyage.getDestination().getDestinationAirport(),\
@@ -100,6 +96,7 @@ class VoyageUI:
 
 
     def addCrewToVoyage(self,voyage):
+        '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
         crew_on_voyage_list = voyage.getCrewOnVoyage()
 
