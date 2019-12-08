@@ -45,8 +45,6 @@ class SubMenuEdit:
                     if user_selection == '1':
                         return VoyageUI().addAircraftToVoyage(voyage)
 
-
-                    
                     elif user_selection == '2':
 
                         #crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -56,12 +54,12 @@ class SubMenuEdit:
                         return VoyageUI().addCrewToVoyage(voyage)
                         
                                             
-                    elif selection == '3':
+                    elif user_selection == '3':
                         # change date
                     
                         return VoyageUI().changeTimeOfVoyage()
                     
-                    elif selection == 'm':
+                    elif user_selection == 'm':
                         return
                     
                     else:
