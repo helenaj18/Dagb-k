@@ -1,6 +1,4 @@
 from API.LL_API import LL_API
-from LL.airplaneLL import AirplaneLL
-from LL.crewLL import CrewLL
 import datetime
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
@@ -54,18 +52,34 @@ class CrewUI:
         not_working_crew_list = LL_API().get_not_working_crew(date_str)
         self.printCrew(not_working_crew_list, False)
 
-    def queryShowNotWorkingCrew(self, date_str):
-        self.showNotWorkingCrew(date_str)
-        keep_asking = True
-        while keep_asking:
-            customer_input = input("What staff member do you want to pick from the list above (Employee ID): ")
-            employee = CrewLL().getOneCrewMember(customer_input)
-            if employee:
-                return employee
-            print("Employee not found, try again")
-        
     
 
+
+    def queryShowNotWorkingCrew(self):
+        #self.showNotWorkingCrew(date_str)
+        keep_asking = True
+
+        while keep_asking:
+            crew_id = input('What staff member do you want to pick from the list above (Employee ID): ')
+            employee = LL_API().get_crew_member_by_id(crew_id)
+            if employee:
+                return employee
+            print('Employee not found, try again')
+        
+    def checkRank(self,crew_member):
+        role = crew_member.getRole()
+        if role == 'Pilot':
+            if crew_member.getCaptain(): 
+                position = 'Captain'
+            else: 
+                position = 'Pilot'
+        elif role == 'Cabincrew':
+            if crew_member.getBool(): 
+                position = 'Head'
+            else: 
+                position = 'Flight Att.'
+        return position
+        
 
     def printCrew(self,not_working_crew_list, not_working):
         header = 'Working Crew' if not_working else 'Not Working crew'
@@ -82,17 +96,7 @@ class CrewUI:
             print(header_str)
             print(len(header_str)*'-')
             for crew_member in not_working_crew_list:
-                role = crew_member.getRole()
-                if role == 'Pilot':
-                    if crew_member.getBool(): 
-                        position = 'Captain'
-                    else: 
-                        position = 'Pilot'
-                elif role == 'Cabincrew':
-                    if crew_member.getBool(): 
-                        position = 'Head'
-                    else: 
-                        position = 'Flight Att.'
+                position = self.checkRank(crew_member)
 
                 format_str += '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}\n'.format(
                     crew_member.getRole(),
