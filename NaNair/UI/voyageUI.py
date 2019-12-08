@@ -247,11 +247,6 @@ class VoyageUI:
             print()
 
 
-            
-
-    def showOneVoyage(self,voyage_ID):
-        '''Shows one specific voyage'''
-        pass
 
     
     def getDest(self):
