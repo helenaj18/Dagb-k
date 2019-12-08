@@ -17,20 +17,28 @@ class AirplaneIO:
         i = 0
 
         # Go through aircraft file with the airplanes NanAir owns
-        for line_aircraft in aircraft_file:
+        for aircraft_line in aircraft_file:
             aircraft_type_file = open(self.__aircraft_type_filename, 'r')
+
+            # Skip the header in aircraft file
             if i != 0:
                 # Get information from aircraft file
-                planeInsignia,planeTypeId_in_aircraft_file,manufacturer,seats = line_aircraft.strip().split(',')
+                planeInsignia,planeTypeId_in_aircraft_file,manufacturer,seats = aircraft_line.strip().split(',')
                 
                 # Go through aircraft type file and match the Plane Type ID with 
                 # the Plane Type ID from the aircraft file
-                for line_aircraft_type in aircraft_type_file:
-                    planeTypeId_in_aircraft_type_file,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = line_aircraft_type.strip().split(',')
+                for aircraft_type_line in aircraft_type_file:
+                    planeTypeId_in_aircraft_type_file,manufacturer,model,capacity,\
+                        emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,\
+                            wingspan = aircraft_type_line.strip().split(',')
                     
                     # Make an airplane instance and add it to a list of airplane instances
                     if planeTypeId_in_aircraft_file == planeTypeId_in_aircraft_type_file:
-                        airplane_instance = Airplane(planeInsignia, planeTypeId_in_aircraft_file,manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
+                        
+                        airplane_instance = Airplane(planeInsignia, planeTypeId_in_aircraft_file,\
+                            manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,\
+                                serviceCeiling,length,height,wingspan)
+                        
                         airplanes_list.append(airplane_instance)
             i += 1
             aircraft_type_file.close()
@@ -40,12 +48,9 @@ class AirplaneIO:
         return airplanes_list
 
 
-
     def addAirplaneToFile(self, planeInsignia,planeTypeId,manufacturer,seats):
         '''Adds an airplane to the airplane file'''
         aircraft_file = open(self.__aircraft_filename,'a')
         aircraft_file.write(planeInsignia+','+planeTypeId+','+manufacturer+','+seats)
         
         return aircraft_file
-
-

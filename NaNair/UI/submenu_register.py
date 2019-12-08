@@ -1,6 +1,7 @@
 from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 from UI.voyageUI import VoyageUI
+from UI.airplaneUI import AirplaneUI
 import datetime
 
 
@@ -34,32 +35,22 @@ class SubMenuRegister:
 
             if selection == '1': 
                 # Add new employee
-                CrewUI().addCrew()
+
+                return CrewUI().addCrew()
 
             elif selection == '2':
                 # Add new voyage
-                VoyageUI().addVoyage()
+
+                return VoyageUI().addVoyage()
                 
             elif selection == '3':
                 # Add new Airplane
-                planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ')
-                planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ')
-                
-                if planeTypeId == 'NAFokkerF100':
-                    manufacturer = 'Fokker'
-                    seats = '100'
-                elif planeTypeId == 'NABAE146':
-                    manufacturer = 'BAE'
-                    seats = '82'
-                else:
-                    manufacturer = 'Fokker'
-                    seats = '65'
 
-                # Add airplane to logic layer  
-                LL_API().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
+                return AirplaneUI().addAirplane()
 
             elif selection == '4':
                 # Add new destination
+                
                 destination_of_voyage = input('Destination (3char airport code): ').upper()
                 print('Departure time')
                 dep_year = int(input('Year: '))
@@ -70,7 +61,7 @@ class SubMenuRegister:
                 departure_time = datetime.datetime(dep_year,dep_month,dep_day,dep_hour,dep_minute,0).isoformat()
 
                 # Add voyage to logic layer
-                LL_API().add_voyage(destination_of_voyage,departure_time)
+                return LL_API().add_voyage(destination_of_voyage,departure_time)
 
                 
             elif selection == 'm':
