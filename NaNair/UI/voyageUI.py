@@ -196,6 +196,7 @@ class VoyageUI:
  
 
 
+
         if end_datetime == '':
             print('Enter end date for time period')
             print()
