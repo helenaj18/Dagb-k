@@ -77,7 +77,6 @@ class VoyageUI:
             if voyage:
                 return voyage
             print("Invalid voyage id")
-<<<<<<< HEAD
             
     def checkPilotAirplaneLicense(self, crew_member,voyage):
         success = True
@@ -108,7 +107,6 @@ class VoyageUI:
             crew_member = CrewUI().queryShowNotWorkingCrew()
             self.checkPilotAirplaneLicense(crew_member,voyage)
             crew_on_voyage_list = voyage.getCrewOnVoyage()            
-=======
     
     def showOneVoyage(self):
         '''Shows one voyage by ID'''
@@ -137,7 +135,6 @@ class VoyageUI:
                 return
             else:
                 print('No voyage with this ID')
->>>>>>> cb861e1c7139716ddb68ce36aaec32e8c7c4972c
             
         else:
 

@@ -2,10 +2,9 @@ from UI.crewUI import CrewUI
 from UI.display_menu_licensed_pilots import DisplayMenuAirplaneType
 
 class DisplayMenuPilots: 
-    def __init__(self, logic_layer):
-        print('Display pilots')
 
     def startDisplayPilots(self):
+        print()
         print('#'*20)
         print('{:^20}'.format('DISPLAY - Pilots'))
         print('#'*20)
