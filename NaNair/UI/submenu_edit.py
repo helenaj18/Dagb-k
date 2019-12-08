@@ -60,7 +60,7 @@ class SubMenuEdit:
                                             crew_member.getRole(), 
                                             voyage.getVoyageID()
                                         ))
-                                if crew_member.getRole() 
+                                #if crew_member.getRole() 
 
                                             
                     elif selection == '2':
