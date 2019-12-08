@@ -1,4 +1,5 @@
 from UI.voyageUI import VoyageUI
+from UI.display_menu_voyage_time_frame import DisplayVoyageTimeFrame
 
 class DisplayMenuVoyages: 
     def __init__(self, logic_layer):
@@ -14,28 +15,28 @@ class DisplayMenuVoyages:
         while True: 
             print('What would you like to display?')
             print()
-            print('1 - All voyages in a certain time frame')
-            print('2 - A single voyage')
-            print('m - Go back to display menu')
+            print('1 - All voyages')
+            print('2 - A single voyage by ID')
+            print('m - Back to main menu')
             print()
 
             selection = input()
 
             if selection == '1':
-                #lista upp allar ferðir á ákveðnum tíma
+                '''Goes to a new menu where the user
+                   can choose a time frame or a 
+                   specific day'''
 
-                
-                return VoyageUI().showAllVoyages()
+                return DisplayVoyageTimeFrame().startDisplayVoyageTimeFrame()
 
-
-    
             elif selection == '2':
+                ''' Lists one voyage by ID'''
                 # lista ákveðna ferð
                 pass
 
             elif selection == 'm':
-                # fara aftur á display
+                '''Goes back to main menu'''
                 return 
             
-            else: 
+            else:
                 print('Invalid selection')
