@@ -10,17 +10,16 @@ from datetime import timedelta
 class VoyageLL:
     ''' LL class for voyage '''
 
-
-
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
-        #self.upcoming_list = IO_API().read_file()
+
         
     def splitDates(self, datetime):
         date = datetime[:10]
         year, month, day = date.split('-')
 
         return int(year), int(month), int(day)
+
 
     def getOneVoyage(self, voyage_to_get_ID):
 
@@ -31,6 +30,7 @@ class VoyageLL:
                 return voyage
                 
         return None
+
 
     def getVoyageDuration(self,voyage_instance):
         ''' Returns voyage duration, flight duration back and forth plus a one hr layover'''
@@ -59,7 +59,8 @@ class VoyageLL:
         for voyage in voyages:
             if employee_id in voyage.getCrewOnVoyage():
                 return True
-        False
+        return False
+
 
     def addCaptain(self, voyage_id, date, employee_id):
 
@@ -71,8 +72,11 @@ class VoyageLL:
             raise Exception("Voyage not found")
         voyage.setCaptain(employee_id)
 
+
     def getVoyageInDateRange(self, start_datetime, end_datetime):
         ''' Returns all voyages in a certain date range'''
+
+        
 
         voyages = IO_API().loadVoyageFromFile()
 
@@ -102,7 +106,6 @@ class VoyageLL:
             
 
 
-
     def assignVoyageID(self):
         '''Find last voyage id in file by finding id of last voyage'''
         
@@ -112,6 +115,7 @@ class VoyageLL:
  
         return str(new_id)
  
+
     def assignFlightNo(self, destination, depart_time):
         '''assigns a departing and arriving flight number based on a location'''
     
@@ -160,8 +164,6 @@ class VoyageLL:
         # time in faroe islands (FAE) and tingwall (LWK) is gmt so no need to change
 
         return time
-
-
 
 
     def findArrivalTime(self, dest_code, depart_time):
@@ -252,6 +254,7 @@ class VoyageLL:
 
         IO_API().addVoyageToFile(new_voyage_str)
 
+
     def checkDestInput(self, dest_input):
         '''Checks if destination IATA code is valid'''
 
@@ -264,7 +267,6 @@ class VoyageLL:
                     boolOutcome = True
         
         return boolOutcome
-
 
 
     def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):

@@ -112,7 +112,7 @@ class AirplaneLL:
                 hour_int = int(hour_str)
                 minute_int = int(minute_str)
 
-                # Checks if the date is valid
+                # Checks if the time is valid
                 time_tuple = self.checkIfTimeValid(hour_int,minute_int)
 
                 # If the date is valid, return a tuple with the time
