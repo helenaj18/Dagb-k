@@ -78,36 +78,28 @@ class VoyageLL:
 
         voyages_on_date = []
         voyages_on_date_indexes = []
-        
-        start_date = start_datetime[:10]
-        end_date = end_datetime[:10]
+
+        list_of_dates = []
+        delta = timedelta(days=1)
+
+        while start_datetime <= end_datetime:
+            list_of_dates.append(start_datetime.date().isoformat())
+            start_datetime += delta
+
             
         for voyage in voyages:
-
             departure_datetime = voyage.getDepartureTime()
-            
             departure_date = departure_datetime[:10]
 
             arrival_datetime = voyage.getArrivalTimeHome()
-            
             arrival_date = arrival_datetime[:10]
 
-            
-            if arrival_date == start_date:
-                first_voyage_index = voyages.index(voyage)
-                voyages_on_date_indexes.append(voyages.index(voyage))
+            if departure_date in list_of_dates:
+                voyages_on_date.append(voyage)
+            elif arrival_date in list_of_dates:
+                voyages_on_date.append(voyage)
 
-            if departure_date == end_date: 
-                voyages_on_date_indexes.append(voyages.index(voyage))
-
-        if len(voyages_on_date_indexes) != 0:
-            first_voyage_index = voyages_on_date_indexes[0]
-            last_voyage_index = voyages_on_date_indexes[-1]
-
-            for i in range(first_voyage_index,last_voyage_index+1):
-                voyages_on_date.append(voyages[i])
-
-            return voyages_on_date
+        return voyages_on_date
             
         else:
             return None

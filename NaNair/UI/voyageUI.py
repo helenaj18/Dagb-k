@@ -23,7 +23,7 @@ class VoyageUI:
         month = int(input('Month: '))
         day = int(input('Day: '))
 
-        return datetime.datetime(year,month,day,0,0,0).isoformat()
+        return datetime.datetime(year,month,day,0,0,0)
     
     def getDateWithTime(self):
 
@@ -167,16 +167,16 @@ class VoyageUI:
             print()
             start_datetime = VoyageUI().getDateInput()
 
-        start_date = VoyageUI().seperateDatetimeString(start_datetime)
 
         if end_datetime == '':
             print('Enter end date for time period')
             print()
             end_datetime = VoyageUI().getDateInput()
             
-        end_date = VoyageUI().seperateDatetimeString(end_datetime)
 
         voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
+        start_date = VoyageUI().seperateDatetimeString(start_datetime.isoformat())
+        end_date = VoyageUI().seperateDatetimeString(end_datetime.isoformat())
 
         print()
         print('All voyages from {} to {}'.format(start_date,end_date))
