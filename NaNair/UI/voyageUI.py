@@ -105,17 +105,21 @@ class VoyageUI:
             
 
 
-    def showAllVoyagesInRange(self): # BÆTA INN EH TIME PERIOD
+    def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''): 
         '''Shows all voyages for a current time period'''
 
-        print('Enter start date for time period')
-        print()
-        start_datetime = VoyageUI().getDateInput()
+        if start_datetime == '':
+            print('Enter start date for time period')
+            print()
+            start_datetime = VoyageUI().getDateInput()
+
         start_date = VoyageUI().seperateDatetimeString(start_datetime)
 
-        print('Enter end date for time period')
-        print()
-        end_datetime = VoyageUI().getDateInput()
+        if end_datetime == '':
+            print('Enter end date for time period')
+            print()
+            end_datetime = VoyageUI().getDateInput()
+            
         end_date = VoyageUI().seperateDatetimeString(end_datetime)
 
         voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
