@@ -64,25 +64,18 @@ class CrewUI:
                 return employee
             print("Employee not found, try again")
         
-        #  for crew_member in not_working_crew_list:
-        #         format_str += '{:<15}{:<20}{:<20}{:<10}{:<10}{:<20}\n'.format(
-        #             crew_member.getRole(),
-        #             crew_member.getName(),
-        #             crew_member.getCrewID(),
-        #             crew_member.getBool(),
-        #             crew_member.getEmail(),
-        #             crew_member.getPhoneNumber()
-        #         )
+    
 
 
     def printCrew(self,not_working_crew_list, not_working):
         header = 'Working Crew' if not_working else 'Not Working crew'
+        format_str = ''
         if not_working_crew_list != None:
             print('#'*30)
             print('{:^30}'.format(header))
             print()
             print('#'*30)
-            header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}{:<10}'.format(
+            header_str = '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}'.format(
                 'Role','Name','Employee Id','Position','Email',\
                     'Phone Number','Destination')
 
@@ -101,7 +94,7 @@ class CrewUI:
                     else: 
                         position = 'Flight Att.'
 
-                format_str += '{:<15}{:<20}{:<20}{:<10}{:<10}{:<20}\n'.format(
+                format_str += '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
@@ -109,7 +102,7 @@ class CrewUI:
                     crew_member.getEmail(),
                     crew_member.getPhoneNumber()
                 )
-                print(format_str)
+            print(format_str)
 
 
             print()
