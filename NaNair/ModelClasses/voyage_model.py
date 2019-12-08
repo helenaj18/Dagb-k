@@ -19,6 +19,8 @@ class Voyage:
         self.__flight_att_one = flight_att_one
         self.__flight_att_two = flight_att_two
         
+    def getDepartureLocation(self):
+        return self.__departure_location
 
     def getDepartureTime(self):
         return self.__departure_time
@@ -42,6 +44,21 @@ class Voyage:
 
     def getAircraftID(self):
         return self.__aircraft_ID
+
+    def getCaptain(self):
+        return self.__captain
+
+    def getCopilot(self):
+        return self.__copilot
+    
+    def getHeadFlightAtt(self):
+        return self.__head_flight_att
+    
+    def getFlightAttOne(self):
+        return self.__flight_att_one
+
+    def getFlightAttTwo(self):
+        return self.__flight_att_two
 
     # def getDestinationName(self):
     #     return self.__destination_name

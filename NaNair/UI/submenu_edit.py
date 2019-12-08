@@ -3,7 +3,7 @@ from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 from UI.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
-from Ui.airplaneUI import airplaneUI
+from UI.airplaneUI import AirplaneUI
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -43,11 +43,10 @@ class SubMenuEdit:
                     print("m - Back to main menu")
                     user_selection = input()
                     if user_selection == '1':
-                        airplaneUI().showAirplanesByDateTime(voyage.getDepartureTime())
-                        voyage.setAircraftID()
-                        
-                        
+                        return VoyageUI().addAircraftToVoyage(voyage)
 
+
+                    
                     elif user_selection == '2':
 
                         #crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -59,11 +58,8 @@ class SubMenuEdit:
                                             
                     elif selection == '3':
                         # change date
-                        new_datetime_str = input('Enter new date - (format 2019-11-20T15:24:00)') 
-                        flight_number = input('Enter flight voyage - (format NAXXXX)') 
-                        #ATH voyage id og breyta í voyage LL líka
-                        
-                        return LL_API().change_voyage_dates(new_datetime_str,flight_number)
+                    
+                        return VoyageUI().changeTimeOfVoyage()
                     
                     elif selection == 'm':
                         return

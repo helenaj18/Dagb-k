@@ -277,18 +277,8 @@ class VoyageLL:
         return boolOutcome
 
 
-
-    def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
-
-        print('In changeDateTimeofVoyage in VoyageLL.py')
-
-        for i in range(len(self.upcoming_list)):
-            if flight_number == self.upcoming_list[i][0]:
-                self.upcoming_list[i][3] = new_datetime_str
-        
-        VoyageIO().changeVoyageFile(self.upcoming_list)
-
-        return 'Change completed'
+    def changeVoyageFile(self,voyage):
+        return IO_API().changeVoyageFile(voyage)
 
 
 

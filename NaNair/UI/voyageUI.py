@@ -120,8 +120,9 @@ class VoyageUI:
                 if 'empty' in crew_on_voyage_list[-2:]:
                     if 'empty' in crew_on_voyage_list[-1]:
                         crew_member = CrewUI().queryShowNotWorkingCrew()
-                            
                         voyage.setFlightAttOne(crew_member)
+                        
+
                     elif 'empty' in crew_on_voyage_list[-2]:
                         crew_member = CrewUI().queryShowNotWorkingCrew()
                         voyage.setFlightAttTwo(crew_member)
@@ -129,11 +130,31 @@ class VoyageUI:
             elif selection == '2':
                 return 
 
+        LL_API().change_voyage(voyage)
+
         #return AddExtraCrewmemberMenu().startAddExtraCrewMenu()
 
     
+    def addAircraftToVoyage(self,voyage):
+        AirplaneUI().showAirplanesByDateTime(voyage.getDepartureTime())
+        print()
+        print('Which Aircraft would you like to assing to voyage {}? (Aircraft ID)'.format(voyage.getVoyageID()))
+        print()
+        aircraft_ID = input()
+        voyage.setAircraftID(aircraft_ID)
+        return LL_API().change_voyage(voyage)
 
-
+    def changeTimeOfVoyage(self,voyage):
+        print('Enter new date and time')
+        year = input('Year: ')
+        month = input('Month: ')
+        day = input('Day: ')
+        time = input('Time: (HH:MM) ')
+        hrs = time[:2]
+        mins = time[-2:]
+        new_time = datetime.datetime(year,month,day,hrs,mins,0,0).isoformat()
+        voyage.setDepartureTime(new_time)
+        return LL_API().change_voyage(voyage)
 
     def showAllVoyagesInRange(self): # BÆTA INN EH TIME PERIOD
         '''Shows all voyages for a current time period'''

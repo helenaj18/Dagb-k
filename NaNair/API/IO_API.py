@@ -62,8 +62,8 @@ class IO_API:
     #     return VoyageIO().read_file()
 
 
-    def changeVoyageInFile(self):
-        return VoyageIO().changeVoyageInFile()
+    def changeVoyageFile(self,voyage):
+        return VoyageIO().changeVoyageFile(voyage)
 
 
     def addVoyageToFile(self,new_voyage_str):

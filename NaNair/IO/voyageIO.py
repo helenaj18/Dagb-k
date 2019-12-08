@@ -2,6 +2,7 @@ import os
 from ModelClasses.voyage_model import Voyage
 from ModelClasses.destination_model import Destination
 import csv
+from datetime import timedelta
 
 class VoyageIO:
 
@@ -60,15 +61,72 @@ class VoyageIO:
      
 
 
-    def changeVoyageFile(self, upcoming_list):
+    def changeVoyageFile(self, updated_voyage):
         '''Updates the file with new changes'''
-        voyage_str = ''
-        for item in upcoming_list:
-            voyage_str += ','.join(item) + '\n'
-        
+        allvoyages = self.loadVoyageFromFile()
+
         file_object = open(self.__allVoyages_filename,'w')
-        file_object.write(voyage_str)
-        pass
+        with file_object:
+            # header 
+            fieldnames = ['voyageIDnumber','flightNumber_out','departingFrom_home',\
+                'arrivingAt_out','departure_time_home','arrival_time_out','flightNumber_home',\
+                    'departingFrom_out','arrivingAt_home','departure_time_out','arrival_time_home',\
+                        'aircraftID','captain','opilot','fsm','fa1','fa2']
+
+
+            writer = csv.DictWriter(file_object,fieldnames=fieldnames)
+            writer.writeheader()
+
+            for voyage in allvoyages:
+                voyage_id = voyage.getVoyageID()
+                updated_voyage_id = updated_voyage.getVoyageID()
+                if voyage_id == updated_voyage_id:
+                    
+                    writer.writerow({
+                        'voyageIDnumber':updated_voyage.getVoyageID(),
+                        'flightNumber_out':updated_voyage_id.getFlightNumbers()[0],
+                        'departingFrom_home':updated_voyage.getDepartureLocation(),
+                        'arrivingAt_out':updated_voyage.getDestination().getDestinationAirport(),
+                        'departure_time_home':updated_voyage.getDepartureTime(),
+                        'arrival_time_out':updated_voyage.getArrivalTimeOut(),
+                        'flightNumber_home':updated_voyage.getFlightNumbers()[1],
+                        'departingFrom_out':updated_voyage.getDestination().getDestinationAirport(),
+                        'arrivingAt_home':updated_voyage.getDepartureLocation(),
+                        'departure_time_out':updated_voyage.getArrivalTimeOut()+ timedelta(hours = 1),
+                        'arrival_time_home':updated_voyage.getArrivaltimeHome(),
+                        'aircraftID':updated_voyage.getAircraftID(),
+                        'captain':updated_voyage.getCaptain(),
+                        'copilot':updated_voyage.getCopilot(),
+                        'fsm':updated_voyage.getHeadFlightAtt(),
+                        'fa1':updated_voyage.getFlightAttOne(),
+                        'fa2':updated_voyage.getFlightAttTwo()
+                    })
+
+                else:
+
+                    writer.writerow({
+                        'voyageIDnumber':voyage.getVoyageID(),
+                        'flightNumber_out':voyage.getFlightNumbers()[0],
+                        'departingFrom_home':voyage.getDepartureLocation(),
+                        'arrivingAt_out':voyage.getDestination().getDestinationAirport(),
+                        'departure_time_home':voyage.getDepartureTime(),
+                        'arrival_time_out':voyage.getArrivalTimeOut(),
+                        'flightNumber_home':voyage.getFlightNumbers()[1],
+                        'departingFrom_out':voyage.getDestination().getDestinationAirport(),
+                        'arrivingAt_home':voyage.getDepartureLocation(),
+                        'departure_time_out':voyage.getArrivalTimeOut()+ timedelta(hours = 1),
+                        'arrival_time_home':voyage.getArrivaltimeHome(),
+                        'aircraftID':voyage.getAircraftID(),
+                        'captain':voyage.getCaptain(),
+                        'copilot':voyage.getCopilot(),
+                        'fsm':voyage.getHeadFlightAtt(),
+                        'fa1':voyage.getFlightAttOne(),
+                        'fa2':voyage.getFlightAttTwo()
+
+                    })
+
+
+        
 
 
     def addVoyageToFile(self, new_voyage_str):
