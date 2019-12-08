@@ -185,8 +185,15 @@ class VoyageUI:
         voyage.setDepartureTime(new_time)
         return LL_API().change_voyage(voyage)
 
-    def showAllVoyagesInRange(self): # BÆTA INN EH TIME PERIOD
+
+    def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
         '''Shows all voyages for a current time period'''
+ 
+        if start_datetime == '':
+            print('Enter start date for time period')
+            print()
+            start_datetime = VoyageUI().getDateInput()
+ 
 
 
         if end_datetime == '':
