@@ -30,7 +30,7 @@ class CrewIO:
                 
             elif row['role'] == CrewIO.CABINCREW:
                 crewmember = FlightAttendant(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
-                    row['license'],row['captain/head_flight_attendant'],row['role'])
+                    row['captain/head_flight_attendant'],row['license'],row['role'])
                 crew_list.append(crewmember)
                 
         return crew_list
@@ -71,7 +71,7 @@ class CrewIO:
                         'ssn':emp.getCrewID(),
                         'name':emp.getName(),
                         'role':emp.getRole(),
-                        'captain/head_flight_attendant':emp.getBool(),
+                        'captain/head_flight_attendant':int(emp.getBool()),
                         'license':emp.getLicense(),
                         'address':emp.getAddress(),
                         'phonenumber':emp.getPhoneNumber(),
