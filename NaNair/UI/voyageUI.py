@@ -49,10 +49,14 @@ class VoyageUI:
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
                 flight_no_out, flight_no_home, voyage_duration_min):
 
-        print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(), voyage.getDestination().getDestinationAirport(),\
+        print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
+            voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
-        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,voyage_duration_min))
+
+        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
+            voyage_duration_min))
 
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
@@ -62,7 +66,7 @@ class VoyageUI:
     def queryOneVoyage(self):
         '''Helps user find one voyage and returns it'''
 
-        self.showAllVoyages()
+        self.showAllVoyagesInRange()
         voyage = None
         while voyage is None:
             voyage_id = input("Enter voyage ID to select: ")
@@ -74,7 +78,7 @@ class VoyageUI:
             
 
 
-    def showAllVoyages(self): # BÆTA INN EH TIME PERIOD
+    def showAllVoyagesInRange(self): # BÆTA INN EH TIME PERIOD
         '''Shows all voyages for a current time period'''
 
         print('Enter start date for time period')
@@ -87,7 +91,7 @@ class VoyageUI:
         end_datetime = VoyageUI().getDateInput()
         end_date = VoyageUI().seperateDatetimeString(end_datetime)
 
-        voyages_on_date = LL_API().get_all_voyages(start_datetime,end_datetime)
+        voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
 
         print()
         print('All voyages from {} to {}'.format(start_date,end_date))
@@ -99,9 +103,12 @@ class VoyageUI:
 
             flight_no_out, flight_no_home = voyage.getFlightNumbers()
 
-            voyage_duration_hrs, voyage_duration_min = LL_API().get_voyage_duration(voyage)
+            voyage_duration_hrs, voyage_duration_min = \
+                LL_API().get_voyage_duration(voyage)
 
-            if VoyageUI.EMPTY in crew_on_voyage_list:
+            if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
+                # not fully staffed if there is not one captain, one pilot and
+                # one flight attendant 
                 voyage_staffed = 'Voyage not fully staffed'
             else: 
                 voyage_staffed = 'Voyage fully staffed'
@@ -114,8 +121,9 @@ class VoyageUI:
             
 
 
-            VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
-                flight_no_out, flight_no_home, voyage_duration_min)
+            VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
+                voyage_duration_hrs, flight_no_out, flight_no_home, \
+                    voyage_duration_min)
 
             print(60*VoyageUI.SEPERATOR)
 
@@ -135,7 +143,8 @@ class VoyageUI:
         print('Please choose a destination. Available destinations are:')
 
         for destination in destinations_class_list[:-1]:
-            print('\t{:<3}: {:<10}'.format(destination.getDestinationName(), destination.getDestinationAirport()))
+            print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
+                 destination.getDestinationAirport()))
 
         print()
         dest = input('Your destination (3 letters): ').upper()
@@ -163,7 +172,8 @@ class VoyageUI:
         airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
 
         for plane in airplanes_class_list:
-            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(), plane.get_planeTypeID()))        
+            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
+                 plane.get_planeTypeID()))        
 
         plane_name = input('Chosen plane (type name of plane): ').upper()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
