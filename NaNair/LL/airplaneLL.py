@@ -122,8 +122,8 @@ class AirplaneLL:
                 # Else asks for a new input
                 else:
                     print('Invalid time! Try again: ')
-                    hour_int = input('Hour: ')
-                    minute_int = input('Minute: ')
+                    hour_str = input('Hour: ')
+                    minute_str = input('Minute: ')
 
             except ValueError:
                 print('Invalid time! Try again: ')

@@ -18,8 +18,6 @@ class SubMenuRegister:
         print('#'*20)
         print()
 
-
-
         while True:
             print('What would you like to do?')
             print()
@@ -50,18 +48,8 @@ class SubMenuRegister:
 
             elif selection == '4':
                 # Add new destination
-                
-                destination_of_voyage = input('Destination (3char airport code): ').upper()
-                print('Departure time')
-                dep_year = int(input('Year: '))
-                dep_month = int(input('Month: '))
-                dep_day = int(input('Day: '))
-                dep_hour = int(input('Hour: '))
-                dep_minute = int(input('Minute: '))
-                departure_time = datetime.datetime(dep_year,dep_month,dep_day,dep_hour,dep_minute,0).isoformat()
 
-                # Add voyage to logic layer
-                return LL_API().add_voyage(destination_of_voyage,departure_time)
+                return LL_API().addDestination()
 
                 
             elif selection == 'm':

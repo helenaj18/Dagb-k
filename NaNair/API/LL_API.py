@@ -161,4 +161,7 @@ class LL_API:
                
         return DestinationLL().changeEmergencyContactPhone(destination_name,new_emergency_phone)
 
+    def addDestination(self):
+        return DestinationLL().addDestination()
+        
 #LL_API.show_all_planes()

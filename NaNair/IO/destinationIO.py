@@ -40,10 +40,13 @@ class DestinationIO:
                 writer.writerow([destination.getDestinationAirport(),destination.getDestinationName(),destination.getDestinationDuration(),destination.getDestinationDistance(),destination.getDestinationContact(),destination.getDestinationEmergencyPhoneNumber()])
 
 
-    def addDestinationToFile(self,new_destination_str):
+    def addDestinationToFile(self,destination):
         '''Adds the destination into file'''
         file_object = open(self.__destination_filename,'a')
-        file_object.write(new_destination_str+'\n')
-
+        file_object.write(destination.getDestinationAirport()+','+destination.getDestinationName()+\
+            ','+destination.getDestinationDistance()+','+ destination.getDestinationDuration()+\
+                ','+destination.getDestinationContact()+','+destination.getDestinationEmergencyPhoneNumber())
+        
+        print('Destination successfully added!')
         return file_object
 
