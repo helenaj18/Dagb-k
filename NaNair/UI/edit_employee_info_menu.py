@@ -49,7 +49,7 @@ class EditEmployeeMenu:
             else: 
                 print('Rank is 1 for Head Flight Attendant and 0 for Flight Attendant')
             new_rank = input('Rank: ')
-            employee.setRank(self,new_rank)
+            employee.setRank(new_rank)
             CrewUI().changeEmployeeInfo(employee)
             
 

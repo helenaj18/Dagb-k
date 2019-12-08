@@ -2,6 +2,9 @@ from API.LL_API import LL_API
 from LL.airplaneLL import AirplaneLL
 from LL.crewLL import CrewLL
 import datetime
+from ModelClasses.flight_att_model import FlightAttendant
+from ModelClasses.pilot_model import Pilot
+
 
 class CrewUI:
 
@@ -25,13 +28,13 @@ class CrewUI:
         for employee in crew:
             string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
 
-            try:
-                if employee.getCaptain():
+            if type(employee) == Pilot:
+                if employee.getBool():
                     string += '{:<25}{:<10}'.format('Captain', employee.getLicense())
                 else:
                     string += '{:<25}{:<10}'.format('Co-pilot', employee.getLicense())
-            except AttributeError:
-                if employee.getHeadFlightAtt():
+            else:
+                if employee.getBool():
                     string += '{:<15}'.format('Head service manager')
                 else:
                     string += '{:<15}'.format('Flight attendant')
@@ -104,14 +107,15 @@ class CrewUI:
             print('Phone number: {}'.format(crew_member.getPhoneNumber()))
             print('Email: {}'.format(crew_member.getEmail()))
 
-            try:
-                if crew_member.getCaptain():
+            if type(crew_member) == Pilot:
+                if crew_member.getBool():
                     print('Rank: Captain')
+                    print('License: {}'.format(crew_member.getLicense()))
                 else:
                     print('Rank: Co-pilot')
-                print('License: {}'.format(crew_member.getLicense()))
-            except:
-                if crew_member.getHeadFlightAtt():
+                    print('License: {}'.format(crew_member.getLicense()))
+            else:
+                if crew_member.getBool():
                     print('Rank: Head service manager')
                 else:
                     print('Rank: Flight attendant')
@@ -134,7 +138,7 @@ class CrewUI:
 
         for pilot_instance in licensed_pilots_list:
             
-            if pilot_instance.getCaptain():
+            if pilot_instance.getBool():
                 rank = 'Captain'
             else:
                 rank = 'Copilot'
@@ -152,7 +156,7 @@ class CrewUI:
         
         for pilot in sorted_pilots_list:
             
-            if pilot.getCaptain():
+            if pilot.getBool():
                 rank = 'Captain'
             else:
                 rank = 'Copilot'
@@ -170,7 +174,7 @@ class CrewUI:
 
         for attendant in flight_att:
 
-            if attendant.getHeadFlightAtt():
+            if attendant.getBool():
                 rank = 'Head service manager'
             else:
                 rank = 'Flight attendant'
