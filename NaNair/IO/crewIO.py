@@ -41,7 +41,6 @@ class CrewIO:
         allEmps = self.loadCrewFromFile()
 
         file_object = open(self.__crew_filename,'w')
-        print(updated_employee.getLicense())
         with file_object:
             #header
             fieldnames = ['ssn','name','role','captain/head_flight_attendant',\
@@ -58,7 +57,7 @@ class CrewIO:
                         'ssn':updated_employee.getCrewID(),
                         'name':updated_employee.getName(),
                         'role':updated_employee.getRole(),
-                        'captain/head_flight_attendant':updated_employee.getBool(),
+                        'captain/head_flight_attendant':int(updated_employee.getBool()),
                         'license':updated_employee.getLicense(),
                         'address':updated_employee.getAddress(),
                         'phonenumber':updated_employee.getPhoneNumber(),
