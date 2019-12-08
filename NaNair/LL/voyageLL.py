@@ -4,8 +4,8 @@ from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 from datetime import timedelta
 
-DEPARTING_DATETIME = 4
-ARRIVING_DATETIME = 8
+# DEPARTING_DATETIME = 4
+# ARRIVING_DATETIME = 8
 
 class VoyageLL:
     ''' LL class for voyage '''
@@ -27,6 +27,8 @@ class VoyageLL:
         return VoyageIO().getOneVoyage(voyage_ID)
 
     def getVoyageDuration(self,voyage_instance):
+        ''' Returns voyage duration, flight duration back and forth plus a one hr layover'''
+
         destination_duration_str = voyage_instance.getDestination().getDestinationDuration()
         destination_duration_hrs = int(destination_duration_str[: -4])
         destination_duration_minutes = int(destination_duration_str[-3: -1])
@@ -37,6 +39,7 @@ class VoyageLL:
         if voyage_duration_min == 60:
             voyage_duration_hrs = voyage_duration_hrs + 1
             voyage_duration_min = 0 
+
         elif voyage_duration_hrs > 60: 
             voyage_duration_hrs = voyage_duration_hrs + 1
             voyage_duration_min = voyage_duration_min - 60 
@@ -53,6 +56,7 @@ class VoyageLL:
         False
 
     def addCaptain(self, voyage_id, date, employee_id):
+
         is_unavailable = self.isEmployeeWorkingOnDate(date, employee_id)
         if is_unavailable:
             raise Exception("Staff member notavailable on this date")
@@ -62,17 +66,16 @@ class VoyageLL:
         voyage.setCaptain(employee_id)
 
     def getVoyageInDateRange(self, start_datetime, end_datetime):
+        ''' Returns alll voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
         voyages_on_date_indexes = []
         
-
         start_date = start_datetime[:10]
         end_date = end_datetime[:10]
             
-        
         for voyage in voyages:
 
             departure_datetime = voyage.getDepartureTime()
@@ -98,7 +101,6 @@ class VoyageLL:
             for i in range(first_voyage_index,last_voyage_index+1):
                 voyages_on_date.append(voyages[i])
 
-    
             return voyages_on_date
             
         else:
@@ -106,14 +108,9 @@ class VoyageLL:
 
 
 
-            
-
-        # for voyage in self.voyage_list:
-        #     print(voyage) # þarf að formatta streng
- 
-
     def assignVoyageID(self):
-        # Find last voyage id in file by finding id of last voyage
+        '''Find last voyage id in file by finding id of last voyage'''
+        
         last_voyageID = self.voyage_list[-1].getVoyageID()
  
         new_id = int(last_voyageID) + 1
@@ -123,7 +120,6 @@ class VoyageLL:
     def assignFlightNo(self, destination, depart_time):
         '''assigns a departing and arriving flight number based on a location'''
     
-
         if destination == 'LYR':
            first_two = '01'
         elif destination == 'GOH':
@@ -208,8 +204,6 @@ class VoyageLL:
     def addVoyage(self,destination, departure_time, plane):
     
         info_list = []
-        # DEPARTING TRIP
-        #voyage id found from last voyage in file
         voyage_id = self.assignVoyageID()
 
         info_list.append( voyage_id )

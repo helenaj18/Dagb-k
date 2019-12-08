@@ -25,7 +25,7 @@ class DisplayMenuVoyages:
                 #lista upp allar ferðir á ákveðnum tíma
 
                 
-                return VoyageUI().showAllVoyages()
+                return VoyageUI().showAllVoyagesInRange()
 
 
     
