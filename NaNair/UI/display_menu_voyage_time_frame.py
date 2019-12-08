@@ -23,7 +23,7 @@ class DisplayVoyageTimeFrame:
                 
             elif selection == '2':
                 ''' Lists one voyage by ID'''
-                # lista ákveðna ferð
+                
                 pass
 
             elif selection == 'm':

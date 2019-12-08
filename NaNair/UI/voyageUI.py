@@ -74,7 +74,34 @@ class VoyageUI:
             if voyage:
                 return voyage
             print("Invalid voyage id")
-            
+    
+    def showOneVoyage(self):
+        '''Shows one voyage by ID'''
+        while True:
+            voyage_id = input("Enter voyage ID: ")
+            voyage = VoyageLL().getOneVoyage(voyage_id)
+            if voyage != None:
+
+                voyage_duration_hrs, voyage_duration_min = \
+                LL_API().get_voyage_duration(voyage)
+                
+                flight_no_out, flight_no_home = voyage.getFlightNumbers()
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                
+                if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
+                    # not fully staffed if there is not one captain, one pilot and
+                    # one flight attendant 
+                    voyage_staffed = 'Voyage not fully staffed'
+                else: 
+                    voyage_staffed = 'Voyage fully staffed'
+                
+                
+                self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
+                
+                return
+            else:
+                print('No voyage with this ID')
             
 
 
@@ -127,12 +154,6 @@ class VoyageUI:
 
             print(60*VoyageUI.SEPERATOR)
 
-
-            
-
-    def showOneVoyage(self,voyage_ID):
-        '''Shows one specific voyage'''
-        pass
 
     
     def getDest(self):

@@ -1,5 +1,4 @@
 from UI.crewUI import CrewUI
-from UI.display_menu_attendants import DisplayMenuAttendants
 from UI.display_menu_pilots import DisplayMenuPilots
 from UI.display_menu_working_crew import DisplayMenuWorkingCrew
 from UI.display_menu_workschedule import DisplayMenuWorkSchedule
