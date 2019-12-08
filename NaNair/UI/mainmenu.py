@@ -17,10 +17,9 @@ class MainMenu:
         print('#'*20)
         print('{:^20}'.format('WELCOME'))
         print('#'*20)
-        print()
 
         while True: 
-          
+            print()
             print('What would you like to do?')
             print('_'*28)
             print() 
@@ -35,18 +34,22 @@ class MainMenu:
 
             if selection == '1':
                 # Register Menu
+                
                 SubMenuRegister(self.logic_layer).startSubMenuRegister()
 
             elif selection == '2':
                 # Display Menu
+
                 SubMenuDisplay(self.logic_layer).startSubMenuDisplay()
 
             elif selection =='3':
                 # Edit Menu
+
                 SubMenuEdit(self.logic_layer).startSubMenuEdit()
 
             elif selection == 'q':
                 # Quit the program
+
                 break
 
             else: 
