@@ -46,7 +46,6 @@ class CrewLL:
             for crew_member in crew:
                 crew_id = crew_member.getCrewID()
                 if input_crew_id == crew_id:
-                    #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
                 return None
