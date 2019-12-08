@@ -55,7 +55,7 @@ class DisplayMenuEmployee:
             elif selection == '3':
                 # Goes to the next menu where the user can pick how he wants
                 # to display the pilots
-                return DisplayMenuPilots(self.logic_layer).startDisplayPilots()
+                return DisplayMenuPilots().startDisplayPilots()
 
 
             elif selection == '4':

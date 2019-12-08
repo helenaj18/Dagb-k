@@ -7,27 +7,16 @@ from ModelClasses.pilot_model import Pilot
 
 class CrewLL:
 
-    SSN_const = 0
-    NAME_const = 1
+
     ROLE_const = 2
     RANK_const = 3
     LICENSE_const = 4
-    ADDRESS_const = 5
-    PHONENUMBER_const = 6
-    EMAIL_const = 7
-
-    def __init__(self):
-
-        #self.employees_list = IO_API().loadCrewFromFile()
-        #self.pilots_list = IO_API().loadPilotFromFile()
-        pass
-
 
     def getPilots(self):
         ''' Gets the pilots '''
-        crew_list = IO_API().loadPilotFromFile()
+        crew_list = IO_API().loadCrewFromFile()
         pilot_list = []
-        for employee in self.crew_list:
+        for employee in crew_list:
             if type(employee) == Pilot:
                 pilot_list.append(employee)
 

@@ -1,57 +1,51 @@
 from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
-from LL.voyageLL import VoyageLL
 from UI.crewUI import CrewUI
 #from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
-
-#### ATHHHHH LL VOYAGE :@
 
 
 class VoyageUI:
     EMPTY = 'empty'
     SEPERATOR = '-'
 
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
     def getDateInput(self):
+        '''Gets a date input from the user'''
 
-        year = int(input('Year: '))
-        month = int(input('Month: '))
-        day = int(input('Day: '))
+        year_str = input('Year: ')
+        month_str = input('Month: ')
+        day_str = input('Day: ')
 
-        return datetime.datetime(year,month,day,0,0,0).isoformat()
+        year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
+
+        return datetime.datetime(year_int,month_int,day_int,0,0,0)
     
     def getDateWithTime(self):
+        '''Gets a date input from the user with time'''
 
         year = input('Year: ')
         month = input('Month: ')
         day = input('Day: ')
         
-        year, month, day = LL_API().verifyDate(year, month, day)
+        year_int, month_int, day_int = LL_API().verifyDate(year, month, day)
 
         hour = input('Hour: ')
-        min = input('Minute: ')
+        minutes = input('Minute: ')
         print()
 
-        hour, min = LL_API().verifyTime(hour, min)
+        hour_int, minutes_int = LL_API().verifyTime(hour, minutes)
 
-        return datetime.datetime(int(year), int(month), int(day), int(hour), int(min), 0)
+        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
 
 
     def seperateDatetimeString(self, datetimestring):
-        
+        '''Seperates a datetime string and returns the date part'''
         return datetimestring[:10]
 
-    def totalSeats(aircraft_ID):
-        pass
 
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
                 flight_no_out, flight_no_home, voyage_duration_min):
+        '''Prints out a voyage'''
 
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
             voyage.getDestination().getDestinationAirport(),\
@@ -67,6 +61,7 @@ class VoyageUI:
         print('\t Seats sold: {}/{}'.format('ATH no info','total seats'))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
+
     def queryOneVoyage(self):
         '''Helps user find one voyage and returns it'''
 
@@ -74,11 +69,12 @@ class VoyageUI:
         voyage = None
         while voyage is None:
             voyage_id = input("Enter voyage ID to select: ")
-            voyage = VoyageLL().getOneVoyage(voyage_id)
+            voyage = LL_API().getOneVoyage(voyage_id)
             if voyage:
                 return voyage
             print("Invalid voyage id")
             
+
     def checkPilotAirplaneLicense(self, crew_member,voyage):
         success = True
         try:
@@ -101,6 +97,7 @@ class VoyageUI:
 
 
     def addCrewToVoyage(self,voyage):
+        '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
         crew_on_voyage_list = voyage.getCrewOnVoyage()
 
@@ -108,6 +105,38 @@ class VoyageUI:
             crew_member = CrewUI().queryShowNotWorkingCrew()
             self.checkPilotAirplaneLicense(crew_member,voyage)
             crew_on_voyage_list = voyage.getCrewOnVoyage()            
+    
+
+    def showOneVoyage(self):
+        '''Shows one voyage by ID'''
+
+        while True:
+            voyage_id = input("Enter voyage ID: ")
+            
+            voyage = LL_API().getOneVoyage(voyage_id)
+            if voyage != None:
+
+                voyage_duration_hrs, voyage_duration_min = \
+                LL_API().get_voyage_duration(voyage)
+                
+                flight_no_out, flight_no_home = voyage.getFlightNumbers()
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                
+                if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
+                    # not fully staffed if there is not one captain, one pilot and
+                    # one flight attendant 
+                    voyage_staffed = 'Voyage not fully staffed'
+                else: 
+                    voyage_staffed = 'Voyage fully staffed'
+                
+                
+                self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
+                
+                return
+
+            else:
+                print('No voyage with this ID')
             
         else:
             print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
@@ -159,51 +188,55 @@ class VoyageUI:
     def showAllVoyagesInRange(self): # BÆTA INN EH TIME PERIOD
         '''Shows all voyages for a current time period'''
 
-        print('Enter start date for time period')
-        print()
-        start_datetime = VoyageUI().getDateInput()
-        start_date = VoyageUI().seperateDatetimeString(start_datetime)
 
-        print('Enter end date for time period')
-        print()
-        end_datetime = VoyageUI().getDateInput()
-        end_date = VoyageUI().seperateDatetimeString(end_datetime)
-
-        voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
-
-        print()
-        print('All voyages from {} to {}'.format(start_date,end_date))
-        print(60*VoyageUI.SEPERATOR)
-
-        for voyage in voyages_on_date:
-
-            crew_on_voyage_list = voyage.getCrewOnVoyage()
-
-            flight_no_out, flight_no_home = voyage.getFlightNumbers()
-
-            voyage_duration_hrs, voyage_duration_min = \
-                LL_API().get_voyage_duration(voyage)
-
-            if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
-                # not fully staffed if there is not one captain, one pilot and
-                # one flight attendant 
-                voyage_staffed = 'Voyage not fully staffed'
-            else: 
-                voyage_staffed = 'Voyage fully staffed'
-                
-            aircraft_ID = voyage.getAircraftID()
-
-            if aircraft_ID == VoyageUI.EMPTY: 
-                aircraft_ID = 'No aircraft assigned to voyage'
-
+        if end_datetime == '':
+            print('Enter end date for time period')
+            print()
+            end_datetime = VoyageUI().getDateInput()
             
 
+        voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
+        start_date = VoyageUI().seperateDatetimeString(start_datetime.isoformat())
+        end_date = VoyageUI().seperateDatetimeString(end_datetime.isoformat())
 
-            VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
-                voyage_duration_hrs, flight_no_out, flight_no_home, \
-                    voyage_duration_min)
 
+        if voyages_on_date != []:
+            print()
+            print('All voyages from {} to {}'.format(start_date,end_date))
             print(60*VoyageUI.SEPERATOR)
+
+            for voyage in voyages_on_date:
+
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+
+                flight_no_out, flight_no_home = voyage.getFlightNumbers()
+
+                voyage_duration_hrs, voyage_duration_min = \
+                    LL_API().get_voyage_duration(voyage)
+
+                if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
+                    # not fully staffed if there is not one captain, one pilot and
+                    # one flight attendant 
+                    voyage_staffed = 'Voyage not fully staffed'
+                else: 
+                    voyage_staffed = 'Voyage fully staffed'
+                    
+                aircraft_ID = voyage.getAircraftID()
+
+                if aircraft_ID == VoyageUI.EMPTY: 
+                    aircraft_ID = 'No aircraft assigned to voyage'
+
+                
+                VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
+                    voyage_duration_hrs, flight_no_out, flight_no_home, \
+                        voyage_duration_min)
+
+                print(60*VoyageUI.SEPERATOR)
+                return
+        else:
+            print()
+            print('No voyages on these dates')
+            print()
 
 
             

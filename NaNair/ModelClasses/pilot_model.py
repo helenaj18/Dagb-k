@@ -22,8 +22,8 @@ class Pilot(Crew):
     def getRole(self):
         return self.__role
         
-    # def getBool(self):
-    #     return self.__captain
+    def getBool(self):
+        return self.__captain
 
     # def isCaptain(self):
     #     return True if self.__captain else False

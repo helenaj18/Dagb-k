@@ -112,7 +112,7 @@ class AirplaneLL:
                 hour_int = int(hour_str)
                 minute_int = int(minute_str)
 
-                # Checks if the date is valid
+                # Checks if the time is valid
                 time_tuple = self.checkIfTimeValid(hour_int,minute_int)
 
                 # If the date is valid, return a tuple with the time
@@ -176,7 +176,8 @@ class AirplaneLL:
                             # Add the airplane and information tuple to the list of airplanes 
                             # that are in use that day
                             airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
-                                voyage.getDepartureTime(),voyage.getArrivalTimeOut(),voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
+                                voyage.getDepartureTime(),voyage.getArrivalTimeOut(),\
+                                    voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
                     else:
                         break
             else:
@@ -226,11 +227,13 @@ class AirplaneLL:
                     # If the hours is between departure hour and arrival at destination,
                     # the flight number out is added
                     if departure_hour_int<=hour_int<=arrival_hour_out_int:
-                        not_available_airplanes_info_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_out))
+                        not_available_airplanes_info_list.append((airplane,destination,\
+                            arrival_time_home_datetime_str,flight_number_out))
                     
                     # Else the flight number home is added
                     else:
-                        not_available_airplanes_info_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_home))
+                        not_available_airplanes_info_list.append((airplane,destination,\
+                            arrival_time_home_datetime_str,flight_number_home))
                 else:
                     available_airplanes_list.append(airplane)
         
@@ -269,12 +272,37 @@ class AirplaneLL:
         return airplanes_type_list
  
 
-    def getOneAirplane(self, id):
-        return IO_API()
-
-    def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
+    def addAirplane(self):
         ''' Adds new airplane'''
-        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+        
+        while True:
+
+            planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper()
+
+            if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
+                
+                while True:
+                    planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ').lower()
+                    
+                    if planeTypeId == 'nafokkerf100':
+                        manufacturer = 'Fokker'
+                        seats = '100'
+                        print('Airplane successfully added!')
+                        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+                    elif planeTypeId == 'nabae146':
+                        manufacturer = 'BAE'
+                        seats = '82'
+                        print('Airplane successfully added!')
+                        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+                    elif planeTypeId == 'nafokkerf28':
+                        manufacturer = 'Fokker'
+                        seats = '65'
+                        print('Airplane successfully added!')
+                        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+                    else:
+                        print('Invalid Type ID!')
+            else:
+                print('Invalid Plane insignia!')
 
 
 # BANNAÐ AÐ FÆRA, VERÐUR AÐ VERA NEÐST

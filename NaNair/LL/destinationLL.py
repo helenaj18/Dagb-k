@@ -1,9 +1,6 @@
 from API.IO_API import IO_API
 from IO.destinationIO import DestinationIO
 
-DESTINATION_NAME_const = 1
-EMERGENCY_CONTACT_NAME_const = 5
-EMERGENCY_CONTACT_PHONE_const = 6
 
 class DestinationLL:
 

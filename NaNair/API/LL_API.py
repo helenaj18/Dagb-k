@@ -25,9 +25,9 @@ class LL_API:
     def verifyTime(self,hour_str,minute_str):
         return AirplaneLL().verifyTime(hour_str,minute_str)
     
-    def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
+    def addAirplane(self):
         ''' Sends info for new ariplane to be added'''
-        return AirplaneLL().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
+        return AirplaneLL().addAirplane()
 
     ### CREW LL 
     

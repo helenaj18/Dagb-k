@@ -4,23 +4,21 @@ from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 from datetime import timedelta
 
-# DEPARTING_DATETIME = 4
-# ARRIVING_DATETIME = 8
+
 
 class VoyageLL:
     ''' LL class for voyage '''
 
-
-
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
-        #self.upcoming_list = IO_API().read_file()
+
         
     def splitDates(self, datetime):
         date = datetime[:10]
         year, month, day = date.split('-')
 
         return int(year), int(month), int(day)
+
 
     def getOneVoyage(self, voyage_to_get_ID):
 
@@ -31,6 +29,7 @@ class VoyageLL:
                 return voyage
                 
         return None
+
 
     def getVoyageDuration(self,voyage_instance):
         ''' Returns voyage duration, flight duration back and forth plus a one hr layover'''
@@ -59,7 +58,8 @@ class VoyageLL:
         for voyage in voyages:
             if employee_id in voyage.getCrewOnVoyage():
                 return True
-        False
+        return False
+
 
     def addCaptain(self, voyage_id, date, employee_id):
 
@@ -71,47 +71,38 @@ class VoyageLL:
             raise Exception("Voyage not found")
         voyage.setCaptain(employee_id)
 
+
     def getVoyageInDateRange(self, start_datetime, end_datetime):
         ''' Returns all voyages in a certain date range'''
+
+        
 
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
-        voyages_on_date_indexes = []
-        
-        start_date = start_datetime[:10]
-        end_date = end_datetime[:10]
+
+        list_of_dates = []
+        delta = timedelta(days=1)
+
+        while start_datetime <= end_datetime:
+            list_of_dates.append(start_datetime.date().isoformat())
+            start_datetime += delta
+
             
         for voyage in voyages:
-
             departure_datetime = voyage.getDepartureTime()
-            
             departure_date = departure_datetime[:10]
 
             arrival_datetime = voyage.getArrivalTimeHome()
-            
             arrival_date = arrival_datetime[:10]
 
+            if departure_date in list_of_dates:
+                voyages_on_date.append(voyage)
+            elif arrival_date in list_of_dates:
+                voyages_on_date.append(voyage)
+
+        return voyages_on_date
             
-            if arrival_date == start_date:
-                first_voyage_index = voyages.index(voyage)
-                voyages_on_date_indexes.append(voyages.index(voyage))
-
-            if departure_date == end_date: 
-                voyages_on_date_indexes.append(voyages.index(voyage))
-
-        if len(voyages_on_date_indexes) != 0:
-            first_voyage_index = voyages_on_date_indexes[0]
-            last_voyage_index = voyages_on_date_indexes[-1]
-
-            for i in range(first_voyage_index,last_voyage_index+1):
-                voyages_on_date.append(voyages[i])
-
-            return voyages_on_date
-            
-        else:
-            return None
-
 
 
     def assignVoyageID(self):
@@ -123,6 +114,7 @@ class VoyageLL:
  
         return str(new_id)
  
+
     def assignFlightNo(self, destination, depart_time):
         '''assigns a departing and arriving flight number based on a location'''
     
@@ -171,8 +163,6 @@ class VoyageLL:
         # time in faroe islands (FAE) and tingwall (LWK) is gmt so no need to change
 
         return time
-
-
 
 
     def findArrivalTime(self, dest_code, depart_time):
@@ -263,6 +253,7 @@ class VoyageLL:
 
         IO_API().addVoyageToFile(new_voyage_str)
 
+
     def checkDestInput(self, dest_input):
         '''Checks if destination IATA code is valid'''
 
@@ -277,8 +268,22 @@ class VoyageLL:
         return boolOutcome
 
 
+<<<<<<< HEAD
     def changeVoyageFile(self,voyage):
         return IO_API().changeVoyageFile(voyage)
+=======
+    def changeDateTimeOfVoyage(self,new_datetime_str,flight_number):
+
+        print('In changeDateTimeofVoyage in VoyageLL.py')
+
+        for i in range(len(self.upcoming_list)):
+            if flight_number == self.upcoming_list[i][0]:
+                self.upcoming_list[i][3] = new_datetime_str
+        
+        VoyageIO().changeVoyageFile(self.upcoming_list)
+
+        return 'Change completed'
+>>>>>>> a71ac5e69173f59f5617673c0ec6f7245d29b847
 
 
 
