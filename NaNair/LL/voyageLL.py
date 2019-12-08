@@ -77,7 +77,6 @@ class VoyageLL:
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
-        voyages_on_date_indexes = []
 
         list_of_dates = []
         delta = timedelta(days=1)
