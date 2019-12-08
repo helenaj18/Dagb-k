@@ -158,8 +158,6 @@ class VoyageUI:
         return dest
 
 
-
-
     def addVoyage(self):
 
         dest = self.getDest()
@@ -169,19 +167,19 @@ class VoyageUI:
 
         print('Please choose an airplane.')
 
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
+        available_airplanes_list = LL_API().showPlanesForNewVoyage(departure_time)
 
-        for plane in airplanes_class_list:
+        for plane in available_airplanes_list:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                  plane.get_planeTypeID()))        
 
         plane_name = input('Chosen plane (type name of plane): ').upper()
-        check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
+        check = LL_API().checkPlaneInput(plane_name, available_airplanes_list)
 
         while check == False:
             print('Please choose one of the listed planes.')
             plane_name = input()
-            check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
+            check = LL_API().checkPlaneInput(plane_name, available_airplanes_list)
 
         LL_API().add_voyage(dest, departure_time, plane_name)
 

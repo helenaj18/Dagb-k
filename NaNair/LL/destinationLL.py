@@ -12,15 +12,6 @@ class DestinationLL:
 
         return IO_API().loadDestinationFromFile()
 
-    def getAirport(self, dest_code):
-        ''' Gets destination code (IATA)'''
-        destinations_instances = self.getDestination()
-
-        #Reads everyline in the file and returns destination code (IATA) 
-        for destination in destinations_instances:
-            if dest_code == destination.getDestinationName():
-                return destination.getDestinationAirport()
-
 
     def changeEmergencyContactName(self,destination_name,new_emergency_contact):
         '''Changes the Emergency Contact name for destination in file'''
