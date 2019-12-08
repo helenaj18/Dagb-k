@@ -18,37 +18,37 @@ class SubMenuDisplay:
         print('#'*20)
         print()
 
-        print('What would you like to display? ')
-        print()
+        while True:
+            print('What would you like to display? ')
+            print()
 
-        print('1 - Airplanes')
-        print('2 - Destinations')
-        print('3 - Voyages')
-        print('4 - Employees')
-        print('m - Main menu')
-        print()
+            print('1 - Airplanes')
+            print('2 - Destinations')
+            print('3 - Voyages')
+            print('4 - Employees')
+            print('m - Main menu')
+            print()
 
-        selection = input()
+            selection = input()
 
-        if selection == '1': 
-            # Display Menu Airplanes
-            DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
+            if selection == '1': 
+                # Display Menu Airplanes
+                return DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
+            
+            elif selection == '2':
+                # Display Destination
+                return DestinationUI().showAllDestinations()
+
+            elif selection == '3':
+                # Display Menu Voyages
+                return DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
+
+            elif selection == '4':
+                # Display Menu Employees
+                return DisplayMenuEmployee(self.logic_layer).startDisplayMenu()
         
-        elif selection == '2':
-            # Display Destination
-            return DestinationUI().showAllDestinations()
-
-        elif selection == '3':
-            # Display Menu Voyages
-            DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
-
-        elif selection == '4':
-            # Display Menu Employees
-            DisplayMenuEmployee(self.logic_layer).startDisplayMenu()
-       
-        elif selection == 'm':
-            # Back to main menu
-            return 
-
-        else:
-            print("Invalid selection")
+            elif selection == 'm':
+                # Back to main menu
+                return 
+            else:
+                print("Invalid selection")
