@@ -58,7 +58,6 @@ class CrewLL:
                     #print("inn í getOneCrewMember prentum crew_member: " , crew_member)
                     return crew_member
             else: 
-                print('CREW MEMBER NOT FOUND')
                 return None
  
     
@@ -255,29 +254,17 @@ class CrewLL:
 
     def getNotWorkingCrew(self,date_str):
         
-        format_str = ''
+        #format_str = ''
         self.getWorkingCrew(date_str)
         not_working_crew_list = []
-        flight_atts = IO_API().loadFlightAttFromFile()
-        pilots = IO_API().loadPilotFromFile()
+        all_crew = IO_API().loadCrewFromFile()
 
-        # self.appendNotWorkingCrewList(flight_atts, not_working_crew_id_list)
-        # self.appendNotWorkingCrewList(pilots, not_working_crew_id_list)
-        all_crew = flight_atts + pilots
 
         if len(all_crew) != 0:
             for crew_member in all_crew:
                 if crew_member.getCrewID() not in self.working_crew_id_list:
                     not_working_crew_list.append(crew_member)
-
-            for crew_member in not_working_crew_list:
-                format_str += '{:<20}{:<20}{:<20}{:<20}\n'.format(
-                    crew_member.getName(),
-                    crew_member.getCrewID(),
-                    crew_member.getAddress(),
-                    crew_member.getPhoneNumber()
-                )
-            return format_str
+            return not_working_crew_list
         else:
             return None
 

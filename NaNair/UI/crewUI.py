@@ -48,8 +48,8 @@ class CrewUI:
 
 
     def showNotWorkingCrew(self,date_str):
-        format_str = LL_API().get_not_working_crew(date_str)
-        self.printCrew(format_str, False)
+        not_working_crew_list = LL_API().get_not_working_crew(date_str)
+        self.printCrew(not_working_crew_list, False)
 
     def queryShowNotWorkingCrew(self, date_str):
         self.showNotWorkingCrew(date_str)
@@ -61,20 +61,54 @@ class CrewUI:
                 return employee
             print("Employee not found, try again")
         
+        #  for crew_member in not_working_crew_list:
+        #         format_str += '{:<15}{:<20}{:<20}{:<10}{:<10}{:<20}\n'.format(
+        #             crew_member.getRole(),
+        #             crew_member.getName(),
+        #             crew_member.getCrewID(),
+        #             crew_member.getBool(),
+        #             crew_member.getEmail(),
+        #             crew_member.getPhoneNumber()
+        #         )
 
 
-    def printCrew(self,format_str, not_working):
+    def printCrew(self,not_working_crew_list, not_working):
         header = 'Working Crew' if not_working else 'Not Working crew'
-        if format_str != None:
+        if not_working_crew_list != None:
             print('#'*30)
             print('{:^30}'.format(header))
             print()
             print('#'*30)
-            header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}'.format('Name','Employee Id','Address','Phone Number','Destination')
+            header_str = '{:<20}{:<20}{:<20}{:<20}{:<20}{:<10}'.format(
+                'Role','Name','Employee Id','Position','Email',\
+                    'Phone Number','Destination')
 
             print(header_str)
             print(len(header_str)*'-')
-            print(format_str)
+            for crew_member in not_working_crew_list:
+                role = crew_member.getRole()
+                if role == 'Pilot':
+                    if crew_member.getBool(): 
+                        position = 'Captain'
+                    else: 
+                        position = 'Pilot'
+                elif role == 'Cabincrew':
+                    if crew_member.getBool(): 
+                        position = 'Head'
+                    else: 
+                        position = 'Flight Att.'
+
+                format_str += '{:<15}{:<20}{:<20}{:<10}{:<10}{:<20}\n'.format(
+                    crew_member.getRole(),
+                    crew_member.getName(),
+                    crew_member.getCrewID(),
+                    position,
+                    crew_member.getEmail(),
+                    crew_member.getPhoneNumber()
+                )
+                print(format_str)
+
+
             print()
         else:
             print('\nNo voyages on this day\n')
