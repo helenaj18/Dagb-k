@@ -11,42 +11,31 @@ class DisplayMenuPilots:
         print('#'*20)
         print()
 
-        start = True
-        while start: 
+        while True: 
             print('What would you like to display?')
             print()
             print('1 - Pilots with a license for a specific airplane')
             print('2 - All pilots sorted by license')
-            print('3 - Single pilot information')
-            print('m - Go back to display menu')
+            print('m - Back to main menu')
             print()
 
             selection = input()
 
             if selection == '1':
-                #lista upp flugmenn með x leyfi
+                # Goes to another menu where the user
+                # can pick a license to list
                 
-                DisplayMenuAirplaneType().startDisplayLicensedPilots()
-
-                start = False
+                return DisplayMenuAirplaneType().startDisplayLicensedPilots()
 
 
             elif selection == '2':
-                # lista upp alla flugmenn eftir hvaða leyfi þeir hafa
+                # List up pilots by license
 
-                CrewUI().showSortedByLicense()
-                start = False
-
-            elif selection == '3':
-                pilot_ID = input('Input pilot ID: ')
-                #lista upp ákveðinn flugmann
-                CrewUI().showOnePilot(pilot_ID)
-                start = False
+                return CrewUI().showSortedByLicense()
 
             elif selection == 'm':
-                # fara aftur á display
-
-                start = False
+                # Goes back to main menu
                 return
+
             else: 
                 print('Invalid selection')

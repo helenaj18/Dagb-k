@@ -244,44 +244,49 @@ class CrewUI:
 
     def showSchedule(self, crew_ID):
         ''' Shows the schedule for a specific crew member '''
-        
-        print('Enter the "From date" for work schedule')
-        
-        start_year_str = input('Year: ')
-        start_month_str = input('Month: ')
-        start_day_str = input('Day: ')
-
-        start_year_int, start_month_int, start_day_int = AirplaneLL().verifyDate(start_year_str, start_month_str, start_day_str)
-        start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
-        
-        print('Enter the "To date" for work schedule')
-        end_year_str = input('Year: ')
-        end_month_str = input('Month: ')
-        end_day_str = input('Day: ')
-
-        end_year_int, end_month_int, end_day_int = AirplaneLL().verifyDate(end_year_str, end_month_str, end_day_str)
-        end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
-        
-        work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
-
         employee = LL_API().get_crew_member_by_id(crew_ID)
-        #working_crew_list
-        name_header_str = '{:<10} {:<10}'.format(employee.getName(),crew_ID)
-        header_str = 'Working Schedule {}.{}.{}-{}.{}.{}'.format(start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
-        print()
-        print(name_header_str)
-        print(header_str)
-        print(len(header_str)*'-')
-        if work_schedule_list != None: 
-            for voyage in work_schedule_list:
-                flight_no_out,flight_no_home = voyage.getFlightNumbers()
-                voyage_duration_hrs, voyage_duration_min = LL_API().get_voyage_duration(voyage)
-                aircraft_ID = voyage.getAircraftID()
-                self.prettyprint(voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
-                aircraft_ID)
-        else:
-            print('No voyages on this time period\n')
+        
+        if employee != None:
+            print('Enter the "From date" for the work schedule')
+            
+            start_year_str = input('Year: ')
+            start_month_str = input('Month: ')
+            start_day_str = input('Day: ')
 
+            start_year_int, start_month_int, start_day_int = AirplaneLL().verifyDate(start_year_str, start_month_str, start_day_str)
+            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
+            
+            print('Enter the "To date" for work schedule')
+            end_year_str = input('Year: ')
+            end_month_str = input('Month: ')
+            end_day_str = input('Day: ')
+
+            end_year_int, end_month_int, end_day_int = AirplaneLL().verifyDate(end_year_str, end_month_str, end_day_str)
+            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
+            
+            work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
+            
+        
+            name_header_str = '{:<10} {:<10}'.format(employee.getName(),crew_ID)
+            header_str = 'Working Schedule {}.{}.{}-{}.{}.{}'.format(start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
+            print()
+            print(name_header_str)
+            print(header_str)
+            print(len(header_str)*'-')
+
+            if work_schedule_list != None: 
+                for voyage in work_schedule_list:
+                    flight_no_out,flight_no_home = voyage.getFlightNumbers()
+                    voyage_duration_hrs, voyage_duration_min = LL_API().get_voyage_duration(voyage)
+                    aircraft_ID = voyage.getAircraftID()
+                    self.prettyprint(voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
+                    aircraft_ID)
+                return True
+            else:
+                print('No voyages in this time period\n')
+                return True
+        else:
+            return False
             
     def prettyprint(self,voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
         aircraft_ID):
