@@ -101,8 +101,6 @@ class VoyageLL:
 
         return voyages_on_date
             
-        else:
-            return None
 
 
 
