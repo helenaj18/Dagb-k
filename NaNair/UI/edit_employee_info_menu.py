@@ -45,16 +45,22 @@ class EditEmployeeMenu:
 
         elif selection == '4':
             if type(employee) == Pilot:
-                print('Rank is 1 for Captain and 0 for Pilot')
+                print('Please choose one: ')
+                print('0 - Co-pilot')
+                print('1 - Captain')
             else: 
-                print('Rank is 1 for Head Flight Attendant and 0 for Flight Attendant')
+                print('Please choose one: ')
+                print('0 - Flight attendant')
+                print('1 - Head service manager')
             new_rank = input('Rank: ')
-            employee.setRank(self,new_rank)
+
+            employee.setRank(new_rank)
             CrewUI().changeEmployeeInfo(employee)
             
 
         elif selection == '5':
             new_license = input('License: ')
+            print()
             employee.setLicense(new_license)
             CrewUI().changeEmployeeInfo(employee)
 

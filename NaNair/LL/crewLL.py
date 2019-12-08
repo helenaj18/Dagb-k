@@ -79,10 +79,10 @@ class CrewLL:
     def addCrew(self, CrewData):
         '''Takes in a list of data and formats it to a string to add to file.
         '''
-
+        # add necessary data that can be found from user input
         # if 'Captain' was selected in UI layer
         if CrewData[2] == '1': 
-            CrewData.insert(CrewLL.ROLE_const, 'Pilot')
+            CrewData.insert(self.ROLE_const, 'Pilot')
             CrewData[CrewLL.RANK_const] = '1'
 
         # if 'Copilot' was selected in UI layer
@@ -102,7 +102,6 @@ class CrewLL:
             CrewData.insert(CrewLL.LICENSE_const, 'N/A')
             CrewData[CrewLL.RANK_const] = '0'
 
-
         new_employee_str = ','.join(CrewData)
 
         return IO_API().addCrew(new_employee_str)
@@ -110,87 +109,9 @@ class CrewLL:
 
 
     def ChangeCrewInfo(self,employee):
-        # all_crew = IO_API().loadCrewFromFile()
-        # new_employee_list = []
-
-        # for crew_member in all_crew:
-        #     if employee.getCrewID() == crew_member.getCrewID():
-        #         new_employee_list.append(employee)
-        #     else:
-        #         new_employee_list.append(crew_member) 
-
         IO_API().changeCrewInfo(employee)
 
 
-    def ChangeHomeAddress(self,crew_id,new_home_address):
-        '''Changes the home address of crew member'''
-        #employee = self.getOneCrewMember(crew_id)
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        new_employee_list = []
-
-        for pilot in pilots:
-            if crew_id == pilot:
-                pilot.setAddress(new_home_address)
-            new_employee_list.append(pilot)
-        
-        for attendant in flight_att:
-            att_id = attendant.getCrewID()
-            if crew_id == att_id:
-                attendant.setAddress(new_home_address)
-            new_employee_list.append(attendant)
-
-        IO_API().changeCrewFile(new_employee_list)
-
-    def ChangeEmailAddress(self,crew_id,new_email_address):
-        '''Changes the email address of a crew member'''
-        employee = self.getOneCrewMember(crew_id)
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        new_employee_list = []
-
-        for pilot in pilots:
-            if employee == pilot:
-                pilot.setEmailAddress(new_email_address)
-            new_employee_list.append(pilot)
-        
-        for attendant in flight_att:
-            if employee == attendant:
-                attendant.setEmailAddress(new_email_address)
-            new_employee_list.append(attendant)
-
-        IO_API().changeCrewFile(new_employee_list)
-
-
-
-    def ChangePhonenumber(self,crew_id,new_phone_number):
-        '''Changes the email address of a crew member'''
-        employee = self.getOneCrewMember(crew_id)
-        pilots = IO_API().loadPilotFromFile()
-        flight_att = IO_API().loadFlightAttFromFile()
-        new_employee_list = []
-
-        for pilot in pilots:
-            if employee == pilot:
-                pilot.setPhonenumber(new_phone_number)
-            new_employee_list.append(pilot)
-
-        for attendant in flight_att:
-            if employee == attendant:
-                attendant.setPhonenumber(new_phone_numer)
-            new_employee_list.append(attendant)
-
-        IO_API().changeCrewFile(new_employee_list)
-    
-    def ChangePilotLicense(self,personal_id,new_license):
-        '''Changes the License of the pilot in file'''
-
-        #for pilot in self.getCrew():
-        #    if pilot.getCrewID == personal_id:
-        #        pilot.setLicense(new_license)
-        pilot = self.getOneCrewMember(personal_id)
-        pilot.setLicense(new_license)
-        IO_API().changeCrewFile(pilot)
 
     def sortPilotsByLicense(self):
         '''Sorts all pilots by their license'''
@@ -201,8 +122,9 @@ class CrewLL:
         licenses = set()
         # make a set of all licenses to iterate through
         for pilot in pilot_list:
-            licenses.add( pilot.getLicense())
+            licenses.add( pilot.getLicense() )
 
+        
         for a_license in licenses:
             for pilot in pilot_list:
                 if pilot.getLicense() == a_license:

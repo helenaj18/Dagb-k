@@ -19,18 +19,18 @@ class DisplayMenuAirplanes:
             print('1 - List all airplanes')
             print('2 - List airplanes by type')
             print('3 - List airplanes by date and time')
-            print('m - Go back to display menu')
+            print('m - Back to main menu')
             print()
 
             selection = input()
 
             if selection == '1':
                 '''Gets all airplanes'''
-                AirplaneUI().showAllPlanes()
+                return AirplaneUI().showAllPlanes()
 
             elif selection == '2':
                 '''Gets all airplanes by type'''
-                DisplayMenuAirplaneType().startDisplayAirplaneType()
+                return DisplayMenuAirplaneType().startDisplayAirplaneType()
             
             elif selection == '3':
                 '''Gets status on airplanes by date and time'''
@@ -47,7 +47,7 @@ class DisplayMenuAirplanes:
 
                 datetime_str = datetime.datetime(year_int,month_int,day_int,hour_int,minute_int).isoformat()
 
-                AirplaneUI().showAirplanesByDateTime(datetime_str)
+                return AirplaneUI().showAirplanesByDateTime(datetime_str)
 
             elif selection == 'm':
                 '''Goes back to main menu'''

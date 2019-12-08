@@ -26,7 +26,6 @@ class SubMenuRegister:
             print('2 - Add new Voyage')
             print('3 - Add new Airplane')
             print('4 - Add new Destination')
-            print('5 - Add staff to an available voyage')
 
             print('m - Main menu')
             print()
@@ -73,9 +72,6 @@ class SubMenuRegister:
                 # Add voyage to logic layer
                 LL_API().add_voyage(destination_of_voyage,departure_time)
 
-            elif selection == '5':
-                # Add staff to an available voyage
-                pass
                 
             elif selection == 'm':
                 # Back to main menu
