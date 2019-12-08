@@ -2,6 +2,9 @@ from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
 from LL.voyageLL import VoyageLL
+from UI.crewUI import CrewUI
+
+#### ATHHHHH LL VOYAGE :@
 
 
 class VoyageUI:
@@ -74,6 +77,38 @@ class VoyageUI:
             if voyage:
                 return voyage
             print("Invalid voyage id")
+<<<<<<< HEAD
+            
+    def checkPilotAirplaneLicense(self, crew_member,voyage):
+        success = True
+        try:
+            voyage.addCrewMember(crew_member) 
+            # exception if pilot does not have License for assigned airplane
+
+        except Exception as e:
+            success = False
+            print(e)
+            input('Press any key to try continue editing voyage')
+        
+        if success:
+            position = CrewUI().checkRank(crew_member)
+            print('{} - {}, {}, was added to voyage {}'.format(
+                        crew_member.getName(),
+                        crew_member.getRole(), 
+                        position,
+                        voyage.getVoyageID()
+                    ))
+
+
+    def addCrewToVoyage(self,voyage):
+        #crew_member = CrewUI().queryShowNotWorkingCrew()
+        crew_on_voyage_list = voyage.getCrewOnVoyage()
+
+        while 'empty' in crew_on_voyage_list[0:3]:
+            crew_member = CrewUI().queryShowNotWorkingCrew()
+            self.checkPilotAirplaneLicense(crew_member,voyage)
+            crew_on_voyage_list = voyage.getCrewOnVoyage()            
+=======
     
     def showOneVoyage(self):
         '''Shows one voyage by ID'''
@@ -102,7 +137,29 @@ class VoyageUI:
                 return
             else:
                 print('No voyage with this ID')
+>>>>>>> cb861e1c7139716ddb68ce36aaec32e8c7c4972c
             
+        else:
+
+            print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
+            print('Do you want to add an extra crew member?')
+            print('1 - Yes')
+            print('2 - No')
+            selection = input()
+            if selection == '1':
+
+                if 'empty' in crew_on_voyage_list[-2:]:
+                    if 'empty' in crew_on_voyage_list[-1]:
+                        crew_member = CrewUI().queryShowNotWorkingCrew()
+                            
+                        voyage.setFlightAttOne(crew_member)
+                    elif 'empty' in crew_on_voyage_list[-2]:
+                        crew_member = CrewUI().queryShowNotWorkingCrew()
+                        voyage.setFlightAttTwo(crew_member)
+            elif selection == '2':
+                return 
+
+        
 
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''): 

@@ -31,6 +31,7 @@ class SubMenuEdit:
             if selection == '1':
                 print("Select date range to find a voyage to edit")
                 voyage = VoyageUI().queryOneVoyage()
+
                 keep_editing = True
                 while keep_editing:
                     print("\nWhat do you want to change in voyage {}".format(voyage.getVoyageID()))
@@ -41,26 +42,15 @@ class SubMenuEdit:
                     user_selection = input()
 
                     if user_selection == '1':
-                        
-                        crew_member = CrewUI().queryShowNotWorkingCrew(voyage.getDepartureTime())
-                        print('You must add 1 captain, 1 copilot, 1 flight atttendant')
-                        success = True
-                        while True:
-                            try:
-                                voyage.addCrewMember(crew_member)
 
-                            except Exception as e:
-                                success = False
-                                print(e)
-                                input("Press any key to try continue editing voyage")
-                            
-                            if success:
-                                print('{} - {}, was added to voyage {}'.format(
-                                            crew_member.getName(),
-                                            crew_member.getRole(), 
-                                            voyage.getVoyageID()
-                                        ))
-                                #if crew_member.getRole() 
+                
+
+                        #crew_on_voyage_list = voyage.getCrewOnVoyage()
+                        CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
+                        print('You must add 1 captain, 1 copilot, 1 flight atttendant')
+                        print()
+                        VoyageUI().addCrewToVoyage(voyage)
+                        
 
                                             
                     elif selection == '2':
