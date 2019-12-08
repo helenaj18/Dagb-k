@@ -75,8 +75,6 @@ class VoyageLL:
     def getVoyageInDateRange(self, start_datetime, end_datetime):
         ''' Returns all voyages in a certain date range'''
 
-        
-
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
