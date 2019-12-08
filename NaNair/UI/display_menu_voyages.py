@@ -31,8 +31,7 @@ class DisplayMenuVoyages:
 
             elif selection == '2':
                 ''' Lists one voyage by ID'''
-                # lista ákveðna ferð
-                pass
+                return VoyageUI().showOneVoyage()
 
             elif selection == 'm':
                 '''Goes back to main menu'''

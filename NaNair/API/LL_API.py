@@ -107,7 +107,7 @@ class LL_API:
         return VoyageLL().checkDestInput(dest_input)
     
     def showPlanesForNewVoyage(self, time):
-        return VoyageLL().showPlanes(time)
+        return VoyageLL().getAvailablePlanes(time)
     
     def checkPlaneInput(self, plane, list_of_planes):
         return VoyageLL().checkPlaneInput(plane, list_of_planes)

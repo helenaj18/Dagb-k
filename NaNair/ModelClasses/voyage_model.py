@@ -43,8 +43,8 @@ class Voyage:
     def getAircraftID(self):
         return self.__aircraft_ID
 
-    def getDestinationName(self):
-        return self.__destination_name
+    # def getDestinationName(self):
+    #     return self.__destination_name
 
     def getVoyageID(self):
         return self.__voyage_ID

@@ -202,7 +202,8 @@ class AirplaneLL:
         # Gets a list of all airplanes as instances
         all_airplanes = self.getAirplanes()
 
-        not_available_airplanes_list = []
+        not_available_airplaneInsignias_list = []
+        not_available_airplanes_info_list = []
         available_airplanes_list = []
 
         if airplanes_on_date != None:
@@ -225,23 +226,27 @@ class AirplaneLL:
                     # If the hours is between departure hour and arrival at destination,
                     # the flight number out is added
                     if departure_hour_int<=hour_int<=arrival_hour_out_int:
-                        not_available_airplanes_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_out))
+                        not_available_airplanes_info_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_out))
                     
                     # Else the flight number home is added
                     else:
-                        not_available_airplanes_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_home))
+                        not_available_airplanes_info_list.append((airplane,destination,arrival_time_home_datetime_str,flight_number_home))
                 else:
                     available_airplanes_list.append(airplane)
-            
+        
+
+            # Remove the extra information and get only plane insignias of not available airplanes
+            for i in range(len(not_available_airplanes_info_list)):
+                not_available_airplaneInsignias_list.append(not_available_airplanes_info_list[i][0].get_planeInsignia())
+
             # If the airplane is not in the not available airplanes list
             # add it to the available airplane list if it's not there already
-            for airplane in all_airplanes:
-                for i in range(len(not_available_airplanes_list)):
-                    if airplane.get_planeInsignia() not in not_available_airplanes_list[i][0].get_planeInsignia():
-                        if airplane not in available_airplanes_list:
-                            available_airplanes_list.append(airplane)
+            for airplane_instance in all_airplanes:
+                if airplane_instance.get_planeInsignia() not in not_available_airplaneInsignias_list:
+                    if airplane_instance not in available_airplanes_list:
+                        available_airplanes_list.append(airplane_instance)
                     
-            return not_available_airplanes_list,available_airplanes_list
+            return not_available_airplanes_info_list,available_airplanes_list
         
         else:
             # All airplanes are available, returns None

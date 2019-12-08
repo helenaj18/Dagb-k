@@ -22,9 +22,15 @@ class VoyageLL:
 
         return int(year), int(month), int(day)
 
-    def getOneVoyage(self, voyage_ID):
+    def getOneVoyage(self, voyage_to_get_ID):
 
-        return VoyageIO().getOneVoyage(voyage_ID)
+        voyage_list = VoyageIO().loadVoyageFromFile()
+        for voyage in voyage_list:
+            voyage_ID = voyage.getVoyageID()
+            if voyage_ID == voyage_to_get_ID: 
+                return voyage
+                
+        return None
 
     def getVoyageDuration(self,voyage_instance):
         ''' Returns voyage duration, flight duration back and forth plus a one hr layover'''
@@ -66,7 +72,7 @@ class VoyageLL:
         voyage.setCaptain(employee_id)
 
     def getVoyageInDateRange(self, start_datetime, end_datetime):
-        ''' Returns alll voyages in a certain date range'''
+        ''' Returns all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
 
@@ -120,6 +126,7 @@ class VoyageLL:
     def assignFlightNo(self, destination, depart_time):
         '''assigns a departing and arriving flight number based on a location'''
     
+        # first two letters are dictated by destination
         if destination == 'LYR':
            first_two = '01'
         elif destination == 'GOH':
@@ -130,15 +137,23 @@ class VoyageLL:
            first_two = '04'
         else:
            first_two = '05'
+
+        date_str = depart_time.date().isoformat()
         
-        #þarf að tekka a ef flug eru á sama degi
-        # for voyage in self.voyage_list:
-        #     time = voyage.getDepartureTime()
-            
-        #     if time.date() == depart_time.date():
+        # all voyages on departing day
+        voyage_list = self.getVoyageInDateRange(date_str, date_str)
 
         latter_two_depart = '00'
         latter_two_arrive = '01'
+
+        for voyage_instance in voyage_list:
+            if destination == voyage_instance.getDestination().getDestinationAirport():
+                depart_num, arrival_num = voyage_instance.getFlightNumbers()
+                latter_two_depart = str( int(depart_num[-2:]) + 2 )
+                latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
+                if len(latter_two_depart) == 1:
+                    latter_two_depart = '0' + latter_two_depart
+                    latter_two_arrive = '0' + latter_two_arrive
 
         departing_num = 'NA' + first_two + latter_two_depart
         arriving_num = 'NA' + first_two + latter_two_arrive
@@ -175,20 +190,16 @@ class VoyageLL:
         return arrival_time
 
 
-    def showPlanes(self, departure_time):
+    def getAvailablePlanes(self, departure_time):
         available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time.isoformat())
         
         if available_tuple != None:
             not_available_planes,available_planes = available_tuple
             
-            airplanes_class_list = available_planes
-            
         else:
-            all_airplanes = AirplaneLL().getAirplanes()
-            
-            airplanes_class_list = AirplaneLL().getAirplanes()
+            available_planes = AirplaneLL().getAirplanes()
         
-        return airplanes_class_list
+        return available_planes
 
 
     def checkPlaneInput(self, plane_input, list_of_planes):
@@ -249,8 +260,6 @@ class VoyageLL:
         
         new_voyage_str = ','.join(info_list)
 
-        # airport found from dest code (3 letter code)
-        # airport = DestinationLL().getAirport(destination)
 
         IO_API().addVoyageToFile(new_voyage_str)
 

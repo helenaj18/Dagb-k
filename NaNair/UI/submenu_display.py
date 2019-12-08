@@ -1,7 +1,5 @@
 from UI.display_menu_airplanes import DisplayMenuAirplanes
 from UI.display_menu_voyages import DisplayMenuVoyages
-from UI.display_menu_pilots import DisplayMenuPilots
-from UI.display_menu_attendants import DisplayMenuAttendants
 from UI.destinationUI import DestinationUI
 from UI.display_menu_employee import DisplayMenuEmployee
 from API.LL_API import LL_API
