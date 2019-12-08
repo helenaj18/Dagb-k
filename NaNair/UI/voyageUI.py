@@ -17,7 +17,7 @@ class VoyageUI:
         day_str = input('Day: ')
 
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
-
+        
         return datetime.datetime(year_int,month_int,day_int,0,0,0)
     
     def getDateWithTime(self):
@@ -38,9 +38,9 @@ class VoyageUI:
         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
 
 
-    def seperateDatetimeString(self, datetimestring):
+    def seperateDatetimeString(self, datetime_str):
         '''Seperates a datetime string and returns the date part'''
-        return datetimestring[:10]
+        return datetime_str[:10],datetime_str[-8:]
 
 
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
@@ -163,14 +163,25 @@ class VoyageUI:
 
         #return AddExtraCrewmemberMenu().startAddExtraCrewMenu()
 
+    def revertDatetimeStrtoDatetime(self,datetime_str):
+        datetime_str_date, datetime_str_time = self.seperateDatetimeString(datetime_str)
+        year,month,day = datetime_str_date.split('-')
+        hour,mins,secs = datetime_str_time.split(':')
+        datetime_object = datetime.datetime(int(year),int(month),int(day),int(hour),int(mins),int(secs))
+        return datetime_object
+
     
+
     def addAircraftToVoyage(self,voyage):
-        AirplaneUI().showAirplanesByDateTime(voyage.getDepartureTime())
+        datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
+
+        AirplaneUI().showAirplanesByDateTime(datetime_object)
         print()
         print('Which Aircraft would you like to assing to voyage {}? (Aircraft ID)'.format(voyage.getVoyageID()))
         print()
         aircraft_ID = input()
         voyage.setAircraftID(aircraft_ID)
+        
         return LL_API().change_voyage(voyage)
 
     def changeTimeOfVoyage(self,voyage):
@@ -193,8 +204,6 @@ class VoyageUI:
             print('Enter start date for time period')
             print()
             start_datetime = VoyageUI().getDateInput()
- 
-
 
 
         if end_datetime == '':
@@ -204,8 +213,8 @@ class VoyageUI:
             
 
         voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
-        start_date = VoyageUI().seperateDatetimeString(start_datetime.isoformat())
-        end_date = VoyageUI().seperateDatetimeString(end_datetime.isoformat())
+        start_date = VoyageUI().seperateDatetimeString(start_datetime.isoformat())[0]
+        end_date = VoyageUI().seperateDatetimeString(end_datetime.isoformat())[0]
 
 
         if voyages_on_date != []:
@@ -234,7 +243,6 @@ class VoyageUI:
                 if aircraft_ID == VoyageUI.EMPTY: 
                     aircraft_ID = 'No aircraft assigned to voyage'
 
-                
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
                     voyage_duration_hrs, flight_no_out, flight_no_home, \
                         voyage_duration_min)
@@ -245,6 +253,7 @@ class VoyageUI:
             print()
             print('No voyages on these dates')
             print()
+            return  # VIRKAR EKKI 
 
 
             
@@ -276,8 +285,6 @@ class VoyageUI:
         
         return dest
         
-    
-
 
 
     def addVoyage(self):

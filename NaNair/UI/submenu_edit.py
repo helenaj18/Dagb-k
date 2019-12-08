@@ -45,15 +45,24 @@ class SubMenuEdit:
                     if user_selection == '1':
                         return VoyageUI().addAircraftToVoyage(voyage)
 
-
                     
                     elif user_selection == '2':
+                        if voyage.getAircraftID == 'empty ':
+                            
+                            print()
+                            print('No aircraft assigned to voyage')
+                            print('Aircraft must me assigned before staff can be added')
+                            print()
+                            return 
 
-                        #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                        CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
-                        print('You must add 1 captain, 1 copilot, 1 flight atttendant')
-                        print()
-                        return VoyageUI().addCrewToVoyage(voyage)
+                        else:
+
+                            #crew_on_voyage_list = voyage.getCrewOnVoyage()
+                            CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
+                            print('You must add 1 captain, 1 copilot, 1 flight atttendant')
+                            print()
+
+                            return VoyageUI().addCrewToVoyage(voyage)
                         
                                             
                     elif selection == '3':

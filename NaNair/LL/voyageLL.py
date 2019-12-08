@@ -13,16 +13,16 @@ class VoyageLL:
         self.voyage_list = IO_API().loadVoyageFromFile()
 
         
-    def splitDates(self, datetime):
-        date = datetime[:10]
-        year, month, day = date.split('-')
+    # def splitDates(self, datetime):       # EKKI Í NOTKUN ??
+    #     date = datetime[:10]
+    #     year, month, day = date.split('-')
 
-        return int(year), int(month), int(day)
+    #     return int(year), int(month), int(day)
 
 
     def getOneVoyage(self, voyage_to_get_ID):
 
-        voyage_list = VoyageIO().loadVoyageFromFile()
+        voyage_list = IO_API().loadVoyageFromFile()
         for voyage in voyage_list:
             voyage_ID = voyage.getVoyageID()
             if voyage_ID == voyage_to_get_ID: 
@@ -75,14 +75,14 @@ class VoyageLL:
     def getVoyageInDateRange(self, start_datetime, end_datetime):
         ''' Returns all voyages in a certain date range'''
 
-        
-
         voyages = IO_API().loadVoyageFromFile()
 
         voyages_on_date = []
 
         list_of_dates = []
         delta = timedelta(days=1)
+        print('AAAAATHHHHH')
+        print(type(start_datetime))
 
         while start_datetime <= end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
@@ -98,6 +98,7 @@ class VoyageLL:
 
             if departure_date in list_of_dates:
                 voyages_on_date.append(voyage)
+
             elif arrival_date in list_of_dates:
                 voyages_on_date.append(voyage)
 
