@@ -34,7 +34,9 @@ class AirplaneIO:
                         airplanes_list.append(airplane_instance)
             i += 1
             aircraft_type_file.close()
-
+        
+        aircraft_file.close()
+        
         return airplanes_list
 
 

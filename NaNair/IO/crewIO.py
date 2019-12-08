@@ -19,7 +19,9 @@ class CrewIO:
 
         crew_file= open(self.__crew_filename,'r')
 
-        reader_crew= csv.DictReader(crew_file)
+        reader_crew = csv.DictReader(crew_file)
+
+        crew_file.close()
 
         for row in reader_crew:
             if row['role'] == CrewIO.PILOT:

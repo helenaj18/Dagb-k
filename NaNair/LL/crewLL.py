@@ -14,7 +14,7 @@ class CrewLL:
 
     def getPilots(self):
         ''' Gets the pilots '''
-        crew_list = IO_API().loadPilotFromFile()
+        crew_list = IO_API().loadCrewFromFile()
         pilot_list = []
         for employee in crew_list:
             if type(employee) == Pilot:

@@ -2,8 +2,6 @@ from IO.destinationIO import DestinationIO
 from IO.crewIO import CrewIO
 from IO.voyageIO import VoyageIO
 from IO.airplaneIO import AirplaneIO
-from IO.attendantIO import AttendantIO
-from IO.pilotIO import PilotIO
 
 
 class IO_API:

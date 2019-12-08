@@ -6,28 +6,10 @@ import csv
 class VoyageIO:
 
     def __init__(self):
-        # Muna að breyta í rétt nöfn!
 
         dirname = os.path.dirname(__file__)
-        #self.__upcomingVoyages_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/UpcomingVoyages.csv')
-        #self.__pastVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/PastVoyages.csv')
         self.__allVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/allvoyages.csv')
         self.__destinations_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/Destinations.csv')
-
-
-        #self.loadVoyageFromFile()
-
-    def get_info(self,file_object):
-        a_list = []
-
-        for line in file_object:
-            line = line.strip().split(',')
-            a_list.append(line)
-
-        a_list = a_list[1:]
-
-        return a_list
-
 
 
     def loadVoyageFromFile(self):
@@ -36,9 +18,7 @@ class VoyageIO:
 
         voyage_file = open(self.__allVoyages_filename)
         
-        
         reader_voyage = csv.DictReader(voyage_file)
-        #reader_dest = csv.DictReader(destination_file)
 
         for row in reader_voyage: 
             destination_file = open(self.__destinations_filename)
@@ -55,9 +35,8 @@ class VoyageIO:
 
                     voyage_list.append(voyage_instance)
 
+        voyage_file.close()
         return voyage_list
-
-     
 
 
     def changeVoyageFile(self, upcoming_list):

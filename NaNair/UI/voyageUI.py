@@ -1,10 +1,7 @@
 from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
-from LL.voyageLL import VoyageLL
 from UI.crewUI import CrewUI
-
-#### ATHHHHH LL VOYAGE :@
 
 
 class VoyageUI:
@@ -73,7 +70,7 @@ class VoyageUI:
         voyage = None
         while voyage is None:
             voyage_id = input("Enter voyage ID to select: ")
-            voyage = VoyageLL().getOneVoyage(voyage_id)
+            voyage = LL_API().getOneVoyage(voyage_id)
             if voyage:
                 return voyage
             print("Invalid voyage id")
@@ -108,11 +105,14 @@ class VoyageUI:
             self.checkPilotAirplaneLicense(crew_member,voyage)
             crew_on_voyage_list = voyage.getCrewOnVoyage()            
     
+
     def showOneVoyage(self):
         '''Shows one voyage by ID'''
+
         while True:
             voyage_id = input("Enter voyage ID: ")
-            voyage = VoyageLL().getOneVoyage(voyage_id)
+            
+            voyage = LL_API().getOneVoyage(voyage_id)
             if voyage != None:
 
                 voyage_duration_hrs, voyage_duration_min = \
@@ -133,6 +133,7 @@ class VoyageUI:
                     voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
                 
                 return
+
             else:
                 print('No voyage with this ID')
             
