@@ -22,9 +22,15 @@ class VoyageLL:
 
         return int(year), int(month), int(day)
 
-    def getOneVoyage(self, voyage_ID):
+    def getOneVoyage(self, voyage_to_get_ID):
 
-        return VoyageIO().getOneVoyage(voyage_ID)
+        voyage_list = VoyageIO().loadVoyageFromFile()
+        for voyage in voyage_list:
+            voyage_ID = voyage.getVoyageID()
+            if voyage_ID == voyage_to_get_ID: 
+                return voyage
+                
+        return None
 
     def getVoyageDuration(self,voyage_instance):
         ''' Returns voyage duration, flight duration back and forth plus a one hr layover'''

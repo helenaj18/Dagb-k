@@ -74,21 +74,52 @@ class VoyageUI:
             if voyage:
                 return voyage
             print("Invalid voyage id")
-            
+    
+    def showOneVoyage(self):
+        '''Shows one voyage by ID'''
+        while True:
+            voyage_id = input("Enter voyage ID: ")
+            voyage = VoyageLL().getOneVoyage(voyage_id)
+            if voyage != None:
+
+                voyage_duration_hrs, voyage_duration_min = \
+                LL_API().get_voyage_duration(voyage)
+                
+                flight_no_out, flight_no_home = voyage.getFlightNumbers()
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
+                
+                if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
+                    # not fully staffed if there is not one captain, one pilot and
+                    # one flight attendant 
+                    voyage_staffed = 'Voyage not fully staffed'
+                else: 
+                    voyage_staffed = 'Voyage fully staffed'
+                
+                
+                self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
+                
+                return
+            else:
+                print('No voyage with this ID')
             
 
 
-    def showAllVoyagesInRange(self): # BÆTA INN EH TIME PERIOD
+    def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''): 
         '''Shows all voyages for a current time period'''
 
-        print('Enter start date for time period')
-        print()
-        start_datetime = VoyageUI().getDateInput()
+        if start_datetime == '':
+            print('Enter start date for time period')
+            print()
+            start_datetime = VoyageUI().getDateInput()
+
         start_date = VoyageUI().seperateDatetimeString(start_datetime)
 
-        print('Enter end date for time period')
-        print()
-        end_datetime = VoyageUI().getDateInput()
+        if end_datetime == '':
+            print('Enter end date for time period')
+            print()
+            end_datetime = VoyageUI().getDateInput()
+            
         end_date = VoyageUI().seperateDatetimeString(end_datetime)
 
         voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
@@ -127,12 +158,6 @@ class VoyageUI:
 
             print(60*VoyageUI.SEPERATOR)
 
-
-            
-
-    def showOneVoyage(self,voyage_ID):
-        '''Shows one specific voyage'''
-        pass
 
     
     def getDest(self):

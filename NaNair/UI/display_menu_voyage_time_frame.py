@@ -19,12 +19,13 @@ class DisplayVoyageTimeFrame:
                 '''Lists up all voyages during a 
                    specific time frame'''
 
-                return VoyageUI().showAllVoyages()
+                return VoyageUI().showAllVoyagesInRange()
                 
             elif selection == '2':
-                ''' Lists one voyage by ID'''
-                # lista ákveðna ferð
-                pass
+                ''' Lists all voyages on a specific day'''
+                date_str = VoyageUI().getDateInput()
+
+                return VoyageUI().showAllVoyagesInRange(date_str, date_str)
 
             elif selection == 'm':
                 '''Goes back to main menu'''
