@@ -63,7 +63,7 @@ class VoyageUI:
         '''Helps user find one voyage and returns it'''
 
         self.showAllVoyages()
-        voyage = None;
+        voyage = None
         while voyage is None:
             voyage_id = input("Enter voyage ID to select: ")
             voyage = VoyageLL().getOneVoyage(voyage_id)
