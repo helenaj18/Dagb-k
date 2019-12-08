@@ -127,11 +127,9 @@ class VoyageLL:
            first_two = '04'
         else:
            first_two = '05'
-
-        date_str = depart_time.date().isoformat()
         
         # all voyages on departing day
-        voyage_list = self.getVoyageInDateRange(date_str, date_str)
+        voyage_list = self.getVoyageInDateRange(depart_time, depart_time)
 
         latter_two_depart = '00'
         latter_two_arrive = '01'
@@ -139,8 +137,9 @@ class VoyageLL:
         for voyage_instance in voyage_list:
             if destination == voyage_instance.getDestination().getDestinationAirport():
                 depart_num, arrival_num = voyage_instance.getFlightNumbers()
-                latter_two_depart = str( int(depart_num[-2:]) + 2 )
-                latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
+                if latter_two_depart <= depart_num[-2:]:
+                    latter_two_depart = str( int(depart_num[-2:]) + 2 )
+                    latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
                 if len(latter_two_depart) == 1:
                     latter_two_depart = '0' + latter_two_depart
                     latter_two_arrive = '0' + latter_two_arrive
@@ -264,6 +263,31 @@ class VoyageLL:
                     boolOutcome = True
         
         return boolOutcome
+
+    def checkIfTakenTime(self, departure_datetime):
+        '''Checks if date inputted by user is taken by another voyage'''
+
+        taken = False
+        datetime_list = []
+
+        # assume one plane can leave each half hour
+        
+        start_time = departure_datetime + timedelta(minutes=-30)
+        end_time = departure_datetime + timedelta(minutes=30)
+
+        voyages_during_departure_date = self.getVoyageInDateRange(start_time, end_time)
+
+        while start_time <= end_time:
+            datetime_list.append(start_time.isoformat())
+            start_time += timedelta(minutes=1)
+
+        for voyage in voyages_during_departure_date:
+            if voyage.getDepartureTime() in datetime_list:
+                taken = True
+            elif voyage.getArrivalTimeHome() in datetime_list:
+                taken = True
+        
+        return taken
 
 
     def changeVoyageFile(self,voyage):

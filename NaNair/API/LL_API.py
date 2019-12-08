@@ -118,6 +118,9 @@ class LL_API:
     def getOneVoyage(self,voyage_id):
         return VoyageLL().getOneVoyage(voyage_id)
 
+    def checkIfTakenDate(self, time_datetime):
+        return VoyageLL().checkIfTakenTime(time_datetime)
+
     ### DESTINATION LL
 
     
