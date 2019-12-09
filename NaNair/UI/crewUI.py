@@ -68,10 +68,6 @@ class CrewUI:
 
         qualified_crew_list = LL_API().getQualifiedCrew(depart_time_str, plane_insignia)
 
-<<<<<<< HEAD
-        self.printCrew(qualified_crew_list, False)
-=======
->>>>>>> 4fbad637010b6077487ba63a90f0f5730d39cfac
         if qualified_crew_list != None:
             self.printCrew(qualified_crew_list, False)
         else:
