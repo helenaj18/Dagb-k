@@ -49,12 +49,12 @@ class DestinationUI:
 
         airport_code = input('Enter airport code (IATA): ').upper()
         
-        check = LL_API().checkDestInput(dest)
+        check = LL_API().checkDestInput(airport_code)
         
         while check == False:
             print('Please enter a valid destination!')
-            dest = input().upper()
-            check = LL_API().checkDestInput(dest)
+            airport_code = input().upper()
+            check = LL_API().checkDestInput(airport_code)
 
         new_emergency_contact = input('Enter name of new emergency contact: ')
 
