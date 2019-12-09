@@ -9,6 +9,11 @@ from datetime import timedelta
 class VoyageLL:
     ''' LL class for voyage '''
 
+    # When a new voyage is added
+    # the solds seats are 0
+    seats_sold_out = '0'
+    seats_sold_home = '0'
+
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
 
@@ -82,8 +87,6 @@ class VoyageLL:
 
         list_of_dates = []
         delta = timedelta(days=1)
-        print('AAAAATHHHHH')
-        print(type(start_datetime))
 
         while start_datetime < end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
@@ -214,20 +217,23 @@ class VoyageLL:
         flight_depart_num, flight_arrive_num = self.assignFlightNo(destination, departure_time)
 
         info_list.append(flight_depart_num)
+        
+        info_list.append(VoyageLL.seats_sold_out)
 
         #departing airport added to info
         info_list.append('KEF')
-        info_list. append(destination)
+        info_list.append(destination)
 
-        info_list.append( departure_time.isoformat() )
+        info_list.append(departure_time.isoformat())
 
         arrival_time_gmt = self.findArrivalTime(destination, departure_time)
 
         # arrival time in other country added
         arrival_time_out = self.TimeDifference(arrival_time_gmt, destination)
-        info_list.append( arrival_time_out.isoformat() )
+        info_list.append(arrival_time_out.isoformat())
 
         info_list.append(flight_arrive_num)
+        info_list.append(VoyageLL.seats_sold_home)
 
         #ARRIVING TRIP
 
@@ -235,10 +241,11 @@ class VoyageLL:
         info_list.append(destination)
         info_list.append('KEF')
 
+
         # depart time added to list
         # plane stops at destination for 1 hour 
         departure_time_back = arrival_time_out + timedelta(hours=1)
-        info_list.append( departure_time_back.isoformat() )
+        info_list.append(departure_time_back.isoformat())
 
         arrival_time_back = self.findArrivalTime(destination, departure_time_back)
         info_list.append( arrival_time_back.isoformat() )

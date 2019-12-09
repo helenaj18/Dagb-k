@@ -299,8 +299,7 @@ class VoyageUI:
         check = LL_API().checkDestInput(dest)
         
         while check == False:
-            print('Please enter a valid destination!')
-            dest = input().upper()
+            dest = input('Please enter a valid destination: ').upper().strip()
             check = LL_API().checkDestInput(dest)
         
         return dest
@@ -317,12 +316,12 @@ class VoyageUI:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        plane_name = input('Chosen plane (type name of plane): ').upper().strip()
+        plane_name = input('Chosen plane (type name of plane on this format TF-XXX): ').upper().strip()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
         while check == False:
             print('Please choose one of the listed planes.')
-            plane_name = input()
+            plane_name = input().upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
         
         return plane_name
