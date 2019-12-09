@@ -1,6 +1,7 @@
 from API.IO_API import IO_API
 from IO.destinationIO import DestinationIO
-
+from ModelClasses.destination_model import Destination
+from LL.airplaneLL import AirplaneLL
 
 class DestinationLL:
 
@@ -8,6 +9,19 @@ class DestinationLL:
         ''' Gets destination from Destination class'''
 
         return IO_API().loadDestinationFromFile()
+
+    def addDestination(self,new_destination):
+        '''Gets information about a new destination
+           and adds it to destination file'''
+        IO_API().addDestinationToFile(new_destination)
+
+
+    def checkIfInt(self,a_str):
+        try:
+            int(a_str)
+            return True
+        except ValueError:
+            return False
 
 
     def changeEmergencyContactName(self,destination_name,new_emergency_contact):

@@ -67,12 +67,12 @@ class SubMenuEdit:
                             #return
                         
                                             
-                    elif selection == '3':
+                    elif user_selection == '3':
                         # change date
                     
                         return VoyageUI().changeTimeOfVoyage()
                     
-                    elif selection == 'm':
+                    elif user_selection == 'm':
                         return
                     
                     else:

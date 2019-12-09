@@ -48,13 +48,11 @@ class CrewUI:
 
 
     def queryShowNotWorkingCrew(self):
-        #self.showNotWorkingCrew(date_str)
-        keep_asking = True
 
-        while keep_asking:
+        while True:
             crew_id = input('What staff member do you want to pick from the list above (Employee ID): ')
             employee = LL_API().get_crew_member_by_id(crew_id)
-            if employee:
+            if employee != None:
                 return employee
             print('Employee not found, try again')
         
@@ -74,8 +72,10 @@ class CrewUI:
         
 
     def printCrew(self,not_working_crew_list, not_working):
+        ''' Prints Crew'''
         header = 'Working Crew' if not_working else 'Not Working crew'
         format_str = ''
+
         if not_working_crew_list != None:
             print('#'*30)
             print('{:^30}'.format(header))
@@ -108,11 +108,11 @@ class CrewUI:
 
 
     def changeEmployeeInfo(self,employee):
-        LL_API().changeCrewInfo(employee)
+        return LL_API().changeCrewInfo(employee)
 
 
     def changePilotLicense(self,crew_id,new_license):
-        LL_API().changePilotLicense(crew_id,new_license)
+        return LL_API().changePilotLicense(crew_id,new_license)
 
             
     def showOneCrewMember(self,crew_id):
@@ -206,6 +206,10 @@ class CrewUI:
         print()
 
     def addCrew(self):
+        '''Gets information about a new 
+           crew member and adds it to the
+           crew file'''
+
         info_list = []
         print('Please fill in the following information. Press enter to skip.\n')
 
@@ -218,13 +222,14 @@ class CrewUI:
         print('3 - Head service manager')
         print('4 - Flight attendant')
         rank = input()
+
         while rank != '1' and rank != '2' and rank != '3' and rank != '4':
             print('Please choose a number between 1-4')
             rank = input()
                 
         info_list.append(rank)
 
-        if rank == '1' or rank =='2':
+        if rank == '1' or rank == '2':
             info_list.append( input('Pilot license: ') )
 
         info_list.append( input('Home address: ') )
@@ -249,16 +254,16 @@ class CrewUI:
             start_month_str = input('Month: ')
             start_day_str = input('Day: ')
 
-            start_year_int, start_month_int, start_day_int = AirplaneLL().verifyDate(start_year_str, start_month_str, start_day_str)
-            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
+            start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
+            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0)
             
             print('Enter the "To date" for work schedule')
             end_year_str = input('Year: ')
             end_month_str = input('Month: ')
             end_day_str = input('Day: ')
 
-            end_year_int, end_month_int, end_day_int = AirplaneLL().verifyDate(end_year_str, end_month_str, end_day_str)
-            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
+            end_year_int, end_month_int, end_day_int = LL_API().verifyDate(end_year_str, end_month_str, end_day_str)
+            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0)
             
             work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
             

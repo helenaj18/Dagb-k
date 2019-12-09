@@ -13,25 +13,19 @@ class IO_API:
         return DestinationIO().loadDestinationFromFile()
 
     def changeEmergencyPhone(self,destination_name,new_emergency_contact):
-        return DestinationIO.changeEmergencyPhone()
+        return DestinationIO().changeEmergencyPhone()
 
     def changeEmergencyContact(self,destination_name,new_emergency_phone):
-        return DestinationIO.changeEmergencyContact()
+        return DestinationIO().changeEmergencyContact()
 
-    def addDestinationToFile(self):
-        return DestinationIO.addDestinationToFile()
+    def addDestinationToFile(self,new_destination):
+        return DestinationIO().addDestinationToFile(new_destination)
 
 
     #CREW
 
     def loadCrewFromFile(self):
         return CrewIO().loadCrewFromFile()
-
-    def loadPilotFromFile(self):
-         return PilotIO().loadPilotFromFile()
-    
-    def loadFlightAttFromFile(self):
-         return AttendantIO().loadFlightAttFromFile()
 
     def changeCrewInfo(self,employee):
         return CrewIO().changeCrewFile(employee)
