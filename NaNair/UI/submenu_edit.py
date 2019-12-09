@@ -49,7 +49,8 @@ class SubMenuEdit:
                     print('Invalid selection!')
 
             elif selection == '3':
-                crew_id = input('Input employee ID: ')
+                crew_id = CrewUI().getPersonalID()
+
                 while True:
                     #lista upplýsingar um starfsmanninn
                     #employee = LL_API().get_crew_member_by_id(crew_id)
@@ -58,6 +59,13 @@ class SubMenuEdit:
                         return EditEmployeeMenu().editSelection(crew_id)    
                     else: 
                         crew_id = input('Input employee ID: ')
+                        if DestinationUI().checkIfInt(crew_id):
+                            if len(crew_id) == 10:
+                                return crew_id
+                            else:
+                                print('Invalid personal ID!')
+                        else:
+                            print('Invalid personal ID!')
                         
 
             elif selection == 'm':

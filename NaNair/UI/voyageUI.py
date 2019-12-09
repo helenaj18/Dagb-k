@@ -63,17 +63,18 @@ class VoyageUI:
         
         if aircraft_ID != 'empty':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
+            aircraft_type = airplane.get_planeTypeID()
             total_seats = airplane.get_planeCapacity()
             sold_seats_out,sold_seats_home = voyage.getSeatsSold()
             print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
                 sold_seats_out,total_seats))
             print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
                 sold_seats_home,total_seats))
-            print('\t Aircraft: {}'.format(aircraft_ID))
+            print('\t Aircraft: {}, type {}'.format(aircraft_ID,aircraft_type))
         elif aircraft_ID == 'empty':
             print('\t Aircraft: No aircraft assigned to voyage')
         else: 
-            print('\t Aircraft: {}'.format(aircraft_ID))
+            print('\t Aircraft: {}, type {}'.format(aircraft_ID,aircraft_type))
         # else:
         #     total_seats = 'No information'
         #     sold_seats_out,sold_seats_home = '0','0'
@@ -101,10 +102,10 @@ class VoyageUI:
             print("Invalid voyage id")
             
 
-    def checkPilotAirplaneLicense(self, crew_member,voyage):
+    def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
         success = True
         try:
-            voyage.addCrewMember(crew_member) 
+            self.addCrewMember(crew_member,voyage,airplane_type_on_voyage) 
             # exception if pilot does not have License for assigned airplane
 
         except Exception as e:
@@ -121,16 +122,41 @@ class VoyageUI:
                         voyage.getVoyageID()
                     ))
 
+    def addCrewMember(self, crew_member, voyage,airplane_type_on_voyage):
+        role = crew_member.getRole()
+
+        if role == 'Pilot':
+            if crew_member.getCaptain():
+                voyage.setCaptain(crew_member,airplane_type_on_voyage)
+            else:
+                voyage.setCopilot(crew_member,airplane_type_on_voyage)
+        elif role == 'Cabincrew':
+                voyage.setHeadFlightAtt()
+            
+                
+            
+
+            
+
 
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
+        airplane = AirplaneLL().getAirplanebyInsignia(voyage.getAircraftID())
+        airplane_type_on_voyage = airplane.get_planeTypeID()
+
         crew_on_voyage_list = voyage.getCrewOnVoyage()
         if 'empty' in crew_on_voyage_list[0:3]:
-            print('You must add 1 captain, 1 copilot, 1 flight atttendant')
+            print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
+                .format(airplane_type_on_voyage))
             while 'empty' in crew_on_voyage_list[0:3]:
                 crew_member = CrewUI().queryShowNotWorkingCrew()
-                self.checkPilotAirplaneLicense(crew_member,voyage)
+                if crew_member.getRole() == 'Pilot':
+                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                elif crew_member.getRole() == 'Cabincrew':
+                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    
+
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
 
         elif 'empty' in crew_on_voyage_list:
