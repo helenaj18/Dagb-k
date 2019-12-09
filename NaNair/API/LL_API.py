@@ -41,12 +41,8 @@ class LL_API:
         return AirplaneLL().addAirplane()
 
     def getAirplaneInsigniaList(self):
-<<<<<<< HEAD
         '''Returns a list of all airplane insignias.'''
         return AirplaneLL().getAirplaneInsignia()
-=======
-        return AirplaneLL().getAirplaneInsigniaList()
->>>>>>> b38aa6c5b16e0da940f3b08499253669267ee0eb
 
 
     def revertDatetimeStrtoDatetime(self,datetime_str):
