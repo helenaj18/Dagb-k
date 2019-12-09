@@ -6,13 +6,18 @@ from UI.destinationUI import DestinationUI
 
 
 class CrewUI:
-    
+
+    pilot_header = '{:<25}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
+    pilot_header += '-'*85
+    flight_att_header = '{:<25}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
+    flight_att_header += '-'*70
+
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
         string = ''
-
-        print(self.BANNER_pilot)
+        
+        print(CrewUI.pilot_header)
 
         for employee in crew:
             string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
@@ -31,7 +36,7 @@ class CrewUI:
             print(string)
 
         print()
-    
+
 
     def showWorkingCrew(self,date_str):
         datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
@@ -47,7 +52,6 @@ class CrewUI:
 
     
 
-
     def queryShowNotWorkingCrew(self):
 
         while True:
@@ -57,6 +61,7 @@ class CrewUI:
                 return employee
             print('Employee not found, try again')
         
+
     def checkRank(self,crew_member):
         role = crew_member.getRole()
         if role == 'Pilot':
@@ -157,7 +162,7 @@ class CrewUI:
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
-        print(self.BANNER_pilot)
+        print(CrewUI.pilot_header)
 
         for pilot_instance in licensed_pilots_list:
             
@@ -175,7 +180,7 @@ class CrewUI:
 
         sorted_pilots_list =  LL_API().sortPilotsByLicense()
 
-        print(self.BANNER_pilot)
+        print(CrewUI.pilot_header)
         
         for pilot in sorted_pilots_list:
             
@@ -191,7 +196,7 @@ class CrewUI:
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 
         
-        print(self.BANNER_att)
+        print(CrewUI.flight_att_header)
 
         flight_att = LL_API().get_flight_att()
 
@@ -271,7 +276,8 @@ class CrewUI:
                 return pilot_license
             else:
                 print('Invalid selection')
-                
+
+
     def getPhoneNumber(self):
         '''Gets the employee's phone 
            number from user'''

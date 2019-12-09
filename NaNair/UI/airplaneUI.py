@@ -73,5 +73,6 @@ class AirplaneUI:
 
     def addAirplane(self):
         '''Adds a new Airplane to the airplane file'''
-        return LL_API().addAirplane()
+        LL_API().addAirplane()
+        print('Airplane successfully added!')
 

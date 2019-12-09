@@ -68,7 +68,7 @@ class Voyage:
         return self.__voyage_ID
 
     def getSoldSeats(self):
-        return pass
+        pass
     
 
 
