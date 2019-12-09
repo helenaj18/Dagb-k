@@ -318,27 +318,33 @@ class AirplaneLL:
             planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper()
 
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
+                print('Enter planeTypeId')
                 
                 while True:
-                    planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ').lower()
                     
-                    if planeTypeId == 'nafokkerf100':
+                    print('1 - NAFokkerF100')
+                    print('2 - NABAE146')
+                    print('3 - NAFokkerF28')
+                    print()
+                    planeTypeId = input('Please choose one of the above: ')
+                    
+                    if planeTypeId == '1':
                         manufacturer = 'Fokker'
                         seats = '100'
-                        print('Airplane successfully added!')
                         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-                    elif planeTypeId == 'nabae146':
+
+                    elif planeTypeId == '2':
                         manufacturer = 'BAE'
                         seats = '82'
-                        print('Airplane successfully added!')
                         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-                    elif planeTypeId == 'nafokkerf28':
+
+                    elif planeTypeId == '3':
                         manufacturer = 'Fokker'
                         seats = '65'
-                        print('Airplane successfully added!')
                         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+
                     else:
-                        print('Invalid Type ID!')
+                        print('\nInvalid Type ID!\n')
             else:
                 print('Invalid Plane insignia!')
 
