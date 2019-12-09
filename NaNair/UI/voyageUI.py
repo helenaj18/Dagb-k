@@ -56,24 +56,29 @@ class VoyageUI:
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
-        if aircraft_ID != 'No aircraft assigned to voyage':
+        if aircraft_ID != 'empty':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             total_seats = airplane.get_planeCapacity()
             sold_seats_out,sold_seats_home = voyage.getSeatsSold()
-        else:
-            total_seats = 'No information'
-            sold_seats_out,sold_seats_home = '0','0'
+            print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
+                sold_seats_out,total_seats))
+            print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
+                sold_seats_home,total_seats))
+            print('\t Aircraft: {}'.format(aircraft_ID))
+        elif aircraft_ID == 'empty':
+            print('\t Aircraft: No aircraft assigned to voyage')
+        else: 
+            print('\t Aircraft: {}'.format(aircraft_ID))
+        # else:
+        #     total_seats = 'No information'
+        #     sold_seats_out,sold_seats_home = '0','0'
 
-        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
-            sold_seats_out,total_seats))
-        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
-            sold_seats_home,total_seats))
 
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
             voyage_duration_min))
         
 
-        print('\t Aircraft: {}'.format(aircraft_ID))
+        
         print('\t Status on staff: {}'.format(voyage_staffed))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
@@ -202,7 +207,7 @@ class VoyageUI:
 
         AirplaneUI().showAirplanesByDateTime(datetime_object)
         print()
-        print('Which Aircraft would you like to assign to voyage {}? (Aircraft ID)'.format(voyage.getVoyageID()))
+        print('Which Aircraft would you like to assign to voyage {}? (PlaneInsignia)'.format(voyage.getVoyageID()))
         print()
         aircraft_ID = input()
         voyage.setAircraftID(aircraft_ID)
@@ -265,8 +270,8 @@ class VoyageUI:
                     
                 aircraft_ID = voyage.getAircraftID()
 
-                if aircraft_ID == VoyageUI.EMPTY: 
-                    aircraft_ID = 'No aircraft assigned to voyage'
+                # if aircraft_ID == VoyageUI.EMPTY: 
+                #     aircraft_ID = None
 
 
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\

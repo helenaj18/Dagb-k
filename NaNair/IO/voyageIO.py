@@ -70,9 +70,12 @@ class VoyageIO:
         with file_object:
             # header 
             fieldnames = ['voyageIDnumber','flightNumber_out','seats_sold_out','departingFrom_home',\
-                'arrivingAt_out','departure_time_home','arrival_time_out','flightNumber_home',\
-                    'departingFrom_out','arrivingAt_home','departure_time_out','arrival_time_home',\
-                        'aircraftID','captain','copilot','fsm','fa1','fa2']
+                'arrivingAt_out','departure_time_home','arrival_time_out',\
+                    'flightNumber_home','seats_sold_home',\
+                    'departingFrom_out','arrivingAt_home','departure_time_out',\
+                        'arrival_time_home',\
+                        'aircraftID','captain',\
+                            'copilot','fsm','fa1','fa2']
 
 
             writer = csv.DictWriter(file_object,fieldnames=fieldnames)
@@ -140,5 +143,3 @@ class VoyageIO:
         file_object = open(self.__allVoyages_filename,'a')
         file_object.write(new_voyage_str+'\n')
 
-        #return file_object
-        pass

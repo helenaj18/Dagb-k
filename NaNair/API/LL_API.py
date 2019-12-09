@@ -42,7 +42,7 @@ class LL_API:
 
     def getAirplaneInsigniaList(self):
         '''Returns a list of all airplane insignias.'''
-        return AirplaneLL().getAirplaneInsignia()
+        return AirplaneLL().getAirplaneInsigniaList()
 
 
     def revertDatetimeStrtoDatetime(self,datetime_str):
