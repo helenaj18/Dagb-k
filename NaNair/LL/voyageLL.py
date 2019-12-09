@@ -10,6 +10,11 @@ from datetime import datetime
 class VoyageLL:
     ''' LL class for voyage '''
 
+    # When a new voyage is added
+    # the sold seats are 0
+    seats_sold_out = '0'
+    seats_sold_home = '0'
+
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
 
@@ -22,14 +27,14 @@ class VoyageLL:
 
 
     def getOneVoyage(self, voyage_to_get_ID):
-
-        voyage_list = IO_API().loadVoyageFromFile()
-        for voyage in voyage_list:
-            voyage_ID = voyage.getVoyageID()
+        '''Takes in voyage id and returns the voyage class instance that has that id'''
+        
+        voyage_instance_list = IO_API().loadVoyageFromFile()
+        for voyage_instance in voyage_instance_list:
+            voyage_ID = voyage_instance.getVoyageID()
             if voyage_ID == voyage_to_get_ID: 
-                return voyage
+                return voyage_instance
                 
-        return None
 
 
     def getVoyageDuration(self,voyage_instance):
@@ -67,8 +72,11 @@ class VoyageLL:
 
         time_now = datetime.now()
 
-        voyage_depart_datetime = voyage_instance.getDepartureTime()
-        voyage_arrive_datetime = voyage_instance.getArrivalTimeHome()
+        voyage_depart_date_str = voyage_instance.getDepartureTime()
+        voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
+
+        voyage_depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_date_str)
+        voyage_arrive_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_arrive_date_str)
 
         if time_now < voyage_depart_datetime:
             status = 'Not departed'
@@ -94,16 +102,14 @@ class VoyageLL:
         ''' Returns a list of instances of all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
-        date = type(start_datetime)
+       # date = type(start_datetime)
 
         voyages_on_date = []
 
         list_of_dates = []
         delta = timedelta(days=1)
-        print('AAAAATHHHHH')
-        print(type(start_datetime))
 
-        while start_datetime < end_datetime:
+        while start_datetime <= end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
             start_datetime += delta
 
@@ -200,7 +206,7 @@ class VoyageLL:
 
 
     def getAvailablePlanes(self, departure_time):
-        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time.isoformat())
+        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time)
         
         if available_tuple != None:
             not_available_planes,available_planes = available_tuple
@@ -232,20 +238,23 @@ class VoyageLL:
         flight_depart_num, flight_arrive_num = self.assignFlightNo(destination, departure_time)
 
         info_list.append(flight_depart_num)
+        
+        info_list.append(VoyageLL.seats_sold_out)
 
         #departing airport added to info
         info_list.append('KEF')
-        info_list. append(destination)
+        info_list.append(destination)
 
-        info_list.append( departure_time.isoformat() )
+        info_list.append(departure_time.isoformat())
 
         arrival_time_gmt = self.findArrivalTime(destination, departure_time)
 
         # arrival time in other country added
         arrival_time_out = self.TimeDifference(arrival_time_gmt, destination)
-        info_list.append( arrival_time_out.isoformat() )
+        info_list.append(arrival_time_out.isoformat())
 
         info_list.append(flight_arrive_num)
+        info_list.append(VoyageLL.seats_sold_home)
 
         #ARRIVING TRIP
 
@@ -253,10 +262,11 @@ class VoyageLL:
         info_list.append(destination)
         info_list.append('KEF')
 
+
         # depart time added to list
         # plane stops at destination for 1 hour 
         departure_time_back = arrival_time_out + timedelta(hours=1)
-        info_list.append( departure_time_back.isoformat() )
+        info_list.append(departure_time_back.isoformat())
 
         arrival_time_back = self.findArrivalTime(destination, departure_time_back)
         info_list.append( arrival_time_back.isoformat() )

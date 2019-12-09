@@ -371,7 +371,7 @@ class AirplaneLL:
         airplane_insignia_list = []
         airplanes = IO_API().loadAirplaneFromFile()
         for airplane in airplanes:
-            airplane_insignia_list.append(airplane.getAirplaneInsignia())
+            airplane_insignia_list.append(airplane.get_planeInsignia())
 
         return airplane_insignia_list
 

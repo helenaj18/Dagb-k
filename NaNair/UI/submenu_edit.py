@@ -5,7 +5,7 @@ from UI.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
 from UI.destinationUI import DestinationUI
-
+from UI.edit_existing_voyage_menu import EditExistingVoyage
 class SubMenuEdit:
 
     EMPTY = 'empty'
@@ -33,59 +33,8 @@ class SubMenuEdit:
             selection = input()
 
             if selection == '1':
-                print("Select date range to find a voyage to edit")
-                voyage = VoyageUI().queryOneVoyage()
-                VoyageUI().showOneVoyage(voyage)
-
-
-                
-                while True:
-                    print("\nWhat do you want to change in voyage {}".format(voyage.getVoyageID()))
-                    # Change existing voyage
-                    print('1 - Add an airplane to a voyage')
-                    print('2 - Add employees to a voyage')
-                    print('3 - Change date')
-                    print("m - Back to main menu")
-                    user_selection = input()
-                    if user_selection == '1':
-                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsigniaList():
-                            print('Airplane already assigned to Voyage')
-                            return
-                        else: 
-                        
-                            return VoyageUI().addAircraftToVoyage(voyage)
-
-                    
-                    elif user_selection == '2':
-                        if voyage.getAircraftID() == self.EMPTY:
-
-                            print()
-                            print('No aircraft assigned to voyage')
-                            print('Aircraft must me assigned before staff can be added')
-                            print()
-                            return 
-
-                        else:
-
-                            #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                            CrewUI().showNotWorkingCrew(voyage.getDepartureTime()) ################
-                            print()
-
-                            VoyageUI().addCrewToVoyage(voyage)
-                            #return
-                        
-                                            
-                    elif user_selection == '3':
-                        # change date
-                    
-                        return VoyageUI().changeTimeOfVoyage()
-                    
-                    elif user_selection == 'm':
-                        return
-                    
-                    else:
-                        print('Invalid selection')
-
+                EditExistingVoyage().startEditExistingVoyage()
+               
 
             elif selection == '2':
                 # Change destination emergency contact

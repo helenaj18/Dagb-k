@@ -12,31 +12,34 @@ class VoyageUI:
     SEPERATOR = '-'
 
     def getDateInput(self):
-        '''Gets a date input from the user'''
+        '''Gets a date input from the user and returns a datetime object'''
 
         year_str = input('Year: ')
         month_str = input('Month: ')
         day_str = input('Day: ')
 
+        # check if date is valid
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
-        
+
         datetime_input = datetime.datetime(year_int,month_int,day_int,0,0,0)
         return datetime_input
     
     def getDateWithTime(self):
-        '''Gets a date input from the user with time'''
+        '''Gets a date and time input from the user and returns a datetime object'''
 
-        year = input('Year: ')
-        month = input('Month: ')
-        day = input('Day: ')
+        year_str = input('Year: ')
+        month_str = input('Month: ')
+        day_str = input('Day: ')
         
-        year_int, month_int, day_int = LL_API().verifyDate(year, month, day)
+        # check if date is valid
+        year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-        hour = input('Hour: ')
-        minutes = input('Minute: ')
+        hour_str = input('Hour: ')
+        minutes_str = input('Minute: ')
         print()
 
-        hour_int, minutes_int = LL_API().verifyTime(hour, minutes)
+        # check if time is valid
+        hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
 
@@ -58,24 +61,29 @@ class VoyageUI:
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
-        if aircraft_ID != 'No aircraft assigned to voyage':
+        if aircraft_ID != 'empty':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             total_seats = airplane.get_planeCapacity()
             sold_seats_out,sold_seats_home = voyage.getSeatsSold()
-        else:
-            total_seats = 'No information'
-            sold_seats_out,sold_seats_home = '0','0'
+            print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
+                sold_seats_out,total_seats))
+            print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
+                sold_seats_home,total_seats))
+            print('\t Aircraft: {}'.format(aircraft_ID))
+        elif aircraft_ID == 'empty':
+            print('\t Aircraft: No aircraft assigned to voyage')
+        else: 
+            print('\t Aircraft: {}'.format(aircraft_ID))
+        # else:
+        #     total_seats = 'No information'
+        #     sold_seats_out,sold_seats_home = '0','0'
 
-        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
-            sold_seats_out,total_seats))
-        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
-            sold_seats_home,total_seats))
 
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
             voyage_duration_min))
         
 
-        print('\t Aircraft: {}'.format(aircraft_ID))
+        
         print('\t Status on staff: {}'.format(voyage_staffed))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
@@ -149,6 +157,8 @@ class VoyageUI:
 
                 voyage_duration_hrs, voyage_duration_min = \
                 LL_API().get_voyage_duration(voyage)
+
+                voyage_state = LL_API().get_status_of_voyage(voyage)
                 
                 flight_no_out, flight_no_home = voyage.getFlightNumbers()
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -162,7 +172,7 @@ class VoyageUI:
                 
                 
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
-                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
                 
                 return
 
@@ -204,7 +214,7 @@ class VoyageUI:
 
         AirplaneUI().showAirplanesByDateTime(datetime_object)
         print()
-        print('Which Aircraft would you like to assign to voyage {}? (Aircraft ID)'.format(voyage.getVoyageID()))
+        print('Which Aircraft would you like to assign to voyage {}? (PlaneInsignia)'.format(voyage.getVoyageID()))
         print()
         aircraft_ID = input()
         voyage.setAircraftID(aircraft_ID)
@@ -259,7 +269,7 @@ class VoyageUI:
                     LL_API().get_voyage_duration(voyage)
 
 
-                voyage_state = LL_API().get_status_of_voyage()
+                voyage_state = LL_API().get_status_of_voyage(voyage)
 
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
@@ -270,8 +280,8 @@ class VoyageUI:
                     
                 aircraft_ID = voyage.getAircraftID()
 
-                if aircraft_ID == VoyageUI.EMPTY: 
-                    aircraft_ID = 'No aircraft assigned to voyage'
+                # if aircraft_ID == VoyageUI.EMPTY: 
+                #     aircraft_ID = None
 
 
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
@@ -304,8 +314,7 @@ class VoyageUI:
         check = LL_API().checkDestInput(dest)
         
         while check == False:
-            print('Please enter a valid destination!')
-            dest = input().upper()
+            dest = input('Please enter a valid destination: ').upper().strip()
             check = LL_API().checkDestInput(dest)
         
         return dest
@@ -322,12 +331,12 @@ class VoyageUI:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        plane_name = input('Chosen plane (type name of plane): ').upper().strip()
+        plane_name = input('Chosen plane (type name of plane on this format TF-XXX): ').upper().strip()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
         while check == False:
             print('Please choose one of the listed planes.')
-            plane_name = input()
+            plane_name = input().upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
         
         return plane_name

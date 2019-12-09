@@ -42,7 +42,7 @@ class LL_API:
 
     def getAirplaneInsigniaList(self):
         '''Returns a list of all airplane insignias.'''
-        return AirplaneLL().getAirplaneInsignia()
+        return AirplaneLL().getAirplaneInsigniaList()
 
 
     def revertDatetimeStrtoDatetime(self,datetime_str):
@@ -159,6 +159,10 @@ class LL_API:
         date is taken, otherwise False.'''
         return VoyageLL().checkIfTakenTime(time_datetime)
 
+
+    def get_status_of_voyage(self, voyage_instance):
+        '''Returns status of voyage at the current time'''
+        return VoyageLL().getVoyageStatus(voyage_instance)
 
 
     ## DESTINATION LL
