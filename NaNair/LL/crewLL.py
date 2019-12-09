@@ -127,10 +127,12 @@ class CrewLL:
     def getWorkingCrew(self,datetime_object):
         ''' Returns a string of the working crew on a date inputted by user'''
         
-        # gets a list of the people working on inputted date and destination
+        working_crew_list = []
+        # Gets a list of the people working on inputted date and the
+        # destination they're going to
         working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
-        date_type_get_working = type(datetime_object)
-        format_str = ''
+
+        #format_str = ''
 
         if working_crew_id_list != None:
             for working_crew_per_voyage in working_crew_id_list:
@@ -140,14 +142,10 @@ class CrewLL:
                 for crew_id in working_crew_per_voyage[0]:
                     if crew_id != 'empty':
                         crew_member = self.getOneCrewMember(crew_id)
-                        format_str += '{:<20}{:<20}{:<20}{:<20}{:<20}\n'.format(crew_member.getName(),
-                                                                                crew_id,crew_member.getAddress(),
-                                                                                crew_member.getPhoneNumber(),
-                                                                                destination_name)
+                        working_crew_list.append((crew_member,destination_name))
             
-            self.working_crew_id_list = working_crew_id_list
+            return working_crew_list
 
-            return format_str
         #if no one is working on the inputted date
         else:
             return None
@@ -179,10 +177,9 @@ class CrewLL:
 
 
     def getNotWorkingCrew(self,datetime_object):
-
-        getNotworkig_date = type(datetime_object)
+        '''Gets a list of instances of crew members
+           that are not working on a specific day'''
         
-        #format_str = ''
         self.getWorkingCrew(datetime_object)
         not_working_crew_list = []
         all_crew = IO_API().loadCrewFromFile()

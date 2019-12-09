@@ -107,7 +107,7 @@ class VoyageLL:
         list_of_dates = []
         delta = datetime.timedelta.timedelta(days=1)
 
-        while start_datetime < end_datetime:
+        while start_datetime <= end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
             start_datetime += delta
 
@@ -204,7 +204,7 @@ class VoyageLL:
 
 
     def getAvailablePlanes(self, departure_time):
-        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time.isoformat())
+        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time)
         
         if available_tuple != None:
             not_available_planes,available_planes = available_tuple

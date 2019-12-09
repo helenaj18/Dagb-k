@@ -40,9 +40,9 @@ class CrewUI:
 
     def showWorkingCrew(self,date_str):
         datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
-        format_str = LL_API().get_working_crew(datetime_object)
-        print(format_str)
-        self.printCrew(format_str,True)
+        working_crew_list = LL_API().get_working_crew(datetime_object)
+        print(working_crew_list)
+        self.printCrew(working_crew_list,True)
 
 
     def showNotWorkingCrew(self,date_str):
@@ -77,33 +77,67 @@ class CrewUI:
         return position
         
 
-    def printCrew(self,not_working_crew_list, not_working):
+    def printCrew(self,crew_list, not_working):
         ''' Prints Crew'''
         header = 'Working Crew' if not_working else 'Not Working crew'
         format_str = ''
 
-        if not_working_crew_list != None:
+        if crew_list != None:
             print('#'*30)
             print('{:^30}'.format(header))
             print()
             print('#'*30)
-            header_str = '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}'.format(
-                'Role','Name','Employee Id','Position','Email',\
-                    'Phone Number','Destination')
+            if header == 'Working Crew':
+                header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}'.format(
+                    'Role','Name','Employee Id','Position','Email',\
+                        'Phone Number','Destination','License')
+                for crew_member_info in crew_list:
+                    crew_member = crew_member_info[0]
+                    destination = crew_member_info[1]
 
-            print(header_str)
-            print(len(header_str)*'-')
-            for crew_member in not_working_crew_list:
-                position = self.checkRank(crew_member)
+                    position = self.checkRank(crew_member)
 
-                format_str += '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}\n'.format(
+                    if crew_member.getRole() == 'Cabincrew':
+                        crew_license = 'N/A'
+                    else:
+                        crew_license = crew_member.getLicense()
+
+                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
                     position,
                     crew_member.getEmail(),
-                    crew_member.getPhoneNumber()
+                    crew_member.getPhoneNumber(),
+                    destination,
+                    crew_license
                 )
+
+            else:
+                header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<20}{:<15}'.format(
+                    'Role','Name','Employee Id','Position','Email',\
+                        'Phone Number','License')
+
+                for crew_member in crew_list:
+
+                    if crew_member.getRole() == 'Cabincrew':
+                        crew_license = 'N/A'
+                    else:
+                        crew_license = crew_member.getLicense()
+
+                    position = self.checkRank(crew_member)
+                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<25}{:<20}{:<15}\n'.format(
+                    crew_member.getRole(),
+                    crew_member.getName(),
+                    crew_member.getCrewID(),
+                    position,
+                    crew_member.getEmail(),
+                    crew_member.getPhoneNumber(),
+                    crew_license
+                )
+
+            print(header_str)
+            print(len(header_str)*'-')
             print(format_str)
 
 
@@ -241,7 +275,9 @@ class CrewUI:
             pilot_license = self.getPilotLicense()
             info_list.append(pilot_license)
 
-        info_list.append(input('Home address: '))
+
+        home_address = self.getHomeAddress()
+        info_list.append(home_address)
 
         phone_number = self.getPhoneNumber()
         info_list.append(phone_number)
@@ -255,6 +291,15 @@ class CrewUI:
 
         print('\nNew Employee added!\n') 
     
+    def getHomeAddress(self):
+        '''Gets home address of an 
+           employee from user'''
+
+        home_address = input('Home address: ')
+        if home_address != '':
+            return home_address
+        else:
+            return 'empty'
 
     def getPilotLicense(self):
         print('Pilot license:')
