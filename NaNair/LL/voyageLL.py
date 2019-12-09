@@ -16,21 +16,14 @@ class VoyageLL:
     def __init__(self):
         self.voyage_list = IO_API().loadVoyageFromFile()
 
-        
-    # def splitDates(self, datetime):       # EKKI Í NOTKUN ??
-    #     date = datetime[:10]
-    #     year, month, day = date.split('-')
 
-    #     return int(year), int(month), int(day)
-
-
-    def getOneVoyage(self, voyage_to_get_ID):
+    def getOneVoyage(self, voyage_to_get_ID_str):
         '''Takes in voyage id and returns the voyage class instance that has that id'''
         
         voyage_instance_list = IO_API().loadVoyageFromFile()
         for voyage_instance in voyage_instance_list:
-            voyage_ID = voyage_instance.getVoyageID()
-            if voyage_ID == voyage_to_get_ID: 
+            voyage_ID_str = voyage_instance.getVoyageID()
+            if voyage_ID_str == voyage_to_get_ID_str: 
                 return voyage_instance
                 
 
@@ -38,34 +31,34 @@ class VoyageLL:
     def getVoyageDuration(self,voyage_instance):
         ''' Returns voyage duration in hours and minutes'''
         
-        # duration of the trip in hrs and mins
-        destination_duration_str = voyage_instance.getDestination().getDestinationDuration()
+        # duration of one way trip in hrs and mins, format: xxhxxm where xx are numbers
+        duration_str = voyage_instance.getDestination().getDestinationDuration()
 
         # hrs and mins isolated
-        destination_duration_hrs = int(destination_duration_str[: -4])
-        destination_duration_minutes = int(destination_duration_str[-3: -1])
-        voyage_duration_min = destination_duration_minutes * 2
+        duration_hrs_int = int(duration_str[: -4])
+        duration_minutes_int = int(duration_str[-3: -1])
+        voyage_duration_min_int = duration_minutes_int * 2
 
         # Duration of round trip plus 1 hour layover
-        voyage_duration_hrs = destination_duration_hrs * 2 + 1 
+        voyage_duration_hrs_int = destination_duration_hrs * 2 + 1 
 
-        if voyage_duration_min == 60:
-            voyage_duration_hrs = voyage_duration_hrs + 1
-            voyage_duration_min = 0 
+        if voyage_duration_min_int == 60:
+            voyage_duration_hrs_int = voyage_duration_hrs_int + 1
+            voyage_duration_min_int = 0 
 
-        elif voyage_duration_hrs > 60: 
-            voyage_duration_hrs = voyage_duration_hrs + 1
-            voyage_duration_min = voyage_duration_min - 60 
+        elif voyage_duration_hrs_int > 60: 
+            voyage_duration_hrs_int = voyage_duration_hrs_int + 1
+            voyage_duration_min_int = voyage_duration_min_int - 60 
 
-        return voyage_duration_hrs, voyage_duration_min
+        return voyage_duration_hrs_int, voyage_duration_min_int
 
 
     def isEmployeeWorkingOnDate(self, date, employee_id):
         '''Checks if an inputted employee is working on an inputted date.
         Returns True if he is, else False.'''
 
-        voyages = self.getVoyageInDateRange(date, date)
-        for voyage in voyages:
+        voyages_intstance_list = self.getVoyageInDateRange(date, date)
+        for voyage in voyages_intstance_list:
             if employee_id in voyage.getCrewOnVoyage():
                 return True
         return False
@@ -75,7 +68,7 @@ class VoyageLL:
         '''Takes a voyage instance and checks its status based on current time. A string describing 
         the status is returned.'''
 
-        time_now = datetime.datetime.now()
+        time_now_datetime = datetime.datetime.now()
 
         voyage_depart_date_str = voyage_instance.getDepartureTime()
         voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
@@ -85,35 +78,35 @@ class VoyageLL:
         voyage_arrive_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_arrive_date_str)
 
         # if voyage departed before current time
-        if time_now < voyage_depart_datetime:
-            status = 'Not departed'
+        if time_now_datetime < voyage_depart_datetime:
+            status_str = 'Not departed'
         # if voyage departed before current time but has not yet arrived
-        elif time_now >= voyage_depart_datetime and time_now < voyage_arrive_datetime:
-            status = 'In air'
+        elif time_now_datetime >= voyage_depart_datetime and time_now_datetime < voyage_arrive_datetime:
+            status_str = 'In air'
         # if voyage has arrived    
         else:
-            status = 'Completed'
+            status_str = 'Completed'
         
-        return status
+        return status_str
 
     def addCaptain(self, voyage_id, date, employee_id):
         '''Captain added to an existing voyage'''
 
-        is_unavailable = self.isEmployeeWorkingOnDate(date, employee_id)
-        if is_unavailable:
+        is_unavailable_bool = self.isEmployeeWorkingOnDate(date, employee_id)
+        if is_unavailable_bool:
             raise Exception("Staff member notavailable on this date")
-        voyage = VoyageIO.getOneVoyage(voyage_id)
-        if voyage is None:
+        voyage_instance = VoyageIO.getOneVoyage(voyage_id)
+        if voyage_instance is None:
             raise Exception("Voyage not found")
-        voyage.setCaptain(employee_id)
+        voyage_instance.setCaptain(employee_id)
 
 
     def getVoyageInDateRange(self, start_datetime, end_datetime):
         ''' Returns a list of instances of all voyages in a certain date range'''
 
-        voyages = IO_API().loadVoyageFromFile()
+        voyages_instance_list = IO_API().loadVoyageFromFile()
 
-        voyages_on_date = []
+        voyages_on_date_list = []
 
         list_of_dates = []
         delta = datetime.timedelta(days=1)
@@ -123,7 +116,7 @@ class VoyageLL:
             start_datetime += delta
 
             
-        for voyage in voyages:
+        for voyage in voyages_instance_list:
             departure_datetime = voyage.getDepartureTime()
             departure_date = departure_datetime[:10]
 
@@ -131,12 +124,12 @@ class VoyageLL:
             arrival_date = arrival_datetime[:10]
 
             if departure_date in list_of_dates:
-                voyages_on_date.append(voyage)
+                voyages_on_date_list.append(voyage)
 
             elif arrival_date in list_of_dates:
-                voyages_on_date.append(voyage)
+                voyages_on_date_list.append(voyage)
 
-        return voyages_on_date
+        return voyages_on_date_list
             
 
 
@@ -144,10 +137,10 @@ class VoyageLL:
         '''Assign a voyage an id based on last voyage in file.'''
         
         # get voyage id of last voyage in file
-        last_voyageID = self.voyage_list[-1].getVoyageID()
+        last_voyageID_str = self.voyage_list[-1].getVoyageID()
  
-        new_id = int(last_voyageID) + 1
-        return str(new_id)
+        new_id_int = int(last_voyageID_str) + 1
+        return str(new_id_int)
  
 
     def assignFlightNo(self, destination, depart_time):
@@ -195,21 +188,21 @@ class VoyageLL:
         return departing_num, arriving_num
 
 
-    def TimeDifference(self, time, dest_code):
+    def TimeDifference(self, time_datetime, dest_code):
         '''Calculates time difference between KEF and destinations'''
         
         if dest_code == 'LYR':
-            time = time + datetime.timedelta(hours=1)
+            time_datetime = time_datetime + datetime.timedelta(hours=1)
         elif dest_code == 'GOH' or dest_code == 'KUS':
-            time = time + datetime.timedelta(hours=-3)
+            time_datetime = time_datetime + datetime.timedelta(hours=-3)
 
         # time in faroe islands (FAE) and tingwall (LWK) is gmt so no need to change
 
-        return time
+        return time_datetime
 
 
-    def findArrivalTime(self, dest_code, depart_time):
-        '''FTakes in destination code and departure time and returns arrival time at
+    def findArrivalTime(self, dest_code, depart_time_datetime):
+        '''Takes in destination code and departure time and returns arrival time at
         destination as datetime object.'''
 
         destinations_instances = DestinationLL().getDestination()
@@ -220,17 +213,17 @@ class VoyageLL:
                 duration_str = destination.getDestinationDuration()
         
         # turns duration string into int values, form of string is xxhxxm where x are numbers
-        index_of_h = duration_str.find('h')
+        index_of_h_int = duration_str.find('h')
 
-        if index_of_h == 1:    
-            hrs = int(duration_str[0])
+        if index_of_h_int == 1:    
+            hrs_int = int(duration_str[0])
         else:
-            hrs = int(duration_str[ :(index_of_h - 1) ])
-        mins = int(duration_str[(index_of_h + 1):3])
+            hrs_int = int(duration_str[ :(index_of_h_int - 1) ])
+        mins_int = int(duration_str[(index_of_h_int + 1):3])
         
-        arrival_time = depart_time + timedelta(hours=hrs, minutes=mins)
+        arrival_time_datetime = depart_time_datetime + timedelta(hours=hrs_int, minutes=mins_int)
 
-        return arrival_time
+        return arrival_time_datetime
 
 
     def getAvailablePlanes(self, departure_time):
@@ -248,11 +241,11 @@ class VoyageLL:
         return available_planes
 
 
-    def checkPlaneInput(self, plane_input, list_of_planes):
+    def checkPlaneInput(self, plane_input, list_of_plane_instances):
         '''Checks if inputted plane exists in inputted list of available planes'''
 
         BoolCheck = False
-        for plane in list_of_planes:
+        for plane in list_of_plane_instances:
             if plane_input == plane.get_planeInsignia():
                 BoolCheck = True
         
