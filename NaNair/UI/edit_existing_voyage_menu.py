@@ -17,7 +17,7 @@ class EditExistingVoyage:
             print('1 - Add an airplane to a voyage')
             print('2 - Add employees to a voyage')
             print('3 - Change date')
-            print("m - Back to main menu")
+            print('m - Back to edit menu')
             user_selection = input()
             
             if user_selection == '1':
@@ -26,7 +26,8 @@ class EditExistingVoyage:
                     return
                 else: 
                 
-                    return VoyageUI().addAircraftToVoyage(voyage)
+                    VoyageUI().addAircraftToVoyage(voyage)
+                    continue 
 
             
             elif user_selection == '2':
@@ -36,13 +37,17 @@ class EditExistingVoyage:
                     print('No aircraft assigned to voyage')
                     print('Aircraft must me assigned before staff can be added')
                     print() 
+                
 
                 else:
+<<<<<<< HEAD
+=======
 
                     #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                    CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
+                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
                     print()
 
+>>>>>>> 6e7f3538b48b6da1472259e0b420403c2463aef4
                     return VoyageUI().addCrewToVoyage(voyage)
                 
                                     

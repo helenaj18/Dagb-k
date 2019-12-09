@@ -18,8 +18,13 @@ class DisplayVoyageTimeFrame:
             if selection == '1':
                 '''Lists up all voyages during a 
                    specific time frame'''
-
-                return VoyageUI().showAllVoyagesInRange()
+                
+                if VoyageUI().showAllVoyagesInRange() != None:
+                    return
+                else:
+                    print()
+                    print('No voyages on these dates')
+                    print()
                 
             elif selection == '2':
                 ''' Lists all voyages on a specific day'''
