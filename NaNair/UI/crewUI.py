@@ -2,6 +2,7 @@ from API.LL_API import LL_API
 import datetime
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
+from UI.destinationUI import DestinationUI
 
 
 class CrewUI:
@@ -112,7 +113,6 @@ class CrewUI:
             print('\nNo voyages on this day\n')
 
 
-
     def changeEmployeeInfo(self,employee):
         return LL_API().changeCrewInfo(employee)
 
@@ -219,8 +219,11 @@ class CrewUI:
         info_list = []
         print('Please fill in the following information. Press enter to skip.\n')
 
-        info_list.append(input('Personal ID (required): '))
-        info_list.append(input('Name (required): '))
+        personal_id = self.getPersonalID()
+        info_list.append(personal_id)
+
+        employee_name = self.getName()
+        info_list.append(employee_name)
 
         print('Please choose one of the following job titles:')
         print('1 - Captain')
@@ -236,18 +239,99 @@ class CrewUI:
         info_list.append(rank)
 
         if rank == '1' or rank == '2':
-            info_list.append( input('Pilot license: ') )
+            pilot_license = self.getPilotLicense()
+            info_list.append(pilot_license)
 
-        info_list.append( input('Home address: ') )
-        info_list.append( input('Phone number: ') )
-        info_list.append( input('Email: ') )
+        info_list.append(input('Home address: '))
+
+        phone_number = self.getPhoneNumber()
+        info_list.append(phone_number)
+
+        email_address = self.getEmail()
+        info_list.append(email_address)
 
         LL_API().addCrew(info_list)
 
         #info_list for pilots is longer because of license
 
-        print('New Employee added!\n') 
-        
+        print('\nNew Employee added!\n') 
+    
+
+    def getPilotLicense(self):
+        print('Pilot license:')
+        print('1 - NAFokkerF100')
+        print('2 - NAFokkerF28')
+        print('3 - NABAE146')
+
+        while True:
+            pilot_license = input('Please choose one of the above: ')
+
+            if pilot_license == '1':
+                pilot_license = 'NAFokkerF100'
+                return pilot_license
+            elif pilot_license == '2':
+                pilot_license = 'NAFOKKERF28'
+                return pilot_license
+            elif pilot_license == '3':
+                pilot_license = 'NABAE146'
+                return pilot_license
+            else:
+                print('Invalid selection')
+                
+    def getPhoneNumber(self):
+        '''Gets the employee's phone 
+           number from user'''
+        while True:
+            employee_phone_number = input("Enter the employee's phone number: ")
+            if len(employee_phone_number) !=0 and DestinationUI().checkIfInt(employee_phone_number):
+                if len(employee_phone_number) == 7:
+                    return employee_phone_number
+                else:
+                    print('Invalid phone number')
+            elif len(employee_phone_number) == 0:
+                return 'empty'
+            else:
+                print('Invalid phone number')
+
+
+    def getEmail(self):
+        '''Gets the employee's email address'''
+        while True:
+            email_address = input('Email: ')
+            if len(email_address) == 0:
+                return 'empty'
+            elif '@' in email_address and len(email_address) != 0:
+                return email_address
+            else:
+                print('Invalid email address!')
+
+    def getName(self):
+        while True:
+            employee_name = input("Enter the employee's name: ").capitalize()
+            for letter in employee_name:
+                if letter.isdigit():
+                    print('Invalid name, please enter only letters!')
+                    break
+            else:
+                if len(employee_name) != 0:
+                    return employee_name
+                else:
+                    print('The name is required')
+
+
+    def getPersonalID(self):
+        '''Gets personal ID from user'''
+
+        while True:
+            personal_id = input('Personal ID (required): ')
+
+            if DestinationUI().checkIfInt(personal_id):
+                if len(personal_id) == 10:
+                    return personal_id
+                else:
+                    print('Invalid personal ID!')
+            else:
+                print('Invalid personal ID!')
 
     def showSchedule(self, crew_ID):
         ''' Shows the schedule for a specific crew member '''
