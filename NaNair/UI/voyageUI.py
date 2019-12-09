@@ -269,21 +269,6 @@ class VoyageUI:
 
         return LL_API().change_voyage(voyage)
 
-<<<<<<< HEAD
-=======
-    def changeTimeOfVoyage(self,voyage):
-        print('Enter new date and time')
-        year = input('Year: ').strip()
-        month = input('Month: ').strip()
-        day = input('Day: ').strip()
-        time = input('Time (HH:MM): ').strip()
-        hrs = time[:2]
-        mins = time[-2:]
-        new_time = datetime.datetime(year,month,day,hrs,mins,0,0).isoformat()
-        voyage.setDepartureTime(new_time)
-        return LL_API().change_voyage(voyage)
-
->>>>>>> ec44592f60f98876a8bec37915884ceb898f5a43
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
         '''Shows all voyages for a current time period'''
