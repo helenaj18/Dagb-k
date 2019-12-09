@@ -25,8 +25,6 @@ class Pilot(Crew):
     def getBool(self):
         return self.__captain
 
-    # def isCaptain(self):
-    #     return True if self.__captain else False
 
     def setLicense(self,new_license):
         self.__pilot_license = new_license

@@ -14,26 +14,25 @@ class CrewIO:
         self.__crew_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Crew.csv')
 
     def loadCrewFromFile(self):
-        '''list of all crewmembers'''
+        '''Returns a list of all crewmembers
+           as instances'''
         crew_list = []
 
         crew_file= open(self.__crew_filename,'r')
 
         reader_crew = csv.DictReader(crew_file)
 
-        
-
         for row in reader_crew:
             if row['role'] == CrewIO.PILOT:
                 
-                pilot = Pilot(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
+                pilot_instance = Pilot(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
                     row['license'],row['captain/head_flight_attendant'],row['role'])
-                crew_list.append(pilot)
+                crew_list.append(pilot_instance)
                 
             elif row['role'] == CrewIO.CABINCREW:
-                crewmember = FlightAttendant(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
+                crewmember_instance = FlightAttendant(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
                     row['captain/head_flight_attendant'],row['license'],row['role'])
-                crew_list.append(crewmember)
+                crew_list.append(crewmember_instance)
 
         crew_file.close()  
         return crew_list
@@ -41,18 +40,19 @@ class CrewIO:
 
     def changeCrewFile(self, updated_employee):
         '''Updates the file with new changes'''
+        # Loads all employees
         allEmps = self.loadCrewFromFile()
 
         file_object = open(self.__crew_filename,'w')
         with file_object:
-            #header
+            # Header
             fieldnames = ['ssn','name','role','captain/head_flight_attendant',\
                 'license', 'address','phonenumber','email']
             writer = csv.DictWriter(file_object, fieldnames=fieldnames)
             writer.writeheader()
             
             for emp in allEmps:
-                emp_id=emp.getCrewID()
+                emp_id = emp.getCrewID()
                 updated_employee_id = updated_employee.getCrewID()
                 if emp_id == updated_employee_id:
                     
