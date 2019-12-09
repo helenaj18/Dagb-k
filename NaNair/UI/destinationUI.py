@@ -49,14 +49,14 @@ class DestinationUI:
 
         airport_code = input('Enter airport code (IATA): ').upper()
         
-        check = LL_API().checkDestInput(airport_code)
+        check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
         
         while check == False:
             print('Please enter a valid destination!')
-            dest = input().upper()
-            check = LL_API().checkDestInput(airport_code)
+            airport_code = input('Enter airport code (IATA): ').upper()
+            check = LL_API().checkDestInput(airport_code) #Verifies if the airport code is valid
 
-        new_emergency_contact = input('Enter name of new emergency contact: ')
+        new_emergency_contact = self.getEmergencyContactName()  #Gets new emergency contact name and verifies the input at the same time
 
         destination_instance = self.getOneDestination(airport_code)
         destination_instance.setEmergencyContactName(new_emergency_contact)
@@ -68,10 +68,15 @@ class DestinationUI:
 
 
     def changeEmergencyContactPhoneNumber(self):
-        
         airport_code = input('Enter airport code (IATA): ')
-        new_emergency_phone = input('Enter new emergency phone number: ') 
+        check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
+        while check == False:
+            print('Please enter a valid destination!')
+            airport_code = input('Enter airport code (IATA): ').upper()
+            check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
 
+        new_emergency_phone = self.getDestinationEmergencyPhoneNumber() #Gets new emergency phone number and verifies the input at the same time
+            
         destination_instance = self.getOneDestination(airport_code)
         destination_instance.setEmergencyContactPhone(new_emergency_phone)
 
@@ -144,7 +149,7 @@ class DestinationUI:
         flight_duration_hours_str = input('Hours: ')
         flight_duration_minutes_str = input('Minutes: ')
 
-        LL_API().verifyTime(flight_duration_hours_str,flight_duration_minutes_str)
+        LL_API().verifyTime(flight_duration_hours_str,flight_duration_minutes_str) #Verifies if the date is valid
 
         if len(flight_duration_minutes_str) == 1:
             flight_duration_str = flight_duration_hours_str + 'h0'+flight_duration_minutes_str + 'm'
