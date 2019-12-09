@@ -17,6 +17,7 @@ class EditEmployeeMenu:
         print('2 - Phone number')
         print('3 - Email')
         print('4 - Rank')
+        print('m - Back to main menu')
 
         if type(employee) == Pilot:
             print('5 - License')
@@ -33,39 +34,54 @@ class EditEmployeeMenu:
             ''' The software asks for new home adress and assigns it to the owner of given ID'''
             new_address = CrewUI().getHomeAddress()
             employee.setAddress(new_address)
-            CrewUI().changeEmployeeInfo(employee)
+            return CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '2':
             ''' The software asks for new phone number and assigns it to the owner of given ID'''
             new_phonenumber = CrewUI().getPhoneNumber()
             employee.setPhonenumber(new_phonenumber)
-            CrewUI().changeEmployeeInfo(employee)
+            return CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '3':
             ''' The software asks for new email adress and assigns it to the owner of given ID'''
             new_email_address = CrewUI().getEmail()
             employee.setEmail(new_email_address)
-            CrewUI().changeEmployeeInfo(employee)
+            return CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '4':
-            ''' The software asks for new rank and assigns it to the owner of given ID'''
-            if type(employee) == Pilot:
-                print('Please choose one: ')
-                print('0 - Co-pilot')
-                print('1 - Captain')
-            else: 
-                print('Please choose one: ')
-                print('0 - Flight attendant')
-                print('1 - Head service manager')
-            new_rank = input('Rank: ')
+            ''' The software asks for new rank and 
+                assigns it to the owner of given ID'''
+            while True:
+                if type(employee) == Pilot:
+                    print('Please choose one: ')
+                    print('0 - Co-pilot')
+                    print('1 - Captain')
+                    print('m - Back to main menu')
+                else: 
+                    print('Please choose one: ')
+                    print('0 - Flight attendant')
+                    print('1 - Head service manager')
+                    print('m - Back to main menu')
+                
+                new_rank = input('Please choose one of the above 1/2/m): ').strip()
 
-            employee.setRank(new_rank)
-            CrewUI().changeEmployeeInfo(employee)
+                if new_rank != '0' and new_rank != '1' and new_rank != 'm':
+                    print('\nInvalid rank!\n')
+
+                elif new_rank == 'm':
+                    return
+
+                else:
+                    employee.setRank(new_rank)
+                    return CrewUI().changeEmployeeInfo(employee)
             
 
         elif selection == '5':
             ''' The software asks for new license and assigns it to the owner of given ID'''
-            EditEmployeeLicense().startEditEmployeeLicense(employee)
+            return EditEmployeeLicense().startEditEmployeeLicense(employee)
+
+        elif selection == 'm':
+            return
 
         else:
-            print("Invalid input")  
+            print("Invalid input")

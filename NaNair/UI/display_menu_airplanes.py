@@ -4,13 +4,11 @@ import datetime
 from API.LL_API import LL_API
 
 class DisplayMenuAirplanes: 
-    def __init__(self, logic_layer):
-        print('Display airplanes')
 
     def startDisplayAirplanes(self):
-        print('#'*20)
+        print('-'*20)
         print('{:^20}'.format('DISPLAY - Airplanes'))
-        print('#'*20)
+        print('-'*20)
         print()
 
         while True: 
@@ -22,18 +20,18 @@ class DisplayMenuAirplanes:
             print('m - Back to main menu')
             print()
 
-            selection = input()
+            selection = input().strip()
 
+            #Prints all airplanes owned by NaN Air
             if selection == '1':
-                '''Gets all airplanes'''
                 return AirplaneUI().showAllPlanes()
 
+            # Prints all airplanes that are a certain type, type is chosen on next screen
             elif selection == '2':
-                '''Gets all airplanes by type'''
                 return DisplayMenuAirplaneType().startDisplayAirplaneType()
             
+            # Gets availability status on airplanes at an inputted date
             elif selection == '3':
-                '''Gets status on airplanes by date and time'''
                 print('Enter the date you want to display')
                 year_str = input('Year: ')
                 month_str = input('Month: ')
@@ -41,16 +39,21 @@ class DisplayMenuAirplanes:
                 hour_str = input('Hour: ')
                 minute_str = input('Minute: ')
 
+                # check if date input is valid
                 year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
 
+                # checks if time input is valid
                 hour_int,minute_int = LL_API().verifyTime(hour_str,minute_str)
 
-                datetime_str = datetime.datetime(year_int,month_int,day_int,hour_int,minute_int).isoformat()
+                # get datetime object of inputted time
+                datetime_object = datetime.datetime(year_int,month_int,day_int,hour_int,minute_int)
 
-                return AirplaneUI().showAirplanesByDateTime(datetime_str)
+                return AirplaneUI().showAirplanesByDateTime(datetime_object)
 
+            #Goes back to main menu
             elif selection == 'm':
-                '''Goes back to main menu'''
                 return
+            # If none of the possibilities are chosen
             else: 
-                print('Invalid selection')
+                print('Invalid selection!')
+                print()

@@ -1,7 +1,3 @@
-# import sys
-# sys.path.insert(1,'/Users/valaroff/Desktop/T111PROG/verklegt1/NaNair/API')
-# import LL_API
-
 from API.LL_API import LL_API
 from UI.submenu_register import SubMenuRegister
 from UI.submenu_edit import SubMenuEdit
@@ -9,8 +5,7 @@ from UI.submenu_display import SubMenuDisplay
 
 
 class MainMenu:
-    def __init__(self):
-        self.logic_layer = LL_API()        
+ 
 
     def start(self):
         # Header
@@ -35,17 +30,17 @@ class MainMenu:
             if selection == '1':
                 # Register Menu
                 
-                SubMenuRegister(self.logic_layer).startSubMenuRegister()
+                SubMenuRegister().startSubMenuRegister()
 
             elif selection == '2':
                 # Display Menu
 
-                SubMenuDisplay(self.logic_layer).startSubMenuDisplay()
+                SubMenuDisplay().startSubMenuDisplay()
 
             elif selection =='3':
                 # Edit Menu
 
-                SubMenuEdit(self.logic_layer).startSubMenuEdit()
+                SubMenuEdit().startSubMenuEdit()
 
             elif selection == 'q':
                 # Quit the program

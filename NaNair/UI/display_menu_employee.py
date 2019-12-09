@@ -1,22 +1,17 @@
 from UI.crewUI import CrewUI
 from UI.display_menu_pilots import DisplayMenuPilots
 from UI.display_menu_working_crew import DisplayMenuWorkingCrew
-from UI.display_menu_workschedule import DisplayMenuWorkSchedule
 import datetime
 
 
 class DisplayMenuEmployee: 
-    def __init__(self, logic_layer):
-        print('Display employees')
-        self.logic_layer = logic_layer
-
     def startDisplayMenu(self):
-        print('#'*20)
+        # banner:
+        print('-'*20)
         print('{:^20}'.format('DISPLAY - Employees'))
-        print('#'*20)
+        print('-'*20)
 
         while True: 
-            print()
             print('What would you like to display?') 
             print()
 
@@ -28,58 +23,52 @@ class DisplayMenuEmployee:
             print('6 - Work Schedule for employee by ID')
             print('m - Back to main menu')
             print()
-            selection = input()
+            selection = input().strip()
             
-
+            # All employees are displayed
             if selection == '1':
                 return CrewUI().showCrew()
 
+            # A single employee is displayed with more percise info
             elif selection =='2':
-                # Checks if the crew ID input is valid,
-                # checks if its 10 letters and an integer
-
                 while True:
                     crew_id = input('Enter the Crew members ID (SSN): ')
                     
+                    # checks if the personal ID is 10 letters and an integer
                     try:
                         int(crew_id)
                         if len(crew_id) == 10:
-                            # Prints information about one Crew member
+                            # Prints information about one crew member
                             return CrewUI().showOneCrewMember(crew_id)
                         else:
                             print('Invalid SSN')
                     except ValueError:
                         print('Invalid SSN')
             
-
+            # Goes to pilot display menu
             elif selection == '3':
-                # Goes to the next menu where the user can pick how he wants
-                # to display the pilots
                 return DisplayMenuPilots().startDisplayPilots()
 
-
+            # Shows all flight attendants
             elif selection == '4':
-                # Shows all flight attendants
                 return CrewUI().showAllFlightAtt()
             
-
+            # allows user to choose date and see working status of crew on that date
             elif selection == '5':
                 return DisplayMenuWorkingCrew().startDisplayMenuWorkingCrew()
             
-            
+            # allows user to see working schedule for a single crew member
             elif selection == '6':
-                # Checks if the crew ID input is valid,
-                # checks if its 10 letters and an integer,
-                # and if the crew ID belongs to a crew member
 
                 while True:
                     crew_id = input('Enter the Crew members ID (SSN): ')
                     
                     try:
+                        # checks if personal ID is 10 letters and an integer
                         int(crew_id)
                         if len(crew_id) == 10:
 
-                            # Prints a work schedule for a crew member
+                            # Prints a work schedule for a crew member if he exists
                             get_schedule = CrewUI().showSchedule(crew_id)
                             if get_schedule == False:
                                 print('No employee with this ID')
@@ -91,10 +80,10 @@ class DisplayMenuEmployee:
                     except ValueError:
                         print('Invalid SSN')
                 
-                
+            # Goes back to main menu
             elif selection == 'm':
-                # Goes back to main menu
                 return
 
             else: 
                 print('Invalid selection')
+                print()

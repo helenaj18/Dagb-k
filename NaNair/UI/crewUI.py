@@ -63,6 +63,7 @@ class CrewUI:
                 return employee
             print('Employee not found, try again')
 
+
     def showQualifiedCrew(self, depart_time_str, plane_insignia):
         '''Prints a list of crew that can be assigned to new voyage'''
 
@@ -265,6 +266,11 @@ class CrewUI:
         print('Please fill in the following information. Press enter to skip.\n')
 
         personal_id = self.getPersonalID()
+
+        while LL_API().doesIDExist(personal_id):
+            print('Another crew member already has that ID! Please input another ID.')
+            personal_id = input('Personal ID: ')
+
         info_list.append(personal_id)
 
 
@@ -272,22 +278,24 @@ class CrewUI:
         employee_name = self.getName()
         info_list.append(employee_name)
 
-        print('Please choose one of the following job titles:')
+        print('\nPlease choose one of the following job titles:\n')
         print('1 - Captain')
         print('2 - Co-pilot')
         print('3 - Head service manager')
         print('4 - Flight attendant')
-        rank = input()
+        print('m - Back to main menu')
+        rank = input('\nPlease choose a number between 1-4: ').strip()
 
-        while rank != '1' and rank != '2' and rank != '3' and rank != '4':
-            print('Please choose a number between 1-4')
-            rank = input()
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
+            rank = input('Please choose a number between 1-4: ').strip()
                 
         info_list.append(rank)
 
         if rank == '1' or rank == '2':
             pilot_license = self.getPilotLicense()
             info_list.append(pilot_license)
+        elif rank == 'm':
+            return
 
 
         home_address = self.getHomeAddress()
@@ -385,10 +393,6 @@ class CrewUI:
 
         while True:
             personal_id = input('Personal ID (required): ')
-
-            while LL_API().doesIDExist(personal_id):
-                print('Another crew member already has that ID! Please input another ID.')
-                personal_id = input('Personal ID: ')
 
             if DestinationUI().checkIfInt(personal_id):
                 if len(personal_id) == 10:

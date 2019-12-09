@@ -10,11 +10,12 @@ class EditExistingVoyage:
         print()
         print('1 - Enter voyage ID')
         print('2 - See a list of voyages on a specific time range')
+        print('m - Back to main menu')
         print()
-        selection = input()
+        selection = input('Please choose one of the above (1/2/m): ').strip()
 
         if selection == '1':
-            voyage_id = input('Enter voyage ID: ')
+            voyage_id = input('Enter voyage ID: ').strip()
             voyage = LL_API().getOneVoyage(voyage_id)
             
             if voyage != None:
@@ -25,18 +26,22 @@ class EditExistingVoyage:
             voyage = VoyageUI().queryOneVoyage()
             if voyage != None:
                 VoyageUI().showOneVoyage(voyage)
+
+        elif selection == 'm':
+            return
+
         else:
             print('Invalid selection!')
             selection = input()
 
 
         while True:
-            print("\nWhat do you want to change in voyage {}?".format(voyage.getVoyageID()))
+            print("\nWhat do you want to change in voyage {}?\n".format(voyage.getVoyageID()))
             # Change existing voyage
             print('1 - Add an airplane to a voyage')
             print('2 - Add employees to a voyage')
-            print('m - Back to edit menu')
-            user_selection = input('Please choose one of the above (1 or 2): ')
+            print('m - Back to edit menu\n')
+            user_selection = input('Please choose one of the above (1/2/m): ')
             
             if user_selection == '1':
                 airplane_insignia_list = AirplaneUI().getAirplaneInsigniaList()
@@ -56,9 +61,6 @@ class EditExistingVoyage:
 
                 else:
                     
-                    insignia = voyage.getAircraftID()
-                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
-                    print()
 
                     return VoyageUI().addCrewToVoyage(voyage)
             
