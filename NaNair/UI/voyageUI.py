@@ -109,6 +109,7 @@ class VoyageUI:
             print()
             print('No voyages on these dates')
             print()
+            return None
     
 
 

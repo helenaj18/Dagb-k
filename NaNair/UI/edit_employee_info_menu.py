@@ -63,7 +63,7 @@ class EditEmployeeMenu:
                     print('1 - Head service manager')
                     print('m - Back to main menu')
                 
-                new_rank = input('Please choose one of the above 1/2/m): ').strip()
+                new_rank = input('Please choose one of the above 0/1/m): ').strip()
 
                 if new_rank != '0' and new_rank != '1' and new_rank != 'm':
                     print('\nInvalid rank!\n')

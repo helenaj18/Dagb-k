@@ -5,7 +5,6 @@ from UI.submenu_display import SubMenuDisplay
 
 
 class MainMenu:
- 
 
     def start(self):
         # Header
