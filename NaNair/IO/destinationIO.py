@@ -5,18 +5,19 @@ import csv
 class DestinationIO:
 
     def __init__(self):
+        # Gets the filename of destination file
         dirname = os.path.dirname(__file__)
         self.__destination_filename = os.path.join(dirname, '../UPDATEDSTUDENTDATA/Destinations.csv')
 
-        
-        self.loadDestinationFromFile()
 
     def loadDestinationFromFile(self):
-        '''Reads file and returns destination list'''
+        '''Reads file and returns a list
+           of destination instances'''
         destination_file = open(self.__destination_filename,'r')
         destination_list = []
         i = 0
         for line in destination_file:
+            # Skip the header in the file
             if i != 0:
                 airport,name,duration,distance,contact,emergency_phone_number = line.strip().split(',')
                 destination_instance = Destination(name,airport,duration,distance,contact,emergency_phone_number)
@@ -69,10 +70,14 @@ class DestinationIO:
 
     def addDestinationToFile(self,destination):
         '''Adds the destination into file'''
+
         file_object = open(self.__destination_filename,'a')
-        file_object.write(destination.getDestinationAirport()+','+destination.getDestinationName()+\
-            ','+destination.getDestinationDistance()+','+ destination.getDestinationDuration()+\
-                ','+destination.getDestinationContact()+','+destination.getDestinationEmergencyPhoneNumber()+'\n')
+        file_object.write(destination.getDestinationAirport()+\
+            ','+destination.getDestinationName()+\
+                ','+destination.getDestinationDistance()+\
+                    ','+ destination.getDestinationDuration()+\
+                        ','+destination.getDestinationContact()+\
+                        ','+destination.getDestinationEmergencyPhoneNumber()+'\n')
         
         return file_object
 

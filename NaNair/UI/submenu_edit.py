@@ -42,7 +42,7 @@ class SubMenuEdit:
                 # Change destination emergency contact
                 print('1 - Change emergency contact')
                 print('2 - Change emergency phone number')
-                user_selection = input()
+                user_selection = input('Please choose one of the above (1 or 2)')
                 if user_selection == '1':
                     DestinationUI().changeEmergencyContactName()
                 elif user_selection == '2':

@@ -36,7 +36,7 @@ class EditExistingVoyage:
             print('1 - Add an airplane to a voyage')
             print('2 - Add employees to a voyage')
             print('m - Back to edit menu')
-            user_selection = input('Please choose one of the above (1 or 2): ')
+            user_selection = input('Please choose one of the above (1/2/m): ')
             
             if user_selection == '1':
                 airplane_insignia_list = AirplaneUI().getAirplaneInsigniaList()
