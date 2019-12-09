@@ -47,13 +47,13 @@ class DestinationUI:
   
     def changeEmergencyContactName(self):
 
-        airport_code = input('Enter airport code (IATA): ').upper()
+        airport_code = input('Enter airport code (IATA - 3 letters): ').upper().strip()
         
         check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
         
         while check == False:
             print('Please enter a valid destination!')
-            airport_code = input('Enter airport code (IATA): ').upper()
+            airport_code = input('Enter airport code (IATA - 3 letters): ').upper().strip()
             check = LL_API().checkDestInput(airport_code) #Verifies if the airport code is valid
 
         new_emergency_contact = self.getEmergencyContactName()  #Gets new emergency contact name and verifies the input at the same time
@@ -68,11 +68,11 @@ class DestinationUI:
 
 
     def changeEmergencyContactPhoneNumber(self):
-        airport_code = input('Enter airport code (IATA): ')
+        airport_code = input('Enter airport code (IATA - 3 letters): ').strip()
         check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
         while check == False:
             print('Please enter a valid destination!')
-            airport_code = input('Enter airport code (IATA): ').upper()
+            airport_code = input('Enter airport code (IATA - 3 letters): ').upper().strip()
             check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
 
         new_emergency_phone = self.getDestinationEmergencyPhoneNumber() #Gets new emergency phone number and verifies the input at the same time
@@ -102,12 +102,12 @@ class DestinationUI:
         
         LL_API().addDestination(new_destination)
         
-        print('Destination successfully added!')
+        print('\nDestination successfully added!')
 
 
     def getDestinationName(self):
         while True:
-            destination_name = input('Name of destination: ').capitalize()
+            destination_name = input('Name of destination: ').capitalize().strip()
             for letter in destination_name:
                 if letter.isdigit():
                     print('Invalid destination name, please enter only letters!')
@@ -118,7 +118,7 @@ class DestinationUI:
 
     def getEmergencyContactName(self):
         while True:
-            emergency_contact_name = input('Enter the emergency contact name: ').capitalize()
+            emergency_contact_name = input('Enter the emergency contact name: ').capitalize().strip()
             for letter in emergency_contact_name:
                 if letter.isdigit():
                     print('Invalid name, please enter only letters!')
@@ -130,7 +130,7 @@ class DestinationUI:
     def getDestinationAirport(self):
         '''Gets destination airport code from user'''
         while True:
-            destination_airport = input('Destination airport code (3char airport code): ').upper()
+            destination_airport = input('Destination airport code (3char airport code): ').upper().strip()
             for letter in destination_airport:
                 if letter.isdigit():
                     print('Invalid airport code!')
@@ -146,8 +146,8 @@ class DestinationUI:
         ''''Gets destination duration from user'''
         print('Enter flight duration')
 
-        flight_duration_hours_str = input('Hours: ')
-        flight_duration_minutes_str = input('Minutes: ')
+        flight_duration_hours_str = input('Hours: ').strip()
+        flight_duration_minutes_str = input('Minutes: ').strip()
 
         LL_API().verifyTime(flight_duration_hours_str,flight_duration_minutes_str) #Verifies if the date is valid
 
@@ -162,7 +162,7 @@ class DestinationUI:
     def getDistance(self):
         '''Gets destination distance from user'''
         while True:
-            destination_distance = input('Distance in km: ')
+            destination_distance = input('Distance in km: ').strip()
             if self.checkIfInt(destination_distance):
                 destination_distance += 'km'
                 return destination_distance
@@ -173,7 +173,7 @@ class DestinationUI:
         '''Gets the destination's emergency 
            contact's phone number from user'''
         while True:
-            emergency_contact_phone = input("Enter the emergency contact's phone number: ")
+            emergency_contact_phone = input("Enter the emergency contact's phone number: ").strip()
             if self.checkIfInt(emergency_contact_phone):
                 if len(emergency_contact_phone) == 7:
                     return emergency_contact_phone

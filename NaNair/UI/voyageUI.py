@@ -13,9 +13,9 @@ class VoyageUI:
     def getDateInput(self):
         '''Gets a date input from the user and returns a datetime object'''
 
-        year_str = input('Year: ')
-        month_str = input('Month: ')
-        day_str = input('Day: ')
+        year_str = input('Year: ').strip()
+        month_str = input('Month: ').strip()
+        day_str = input('Day: ').strip()
 
         # check if date is valid
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
@@ -92,7 +92,7 @@ class VoyageUI:
             if len(completed_voyages_in_range) < len(voyages_on_date):
 
                 while True:
-                    voyage_id = input("Enter voyage ID to select: ")
+                    voyage_id = input("Enter voyage ID to select: ").strip()
                     voyage = LL_API().getOneVoyage(voyage_id)
                     if voyage:
                         voyage_state = LL_API().get_status_of_voyage(voyage)
@@ -123,7 +123,7 @@ class VoyageUI:
         except Exception as e:
             success = False
             print(e)
-            input('Press any key to try continue editing voyage ')
+            input('Press any key to try continue editing voyage ').strip()
         
         if success:
             position = CrewUI().checkRank(crew_member)

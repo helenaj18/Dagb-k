@@ -4,24 +4,12 @@ from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 import datetime
 
-
-
 class VoyageLL:
     ''' LL class for voyage '''
 
     # When a new voyage is added there are no sold seats
     seats_sold_out = '0'
     seats_sold_home = '0'
-
-    # def __init__(self):
-    #     self.voyage_list = IO_API().loadVoyageFromFile()
-
-        
-    # def splitDates(self, datetime):       # EKKI Í NOTKUN ??
-    #     date = datetime[:10]
-    #     year, month, day = date.split('-')
-
-    #     return int(year), int:(month), int(day)
 
     
     def getUpcomingVoyges(self):
@@ -169,8 +157,9 @@ class VoyageLL:
     def assignVoyageID(self):
         '''Assign a voyage an id based on last voyage in file.'''
         
-        # get voyage id of last voyage in file
-        last_voyageID_str = self.voyage_list[-1].getVoyageID()
+        # Get voyage id of last voyage in file
+        voyage_list = IO_API().loadVoyageFromFile()
+        last_voyageID_str = voyage_list[-1].getVoyageID()
  
         new_id_int = int(last_voyageID_str) + 1
         return str(new_id_int)
@@ -254,7 +243,7 @@ class VoyageLL:
             hrs_int = int(duration_str[ :(index_of_h_int - 1) ])
         mins_int = int(duration_str[(index_of_h_int + 1):3])
         
-        arrival_time_datetime = depart_time_datetime + timedelta(hours=hrs_int, minutes=mins_int)
+        arrival_time_datetime = depart_time_datetime + datetime.timedelta(hours=hrs_int, minutes=mins_int)
 
         return arrival_time_datetime
 

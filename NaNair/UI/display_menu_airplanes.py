@@ -33,11 +33,11 @@ class DisplayMenuAirplanes:
             # Gets availability status on airplanes at an inputted date
             elif selection == '3':
                 print('Enter the date you want to display')
-                year_str = input('Year: ')
-                month_str = input('Month: ')
-                day_str = input('Day: ')
-                hour_str = input('Hour: ')
-                minute_str = input('Minute: ')
+                year_str = input('Year: ').strip()
+                month_str = input('Month: ').strip()
+                day_str = input('Day: ').strip()
+                hour_str = input('Hour: ').strip()
+                minute_str = input('Minute: ').strip()
 
                 # check if date input is valid
                 year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)

@@ -270,7 +270,7 @@ class CrewUI:
 
         while LL_API().doesIDExist(personal_id):
             print('Another crew member already has that ID! Please input another ID.')
-            personal_id = input('Personal ID: ')
+            personal_id = input('Personal ID: ').strip()
 
         info_list.append(personal_id)
 
@@ -320,7 +320,7 @@ class CrewUI:
         '''Gets home address of an 
            employee from user'''
 
-        home_address = input('Home address: ')
+        home_address = input('Home address: ').strip()
         if home_address != '':
             return home_address
         else:
@@ -333,7 +333,7 @@ class CrewUI:
         print('3 - NABAE146')
 
         while True:
-            pilot_license = input('Please choose one of the above: ')
+            pilot_license = input('Please choose one of the above: ').strip()
 
             if pilot_license == '1':
                 pilot_license = 'NAFokkerF100'
@@ -352,7 +352,7 @@ class CrewUI:
         '''Gets the employee's phone 
            number from user'''
         while True:
-            employee_phone_number = input("Enter the employee's phone number: ")
+            employee_phone_number = input("Enter the employee's phone number: ").strip()
             if len(employee_phone_number) !=0 and DestinationUI().checkIfInt(employee_phone_number):
                 if len(employee_phone_number) == 7:
                     return employee_phone_number
@@ -367,7 +367,7 @@ class CrewUI:
     def getEmail(self):
         '''Gets the employee's email address'''
         while True:
-            email_address = input('Email: ')
+            email_address = input('Email: ').strip()
             if len(email_address) == 0:
                 return 'empty'
             elif '@' and '.' in email_address and len(email_address) != 0:
@@ -377,7 +377,7 @@ class CrewUI:
 
     def getName(self):
         while True:
-            employee_name = input("Enter the employee's name: ").capitalize()
+            employee_name = input("Enter the employee's name: ").capitalize().strip()
             for letter in employee_name:
                 if letter.isdigit():
                     print('Invalid name, please enter only letters!')
@@ -393,7 +393,7 @@ class CrewUI:
         '''Gets personal ID from user'''
 
         while True:
-            personal_id = input('Personal ID (required): ')
+            personal_id = input('Personal ID (required): ').strip()
 
             if DestinationUI().checkIfInt(personal_id):
                 if len(personal_id) == 10:
@@ -410,17 +410,17 @@ class CrewUI:
         if employee != None:
             print('Enter the "From date" for the work schedule')
             
-            start_year_str = input('Year: ')
-            start_month_str = input('Month: ')
-            start_day_str = input('Day: ')
+            start_year_str = input('Year: ').strip()
+            start_month_str = input('Month: ').strip()
+            start_day_str = input('Day: ').strip()
 
             start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
             start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0) #VERIFY INPUT
             
             print('Enter the "To date" for work schedule')
-            end_year_str = input('Year: ')
-            end_month_str = input('Month: ')
-            end_day_str = input('Day: ')
+            end_year_str = input('Year: ').strip()
+            end_month_str = input('Month: ').strip()
+            end_day_str = input('Day: ').strip()
 
             end_year_int, end_month_int, end_day_int = LL_API().verifyDate(end_year_str, end_month_str, end_day_str)
             end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0) # VERIFY INPUT

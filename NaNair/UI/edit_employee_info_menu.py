@@ -29,7 +29,7 @@ class EditEmployeeMenu:
         self.printEditEmployeeMenu(crew_id,employee)
         
         
-        selection = input()
+        selection = input('Please choose one of the above: ').strip()
         if selection == '1':
             ''' The software asks for new home adress and assigns it to the owner of given ID'''
             new_address = CrewUI().getHomeAddress()
