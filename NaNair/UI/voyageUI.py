@@ -60,7 +60,7 @@ class VoyageUI:
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
-        if aircraft_ID != 'empty':
+        if aircraft_ID != 'EMPTY':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             aircraft_type = airplane.get_planeTypeID()
             total_seats = airplane.get_planeCapacity()
@@ -70,14 +70,8 @@ class VoyageUI:
             print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
                 sold_seats_home,total_seats))
             print('\t Aircraft: {}, type {}'.format(aircraft_ID,aircraft_type))
-        elif aircraft_ID == 'empty':
+        elif aircraft_ID == 'EMPTY':
             print('\t Aircraft: No aircraft assigned to voyage')
-        else: 
-            print('\t Aircraft: {}, type {}'.format(aircraft_ID,aircraft_type))
-        # else:
-        #     total_seats = 'No information'
-        #     sold_seats_out,sold_seats_home = '0','0'
-
 
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
             voyage_duration_min))
@@ -90,25 +84,26 @@ class VoyageUI:
 
     def queryOneVoyage(self):
         '''Helps user find one voyage and returns it'''
+        voyages_tuple = self.showAllVoyagesInRange()
 
-        if self.showAllVoyagesInRange() != None:
-            list_of_completed_voyages = LL_API().getCompletedVoyagesInRange()
-            if len(list_of_completed_voyages)< len(self.showAllVoyagesInRange()):
+        if voyages_tuple:
+            voyages_on_date, completed_voyages_in_range = voyages_tuple
+            
+            if len(completed_voyages_in_range) < len(voyages_on_date):
 
                 while True:
                     voyage_id = input("Enter voyage ID to select: ")
                     voyage = LL_API().getOneVoyage(voyage_id)
-                    voyage_state = LL_API().get_status_of_voyage(voyage)
-
-                    if voyage_state == 'Completed':
-                        print('Voyage is completed, not possible to change')
-                    else:
-                        voyage = LL_API().getOneVoyage(voyage_id)
-                        if voyage:
+                    if voyage:
+                        voyage_state = LL_API().get_status_of_voyage(voyage)
+                        if voyage_state == 'Completed':
+                            print('Voyage is completed, not possible to change')
+                        else:
                             return voyage
-                        print("Invalid voyage id")
+                    print("Invalid voyage id")
             else:
                 print('All voyages in range are completed, not possible to change')
+                return None
 
         else:
             print()
@@ -295,13 +290,15 @@ class VoyageUI:
             print('Enter end date for time period')
             print()
             end_datetime = VoyageUI().getDateInput()
-            
+        
+
+        completed_voyages_in_range = LL_API().getCompletedVoyagesInRange(start_datetime,end_datetime)
 
         voyages_on_date = LL_API().get_all_voyages_in_date_range(start_datetime,end_datetime)
         start_date = VoyageUI().seperateDatetimeString(start_datetime.isoformat())[0]
         end_date = VoyageUI().seperateDatetimeString(end_datetime.isoformat())[0]
+        
 
-        completed_voyages_on_date = LL_API().getCompletedVoyagesInRange()
 
         if voyages_on_date != []:
             print()
@@ -327,7 +324,7 @@ class VoyageUI:
                 else: 
                     voyage_staffed = 'Voyage fully staffed'
                     
-                aircraft_ID = voyage.getAircraftID()
+                aircraft_ID = voyage.getAircraftID().upper()
 
                 # if aircraft_ID == VoyageUI.EMPTY: 
                 #     aircraft_ID = None
@@ -339,7 +336,7 @@ class VoyageUI:
 
                 print(60*VoyageUI.SEPERATOR)
 
-            return voyages_on_date
+            return voyages_on_date,completed_voyages_in_range
         else:
             return None
 

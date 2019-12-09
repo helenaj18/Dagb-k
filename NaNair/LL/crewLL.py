@@ -220,7 +220,7 @@ class CrewLL:
         not_working_list = self.getNotWorkingCrew(depart_datetime)
         licensed_pilots_list = self.getLicensedPilots(plane_license)
 
-        if licensed_pilots_list != []
+        if licensed_pilots_list != []:
             licensed_pilots_id_list = []
 
             for pilot in licensed_pilots_list:

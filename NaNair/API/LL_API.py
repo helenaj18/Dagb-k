@@ -121,7 +121,9 @@ class LL_API:
     def change_voyage(self,voyage):
         '''Adds changed info of an existing voyage chosen by user to file. '''
         return VoyageLL().changeVoyageFile(voyage)
-
+    
+    def getCompletedVoyagesInRange(self,start_datetime, end_datetime):
+        return VoyageLL().getCompletedVoyagesInRange(start_datetime, end_datetime)
 
     def add_voyage(self,destination, time, plane):
         '''Takes in destination, departure time and plane name and 
@@ -171,6 +173,9 @@ class LL_API:
     def get_status_of_voyage(self, voyage_instance):
         '''Returns status of voyage at the current time'''
         return VoyageLL().getVoyageStatus(voyage_instance)
+
+    def get_upcoming_voyages(self):
+        return VoyageLL().getUpcomingVoyges()
 
 
     ## DESTINATION LL

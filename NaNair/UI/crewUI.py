@@ -68,10 +68,14 @@ class CrewUI:
 
         qualified_crew_list = LL_API().getQualifiedCrew(depart_time_str, plane_insignia)
 
+<<<<<<< HEAD
+        self.printCrew(qualified_crew_list, False)
+=======
         if qualified_crew_list != None:
             self.printCrew(qualified_crew_list, False)
         else:
             print('There are no non-working pilots qualified to fly this plane. Please pick another one.')
+>>>>>>> d43b89865e5b619f3f9287adc1dffd950abe65b7
         
 
     def checkRank(self,crew_member):
@@ -330,7 +334,7 @@ class CrewUI:
                 pilot_license = 'NAFokkerF100'
                 return pilot_license
             elif pilot_license == '2':
-                pilot_license = 'NAFOKKERF28'
+                pilot_license = 'NAFokkerF28'
                 return pilot_license
             elif pilot_license == '3':
                 pilot_license = 'NABAE146'

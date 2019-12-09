@@ -13,9 +13,29 @@ class VoyageLL:
     seats_sold_out = '0'
     seats_sold_home = '0'
 
-    def __init__(self):
-        self.voyage_list = IO_API().loadVoyageFromFile()
+    # def __init__(self):
+    #     self.voyage_list = IO_API().loadVoyageFromFile()
 
+        
+    # def splitDates(self, datetime):       # EKKI Í NOTKUN ??
+    #     date = datetime[:10]
+    #     year, month, day = date.split('-')
+
+    #     return int(year), int:(month), int(day)
+
+    
+    def getUpcomingVoyges(self):
+        voyage_list = IO_API().loadVoyageFromFile()
+        date_today =  datetime.datetime.today()
+        upcoming_voyages_list = []
+
+        for voyage in voyage_list: 
+            if voyage.getDepartureTime() >= date_today:
+                upcoming_voyages_list.append(voyage)
+
+        return upcoming_voyages_list
+                 
+        
 
     def getOneVoyage(self, voyage_to_get_ID_str):
         '''Takes in voyage id and returns the voyage class instance that has that id'''
@@ -131,7 +151,7 @@ class VoyageLL:
             elif arrival_date in list_of_dates:
                 voyages_on_date_list.append(voyage)
 
-        return voyages_on_date
+        return voyages_on_date_list
     
     def getCompletedVoyagesInRange(self, start_datetime, end_datetime):
         '''Gets a list of completed voyages
@@ -144,9 +164,7 @@ class VoyageLL:
                 completed_voyage_list.append(voyage)
         
         return completed_voyage_list
-        return voyages_on_date_list
             
-
 
     def assignVoyageID(self):
         '''Assign a voyage an id based on last voyage in file.'''
