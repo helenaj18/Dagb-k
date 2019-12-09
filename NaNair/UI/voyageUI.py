@@ -47,12 +47,14 @@ class VoyageUI:
 
 
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
-                flight_no_out, flight_no_home, voyage_duration_min):
+                flight_no_out, flight_no_home, voyage_duration_min, voyage_state):
         '''Prints out a voyage'''
 
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
             voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+
+        print('\t Status: {}'.format(voyage_state))
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
@@ -256,6 +258,9 @@ class VoyageUI:
                 voyage_duration_hrs, voyage_duration_min = \
                     LL_API().get_voyage_duration(voyage)
 
+
+                voyage_state = LL_API().get_status_of_voyage(voyage)
+
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
                     # one flight attendant 
@@ -271,7 +276,7 @@ class VoyageUI:
 
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
                     voyage_duration_hrs, flight_no_out, flight_no_home, \
-                        voyage_duration_min)
+                        voyage_duration_min, voyage_state)
 
                 print(60*VoyageUI.SEPERATOR)
         else:

@@ -3,6 +3,7 @@ from IO.voyageIO import VoyageIO
 from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
 from datetime import timedelta
+from datetime import datetime
 
 
 
@@ -65,6 +66,26 @@ class VoyageLL:
                 return True
         return False
 
+
+    def getVoyageStatus(self, voyage_instance):
+        '''Returns the status of voyage'''
+
+        time_now = datetime.now()
+
+        voyage_depart_date_str = voyage_instance.getDepartureTime()
+        voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
+
+        voyage_depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_date_str)
+        voyage_arrive_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_arrive_date_str)
+
+        if time_now < voyage_depart_datetime:
+            status = 'Not departed'
+        elif time_now >= voyage_depart_datetime and time_now < voyage_arrive_datetime:
+            status = 'In air'
+        else:
+            status = 'Completed'
+        
+        return status
 
     def addCaptain(self, voyage_id, date, employee_id):
 
