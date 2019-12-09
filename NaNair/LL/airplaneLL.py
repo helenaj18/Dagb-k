@@ -165,18 +165,13 @@ class AirplaneLL:
            and information about the voyage they're in.
            Returns None if there are no voyages on the date'''
 
-        # if type(datetime_str) == datetime.datetime:
-        #     datetime_str = datetime_str.isoformat() #convert to string 
-             
-
         # Gets a list of all airplanes NanAir has
         airplane_list = self.getAirplanes()
-        #date_str = datetime_str[:10]
 
         # Returns a list of voyages on a date, returns None if there are
         # no voyages on that date
         voyages_on_date = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
-        airplanes_on_date_list = []
+        airplanes_on_date_info_list = []
 
         if voyages_on_date != None:
             # Go through all voyages on the date and match it with an airplane
@@ -188,15 +183,16 @@ class AirplaneLL:
                         if voyage.getAircraftID() == airplane.get_planeInsignia():
                             # Add the airplane and information tuple to the list of airplanes 
                             # that are in use that day
-                            airplanes_on_date_list.append((airplane,voyage.getDestination().getDestinationName(),\
-                                voyage.getDepartureTime(),voyage.getArrivalTimeOut(),\
-                                    voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
+                            airplanes_on_date_info_list.append((airplane,\
+                                voyage.getDestination().getDestinationName(),\
+                                    voyage.getDepartureTime(),voyage.getArrivalTimeOut(),\
+                                        voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
                     else:
                         break
             else:
-                # All airplanes are free if the airplanes on date list is empty
-                if len(airplanes_on_date_list) != 0:
-                    return airplanes_on_date_list
+                # All airplanes are free if the airplanes on date info list is empty
+                if len(airplanes_on_date_info_list) != 0:
+                    return airplanes_on_date_info_list
                 else:
                     return None
         else:
@@ -204,14 +200,19 @@ class AirplaneLL:
             return None
 
     def seperateDatetimeString(self, datetime_str):   
-        '''Seperates a datetime string and returns the date part'''
+        '''Seperates a datetime string and 
+           returns the date part and time part in a tuple'''
+
         return datetime_str[:10],datetime_str[-8:]
 
     def revertDatetimeStrtoDatetime(self,datetime_str):   
+        '''Reverts a string object with a date string
+           to a datetime object'''
         datetime_str_date, datetime_str_time = self.seperateDatetimeString(datetime_str)
         year,month,day = datetime_str_date.split('-')
         hour,mins,secs = datetime_str_time.split(':')
         datetime_object = datetime.datetime(int(year),int(month),int(day),int(hour),int(mins),int(secs))
+
         return datetime_object
 
 
@@ -222,38 +223,38 @@ class AirplaneLL:
 
         # Gets a tuple of info about airplanes that are in use on a date
         # Returns None if there are no airplanes in use on this date
-        airplanes_on_date = self.getAirplanesByDate(datetime_object)
+        airplanes_on_date_info_list = self.getAirplanesByDate(datetime_object)
 
         # Gets a list of all airplanes as instances
         all_airplanes = self.getAirplanes()
 
-        not_available_airplaneInsignias_list = []
+        not_available_airplane_insignias_list = []
         not_available_airplanes_info_list = []
         available_airplanes_list = []
 
-        if airplanes_on_date != None:
+        if airplanes_on_date_info_list != None:
             # Gets the hour out of the datetime string
-            hour_int = datetime_object.hour #int(datetime_str[11:13])
+            hour_int = datetime_object.hour
 
-            for item in airplanes_on_date:    
-                airplane = item[AirplaneLL.AIRPLANE_const]
-                destination = item[AirplaneLL.DESTINATION_const]
+            for item in airplanes_on_date_info_list:
+                airplane_instance = item[AirplaneLL.AIRPLANE_const]
+                destination_name = item[AirplaneLL.DESTINATION_const]
                 flight_number_out,flight_number_home = item[AirplaneLL.FLIGHT_NUMBERS_const]
 
-                departure_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.DEPARTURE_DATETIME_const]) ######### SETJA FASTA 
+                departure_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.DEPARTURE_DATETIME_const])
                 arrival_time_out_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.ARRIVAL_DATETIME_OUT_const])
                 arrival_time_home_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.ARRIVAL_DATETIME_HOME_const])
 
-                departure_hour_int = departure_datetime_object . hour
-                arrival_hour_out_int = arrival_time_out_datetime_object . hour
-                arrival_hour_home_int =  arrival_time_home_datetime_object . hour
+                departure_hour_int = departure_datetime_object.hour
+                arrival_hour_out_int = arrival_time_out_datetime_object.hour
+                arrival_hour_home_int =  arrival_time_home_datetime_object.hour
 
                 if departure_hour_int <= hour_int <= arrival_hour_home_int:
                     # If the hours is between departure hour and arrival at destination,
                     # the flight number out is added
                     if departure_hour_int <= hour_int <= arrival_hour_out_int:
                         not_available_airplanes_info_list.append((
-                            airplane,destination,
+                            airplane_instance,destination_name,
                             arrival_time_home_datetime_object.isoformat(),
                             flight_number_out
                         ))
@@ -261,22 +262,24 @@ class AirplaneLL:
                     # Else the flight number home is added
                     else:
                         not_available_airplanes_info_list.append((
-                            airplane,destination,
+                            airplane_instance,destination_name,
                             arrival_time_home_datetime_object.isoformat(),
                             flight_number_home
                         ))
                 else:
-                    available_airplanes_list.append(airplane)
+                    available_airplanes_list.append(airplane_instance)
         
 
-            # Remove the extra information and get only plane insignias of not available airplanes
+            # Remove the extra information and get only plane 
+            # insignias of not available airplanes
             for i in range(len(not_available_airplanes_info_list)):
-                not_available_airplaneInsignias_list.append(not_available_airplanes_info_list[i][AirplaneLL.AIRPLANE_const].get_planeInsignia())
+                not_available_airplane_insignia_str = not_available_airplanes_info_list[i][AirplaneLL.AIRPLANE_const].get_planeInsignia()
+                not_available_airplane_insignias_list.append(not_available_airplane_insignia_str)
 
             # If the airplane is not in the not available airplanes list
             # add it to the available airplane list if it's not there already
             for airplane_instance in all_airplanes:
-                if airplane_instance.get_planeInsignia() not in not_available_airplaneInsignias_list:
+                if airplane_instance.get_planeInsignia() not in not_available_airplane_insignias_list:
                     if airplane_instance not in available_airplanes_list:
                         available_airplanes_list.append(airplane_instance)
                     
@@ -286,15 +289,19 @@ class AirplaneLL:
             # All airplanes are available, returns None
             return None
 
-    def getAirplanebyInsignia(self, planeInsignia):
-        ''''Sorts all airplanes by their ID'''
+
+    def getAirplanebyInsignia(self, planeInsignia_input):
+        ''''Gets an airplane by its insignia,
+            returns the airplane if it's in the file,
+            else returns None'''
+
         airplane_list = self.getAirplanes()
         while True:
             for airplane in airplane_list:
-                a = airplane.get_planeInsignia()
-                if a == planeInsignia:
+                if airplane.get_planeInsignia() == planeInsignia_input:
                     return airplane
             else:
+                # Returns None if the airplane doesn't exist
                 return None
 
 
@@ -317,6 +324,7 @@ class AirplaneLL:
     def addAirplane(self):
         '''Gets information about a new airplane
            and adds it to the file'''
+
         planeInsignia = self.getAirplaneInsigniaInput()
         planeTypeID,manufacturer,seats = self.getPlaneTypeIDInput()
 
@@ -326,7 +334,7 @@ class AirplaneLL:
     def getPlaneTypeIDInput(self):
         '''Gets plane type id input from user'''
 
-        print('Enter planeTypeId')
+        print('\nChoose planeTypeId:\n')
 
         while True:
                     
@@ -334,7 +342,7 @@ class AirplaneLL:
             print('2 - NABAE146')
             print('3 - NAFokkerF28')
             print()
-            selection = input('Please choose one of the above: ')
+            selection = input('Please choose one of the above (1/2/3): ')
             
             if selection == '1':
                 planeTypeId = 'NAFokkerF100'
@@ -365,12 +373,15 @@ class AirplaneLL:
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
                 return planeInsignia
             else:
-                print('Invalid Plane insignia!')
+                print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
 
 
 
 
     def getAirplaneInsigniaList(self):
+        '''Gets a list of all airplane
+           insignias '''
+           
         airplane_insignia_list = []
         airplanes = IO_API().loadAirplaneFromFile()
         for airplane in airplanes:
