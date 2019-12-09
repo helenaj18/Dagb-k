@@ -9,6 +9,8 @@ class AddExtraCrewmemberMenu:
         print('2 - No')
         selection = input()
         if selection == '1':
+            CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
+            print()
 
             if 'empty' in crew_on_voyage_list[-2:]:
                 if 'empty' in crew_on_voyage_list[-1]:
