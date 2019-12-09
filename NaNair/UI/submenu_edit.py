@@ -4,6 +4,7 @@ from UI.crewUI import CrewUI
 from UI.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
+from UI.destinationUI import DestinationUI
 
 class SubMenuEdit:
 
@@ -47,7 +48,7 @@ class SubMenuEdit:
                     print("m - Back to main menu")
                     user_selection = input()
                     if user_selection == '1':
-                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsignia():
+                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsigniaList():
                             print('Airplane already assigned to Voyage')
                             return
                         else: 
@@ -92,9 +93,9 @@ class SubMenuEdit:
                 print('2 - Change emergency phone number')
                 user_selection = input()
                 if user_selection == '1':
-                    LL_API().changeDestinationEmergencyContact()
+                    DestinationUI().changeEmergencyContactName()
                 elif user_selection == '2':
-                    LL_API().changeDestinationEmergencyPhone()
+                    DestinationUI().changeEmergencyContactPhoneNumber()
                 else:
                     print('Invalid selection!')
 

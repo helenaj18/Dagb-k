@@ -76,5 +76,5 @@ class AirplaneUI:
         LL_API().addAirplane()
         print('Airplane successfully added!')
 
-    def getAirplaneInsignia(self):
-        return LL_API().getAirplaneInsignia()
+    def getAirplaneInsigniaList(self):
+        return LL_API().getAirplaneInsigniaList()

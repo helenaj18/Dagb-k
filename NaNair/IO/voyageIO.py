@@ -27,12 +27,32 @@ class VoyageIO:
             for dest_row in reader_dest:
                 if dest_row['id'] == row['arrivingAt_out']:
 
-                    destination_instance = Destination(dest_row['destination'],dest_row['id'],\
-                         dest_row['flight_duration'],dest_row['distance'],dest_row['emergency_name'], dest_row['emergency_phone'])
+                    destination_instance = Destination(
+                        dest_row['destination'],
+                        dest_row['id'],
+                        dest_row['flight_duration'],
+                        dest_row['distance'],
+                        dest_row['emergency_name'],
+                        dest_row['emergency_phone']
+                    )
 
-                    voyage_instance = Voyage(row['voyageIDnumber'],row['flightNumber_out'],row['flightNumber_home'],row['departingFrom_home'],\
-                        destination_instance ,row['departure_time_home'],row['arrival_time_out'],row['arrival_time_home'], row['aircraftID'],\
-                            row['captain'],row['copilot'],row['fsm'],row['fa1'],row['fa2'])
+                    voyage_instance = Voyage(
+                        row['voyageIDnumber'],
+                        row['flightNumber_out'],
+                        row['flightNumber_home'],
+                        row['departingFrom_home'],
+                        destination_instance,
+                        row['departure_time_home'],
+                        row['departure_time_out']
+                        row['arrival_time_out'],
+                        row['arrival_time_home'], 
+                        row['aircraftID'],
+                        row['captain'],
+                        row['copilot'],
+                        row['fsm'],
+                        row['fa1'],
+                        row['fa2']
+                    )
 
                     voyage_list.append(voyage_instance)
 
@@ -71,7 +91,7 @@ class VoyageIO:
                         'flightNumber_home':updated_voyage.getFlightNumbers()[1],
                         'departingFrom_out':updated_voyage.getDestination().getDestinationAirport(),
                         'arrivingAt_home':updated_voyage.getDepartureLocation(),
-                        'departure_time_out':updated_voyage.getArrivalTimeOut(), ###### ATH BREYTA Í DATETIME+ timedelta(hours = 1),
+                        'departure_time_out':updated_voyage.getDepartureTimeAtDestination(), 
                         'arrival_time_home':updated_voyage.getArrivalTimeHome(),
                         'aircraftID':updated_voyage.getAircraftID(),
                         'captain':updated_voyage.getCaptain(),
@@ -93,7 +113,7 @@ class VoyageIO:
                         'flightNumber_home':voyage.getFlightNumbers()[1],
                         'departingFrom_out':voyage.getDestination().getDestinationAirport(),
                         'arrivingAt_home':voyage.getDepartureLocation(),
-                        'departure_time_out':voyage.getArrivalTimeOut(), ##### + timedelta(hours = 1),
+                        'departure_time_out':voyage.getDepartureTimeAtDestination(), 
                         'arrival_time_home':voyage.getArrivalTimeHome(),
                         'aircraftID':voyage.getAircraftID(),
                         'captain':voyage.getCaptain(),
