@@ -1,6 +1,8 @@
+from UI.crewUI import CrewUI
+
 class AddExtraCrewmemberMenu:
 
-    def startAddExtraCrewMenu(self):
+    def startAddExtraCrewMenu(self,voyage,crew_on_voyage_list):
         print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
         print('Do you want to add an extra crew member?')
         print('1 - Yes')

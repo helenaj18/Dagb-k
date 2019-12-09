@@ -5,14 +5,6 @@ from ModelClasses.pilot_model import Pilot
 
 
 class CrewUI:
-
-    def __init__(self):
-        self.BANNER_pilot = '{:<25}{:<20}{:<25}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
-        self.BANNER_pilot += '_'*80
-        self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Flight Att. ID', 'Rank')
-        self.BANNER_att += '_'*80
-        self.BANNER_crew = '{:<25}{:<20}{:<25}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
-        self.BANNER_crew += '_'*80
     
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
@@ -41,13 +33,15 @@ class CrewUI:
     
 
     def showWorkingCrew(self,date_str):
-        format_str = LL_API().get_working_crew(date_str)
+        datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
+        format_str = LL_API().get_working_crew(datetime_object)
         print(format_str)
         self.printCrew(format_str,True)
 
 
     def showNotWorkingCrew(self,date_str):
-        not_working_crew_list = LL_API().get_not_working_crew(date_str)
+        datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
+        not_working_crew_list = LL_API().get_not_working_crew(datetime_object)
         self.printCrew(not_working_crew_list, False)
 
     

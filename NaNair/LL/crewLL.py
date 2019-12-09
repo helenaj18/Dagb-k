@@ -124,11 +124,12 @@ class CrewLL:
         return sorted_pilots_list
  
 
-    def getWorkingCrew(self,date_str):
+    def getWorkingCrew(self,datetime_object):
         ''' Returns a string of the working crew on a date inputted by user'''
         
         # gets a list of the people working on inputted date and destination
-        working_crew_id_list = self.getWorkingCrewIdList(date_str)
+        working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
+        date_type_get_working = type(datetime_object)
         format_str = ''
 
         if working_crew_id_list != None:
@@ -152,11 +153,11 @@ class CrewLL:
             return None
 
 
-    def getWorkingCrewIdList(self,date_str):
+    def getWorkingCrewIdList(self,datetime_object):
         '''Takes in a date and returns a list of IDs for the people working on that date'''
 
         # Voyages on a specific date:
-        voyage_list = VoyageLL().getVoyageInDateRange(date_str,date_str)
+        voyage_list = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
         self.working_crew_id_list = []
         
         #iterates through voyages on a specific date and adds the IDs of working crew 
@@ -177,10 +178,12 @@ class CrewLL:
             return None
 
 
-    def getNotWorkingCrew(self,date_str):
+    def getNotWorkingCrew(self,datetime_object):
+
+        getNotworkig_date = type(datetime_object)
         
         #format_str = ''
-        self.getWorkingCrew(date_str)
+        self.getWorkingCrew(datetime_object)
         not_working_crew_list = []
         all_crew = IO_API().loadCrewFromFile()
 
