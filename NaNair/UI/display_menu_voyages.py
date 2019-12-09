@@ -31,11 +31,15 @@ class DisplayMenuVoyages:
 
             elif selection == '2':
                 ''' Lists one voyage by ID'''
-                return VoyageUI().showOneVoyage()
+                if VoyageUI().showOneVoyage() != None:
+                    return
+                else:
+                    print('No voyage with this ID\n')
+
 
             elif selection == 'm':
                 '''Goes back to main menu'''
-                return 
+                return
             
             else:
                 print('Invalid selection')

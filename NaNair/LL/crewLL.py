@@ -4,6 +4,7 @@ from IO.crewIO import CrewIO
 from LL.voyageLL import VoyageLL
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
+from LL.airplaneLL import AirplaneLL
 
 class CrewLL:
 
@@ -16,6 +17,7 @@ class CrewLL:
         ''' Gets the pilots '''
         crew_list = IO_API().loadCrewFromFile()
         pilot_list = []
+        #iterates through crew file and appends the pilots to pilot list
         for employee in crew_list:
             if type(employee) == Pilot:
                 pilot_list.append(employee)
@@ -27,6 +29,7 @@ class CrewLL:
         ''' Gets the flight attendants '''
         crew_list = IO_API().loadCrewFromFile()
         flight_att_list = []
+        #iterates through crew file and appends the flight attendants to flith attendants list
         for employee in crew_list:
             if type(employee) == FlightAttendant:
                 flight_att_list.append(employee)
@@ -36,12 +39,13 @@ class CrewLL:
 
     def getCrew(self):
         ''' Returns a list of class instances for all crew '''
-
         return IO_API().loadCrewFromFile()
     
 
     def getOneCrewMember(self,input_crew_id):
+        ''' Returns crew memeber which holds given ID number'''
         crew = self.getCrew()
+        #itirates through the crew file and finds memeber with given ID
         while True:
             for crew_member in crew:
                 crew_id = crew_member.getCrewID()
@@ -54,9 +58,7 @@ class CrewLL:
     def getLicensedPilots(self, pilot_license):
         '''Takes in a pilot license and finds all pilots who have the inputted license.
         Returns a list of class instances'''
-
         pilots_instances_list = self.getPilots()
-
         licensedPilots = []
 
         # Checks all pilots if they have inputted license. IF they do they are added to a list
@@ -100,13 +102,13 @@ class CrewLL:
 
 
     def ChangeCrewInfo(self,employee):
+        ''' Changes emplpyees information'''
         IO_API().changeCrewInfo(employee)
 
 
 
     def sortPilotsByLicense(self):
         '''Sorts all pilots by their license'''
-
         pilot_list = self.getPilots()
         sorted_pilots_list = []
 
@@ -184,7 +186,8 @@ class CrewLL:
         not_working_crew_list = []
         all_crew = IO_API().loadCrewFromFile()
 
-
+        #Checks if the crew memeber is in working list, if not, the crew member is added
+        # to list of not working crew members
         if len(all_crew) != 0:
             for crew_member in all_crew:
                 if crew_member.getCrewID() not in self.working_crew_id_list:
@@ -193,9 +196,42 @@ class CrewLL:
         else:
             return None
 
+    def getQualifiedCrew(self, depart_time, plane_insignia):
+        '''Returns a instance list of crew that is both qualified for a specific plane 
+        and is not working'''
+
+        plane_instance = AirplaneLL().getAirplanebyInsignia(plane_insignia)
+        plane_license = plane_instance.get_planeTypeID()
+
+        depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(depart_time)
+
+        not_working_list = self.getNotWorkingCrew(depart_datetime)
+        licensed_pilots_list = self.getLicensedPilots(plane_license)
+
+        if licensed_pilots_list != []:
+            licensed_pilots_id_list = []
+
+            for pilot in licensed_pilots_list:
+                licensed_pilots_id_list.append(pilot.getCrewID())
+
+            qualified_crew_list = []
+
+            # appends only pilots that are not working and have a specific license
+            # appends all flight attendants that are not working
+            for crew_member in not_working_list:
+                if type(crew_member) == Pilot:
+                    if crew_member.getCrewID() in licensed_pilots_id_list:
+                        qualified_crew_list.append(crew_member)
+                else:
+                    qualified_crew_list.append(crew_member)
+            
+            return qualified_crew_list
+        else:
+            return None
 
     def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
-
+        #Checks if the crew memeber is in working list, if not, the crew member is added
+        # to list of not working crew members
         for crew_member in crew_instance_list:
             crew_id = crew_member.getCrewID()
             if crew_id not in self.working_crew_id_list:
