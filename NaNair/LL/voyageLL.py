@@ -40,7 +40,7 @@ class VoyageLL:
         voyage_duration_min_int = duration_minutes_int * 2
 
         # Duration of round trip plus 1 hour layover
-        voyage_duration_hrs_int = destination_duration_hrs * 2 + 1 
+        voyage_duration_hrs_int = duration_hrs_int * 2 + 1 
 
         if voyage_duration_min_int == 60:
             voyage_duration_hrs_int = voyage_duration_hrs_int + 1

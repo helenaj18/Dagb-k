@@ -104,6 +104,9 @@ class LL_API:
     def changeCrewInfo(self,employee):
         '''Adds changed info of an existing employee chosen by user to file.'''
         return CrewLL().ChangeCrewInfo(employee)
+    
+    def getQualifiedCrew(self, depart_time, plane_license):
+        return CrewLL().getQualifiedCrew(depart_time, plane_license)
 
 
     

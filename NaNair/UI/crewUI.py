@@ -60,6 +60,13 @@ class CrewUI:
             if employee != None:
                 return employee
             print('Employee not found, try again')
+
+    def showQualifiedCrew(self, depart_time, plane_license):
+        '''Prints a list of crew that can be assigned to new voyage'''
+
+        qualified_crew_list = LL_API().getQualifiedCrew(depart_time, plane_license)
+
+        printCrew(qualified_crew_list, False)
         
 
     def checkRank(self,crew_member):
@@ -290,6 +297,8 @@ class CrewUI:
         #info_list for pilots is longer because of license
 
         print('\nNew Employee added!\n') 
+
+        return
     
     def getHomeAddress(self):
         '''Gets home address of an 

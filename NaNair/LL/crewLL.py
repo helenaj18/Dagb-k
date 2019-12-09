@@ -193,6 +193,25 @@ class CrewLL:
         else:
             return None
 
+    def getQualifiedCrew(self, depart_time, plane_license):
+        '''Returns a instance list of crew that is both qualified for a specific plane 
+        and is not working'''
+
+        not_working_list = self.get_not_working_crew(depart_time)
+        licensed_pilots_list = self.get_licensed_pilots()
+
+        qualified_crew_list = []
+
+        # appends only pilots that are not working and have a specific license
+        # appends all flight attendants that are not working
+        for crew_member in not_working_list:
+            if type(crew_member) == Pilot:
+                if crew_member in licensed_pilots_list:
+                    qualified_crew_list.append(crew_member)
+            else:
+                qualified_crew_list.append(crew_member)
+        
+        return qualified_crew_list
 
     def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
 
