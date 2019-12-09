@@ -173,6 +173,9 @@ class VoyageUI:
                     
 
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
+            
+            LL_API().change_voyage(voyage)
+            
 
         elif 'empty' in crew_on_voyage_list:
             AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
