@@ -35,7 +35,7 @@ class DisplayMenuVoyages:
 
             elif selection == 'm':
                 '''Goes back to main menu'''
-                return 
+                return
             
             else:
                 print('Invalid selection')

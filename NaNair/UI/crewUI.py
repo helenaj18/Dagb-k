@@ -61,12 +61,15 @@ class CrewUI:
                 return employee
             print('Employee not found, try again')
 
-    def showQualifiedCrew(self, depart_time, plane_license):
+    def showQualifiedCrew(self, depart_time_str, plane_insignia):
         '''Prints a list of crew that can be assigned to new voyage'''
 
-        qualified_crew_list = LL_API().getQualifiedCrew(depart_time, plane_license)
+        qualified_crew_list = LL_API().getQualifiedCrew(depart_time_str, plane_insignia)
 
-        printCrew(qualified_crew_list, False)
+        if qualified_crew_list != None:
+            self.printCrew(qualified_crew_list, False)
+        else:
+            print('There are no non-working pilots qualified to fly this plane. Please pick another one.')
         
 
     def checkRank(self,crew_member):
