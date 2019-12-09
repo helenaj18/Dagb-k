@@ -129,7 +129,7 @@ class CrewLL:
         
         # gets a list of the people working on inputted date and destination
         working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
-        date_type_get_working = type(datetime_object)
+
         format_str = ''
 
         if working_crew_id_list != None:
