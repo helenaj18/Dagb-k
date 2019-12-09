@@ -48,7 +48,7 @@ class SubMenuEdit:
                     print("m - Back to main menu")
                     user_selection = input()
                     if user_selection == '1':
-                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsignia():
+                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsigniaList():
                             print('Airplane already assigned to Voyage')
                             return
                         else: 

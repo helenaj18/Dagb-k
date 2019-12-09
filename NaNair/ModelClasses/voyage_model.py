@@ -1,7 +1,7 @@
 
 class Voyage:
     def __init__(self,voyage_ID,flight_no,flight_no_home,departure_location,destination,\
-                    departure_time,arrival_time_out,arrival_time_home,aircraft_ID,captain,copilot,\
+                    departure_time,departure_time_out,arrival_time_out,arrival_time_home,aircraft_ID,captain,copilot,\
                         head_flight_att,flight_att_one,flight_att_two,sold_seats = 0):
 
         self.__voyage_ID = voyage_ID
@@ -10,6 +10,7 @@ class Voyage:
         self.__departure_location = departure_location
         self.__destination = destination
         self.__departure_time = departure_time
+        self.__departure_time_out = departure_time_out
         self.__arrival_time_out = arrival_time_out
         self.__arrival_time_home = arrival_time_home
         self.__aircraft_ID = aircraft_ID
@@ -25,6 +26,9 @@ class Voyage:
 
     def getDepartureTime(self):
         return self.__departure_time
+
+    def getDepartureTimeAtDestination(self):
+        return self.__departure_time_out
 
     def getArrivalTimeOut(self):
         return self.__arrival_time_out
