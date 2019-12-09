@@ -345,7 +345,7 @@ class CrewUI:
             email_address = input('Email: ')
             if len(email_address) == 0:
                 return 'empty'
-            elif '@' in email_address and len(email_address) != 0:
+            elif '@' and '.' in email_address and len(email_address) != 0:
                 return email_address
             else:
                 print('Invalid email address!')
