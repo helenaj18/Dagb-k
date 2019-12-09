@@ -7,6 +7,14 @@ import datetime
 class AirplaneLL:
     ''' LL class for airplane '''
 
+    AIRPLANE_const = 0
+    DESTINATION_const = 1
+    FLIGHT_NUMBERS_const = 5
+    DEPARTURE_DATETIME_const = 2
+    ARRIVAL_DATETIME_OUT_const = 3
+    ARRIVAL_DATETIME_HOME_const = 4
+
+
     def checkIfDateValid(self,year_int,month_int,day_int):
         '''Checks if date is valid, returns a tuple with the date if valid 
            else it returns None'''
@@ -228,19 +236,14 @@ class AirplaneLL:
             hour_int = datetime_object.hour #int(datetime_str[11:13])
 
             for item in airplanes_on_date:    
-                airplane = item[0]
-                destination = item[1]
-                flight_number_out,flight_number_home = item[5]
-                # departure_time_datetime_str = item[2]
-                # arrival_time_out_datetime_str  = item[3]
-                # arrival_time_home_datetime_str  = item[4]
-                departure_datetime_object = self.revertDatetimeStrtoDatetime(item[2]) ######### SETJA FASTA 
-                arrival_time_out_datetime_object = self.revertDatetimeStrtoDatetime(item[3])
-                arrival_time_home_datetime_object = self.revertDatetimeStrtoDatetime(item[4])
+                airplane = item[AirplaneLL.AIRPLANE_const]
+                destination = item[AirplaneLL.DESTINATION_const]
+                flight_number_out,flight_number_home = item[AirplaneLL.FLIGHT_NUMBERS_const]
 
-                # departure_hour_int = int(departure_time_datetime_str [11:13])
-                # arrival_hour_out_int = int(arrival_time_out_datetime_str [11:13])
-                # arrival_hour_home_int = int(arrival_time_home_datetime_str [11:13])
+                departure_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.DEPARTURE_DATETIME_const]) ######### SETJA FASTA 
+                arrival_time_out_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.ARRIVAL_DATETIME_OUT_const])
+                arrival_time_home_datetime_object = self.revertDatetimeStrtoDatetime(item[AirplaneLL.ARRIVAL_DATETIME_HOME_const])
+
                 departure_hour_int = departure_datetime_object . hour
                 arrival_hour_out_int = arrival_time_out_datetime_object . hour
                 arrival_hour_home_int =  arrival_time_home_datetime_object . hour
@@ -268,7 +271,7 @@ class AirplaneLL:
 
             # Remove the extra information and get only plane insignias of not available airplanes
             for i in range(len(not_available_airplanes_info_list)):
-                not_available_airplaneInsignias_list.append(not_available_airplanes_info_list[i][0].get_planeInsignia())
+                not_available_airplaneInsignias_list.append(not_available_airplanes_info_list[i][AirplaneLL.AIRPLANE_const].get_planeInsignia())
 
             # If the airplane is not in the not available airplanes list
             # add it to the available airplane list if it's not there already
@@ -311,44 +314,59 @@ class AirplaneLL:
  
 
     def addAirplane(self):
-        ''' Adds new airplane'''
-        
+        '''Gets information about a new airplane
+           and adds it to the file'''
+        planeInsignia = self.getAirplaneInsigniaInput()
+        planeTypeID,manufacturer,seats = self.getPlaneTypeIDInput()
+
+        return IO_API().addAirplaneToFile(planeInsignia,planeTypeID,manufacturer,seats)
+
+
+    def getPlaneTypeIDInput(self):
+        '''Gets plane type id input from user'''
+
+        print('Enter planeTypeId')
+
         while True:
+                    
+            print('1 - NAFokkerF100')
+            print('2 - NABAE146')
+            print('3 - NAFokkerF28')
+            print()
+            planeTypeId = input('Please choose one of the above: ')
+            
+            if planeTypeId == '1':
+                manufacturer = 'Fokker'
+                seats = '100'
+                return planeTypeId,manufacturer,seats
 
+            elif planeTypeId == '2':
+                manufacturer = 'BAE'
+                seats = '82'
+                return planeTypeId,manufacturer,seats
+
+            elif planeTypeId == '3':
+                manufacturer = 'Fokker'
+                seats = '65'
+                return planeTypeId,manufacturer,seats
+
+            else:
+                print('\nInvalid Type ID!\n')
+
+
+    def getAirplaneInsigniaInput(self):
+        '''Gets plane insignia from user'''
+        while True:
             planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper()
-
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
-                print('Enter planeTypeId')
-                
-                while True:
-                    
-                    print('1 - NAFokkerF100')
-                    print('2 - NABAE146')
-                    print('3 - NAFokkerF28')
-                    print()
-                    planeTypeId = input('Please choose one of the above: ')
-                    
-                    if planeTypeId == '1':
-                        manufacturer = 'Fokker'
-                        seats = '100'
-                        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-
-                    elif planeTypeId == '2':
-                        manufacturer = 'BAE'
-                        seats = '82'
-                        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-
-                    elif planeTypeId == '3':
-                        manufacturer = 'Fokker'
-                        seats = '65'
-                        return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-
-                    else:
-                        print('\nInvalid Type ID!\n')
+                return planeInsignia
             else:
                 print('Invalid Plane insignia!')
 
-    def getAirplaneInsignia(self):
+
+
+
+    def getAirplaneInsigniaList(self):
         airplane_insignia_list = []
         airplanes = IO_API().loadAirplaneFromFile()
         for airplane in airplanes:

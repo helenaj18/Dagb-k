@@ -51,6 +51,6 @@ class AirplaneIO:
     def addAirplaneToFile(self, planeInsignia,planeTypeId,manufacturer,seats):
         '''Adds an airplane to the airplane file'''
         aircraft_file = open(self.__aircraft_filename,'a')
-        aircraft_file.write(planeInsignia+','+planeTypeId+','+manufacturer+','+seats)
+        aircraft_file.write(planeInsignia+','+planeTypeId+','+manufacturer+','+seats+'\n')
         
         return aircraft_file
