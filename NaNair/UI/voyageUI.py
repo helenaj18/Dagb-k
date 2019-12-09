@@ -274,7 +274,7 @@ class VoyageUI:
         year = input('Year: ').strip()
         month = input('Month: ').strip()
         day = input('Day: ').strip()
-        time = input('Time: (HH:MM) ').strip()
+        time = input('Time (HH:MM): ').strip()
         hrs = time[:2]
         mins = time[-2:]
         new_time = datetime.datetime(year,month,day,hrs,mins,0,0).isoformat()
