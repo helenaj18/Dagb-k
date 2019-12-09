@@ -2,8 +2,7 @@ from API.IO_API import IO_API
 from IO.voyageIO import VoyageIO
 from LL.airplaneLL import AirplaneLL
 from LL.destinationLL import DestinationLL
-from datetime import timedelta
-from datetime import datetime
+import datetime
 
 
 
@@ -70,7 +69,7 @@ class VoyageLL:
     def getVoyageStatus(self, voyage_instance):
         '''Returns the status of voyage'''
 
-        time_now = datetime.now()
+        time_now = datetime.datetime.now()
 
         voyage_depart_date_str = voyage_instance.getDepartureTime()
         voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
@@ -102,12 +101,11 @@ class VoyageLL:
         ''' Returns a list of instances of all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
-        date = type(start_datetime)
 
         voyages_on_date = []
 
         list_of_dates = []
-        delta = timedelta(days=1)
+        delta = datetime.timedelta.timedelta(days=1)
 
         while start_datetime < end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
@@ -181,9 +179,9 @@ class VoyageLL:
     def TimeDifference(self, time, dest_code):
         '''calculates time difference from iceland time'''
         if dest_code == 'LYR':
-            time = time + timedelta(hours=1)
+            time = time + datetime.timedelta(hours=1)
         elif dest_code == 'GOH' or dest_code == 'KUS':
-            time = time + timedelta(hours=-3)
+            time = time + datetime.timedelta(hours=-3)
 
         # time in faroe islands (FAE) and tingwall (LWK) is gmt so no need to change
 
@@ -265,7 +263,7 @@ class VoyageLL:
 
         # depart time added to list
         # plane stops at destination for 1 hour 
-        departure_time_back = arrival_time_out + timedelta(hours=1)
+        departure_time_back = arrival_time_out + datetime.timedelta(hours=1)
         info_list.append(departure_time_back.isoformat())
 
         arrival_time_back = self.findArrivalTime(destination, departure_time_back)
@@ -304,14 +302,14 @@ class VoyageLL:
 
         # assume one plane can leave each half hour
         
-        start_time = departure_datetime + timedelta(minutes=-30)
-        end_time = departure_datetime + timedelta(minutes=30)
+        start_time = departure_datetime + datetime.timedelta(minutes=-30)
+        end_time = departure_datetime + datetime.timedelta(minutes=30)
 
         voyages_during_departure_date = self.getVoyageInDateRange(start_time, end_time)
 
         while start_time <= end_time:
             datetime_list.append(start_time.isoformat())
-            start_time += timedelta(minutes=1)
+            start_time += datetime.timedelta(minutes=1)
 
         for voyage in voyages_during_departure_date:
             if voyage.getDepartureTime() in datetime_list:

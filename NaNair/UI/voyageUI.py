@@ -101,10 +101,10 @@ class VoyageUI:
             print("Invalid voyage id")
             
 
-    def checkPilotAirplaneLicense(self, crew_member,voyage):
+    def checkRank(self, crew_member,voyage):
         success = True
         try:
-            voyage.addCrewMember(crew_member) 
+            self.addCrewMember(crew_member) 
             # exception if pilot does not have License for assigned airplane
 
         except Exception as e:
@@ -121,16 +121,39 @@ class VoyageUI:
                         voyage.getVoyageID()
                     ))
 
+    def addCrewMember(self, crew_member, voyage):
+        role = crew_member.getRole()
+        airplane = AirplaneLL().getAirplanebyInsignia(voyage.getAircraftID())
+        airplane_type_on_voyage = airplane.get_planeTypeID()
+
+        if role == 'Pilot':
+            if crew_member.getCaptain():
+                voyage.setCaptain(crew_member,airplane_type_on_voyage)
+            else:
+                voyage.setCopilot(crew_member,airplane_type_on_voyage)
+        elif role == 'Cabincrew':
+                voyage.setHeadFlightAtt()
+            
+                
+            
+
+            
+
 
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
         crew_on_voyage_list = voyage.getCrewOnVoyage()
         if 'empty' in crew_on_voyage_list[0:3]:
-            print('You must add 1 captain, 1 copilot, 1 flight atttendant')
+            print('You must add 1 captain, 1 copilot, 1 head flight atttendant')
             while 'empty' in crew_on_voyage_list[0:3]:
                 crew_member = CrewUI().queryShowNotWorkingCrew()
-                self.checkPilotAirplaneLicense(crew_member,voyage)
+                if crew_member.getRole() == 'Pilot':
+                    self.checkRank(crew_member,voyage)
+                elif crew_member.getRole() == 'Cabincrew':
+                    self.checkRank(crew_member,voyage)
+                    
+
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
 
         elif 'empty' in crew_on_voyage_list:
