@@ -27,17 +27,44 @@ class DestinationIO:
         return destination_list
 
 
-    def changeDestinationFile(self,new_destination_list):
+    def changeDestinationFile(self,new_destination_instance):
         '''Updates the file with new changes (overwrites the old file)'''
+
+        all_destinations = self.loadDestinationFromFile()
 
         file_object = open(self.__destination_filename,'w')
 
         with file_object:
-            writer = csv.writer(file_object)
-            writer.writerow(['id','destination','flight_duration','distance','emergency_name','emergency_phone'])
+            fieldnames = ['id','destination','flight_duration','distance',\
+            'emergency_name','emergency_phone']
+            writer = csv.DictWriter(file_object, fieldnames=fieldnames)
+            writer.writeheader()
         
-            for destination in new_destination_list:
-                writer.writerow([destination.getDestinationAirport(),destination.getDestinationName(),destination.getDestinationDuration(),destination.getDestinationDistance(),destination.getDestinationContact(),destination.getDestinationEmergencyPhoneNumber()])
+            for destination in all_destinations:
+                dest_code = destination.getDestinationAirport()
+                updated_destination = new_destination_instance.getDestinationAirport()
+
+                if dest_code == updated_destination:
+                    writer.writerow({
+                        'id':new_destination_instance.getDestinationAirport(),
+                        'destination':new_destination_instance.getDestinationName(),
+                        'flight_duration':new_destination_instance.getDestinationDuration(),
+                        'distance':new_destination_instance.getDestinationDistance(),
+                        'emergency_name':new_destination_instance.getDestinationContact(),
+                        'emergency_phone':new_destination_instance.getDestinationEmergencyPhoneNumber()
+                    })
+            
+                else:
+
+                    writer.writerow({
+                        'id':destination.getDestinationAirport(),
+                        'destination':destination.getDestinationName(),
+                        'flight_duration':destination.getDestinationDuration(),
+                        'distance':destination.getDestinationDistance(),
+                        'emergency_name':destination.getDestinationContact(),
+                        'emergency_phone':destination.getDestinationEmergencyPhoneNumber()
+                    })
+
 
 
     def addDestinationToFile(self,destination):
