@@ -44,7 +44,7 @@ class VoyageUI:
 
 
     def seperateDatetimeString(self, datetime_str):
-        '''Seperates a datetime string and returns the date part'''
+        '''Seperates a datetime string and returns the split parts'''
         return datetime_str[:10],datetime_str[-8:]
 
 

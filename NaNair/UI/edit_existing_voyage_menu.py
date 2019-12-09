@@ -32,6 +32,7 @@ class EditExistingVoyage:
                 elif user_selection == '2':
                     if voyage.getAircraftID() == self.EMPTY:
 
+<<<<<<< HEAD
                         print()
                         print('No aircraft assigned to voyage')
                         print('Aircraft must me assigned before staff can be added')
@@ -45,6 +46,16 @@ class EditExistingVoyage:
                         print()
 
                         return VoyageUI().addCrewToVoyage(voyage)
+=======
+                else:
+
+                    #crew_on_voyage_list = voyage.getCrewOnVoyage()
+                    insignia = voyage.getAircraftID()
+                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
+                    print()
+
+                    return VoyageUI().addCrewToVoyage(voyage)
+>>>>>>> d43b89865e5b619f3f9287adc1dffd950abe65b7
                 
                 elif user_selection == 'm':
                     return

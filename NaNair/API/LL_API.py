@@ -105,8 +105,8 @@ class LL_API:
         '''Adds changed info of an existing employee chosen by user to file.'''
         return CrewLL().ChangeCrewInfo(employee)
     
-    def getQualifiedCrew(self, depart_time, plane_license):
-        return CrewLL().getQualifiedCrew(depart_time, plane_license)
+    def getQualifiedCrew(self, depart_time, plane_insignia):
+        return CrewLL().getQualifiedCrew(depart_time, plane_insignia)
 
 
     
@@ -168,6 +168,9 @@ class LL_API:
     def get_status_of_voyage(self, voyage_instance):
         '''Returns status of voyage at the current time'''
         return VoyageLL().getVoyageStatus(voyage_instance)
+
+    def get_upcoming_voyages(self):
+        return VoyageLL().getUpcomingVoyges()
 
 
     ## DESTINATION LL

@@ -4,6 +4,7 @@ from IO.crewIO import CrewIO
 from LL.voyageLL import VoyageLL
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
+from LL.airplaneLL import AirplaneLL
 
 class CrewLL:
 
@@ -195,25 +196,38 @@ class CrewLL:
         else:
             return None
 
-    def getQualifiedCrew(self, depart_time, plane_license):
+    def getQualifiedCrew(self, depart_time, plane_insignia):
         '''Returns a instance list of crew that is both qualified for a specific plane 
         and is not working'''
 
-        not_working_list = self.get_not_working_crew(depart_time)
-        licensed_pilots_list = self.get_licensed_pilots()
+        plane_instance = AirplaneLL().getAirplanebyInsignia(plane_insignia)
+        plane_license = plane_instance.get_planeTypeID()
 
-        qualified_crew_list = []
+        depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(depart_time)
 
-        # appends only pilots that are not working and have a specific license
-        # appends all flight attendants that are not working
-        for crew_member in not_working_list:
-            if type(crew_member) == Pilot:
-                if crew_member in licensed_pilots_list:
+        not_working_list = self.getNotWorkingCrew(depart_datetime)
+        licensed_pilots_list = self.getLicensedPilots(plane_license)
+
+        if licensed_pilots_list != []:
+            licensed_pilots_id_list = []
+
+            for pilot in licensed_pilots_list:
+                licensed_pilots_id_list.append(pilot.getCrewID())
+
+            qualified_crew_list = []
+
+            # appends only pilots that are not working and have a specific license
+            # appends all flight attendants that are not working
+            for crew_member in not_working_list:
+                if type(crew_member) == Pilot:
+                    if crew_member.getCrewID() in licensed_pilots_id_list:
+                        qualified_crew_list.append(crew_member)
+                else:
                     qualified_crew_list.append(crew_member)
-            else:
-                qualified_crew_list.append(crew_member)
-        
-        return qualified_crew_list
+            
+            return qualified_crew_list
+        else:
+            return None
 
     def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
         #Checks if the crew memeber is in working list, if not, the crew member is added

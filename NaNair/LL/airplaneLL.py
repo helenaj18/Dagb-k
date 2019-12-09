@@ -170,12 +170,12 @@ class AirplaneLL:
 
         # Returns a list of voyages on a date, returns None if there are
         # no voyages on that date
-        voyages_on_date = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
+        voyages_on_date_list = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
         airplanes_on_date_info_list = []
 
-        if voyages_on_date != None:
+        if voyages_on_date_list != None:
             # Go through all voyages on the date and match it with an airplane
-            for voyage in voyages_on_date:
+            for voyage in voyages_on_date_list:
                 for airplane in airplane_list:
                     # If the voyage hasn't been assigned to an airplane, 
                     # break and go to the next voyage
