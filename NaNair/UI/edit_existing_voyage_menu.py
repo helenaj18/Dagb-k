@@ -17,22 +17,21 @@ class EditExistingVoyage:
                 print('1 - Add an airplane to a voyage')
                 print('2 - Add employees to a voyage')
                 print('m - Back to edit menu')
-                user_selection = input('Please choose one of the above (1 or 2): ')
+                user_selection = input('Please choose one of the above (1/2/m): ')
                 
                 if user_selection == '1':
                     airplane_insignia_list = AirplaneUI().getAirplaneInsigniaList()
                     if voyage.getAircraftID() in airplane_insignia_list:
-                        print('Airplane already assigned to Voyage')
-                        return
+                        print('\nAirplane already assigned to Voyage\n')
+                        continue
                     else:
                         VoyageUI().addAircraftToVoyage(voyage)
+                        print('Aircraft successfully added!')
                         continue 
-
                 
                 elif user_selection == '2':
                     if voyage.getAircraftID() == self.EMPTY:
 
-<<<<<<< HEAD
                         print()
                         print('No aircraft assigned to voyage')
                         print('Aircraft must me assigned before staff can be added')
@@ -42,20 +41,11 @@ class EditExistingVoyage:
                     else:
 
                         #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                        CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
+                        insignia = voyage.getAircraftID()
+                        CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
                         print()
 
                         return VoyageUI().addCrewToVoyage(voyage)
-=======
-                else:
-
-                    #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                    insignia = voyage.getAircraftID()
-                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
-                    print()
-
-                    return VoyageUI().addCrewToVoyage(voyage)
->>>>>>> d43b89865e5b619f3f9287adc1dffd950abe65b7
                 
                 elif user_selection == 'm':
                     return

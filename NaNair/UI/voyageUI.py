@@ -154,7 +154,7 @@ class VoyageUI:
         #crew_member = CrewUI().queryShowNotWorkingCrew()
         insignia = voyage.getAircraftID()
         airplane = LL_API().getAirplanebyInsignia(voyage.getAircraftID())
-        airplane_type_on_voyage = airplane.get_planeTypeID(insignia)
+        airplane_type_on_voyage = airplane.get_planeTypeID()
 
         crew_on_voyage_list = voyage.getCrewOnVoyage()
 
