@@ -2,24 +2,22 @@ from API.LL_API import LL_API
 import datetime
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
+from UI.destinationUI import DestinationUI
 
 
 class CrewUI:
 
-    def __init__(self):
-        self.BANNER_pilot = '{:<25}{:<20}{:<25}{:<10}\n'.format('Name', 'Pilot ID', 'Rank', 'License')
-        self.BANNER_pilot += '_'*80
-        self.BANNER_att = '{:<25}{:<20}{:<20}\n'.format('Name', 'Flight Att. ID', 'Rank')
-        self.BANNER_att += '_'*80
-        self.BANNER_crew = '{:<25}{:<20}{:<25}{:<20}\n'.format('Name','Crew Member ID','Rank','License')
-        self.BANNER_crew += '_'*80
-    
+    pilot_header = '{:<25}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
+    pilot_header += '-'*85
+    flight_att_header = '{:<25}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
+    flight_att_header += '-'*70
+
     def showCrew(self):
         '''' Shows full list of crew, pilots and flight attendants'''
         crew = LL_API().get_crew()
         string = ''
-
-        print(self.BANNER_pilot)
+        
+        print(CrewUI.pilot_header)
 
         for employee in crew:
             string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
@@ -38,20 +36,21 @@ class CrewUI:
             print(string)
 
         print()
-    
+
 
     def showWorkingCrew(self,date_str):
-        format_str = LL_API().get_working_crew(date_str)
+        datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
+        format_str = LL_API().get_working_crew(datetime_object)
         print(format_str)
         self.printCrew(format_str,True)
 
 
     def showNotWorkingCrew(self,date_str):
-        not_working_crew_list = LL_API().get_not_working_crew(date_str)
+        datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
+        not_working_crew_list = LL_API().get_not_working_crew(datetime_object)
         self.printCrew(not_working_crew_list, False)
 
     
-
 
     def queryShowNotWorkingCrew(self):
 
@@ -62,6 +61,7 @@ class CrewUI:
                 return employee
             print('Employee not found, try again')
         
+
     def checkRank(self,crew_member):
         role = crew_member.getRole()
         if role == 'Pilot':
@@ -110,7 +110,6 @@ class CrewUI:
             print()
         else:
             print('\nNo voyages on this day\n')
-
 
 
     def changeEmployeeInfo(self,employee):
@@ -163,7 +162,7 @@ class CrewUI:
 
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
-        print(self.BANNER_pilot)
+        print(CrewUI.pilot_header)
 
         for pilot_instance in licensed_pilots_list:
             
@@ -181,7 +180,7 @@ class CrewUI:
 
         sorted_pilots_list =  LL_API().sortPilotsByLicense()
 
-        print(self.BANNER_pilot)
+        print(CrewUI.pilot_header)
         
         for pilot in sorted_pilots_list:
             
@@ -197,7 +196,7 @@ class CrewUI:
     def showAllFlightAtt(self):
         ''' Shows a full list of all pilots registered''' 
         
-        print(self.BANNER_att)
+        print(CrewUI.flight_att_header)
 
         flight_att = LL_API().get_flight_att()
 
@@ -219,8 +218,11 @@ class CrewUI:
         info_list = []
         print('Please fill in the following information. Press enter to skip.\n')
 
-        info_list.append(input('Personal ID (required): '))
-        info_list.append(input('Name (required): '))
+        personal_id = self.getPersonalID()
+        info_list.append(personal_id)
+
+        employee_name = self.getName()
+        info_list.append(employee_name)
 
         print('Please choose one of the following job titles:')
         print('1 - Captain')
@@ -236,18 +238,100 @@ class CrewUI:
         info_list.append(rank)
 
         if rank == '1' or rank == '2':
-            info_list.append( input('Pilot license: ') )
+            pilot_license = self.getPilotLicense()
+            info_list.append(pilot_license)
 
-        info_list.append( input('Home address: ') )
-        info_list.append( input('Phone number: ') )
-        info_list.append( input('Email: ') )
+        info_list.append(input('Home address: '))
+
+        phone_number = self.getPhoneNumber()
+        info_list.append(phone_number)
+
+        email_address = self.getEmail()
+        info_list.append(email_address)
 
         LL_API().addCrew(info_list)
 
         #info_list for pilots is longer because of license
 
-        print('New Employee added!\n') 
-        
+        print('\nNew Employee added!\n') 
+    
+
+    def getPilotLicense(self):
+        print('Pilot license:')
+        print('1 - NAFokkerF100')
+        print('2 - NAFokkerF28')
+        print('3 - NABAE146')
+
+        while True:
+            pilot_license = input('Please choose one of the above: ')
+
+            if pilot_license == '1':
+                pilot_license = 'NAFokkerF100'
+                return pilot_license
+            elif pilot_license == '2':
+                pilot_license = 'NAFOKKERF28'
+                return pilot_license
+            elif pilot_license == '3':
+                pilot_license = 'NABAE146'
+                return pilot_license
+            else:
+                print('Invalid selection')
+
+
+    def getPhoneNumber(self):
+        '''Gets the employee's phone 
+           number from user'''
+        while True:
+            employee_phone_number = input("Enter the employee's phone number: ")
+            if len(employee_phone_number) !=0 and DestinationUI().checkIfInt(employee_phone_number):
+                if len(employee_phone_number) == 7:
+                    return employee_phone_number
+                else:
+                    print('Invalid phone number')
+            elif len(employee_phone_number) == 0:
+                return 'empty'
+            else:
+                print('Invalid phone number')
+
+
+    def getEmail(self):
+        '''Gets the employee's email address'''
+        while True:
+            email_address = input('Email: ')
+            if len(email_address) == 0:
+                return 'empty'
+            elif '@' in email_address and len(email_address) != 0:
+                return email_address
+            else:
+                print('Invalid email address!')
+
+    def getName(self):
+        while True:
+            employee_name = input("Enter the employee's name: ").capitalize()
+            for letter in employee_name:
+                if letter.isdigit():
+                    print('Invalid name, please enter only letters!')
+                    break
+            else:
+                if len(employee_name) != 0:
+                    return employee_name
+                else:
+                    print('The name is required')
+
+
+    def getPersonalID(self):
+        '''Gets personal ID from user'''
+
+        while True:
+            personal_id = input('Personal ID (required): ')
+
+            if DestinationUI().checkIfInt(personal_id):
+                if len(personal_id) == 10:
+                    return personal_id
+                else:
+                    print('Invalid personal ID!')
+            else:
+                print('Invalid personal ID!')
 
     def showSchedule(self, crew_ID):
         ''' Shows the schedule for a specific crew member '''

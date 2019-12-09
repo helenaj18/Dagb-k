@@ -1,6 +1,7 @@
 from API.IO_API import IO_API
 from IO.airplaneIO import AirplaneIO
 from ModelClasses.airplane_model import Airplane
+import datetime
 
 
 class AirplaneLL:
@@ -151,18 +152,22 @@ class AirplaneLL:
         return AirplaneIO().loadAirplaneFromFile()
     
 
-    def getAirplanesByDate(self,datetime_str):
+    def getAirplanesByDate(self,datetime_object):
         '''Returns a list with tuples with airplanes that are flying on a date
            and information about the voyage they're in.
            Returns None if there are no voyages on the date'''
 
+        # if type(datetime_str) == datetime.datetime:
+        #     datetime_str = datetime_str.isoformat() #convert to string 
+             
+
         # Gets a list of all airplanes NanAir has
         airplane_list = self.getAirplanes()
-        date_str = datetime_str[:10]
+        #date_str = datetime_str[:10]
 
         # Returns a list of voyages on a date, returns None if there are
         # no voyages on that date
-        voyages_on_date = VoyageLL().getVoyageInDateRange(date_str,date_str)
+        voyages_on_date = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
         airplanes_on_date_list = []
 
         if voyages_on_date != None:
@@ -190,15 +195,26 @@ class AirplaneLL:
             # All airplanes are free if there's no voyage at the date
             return None
 
+    def seperateDatetimeString(self, datetime_str):   
+        '''Seperates a datetime string and returns the date part'''
+        return datetime_str[:10],datetime_str[-8:]
 
-    def getAirplanesByDateTime(self,datetime_str):
+    def revertDatetimeStrtoDatetime(self,datetime_str):   
+        datetime_str_date, datetime_str_time = self.seperateDatetimeString(datetime_str)
+        year,month,day = datetime_str_date.split('-')
+        hour,mins,secs = datetime_str_time.split(':')
+        datetime_object = datetime.datetime(int(year),int(month),int(day),int(hour),int(mins),int(secs))
+        return datetime_object
+
+
+    def getAirplanesByDateTime(self,datetime_object):
         '''Gets a tuple of two lists, one with available airplanes 
         and one with not available. Returns None if all airplanes are 
         available'''
 
         # Gets a tuple of info about airplanes that are in use on a date
         # Returns None if there are no airplanes in use on this date
-        airplanes_on_date = self.getAirplanesByDate(datetime_str)
+        airplanes_on_date = self.getAirplanesByDate(datetime_object)
 
         # Gets a list of all airplanes as instances
         all_airplanes = self.getAirplanes()
@@ -209,31 +225,43 @@ class AirplaneLL:
 
         if airplanes_on_date != None:
             # Gets the hour out of the datetime string
-            hour_int = int(datetime_str[11:13])
+            hour_int = datetime_object.hour #int(datetime_str[11:13])
 
-            for item in airplanes_on_date:
+            for item in airplanes_on_date:    
                 airplane = item[0]
                 destination = item[1]
-                departure_time_datetime_str = item[2]
-                arrival_time_out_datetime_str  = item[3]
-                arrival_time_home_datetime_str  = item[4]
                 flight_number_out,flight_number_home = item[5]
+                # departure_time_datetime_str = item[2]
+                # arrival_time_out_datetime_str  = item[3]
+                # arrival_time_home_datetime_str  = item[4]
+                departure_datetime_object = self.revertDatetimeStrtoDatetime(item[2]) ######### SETJA FASTA 
+                arrival_time_out_datetime_object = self.revertDatetimeStrtoDatetime(item[3])
+                arrival_time_home_datetime_object = self.revertDatetimeStrtoDatetime(item[4])
 
-                departure_hour_int = int(departure_time_datetime_str [11:13])
-                arrival_hour_out_int = int(arrival_time_out_datetime_str [11:13])
-                arrival_hour_home_int = int(arrival_time_home_datetime_str [11:13])
+                # departure_hour_int = int(departure_time_datetime_str [11:13])
+                # arrival_hour_out_int = int(arrival_time_out_datetime_str [11:13])
+                # arrival_hour_home_int = int(arrival_time_home_datetime_str [11:13])
+                departure_hour_int = departure_datetime_object . hour
+                arrival_hour_out_int = arrival_time_out_datetime_object . hour
+                arrival_hour_home_int =  arrival_time_home_datetime_object . hour
 
-                if departure_hour_int<=hour_int<=arrival_hour_home_int:
+                if departure_hour_int <= hour_int <= arrival_hour_home_int:
                     # If the hours is between departure hour and arrival at destination,
                     # the flight number out is added
-                    if departure_hour_int<=hour_int<=arrival_hour_out_int:
-                        not_available_airplanes_info_list.append((airplane,destination,\
-                            arrival_time_home_datetime_str,flight_number_out))
+                    if departure_hour_int <= hour_int <= arrival_hour_out_int:
+                        not_available_airplanes_info_list.append((
+                            airplane,destination,
+                            arrival_time_home_datetime_object.isoformat(),
+                            flight_number_out
+                        ))
                     
                     # Else the flight number home is added
                     else:
-                        not_available_airplanes_info_list.append((airplane,destination,\
-                            arrival_time_home_datetime_str,flight_number_home))
+                        not_available_airplanes_info_list.append((
+                            airplane,destination,
+                            arrival_time_home_datetime_object.isoformat(),
+                            flight_number_home
+                        ))
                 else:
                     available_airplanes_list.append(airplane)
         
@@ -254,6 +282,16 @@ class AirplaneLL:
         else:
             # All airplanes are available, returns None
             return None
+
+    def getAirplanebyInsignia(self, planeInsignia):
+        ''''Sorts all airplanes by their ID'''
+        airplane_list = self.getAirplanes()
+        while True:
+            for airplane in airplane_list:
+                if airplane.get_planeInsignia() == planeInsignia:
+                    return airplane
+            else:
+                return None
 
 
     def getAirplanesByType(self, planeTypeID = ''):
@@ -280,29 +318,44 @@ class AirplaneLL:
             planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper()
 
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
+                print('Enter planeTypeId')
                 
                 while True:
-                    planeTypeId = input('Enter planeTypeId (NAFokkerF100/NABAE146/NAFokkerF28): ').lower()
                     
-                    if planeTypeId == 'nafokkerf100':
+                    print('1 - NAFokkerF100')
+                    print('2 - NABAE146')
+                    print('3 - NAFokkerF28')
+                    print()
+                    planeTypeId = input('Please choose one of the above: ')
+                    
+                    if planeTypeId == '1':
                         manufacturer = 'Fokker'
                         seats = '100'
-                        print('Airplane successfully added!')
                         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-                    elif planeTypeId == 'nabae146':
+
+                    elif planeTypeId == '2':
                         manufacturer = 'BAE'
                         seats = '82'
-                        print('Airplane successfully added!')
                         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
-                    elif planeTypeId == 'nafokkerf28':
+
+                    elif planeTypeId == '3':
                         manufacturer = 'Fokker'
                         seats = '65'
-                        print('Airplane successfully added!')
                         return IO_API().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+
                     else:
-                        print('Invalid Type ID!')
+                        print('\nInvalid Type ID!\n')
             else:
                 print('Invalid Plane insignia!')
+
+    def getAirplaneInsignia(self):
+        airplane_insignia_list = []
+        airplanes = IO_API().loadAirplaneFromFile()
+        for airplane in airplanes:
+            airplane_insignia_list.append(airplane.getAirplaneInsignia())
+
+        return airplane_insignia_list
+
 
 
 # BANNAÐ AÐ FÆRA, VERÐUR AÐ VERA NEÐST

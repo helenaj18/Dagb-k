@@ -50,7 +50,7 @@ class VoyageIO:
             fieldnames = ['voyageIDnumber','flightNumber_out','departingFrom_home',\
                 'arrivingAt_out','departure_time_home','arrival_time_out','flightNumber_home',\
                     'departingFrom_out','arrivingAt_home','departure_time_out','arrival_time_home',\
-                        'aircraftID','captain','opilot','fsm','fa1','fa2']
+                        'aircraftID','captain','copilot','fsm','fa1','fa2']
 
 
             writer = csv.DictWriter(file_object,fieldnames=fieldnames)
@@ -63,7 +63,7 @@ class VoyageIO:
                     
                     writer.writerow({
                         'voyageIDnumber':updated_voyage.getVoyageID(),
-                        'flightNumber_out':updated_voyage_id.getFlightNumbers()[0],
+                        'flightNumber_out':updated_voyage.getFlightNumbers()[0],
                         'departingFrom_home':updated_voyage.getDepartureLocation(),
                         'arrivingAt_out':updated_voyage.getDestination().getDestinationAirport(),
                         'departure_time_home':updated_voyage.getDepartureTime(),
@@ -71,8 +71,8 @@ class VoyageIO:
                         'flightNumber_home':updated_voyage.getFlightNumbers()[1],
                         'departingFrom_out':updated_voyage.getDestination().getDestinationAirport(),
                         'arrivingAt_home':updated_voyage.getDepartureLocation(),
-                        'departure_time_out':updated_voyage.getArrivalTimeOut()+ timedelta(hours = 1),
-                        'arrival_time_home':updated_voyage.getArrivaltimeHome(),
+                        'departure_time_out':updated_voyage.getArrivalTimeOut(), ###### ATH BREYTA Í DATETIME+ timedelta(hours = 1),
+                        'arrival_time_home':updated_voyage.getArrivalTimeHome(),
                         'aircraftID':updated_voyage.getAircraftID(),
                         'captain':updated_voyage.getCaptain(),
                         'copilot':updated_voyage.getCopilot(),
@@ -93,8 +93,8 @@ class VoyageIO:
                         'flightNumber_home':voyage.getFlightNumbers()[1],
                         'departingFrom_out':voyage.getDestination().getDestinationAirport(),
                         'arrivingAt_home':voyage.getDepartureLocation(),
-                        'departure_time_out':voyage.getArrivalTimeOut()+ timedelta(hours = 1),
-                        'arrival_time_home':voyage.getArrivaltimeHome(),
+                        'departure_time_out':voyage.getArrivalTimeOut(), ##### + timedelta(hours = 1),
+                        'arrival_time_home':voyage.getArrivalTimeHome(),
                         'aircraftID':voyage.getAircraftID(),
                         'captain':voyage.getCaptain(),
                         'copilot':voyage.getCopilot(),

@@ -12,6 +12,8 @@ class LL_API:
         '''Returns a list of airplane instances''' 
         return AirplaneLL().getAirplanes() 
     
+    def getAirplanebyInsignia(self, planeInsignia):
+        return AirplaneLL().getAirplanebyInsignia(planeInsignia)
 
     def showAirplanesByType(self, planeTypeId = ''):
         '''Returns a list of airplane instances that have a type inputted by user'''
@@ -35,10 +37,15 @@ class LL_API:
     
 
     def addAirplane(self):
-        ''' Sends info for new ariplane to be added'''
+        ''' Sends info for new airplane to be added'''
         return AirplaneLL().addAirplane()
 
+    def getAirplaneInsignia(self):
+        return AirplaneLL().getAirplaneInsignia()
 
+
+    def revertDatetimeStrtoDatetime(self,datetime_str):
+        return AirplaneLL().revertDatetimeStrtoDatetime(datetime_str)
 
 
     ### CREW LL 
@@ -57,15 +64,13 @@ class LL_API:
         '''Returns a list of instances of all flight attendants.'''
         return CrewLL().getFlightAtt()
 
-
-    def get_working_crew(self,date_str):
+    def get_working_crew(self,datetime_object):
         '''Returns a formatted string of crew that are working at an inputted time'''
-        return CrewLL().getWorkingCrew(date_str)
+        return CrewLL().getWorkingCrew(datetime_object)
     
-
-    def get_not_working_crew(self,date_str):
+    def get_not_working_crew(self,datetime_object):
         '''Returns a list of instances of the crew that is not working on a specific day.'''
-        return CrewLL().getNotWorkingCrew(date_str)
+        return CrewLL().getNotWorkingCrew(datetime_object)
     
 
     def get_work_schedule(self,start_date,end_date,crew_id):
@@ -164,7 +169,7 @@ class LL_API:
 
         return DestinationLL().changeDestinationFile(destination_instance)
 
-    def addDestination(self):
-        return DestinationLL().addDestination()
+    def addDestination(self,new_destination):
+        return DestinationLL().addDestination(new_destination)
         
 #LL_API.show_all_planes()

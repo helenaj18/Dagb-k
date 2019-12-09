@@ -1,4 +1,4 @@
-planeInsignia,planeTypeId,manufacturer,seats
+planeInsignia,planeTypeId,manufacturer
 TF-EPG,NAFokkerF100,Fokker,100
 TF-UVR,NAFokkerF28,Fokker,65
 TF-XZR,NABAE146,BAE,82
@@ -9,3 +9,4 @@ TF-TYQ,NAFokkerF100,Fokker,100
 TF-LNQ,NABAE146,BAE,82
 TF-XUP,NAFokkerF100,Fokker,100
 TF-GIX,NAFokkerF28,Fokker,65
+TF-STU,1,Fokker,100TF-STU,1,Fokker,100TF-STD,3,Fokker,65TF-STD,1,Fokker,100

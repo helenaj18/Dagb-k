@@ -2,6 +2,7 @@ from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
+from UI.destinationUI import DestinationUI
 import datetime
 
 
@@ -49,7 +50,7 @@ class SubMenuRegister:
             elif selection == '4':
                 # Add new destination
 
-                return LL_API().addDestination()
+                return DestinationUI().addDestination()
 
                 
             elif selection == 'm':

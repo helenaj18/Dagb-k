@@ -7,6 +7,8 @@ from UI.airplaneUI import AirplaneUI
 from UI.destinationUI import DestinationUI
 
 class SubMenuEdit:
+
+    EMPTY = 'empty'
     def __init__(self, logic_layer):
         print('sub menu Edit')
         self.logic_layer = logic_layer
@@ -33,6 +35,8 @@ class SubMenuEdit:
             if selection == '1':
                 print("Select date range to find a voyage to edit")
                 voyage = VoyageUI().queryOneVoyage()
+                VoyageUI().showOneVoyage(voyage)
+
 
                 
                 while True:
@@ -44,15 +48,31 @@ class SubMenuEdit:
                     print("m - Back to main menu")
                     user_selection = input()
                     if user_selection == '1':
-                        return VoyageUI().addAircraftToVoyage(voyage)
+                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsignia():
+                            print('Airplane already assigned to Voyage')
+                            return
+                        else: 
+                        
+                            return VoyageUI().addAircraftToVoyage(voyage)
 
+                    
                     elif user_selection == '2':
+                        if voyage.getAircraftID() == self.EMPTY:
 
-                        #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                        CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
-                        print('You must add 1 captain, 1 copilot, 1 flight atttendant')
-                        print()
-                        return VoyageUI().addCrewToVoyage(voyage)
+                            print()
+                            print('No aircraft assigned to voyage')
+                            print('Aircraft must me assigned before staff can be added')
+                            print()
+                            return 
+
+                        else:
+
+                            #crew_on_voyage_list = voyage.getCrewOnVoyage()
+                            CrewUI().showNotWorkingCrew(voyage.getDepartureTime()) ################
+                            print()
+
+                            VoyageUI().addCrewToVoyage(voyage)
+                            #return
                         
                                             
                     elif user_selection == '3':
