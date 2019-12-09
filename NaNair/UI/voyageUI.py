@@ -60,7 +60,7 @@ class VoyageUI:
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
-        if aircraft_ID != 'EMPTY':
+        if aircraft_ID != 'EMPTY' and aircraft_ID != 'empty':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             aircraft_type = airplane.get_planeTypeID()
             total_seats = airplane.get_planeCapacity()

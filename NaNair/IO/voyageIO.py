@@ -65,6 +65,9 @@ class VoyageIO:
     def changeVoyageFile(self, updated_voyage):
         '''Updates the file with new changes'''
         allvoyages = self.loadVoyageFromFile()
+        
+        #new_voyage = updated_voyage
+        #old_voyage = allvoyages[0]
 
         file_object = open(self.__allVoyages_filename,'w')
         with file_object:
@@ -80,7 +83,7 @@ class VoyageIO:
 
             writer = csv.DictWriter(file_object,fieldnames=fieldnames)
             writer.writeheader()
-
+            
             for voyage in allvoyages:
                 voyage_id = voyage.getVoyageID()
                 updated_voyage_id = updated_voyage.getVoyageID()
