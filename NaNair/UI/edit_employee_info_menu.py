@@ -29,21 +29,25 @@ class EditEmployeeMenu:
         
         selection = input()
         if selection == '1':
+            ''' The software asks for new home adress and assigns it to the owner of given ID'''
             new_address = CrewUI().getHomeAddress()
             employee.setAddress(new_address)
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '2':
+            ''' The software asks for new phone number and assigns it to the owner of given ID'''
             new_phonenumber = CrewUI().getPhoneNumber()
             employee.setPhonenumber(new_phonenumber)
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '3':
+            ''' The software asks for new email adress and assigns it to the owner of given ID'''
             new_email_address = CrewUI().getEmail()
             employee.setEmail(new_email_address)
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '4':
+            ''' The software asks for new rank and assigns it to the owner of given ID'''
             if type(employee) == Pilot:
                 print('Please choose one: ')
                 print('0 - Co-pilot')
@@ -59,6 +63,7 @@ class EditEmployeeMenu:
             
 
         elif selection == '5':
+            ''' The software asks for new license and assigns it to the owner of given ID'''
             new_license = CrewUI().getPilotLicense()
             print()
             employee.setLicense(new_license)
