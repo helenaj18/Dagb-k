@@ -87,15 +87,15 @@ class CrewUI:
             print('{:^30}'.format(header))
             print()
             print('#'*30)
-            header_str = '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}'.format(
+            header_str = '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}{:<15}'.format(
                 'Role','Name','Employee Id','Position','Email',\
-                    'Phone Number','Destination')
+                    'Phone Number','Destination','License')
 
             print(header_str)
             print(len(header_str)*'-')
             for crew_member in not_working_crew_list:
                 position = self.checkRank(crew_member)
-
+                
                 format_str += '{:<15}{:<25}{:<15}{:<15}{:<25}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
@@ -241,7 +241,9 @@ class CrewUI:
             pilot_license = self.getPilotLicense()
             info_list.append(pilot_license)
 
-        info_list.append(input('Home address: '))
+
+        home_address = self.getHomeAddress()
+        info_list.append(home_address)
 
         phone_number = self.getPhoneNumber()
         info_list.append(phone_number)
@@ -255,6 +257,15 @@ class CrewUI:
 
         print('\nNew Employee added!\n') 
     
+    def getHomeAddress(self):
+        '''Gets home address of an 
+           employee from user'''
+
+        home_address = input('Home address: ')
+        if home_address != '':
+            return home_address
+        else:
+            return 'empty'
 
     def getPilotLicense(self):
         print('Pilot license:')
