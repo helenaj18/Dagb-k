@@ -5,10 +5,6 @@ from UI.display_menu_employee import DisplayMenuEmployee
 from API.LL_API import LL_API
 
 class SubMenuDisplay: 
-    def __init__(self, logic_layer):
-        print('sub menu Display')
-        self.logic_layer = logic_layer
-    
     def startSubMenuDisplay(self):
         # Header
         print('#'*20)
@@ -31,7 +27,7 @@ class SubMenuDisplay:
 
             if selection == '1': 
                 # Display Menu Airplanes
-                return DisplayMenuAirplanes(self.logic_layer).startDisplayAirplanes()
+                return DisplayMenuAirplanes().startDisplayAirplanes()
             
             elif selection == '2':
                 # Display Destination
@@ -39,14 +35,15 @@ class SubMenuDisplay:
 
             elif selection == '3':
                 # Display Menu Voyages
-                return DisplayMenuVoyages(self.logic_layer).startDisplayVoyages()
+                return DisplayMenuVoyages().startDisplayVoyages()
 
             elif selection == '4':
                 # Display Menu Employees
-                return DisplayMenuEmployee(self.logic_layer).startDisplayMenu()
+                return DisplayMenuEmployee().startDisplayMenu()
         
             elif selection == 'm':
                 # Back to main menu
                 return 
             else:
                 print("Invalid selection")
+                print()

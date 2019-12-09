@@ -11,20 +11,28 @@ class DisplayMenuAirplaneType:
             print('3 - NABAE146')
             print('m - Back to main menu')
             print()
-            selection = input()
+            selection = input().strip()
 
+            # User chooses NAFokkerF100
             if selection == '1':
                 planeTypeID = 'NAFokkerF100'
                 return AirplaneUI().showAirplanesByType(planeTypeID)
+            
+            # User chooses NAFokkerF28
             elif selection == '2':
                 planeTypeID = 'NAFokkerF28'
                 return AirplaneUI().showAirplanesByType(planeTypeID)
+            
+            # User chooses NABAE146
             elif selection == '3':
                 planeTypeID = 'NABAE146'
                 return AirplaneUI().showAirplanesByType(planeTypeID)
             
+            # User chooses to go back to main menu
             elif selection == 'm':
                 return
                 
+            # User does not choose any of the given possibilities
             else:
-                print('Invalid selection')
+                print('Invalid selection!')
+                print()
