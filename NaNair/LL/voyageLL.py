@@ -11,7 +11,7 @@ class VoyageLL:
     ''' LL class for voyage '''
 
     # When a new voyage is added
-    # the solds seats are 0
+    # the sold seats are 0
     seats_sold_out = '0'
     seats_sold_home = '0'
 
@@ -27,14 +27,16 @@ class VoyageLL:
 
 
     def getOneVoyage(self, voyage_to_get_ID):
-
-        voyage_list = IO_API().loadVoyageFromFile()
-        for voyage in voyage_list:
-            voyage_ID = voyage.getVoyageID()
+        '''Takes in voyage id and returns the voyage class instance that has that id'''
+        
+        voyage_instance_list = IO_API().loadVoyageFromFile()
+        for voyage_instance in voyage_instance_list:
+            voyage_ID = voyage_instance.getVoyageID()
             if voyage_ID == voyage_to_get_ID: 
                 return voyage
                 
-        return None
+            else:
+                return None
 
 
     def getVoyageDuration(self,voyage_instance):
