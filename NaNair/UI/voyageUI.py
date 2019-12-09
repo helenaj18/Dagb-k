@@ -240,7 +240,6 @@ class VoyageUI:
                         voyage_duration_min)
 
                 print(60*VoyageUI.SEPERATOR)
-                return
         else:
             print()
             print('No voyages on these dates')
