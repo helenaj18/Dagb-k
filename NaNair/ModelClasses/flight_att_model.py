@@ -7,8 +7,8 @@ class FlightAttendant(Crew):
         self.__license = 'N/A'
         self.__role = 'Cabincrew'
 
-    def __str__(self):
-        pass
+    # def __str__(self):
+    #     return 'FLIGHT ATTENDANT'
 
     def setRank(self,new_rank):
         self.__head_flight_att= new_rank
@@ -25,4 +25,7 @@ class FlightAttendant(Crew):
     
     def getLicense(self):
         return self.__license
+
+    # def getCrewID(self):
+    #     return Crew.__crewID
 

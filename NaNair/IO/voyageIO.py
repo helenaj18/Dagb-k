@@ -78,8 +78,7 @@ class VoyageIO:
                     'flightNumber_home','seats_sold_home',\
                     'departingFrom_out','arrivingAt_home','departure_time_out',\
                         'arrival_time_home',\
-                        'aircraftID','captain',\
-                            'copilot','fsm','fa1','fa2']
+                        'aircraftID','captain','copilot','fsm','fa1','fa2']
 
 
             writer = csv.DictWriter(file_object,fieldnames=fieldnames)
@@ -89,6 +88,7 @@ class VoyageIO:
                 voyage_id = voyage.getVoyageID()
                 updated_voyage_id = updated_voyage.getVoyageID()
                 if voyage_id == updated_voyage_id:
+                    
                     
                     writer.writerow({
                         'voyageIDnumber':updated_voyage.getVoyageID(),
@@ -136,6 +136,7 @@ class VoyageIO:
                         'fa2':voyage.getFlightAttTwo()
 
                     })
+        file_object.close()
 
 
     def addVoyageToFile(self, new_voyage_str):

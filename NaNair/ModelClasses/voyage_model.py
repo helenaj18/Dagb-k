@@ -100,7 +100,7 @@ class Voyage:
         if not new_capt.canFly(airplane_type):
             raise Exception("Pilot can not fly this type")
     
-        self.__captain = new_capt
+        self.__captain = new_capt.getCrewID()
     
     def setCopilot(self, new_copilot,airplane_type):
         
@@ -108,13 +108,13 @@ class Voyage:
         if not new_copilot.canFly(airplane_type):
             raise Exception("Copilot can not fly this type")
     
-        self.__copilot = new_copilot
+        self.__copilot = new_copilot.getCrewID()
     
     def setHeadFlightAtt(self, new_head):
         if not new_head.getHeadFlightAtt():
             raise Exception('You must add a head flight attendant')
         
-        self.__head_flight_att = new_head
+        self.__head_flight_att = new_head.getCrewID()
 
 
     def setFlightAttOne(self, new_att):

@@ -7,8 +7,8 @@ class Pilot(Crew):
         self.__captain = bool(int(captain))
         self.__role = 'Pilot'
 
-    def __str__(self):
-        pass
+    # def __str__(self):
+    #     return str(self.__captain)
 
     def getLicense(self):
         return self.__pilot_license
@@ -24,6 +24,9 @@ class Pilot(Crew):
         
     def getBool(self):
         return self.__captain
+
+    # def getCrewID(self):
+    #     return Crew.__crewID
 
 
     def setLicense(self,new_license):

@@ -56,7 +56,8 @@ class CrewUI:
 
         while True:
             print('What staff member do you want to pick from the list above (Employee ID): ')
-            crew_id = input().lower()
+            
+            crew_id = input().lower().strip()
 
             employee = LL_API().get_crew_member_by_id(crew_id)
             if employee != None:

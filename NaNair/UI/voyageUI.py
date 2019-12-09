@@ -70,7 +70,7 @@ class VoyageUI:
             print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
                 sold_seats_home,total_seats))
             print('\t Aircraft: {}, type {}'.format(aircraft_ID,aircraft_type))
-        elif aircraft_ID == 'EMPTY':
+        elif aircraft_ID == 'EMPTY' or aircraft_ID == 'empty':
             print('\t Aircraft: No aircraft assigned to voyage')
 
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
@@ -122,7 +122,7 @@ class VoyageUI:
         except Exception as e:
             success = False
             print(e)
-            input('Press any key to try continue editing voyage')
+            input('Press any key to try continue editing voyage ')
         
         if success:
             position = CrewUI().checkRank(crew_member)
@@ -138,16 +138,26 @@ class VoyageUI:
 
         if role == 'Pilot':
             if crew_member.getCaptain():
-                voyage.setCaptain(crew_member,airplane_type_on_voyage)
+                if voyage.getCaptain() == 'empty':
+                    voyage.setCaptain(crew_member,airplane_type_on_voyage)
+                else: 
+                    raise Exception('Captain already added to voyage')
             else:
-                voyage.setCopilot(crew_member,airplane_type_on_voyage)
+                if voyage.getCopilot() == 'empty':
+                    voyage.setCopilot(crew_member,airplane_type_on_voyage)
+                else: 
+                    raise Exception('Copilot already added to voyage')
+                # GERA eh do you want to replace him 
+#############################################
+
         elif role == 'Cabincrew':
+            if voyage.getHeadFlightAtt() == 'empty':
                 voyage.setHeadFlightAtt(crew_member)
+            else:
+                raise Exception('Head flight attendant already added to voyage')
             
                 
             
-
-
 
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
@@ -159,14 +169,13 @@ class VoyageUI:
         crew_on_voyage_list = voyage.getCrewOnVoyage()
 
         if 'empty' in crew_on_voyage_list[0:3]:
-            CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print()
-
+            CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
                 .format(airplane_type_on_voyage))
             while 'empty' in crew_on_voyage_list[0:3]:
-                insignia = voyage.getAircraftID()
-                CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
+                # insignia = voyage.getAircraftID()
+                # CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
                 print()
 
                 crew_member = CrewUI().queryShowNotWorkingCrew()
@@ -174,8 +183,7 @@ class VoyageUI:
                     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
                 elif crew_member.getRole() == 'Cabincrew':
                     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-                    
-
+               
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
             
             LL_API().change_voyage(voyage)
