@@ -33,10 +33,8 @@ class VoyageLL:
         for voyage_instance in voyage_instance_list:
             voyage_ID = voyage_instance.getVoyageID()
             if voyage_ID == voyage_to_get_ID: 
-                return voyage
+                return voyage_instance
                 
-            else:
-                return None
 
 
     def getVoyageDuration(self,voyage_instance):
