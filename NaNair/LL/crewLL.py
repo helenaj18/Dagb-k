@@ -125,6 +125,18 @@ class CrewLL:
         
         return sorted_pilots_list
  
+    def doesIDExist(self, crew_id):
+        '''Checks if a crew member already has inputted ID. Returns true if so, else false'''
+
+        crew_instance_list = IO_API().loadCrewFromFile()
+        BoolCheck = False
+
+        for crew_member in crew_instance_list:
+            if crew_member.getCrewID() == crew_id:
+                BoolCheck = True
+        
+        return BoolCheck
+
 
     def getWorkingCrew(self,datetime_object):
         ''' Returns a string of the working crew on a date inputted by user'''
