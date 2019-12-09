@@ -7,14 +7,15 @@ from datetime import timedelta
 class VoyageIO:
 
     def __init__(self):
-
+        # Gets the filenames for voyages and destinations
         dirname = os.path.dirname(__file__)
         self.__allVoyages_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/allvoyages.csv')
         self.__destinations_filename = os.path.join(dirname,'../UPDATEDSTUDENTDATA/Destinations.csv')
 
 
     def loadVoyageFromFile(self):
-        '''Loads existing voyages from the file'''
+        '''Loads existing voyages from the file,
+           returns a list of voyage instances'''
         voyage_list = []
 
         voyage_file = open(self.__allVoyages_filename)
@@ -68,7 +69,7 @@ class VoyageIO:
 
         file_object = open(self.__allVoyages_filename,'w')
         with file_object:
-            # header 
+            # Header 
             fieldnames = ['voyageIDnumber','flightNumber_out','seats_sold_out','departingFrom_home',\
                 'arrivingAt_out','departure_time_home','arrival_time_out',\
                     'flightNumber_home','seats_sold_home',\
@@ -134,12 +135,11 @@ class VoyageIO:
                     })
 
 
-        
-
-
     def addVoyageToFile(self, new_voyage_str):
         '''Adds a new voyage to the file'''
 
         file_object = open(self.__allVoyages_filename,'a')
         file_object.write(new_voyage_str+'\n')
+
+        return file_object
 

@@ -63,6 +63,7 @@ class CrewUI:
                 return employee
             print('Employee not found, try again')
 
+
     def showQualifiedCrew(self, depart_time_str, plane_insignia):
         '''Prints a list of crew that can be assigned to new voyage'''
 
@@ -265,6 +266,11 @@ class CrewUI:
         print('Please fill in the following information. Press enter to skip.\n')
 
         personal_id = self.getPersonalID()
+
+        while LL_API().doesIDExist(personal_id):
+            print('Another crew member already has that ID! Please input another ID.')
+            personal_id = input('Personal ID: ')
+            
         info_list.append(personal_id)
 
 
@@ -280,8 +286,7 @@ class CrewUI:
         rank = input()
 
         while rank != '1' and rank != '2' and rank != '3' and rank != '4':
-            print('Please choose a number between 1-4')
-            rank = input()
+            rank = input('Please choose a number between 1-4')
                 
         info_list.append(rank)
 
@@ -385,10 +390,6 @@ class CrewUI:
 
         while True:
             personal_id = input('Personal ID (required): ')
-
-            while LL_API().doesIDExist(personal_id):
-                print('Another crew member already has that ID! Please input another ID.')
-                personal_id = input('Personal ID: ')
 
             if DestinationUI().checkIfInt(personal_id):
                 if len(personal_id) == 10:

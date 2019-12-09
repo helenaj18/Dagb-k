@@ -13,16 +13,17 @@ class AirplaneUI:
         print('-'*len(header_str))
 
         # Gets a list of airplane instances
-        airplanes = LL_API().showAllPlanes()
+        airplanes_list = LL_API().showAllPlanes()
 
         # Goes through all airplane instances in the list and prints each one
-        for airplane in airplanes:
+        for airplane in airplanes_list:
             format_str = '{:<15}{:<15}{:<15}{:<15}{:<15}'.format(airplane.get_planeInsignia(),\
                 airplane.get_planeTypeID(),airplane.get_planeManufacturer(),\
                     airplane.get_planeModel(),airplane.get_planeCapacity())
             print(format_str)
         print()
     
+
     def showAirplanesByType(self,planeTypeID):
         '''Shows Airplanes by type'''
 
@@ -44,6 +45,7 @@ class AirplaneUI:
             
         print()
     
+
     def showAirplanesByDateTime(self,date_str):
         '''Shows airplanes availability by a date and time'''
 
@@ -76,9 +78,9 @@ class AirplaneUI:
             print()
 
         else:
-            # All airplanes available if there's no voyage on the date
-            airplanes = LL_API().showAllPlanes()
-            for airplane in airplanes:
+            # All airplanes are available if there's no voyage on the date
+            airplanes_list = LL_API().showAllPlanes()
+            for airplane in airplanes_list:
                 format_str = '{:<15}{:<15}{:<15}{:<15}{:<20}{:<25}{:<15}'.format(airplane.get_planeInsignia(),\
                     airplane.get_planeTypeID(),airplane.get_planeCapacity(),\
                         'N/A','Available','N/A','N/A')       
@@ -91,7 +93,6 @@ class AirplaneUI:
         '''Adds a new Airplane to the airplane file'''
         LL_API().addAirplane()
         print('Airplane successfully added!')
-
 
 
     def getAirplaneInsigniaList(self):
