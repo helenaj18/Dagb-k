@@ -12,31 +12,34 @@ class VoyageUI:
     SEPERATOR = '-'
 
     def getDateInput(self):
-        '''Gets a date input from the user'''
+        '''Gets a date input from the user and returns a datetime object'''
 
         year_str = input('Year: ')
         month_str = input('Month: ')
         day_str = input('Day: ')
 
+        # check if date is valid
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
-        
+
         datetime_input = datetime.datetime(year_int,month_int,day_int,0,0,0)
         return datetime_input
     
     def getDateWithTime(self):
-        '''Gets a date input from the user with time'''
+        '''Gets a date and time input from the user and returns a datetime object'''
 
-        year = input('Year: ')
-        month = input('Month: ')
-        day = input('Day: ')
+        year_str = input('Year: ')
+        month_str = input('Month: ')
+        day_str = input('Day: ')
         
-        year_int, month_int, day_int = LL_API().verifyDate(year, month, day)
+        # check if date is valid
+        year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-        hour = input('Hour: ')
-        minutes = input('Minute: ')
+        hour_str = input('Hour: ')
+        minutes_str = input('Minute: ')
         print()
 
-        hour_int, minutes_int = LL_API().verifyTime(hour, minutes)
+        # check if time is valid
+        hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
 
@@ -149,6 +152,8 @@ class VoyageUI:
 
                 voyage_duration_hrs, voyage_duration_min = \
                 LL_API().get_voyage_duration(voyage)
+
+                voyage_state = LL_API().get_status_of_voyage(voyage)
                 
                 flight_no_out, flight_no_home = voyage.getFlightNumbers()
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -162,7 +167,7 @@ class VoyageUI:
                 
                 
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
-                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
                 
                 return
 
