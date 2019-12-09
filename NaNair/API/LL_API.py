@@ -160,6 +160,10 @@ class LL_API:
         return VoyageLL().checkIfTakenTime(time_datetime)
 
 
+    def get_status_of_voyage(self, voyage_instance):
+        '''Returns status of voyage at the current time'''
+        return VoyageLL().getVoyageStatus(voyage_instance)
+
 
     ## DESTINATION LL
 

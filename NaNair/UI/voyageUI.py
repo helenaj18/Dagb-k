@@ -12,31 +12,34 @@ class VoyageUI:
     SEPERATOR = '-'
 
     def getDateInput(self):
-        '''Gets a date input from the user'''
+        '''Gets a date input from the user and returns a datetime object'''
 
         year_str = input('Year: ')
         month_str = input('Month: ')
         day_str = input('Day: ')
 
+        # check if date is valid
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
-        
+
         datetime_input = datetime.datetime(year_int,month_int,day_int,0,0,0)
         return datetime_input
     
     def getDateWithTime(self):
-        '''Gets a date input from the user with time'''
+        '''Gets a date and time input from the user and returns a datetime object'''
 
-        year = input('Year: ')
-        month = input('Month: ')
-        day = input('Day: ')
+        year_str = input('Year: ')
+        month_str = input('Month: ')
+        day_str = input('Day: ')
         
-        year_int, month_int, day_int = LL_API().verifyDate(year, month, day)
+        # check if date is valid
+        year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-        hour = input('Hour: ')
-        minutes = input('Minute: ')
+        hour_str = input('Hour: ')
+        minutes_str = input('Minute: ')
         print()
 
-        hour_int, minutes_int = LL_API().verifyTime(hour, minutes)
+        # check if time is valid
+        hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
 
@@ -47,12 +50,14 @@ class VoyageUI:
 
 
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
-                flight_no_out, flight_no_home, voyage_duration_min):
+                flight_no_out, flight_no_home, voyage_duration_min, voyage_state):
         '''Prints out a voyage'''
 
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
             voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+
+        print('\t Status: {}'.format(voyage_state))
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
@@ -152,6 +157,8 @@ class VoyageUI:
 
                 voyage_duration_hrs, voyage_duration_min = \
                 LL_API().get_voyage_duration(voyage)
+
+                voyage_state = LL_API().get_status_of_voyage(voyage)
                 
                 flight_no_out, flight_no_home = voyage.getFlightNumbers()
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -165,7 +172,7 @@ class VoyageUI:
                 
                 
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
-                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min)
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
                 
                 return
 
@@ -261,6 +268,9 @@ class VoyageUI:
                 voyage_duration_hrs, voyage_duration_min = \
                     LL_API().get_voyage_duration(voyage)
 
+
+                voyage_state = LL_API().get_status_of_voyage(voyage)
+
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
                     # one flight attendant 
@@ -276,7 +286,7 @@ class VoyageUI:
 
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
                     voyage_duration_hrs, flight_no_out, flight_no_home, \
-                        voyage_duration_min)
+                        voyage_duration_min, voyage_state)
 
                 print(60*VoyageUI.SEPERATOR)
         else:
@@ -304,37 +314,29 @@ class VoyageUI:
         check = LL_API().checkDestInput(dest)
         
         while check == False:
-            print('Please enter a valid destination!')
-            dest = input().upper()
+            dest = input('Please enter a valid destination: ').upper().strip()
             check = LL_API().checkDestInput(dest)
         
         return dest
         
 
 
-    def addVoyage(self):
-
-        dest = self.getDest()
-        print('Enter departure time: ')
-
-        departure_time = self.getDateWithTime()
-
     
-    def getAirplaneInput(self):
+    def getAirplaneInput(self,departure_datetime):
         print('Please choose an airplane.')
 
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
+        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
 
         for plane in airplanes_class_list:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        plane_name = input('Chosen plane (type name of plane): ').upper()
+        plane_name = input('Chosen plane (type name of plane on this format TF-XXX): ').upper().strip()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
         while check == False:
             print('Please choose one of the listed planes.')
-            plane_name = input()
+            plane_name = input().upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
         
         return plane_name
@@ -361,7 +363,7 @@ class VoyageUI:
             selection = input()
 
         if selection == 'y':
-            plane_name = self.getAirplaneInput()
+            plane_name = self.getAirplaneInput(departure_datetime)
         else:
             plane_name = 'empty'
 
