@@ -304,24 +304,17 @@ class VoyageUI:
         
 
 
-    def addVoyage(self):
-
-        dest = self.getDest()
-        print('Enter departure time: ')
-
-        departure_time = self.getDateWithTime()
-
     
-    def getAirplaneInput(self):
+    def getAirplaneInput(self,departure_datetime):
         print('Please choose an airplane.')
 
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
+        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
 
         for plane in airplanes_class_list:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        plane_name = input('Chosen plane (type name of plane): ').upper()
+        plane_name = input('Chosen plane (type name of plane): ').upper().strip()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
         while check == False:
@@ -353,7 +346,7 @@ class VoyageUI:
             selection = input()
 
         if selection == 'y':
-            plane_name = self.getAirplaneInput()
+            plane_name = self.getAirplaneInput(departure_datetime)
         else:
             plane_name = 'empty'
 
