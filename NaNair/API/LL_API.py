@@ -12,6 +12,8 @@ class LL_API:
         '''Returns a list of airplane instances''' 
         return AirplaneLL().getAirplanes() 
     
+    def getAirplanebyInsignia(self, planeInsignia):
+        return AirplaneLL().getAirplanebyInsignia(planeInsignia)
 
     def showAirplanesByType(self, planeTypeId = ''):
         '''Returns a list of airplane instances that have a type inputted by user'''

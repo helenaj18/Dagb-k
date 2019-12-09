@@ -283,6 +283,16 @@ class AirplaneLL:
             # All airplanes are available, returns None
             return None
 
+    def getAirplanebyInsignia(self, planeInsignia):
+        ''''Sorts all airplanes by their ID'''
+        airplane_list = self.getAirplanes()
+        while True:
+            for airplane in airplane_list:
+                if airplane.get_planeInsignia() == planeInsignia:
+                    return airplane
+            else:
+                return None
+
 
     def getAirplanesByType(self, planeTypeID = ''):
         ''' Returns list of airplanes with same Id'''

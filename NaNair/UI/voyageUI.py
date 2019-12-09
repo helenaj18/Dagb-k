@@ -2,6 +2,8 @@ from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
 from UI.crewUI import CrewUI
+from LL.airplaneLL import AirplaneLL
+#from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
 from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
 
 
@@ -56,10 +58,18 @@ class VoyageUI:
 
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
             voyage_duration_min))
+        
+        if aircraft_ID != 'No aircraft assigned to voyage':
+            airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
+            total_seats = airplane.get_planeCapacity()
+            sold_seats = voyage.getSoldSeats()
+        else:
+            total_seats = 'No information'
+            sold_seats = '0'
 
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
-        print('\t Seats sold: {}/{}'.format('ATH no info','total seats'))
+        print('\t Seats sold: {}/{}'.format(sold_seats,total_seats))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
 
@@ -254,6 +264,7 @@ class VoyageUI:
 
                 if aircraft_ID == VoyageUI.EMPTY: 
                     aircraft_ID = 'No aircraft assigned to voyage'
+
 
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
                     voyage_duration_hrs, flight_no_out, flight_no_home, \
