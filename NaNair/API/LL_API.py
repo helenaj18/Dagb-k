@@ -36,6 +36,8 @@ class LL_API:
         ''' Sends info for new ariplane to be added'''
         return AirplaneLL().addAirplane()
 
+    def getAirplaneInsignia(self):
+        return AirplaneLL().getAirplaneInsignia()
 
 
     def revertDatetimeStrtoDatetime(self,datetime_str):

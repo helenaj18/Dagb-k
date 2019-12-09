@@ -6,6 +6,8 @@ from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
 
 class SubMenuEdit:
+
+    EMPTY = 'empty'
     def __init__(self, logic_layer):
         print('sub menu Edit')
         self.logic_layer = logic_layer
@@ -45,11 +47,16 @@ class SubMenuEdit:
                     print("m - Back to main menu")
                     user_selection = input()
                     if user_selection == '1':
-                        return VoyageUI().addAircraftToVoyage(voyage)
+                        if voyage.getAircraftID in AirplaneUI().getAirplaneInsignia():
+                            print('Airplane already assigned to Voyage')
+                            return
+                        else: 
+                        
+                            return VoyageUI().addAircraftToVoyage(voyage)
 
                     
                     elif user_selection == '2':
-                        if voyage.getAircraftID == 'empty ':
+                        if voyage.getAircraftID() == self.EMPTY:
 
                             print()
                             print('No aircraft assigned to voyage')
