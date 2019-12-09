@@ -17,6 +17,7 @@ class DestinationLL:
 
 
     def checkIfInt(self,a_str):
+        '''Checks if given str is an int'''
         try:
             int(a_str)
             return True
@@ -25,41 +26,5 @@ class DestinationLL:
 
 
     def changeDestinationFile(self, new_dest_instance):
+        ''' Updates Destination file with new information '''
         return IO_API().changeDestinationFile(new_dest_instance)
-
-    # def changeEmergencyContactName(self,destination_name,new_emergency_contact):
-    #     '''Changes the Emergency Contact name for destination in file'''
-    #     destination_list = IO_API().loadDestinationFromFile()
-    #     new_destination_list = []
-
-    #     #Reads every line until it finds the same name of the airport as the input (destinantion_name)
-    #     #and then changes the airports emergency contact to the same as the input (new_emergency_contact)
-    #     for destination in destination_list:
-    #         if destination_name == destination.getDestinationAirport():
-    #             destination.setEmergencyContactName(new_emergency_contact)
-    #         new_destination_list.append(destination)
-
-    #     #Sends destination list to DestinationIO to overwrite the file with new information       
-    #     DestinationIO().changeDestinationFile(new_destination_list)
-    
-
-    # def changeEmergencyContactPhone(self,destination_name,new_emergency_phone):
-    #     '''Changes the Emergency Contact Phone number for destination in file'''
-    #     destination_list = IO_API().loadDestinationFromFile()
-    #     new_destination_list = []
-
-    #     #Reads every line until it finds the same name of the airport as the input (destinantion_name)
-    #     #and then changes the airports emergency phone number to the same as the input (new_emergency_phone)
-    #     for destination in destination_list:
-    #         if destination_name == destination.getDestinationAirport():
-    #             destination.setEmergencyContactPhone(new_emergency_phone)
-    #         new_destination_list.append(destination)
-        
-    #     #Sends destination list to DestinationIO to overwrite the file with new information
-    #     DestinationIO().changeDestinationFile(new_destination_list)
-        
-
-
-
-
-

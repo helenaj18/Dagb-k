@@ -40,6 +40,14 @@ class EditExistingVoyage:
                 
 
                 else:
+<<<<<<< HEAD
+=======
+
+                    #crew_on_voyage_list = voyage.getCrewOnVoyage()
+                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
+                    print()
+
+>>>>>>> 6e7f3538b48b6da1472259e0b420403c2463aef4
                     return VoyageUI().addCrewToVoyage(voyage)
                 
                                     
