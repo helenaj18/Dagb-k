@@ -102,7 +102,7 @@ class VoyageLL:
         ''' Returns a list of instances of all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
-        date = type(start_datetime)
+       # date = type(start_datetime)
 
         voyages_on_date = []
 
@@ -206,7 +206,7 @@ class VoyageLL:
 
 
     def getAvailablePlanes(self, departure_time):
-        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time.isoformat())
+        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time)
         
         if available_tuple != None:
             not_available_planes,available_planes = available_tuple
