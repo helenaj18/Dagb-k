@@ -55,21 +55,26 @@ class VoyageUI:
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
-
-        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
-            voyage_duration_min))
         
         if aircraft_ID != 'No aircraft assigned to voyage':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             total_seats = airplane.get_planeCapacity()
-            sold_seats = voyage.getSoldSeats()
+            sold_seats_out,sold_seats_home = voyage.getSeatsSold()
         else:
             total_seats = 'No information'
-            sold_seats = '0'
+            sold_seats_out,sold_seats_home = '0','0'
+
+        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
+            sold_seats_out,total_seats))
+        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
+            sold_seats_home,total_seats))
+
+        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
+            voyage_duration_min))
+        
 
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
-        print('\t Seats sold: {}/{}'.format(sold_seats,total_seats))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
 
@@ -224,8 +229,6 @@ class VoyageUI:
             print('Enter start date for time period')
             print()
             start_datetime = VoyageUI().getDateInput()
-
-        dateinvoyageUI = type(start_datetime)
 
 
         if end_datetime == '':

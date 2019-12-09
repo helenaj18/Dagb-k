@@ -39,11 +39,13 @@ class VoyageIO:
                     voyage_instance = Voyage(
                         row['voyageIDnumber'],
                         row['flightNumber_out'],
+                        row['seats_sold_out'],
                         row['flightNumber_home'],
+                        row['seats_sold_home'],
                         row['departingFrom_home'],
                         destination_instance,
                         row['departure_time_home'],
-                        row['departure_time_out']
+                        row['departure_time_out'],
                         row['arrival_time_out'],
                         row['arrival_time_home'], 
                         row['aircraftID'],
@@ -67,7 +69,7 @@ class VoyageIO:
         file_object = open(self.__allVoyages_filename,'w')
         with file_object:
             # header 
-            fieldnames = ['voyageIDnumber','flightNumber_out','departingFrom_home',\
+            fieldnames = ['voyageIDnumber','flightNumber_out','seats_sold_out','departingFrom_home',\
                 'arrivingAt_out','departure_time_home','arrival_time_out','flightNumber_home',\
                     'departingFrom_out','arrivingAt_home','departure_time_out','arrival_time_home',\
                         'aircraftID','captain','copilot','fsm','fa1','fa2']
@@ -84,11 +86,13 @@ class VoyageIO:
                     writer.writerow({
                         'voyageIDnumber':updated_voyage.getVoyageID(),
                         'flightNumber_out':updated_voyage.getFlightNumbers()[0],
+                        'seats_sold_out':updated_voyage.getSeatsSold()[0],
                         'departingFrom_home':updated_voyage.getDepartureLocation(),
                         'arrivingAt_out':updated_voyage.getDestination().getDestinationAirport(),
                         'departure_time_home':updated_voyage.getDepartureTime(),
                         'arrival_time_out':updated_voyage.getArrivalTimeOut(),
                         'flightNumber_home':updated_voyage.getFlightNumbers()[1],
+                        'seats_sold_home':updated_voyage.getSeatsSold()[1],
                         'departingFrom_out':updated_voyage.getDestination().getDestinationAirport(),
                         'arrivingAt_home':updated_voyage.getDepartureLocation(),
                         'departure_time_out':updated_voyage.getDepartureTimeAtDestination(), 
@@ -106,11 +110,13 @@ class VoyageIO:
                     writer.writerow({
                         'voyageIDnumber':voyage.getVoyageID(),
                         'flightNumber_out':voyage.getFlightNumbers()[0],
+                        'seats_sold_out':voyage.getSeatsSold()[0],
                         'departingFrom_home':voyage.getDepartureLocation(),
                         'arrivingAt_out':voyage.getDestination().getDestinationAirport(),
                         'departure_time_home':voyage.getDepartureTime(),
                         'arrival_time_out':voyage.getArrivalTimeOut(),
                         'flightNumber_home':voyage.getFlightNumbers()[1],
+                        'seats_sold_home':voyage.getSeatsSold()[1],
                         'departingFrom_out':voyage.getDestination().getDestinationAirport(),
                         'arrivingAt_home':voyage.getDepartureLocation(),
                         'departure_time_out':voyage.getDepartureTimeAtDestination(), 
