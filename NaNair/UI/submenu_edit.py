@@ -20,11 +20,12 @@ class SubMenuEdit:
         print('#'*20)
         print()
 
-        print('What would you like to edit? ')
-        print()
+        
 
         start = True
         while start: 
+            print('What would you like to edit? ')
+            print()
             print('1 - Existing voyage')
             print('2 - Destination')
             print('3 - Employee')

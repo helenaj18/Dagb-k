@@ -55,7 +55,9 @@ class CrewUI:
     def queryShowNotWorkingCrew(self):
 
         while True:
-            crew_id = input('What staff member do you want to pick from the list above (Employee ID): ')
+            print('What staff member do you want to pick from the list above (Employee ID): ')
+            crew_id = input().lower()
+
             employee = LL_API().get_crew_member_by_id(crew_id)
             if employee != None:
                 return employee

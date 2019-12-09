@@ -26,6 +26,8 @@ class VoyageLL:
             if voyage_ID_str == voyage_to_get_ID_str: 
                 return voyage_instance
                 
+        return None
+                
 
 
     def getVoyageDuration(self,voyage_instance):
@@ -129,6 +131,19 @@ class VoyageLL:
             elif arrival_date in list_of_dates:
                 voyages_on_date_list.append(voyage)
 
+        return voyages_on_date
+    
+    def getCompletedVoyagesInRange(self, start_datetime, end_datetime):
+        '''Gets a list of completed voyages
+           in a date range'''
+        voyages_on_date = self.getVoyageInDateRange(start_datetime, end_datetime)
+        completed_voyage_list = []
+
+        for voyage in voyages_on_date:
+            if self.getVoyageStatus(voyage) == 'Completed':
+                completed_voyage_list.append(voyage)
+        
+        return completed_voyage_list
         return voyages_on_date_list
             
 

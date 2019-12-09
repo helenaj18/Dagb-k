@@ -18,6 +18,8 @@ class DisplayMenuWorkingCrew:
             year_str = input('Year: ')
             month_str = input('Month: ')
             day_str = input('Day: ')
+            #verifies if the date is correct
+            year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 
             year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 
