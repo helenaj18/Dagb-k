@@ -75,13 +75,8 @@ class VoyageLL:
         '''Takes a voyage instance and checks its status based on current time. A string describing 
         the status is returned.'''
 
-<<<<<<< HEAD
-        time_now = datetime.now()
-        
-=======
         time_now = datetime.datetime.now()
 
->>>>>>> cefe0a9b62f3ab525096f98ee9fb514e7e588dd4
         voyage_depart_date_str = voyage_instance.getDepartureTime()
         voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
 
@@ -317,14 +312,9 @@ class VoyageLL:
         datetime_list = []
 
         # assume one plane can leave each half hour
-<<<<<<< HEAD
-        start_time = departure_datetime + timedelta(minutes=-30)
-        end_time = departure_datetime + timedelta(minutes=30)
-=======
         
         start_time = departure_datetime + datetime.timedelta(minutes=-30)
         end_time = departure_datetime + datetime.timedelta(minutes=30)
->>>>>>> cefe0a9b62f3ab525096f98ee9fb514e7e588dd4
 
         # list of voyages that depart the same day
         voyages_during_departure_date = self.getVoyageInDateRange(start_time, end_time)
