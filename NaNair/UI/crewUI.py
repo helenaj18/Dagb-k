@@ -261,7 +261,7 @@ class CrewUI:
             start_day_str = input('Day: ')
 
             start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
-            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0).isoformat()
+            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0)
             
             print('Enter the "To date" for work schedule')
             end_year_str = input('Year: ')
@@ -269,7 +269,7 @@ class CrewUI:
             end_day_str = input('Day: ')
 
             end_year_int, end_month_int, end_day_int = LL_API().verifyDate(end_year_str, end_month_str, end_day_str)
-            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0).isoformat()
+            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0)
             
             work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
             

@@ -45,8 +45,7 @@ class DestinationIO:
         file_object = open(self.__destination_filename,'a')
         file_object.write(destination.getDestinationAirport()+','+destination.getDestinationName()+\
             ','+destination.getDestinationDistance()+','+ destination.getDestinationDuration()+\
-                ','+destination.getDestinationContact()+','+destination.getDestinationEmergencyPhoneNumber())
+                ','+destination.getDestinationContact()+','+destination.getDestinationEmergencyPhoneNumber()+'\n')
         
-        print('Destination successfully added!')
         return file_object
 
