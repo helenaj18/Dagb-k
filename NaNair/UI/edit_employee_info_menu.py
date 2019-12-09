@@ -29,17 +29,17 @@ class EditEmployeeMenu:
         
         selection = input()
         if selection == '1':
-            new_address = input("New address: ")
+            new_address = CrewUI().getHomeAddress()
             employee.setAddress(new_address)
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '2':
-            new_phonenumber = input('New Phone number: ')
+            new_phonenumber = CrewUI().getPhoneNumber()
             employee.setPhonenumber(new_phonenumber)
             CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '3':
-            new_email_address = input('New email: ')
+            new_email_address = CrewUI().getEmail()
             employee.setEmail(new_email_address)
             CrewUI().changeEmployeeInfo(employee)
 
@@ -59,7 +59,7 @@ class EditEmployeeMenu:
             
 
         elif selection == '5':
-            new_license = input('License: ')
+            new_license = CrewUI().getPilotLicense()
             print()
             employee.setLicense(new_license)
             CrewUI().changeEmployeeInfo(employee)
