@@ -9,20 +9,25 @@ class LL_API:
 
     ### AIRPLANE LL 
     def showAllPlanes(self):
-        
+        '''Returns a list of airplane instances''' 
         return AirplaneLL().getAirplanes() 
     
+
     def showAirplanesByType(self, planeTypeId = ''):
-        '''Gets a list of airplanes by type'''
+        '''Returns a list of airplane instances that have a type inputted by user'''
         return AirplaneLL().getAirplanesByType(planeTypeId)
 
     def showAirplanesByDateTime(self,date_str):
+        '''Returns a tuple of lists of instances. First tuple is planes that are not available,
+        the second is planes that are available at the time  inputted by user.'''
         return AirplaneLL().getAirplanesByDateTime(date_str)
     
     def verifyDate(self,year_str,month_str,day_str):
+        '''Checks if date is valid. If it is not valid, it will ask user to input another date.'''
         return AirplaneLL().verifyDate(year_str,month_str,day_str)
 
     def verifyTime(self,hour_str,minute_str):
+        '''Checks if time is valid. If it is not valid, it will ask user to input another time.'''
         return AirplaneLL().verifyTime(hour_str,minute_str)
     
     def addAirplane(self):
@@ -32,20 +37,23 @@ class LL_API:
     ### CREW LL 
     
     def get_crew(self):
-        ''' Fetches all crew members'''
+        ''' Fetches all crew members and returns a list of instances.'''
         return CrewLL().getCrew()
 
     def get_pilots(self):
-        ''' Fetches all pilots '''
+        ''' Fetches all pilots and returns a list of instances.'''
         return CrewLL().getPilots()
     
     def get_flight_att(self):
+        '''Returns a list of instances of all flight attendants.'''
         return CrewLL().getFlightAtt()
 
     def get_working_crew(self,date_str):
+        '''Returns a formatted string of crew that are working at an inputted time'''
         return CrewLL().getWorkingCrew(date_str)
     
     def get_not_working_crew(self,date_str):
+        '''Returns a list of instances of the crew that is not working on a specific day.'''
         return CrewLL().getNotWorkingCrew(date_str)
     
     def get_work_schedule(self,start_date,end_date,crew_id):
@@ -70,17 +78,6 @@ class LL_API:
     def addCrew(self, info_list):
         return CrewLL().addCrew(info_list)
     
-    # def changeEmployeeEmail(self,crew_id,email_address):
-    #     return CrewLL().ChangeEmailAddress(crew_id,email_address)
-
-    # def changeEmployeeAddress(self,crew_id,new_address):
-    #     return CrewLL().ChangeHomeAddress(crew_id,new_address)
-
-    # def changeEmployeePhonenumber(self,crew_id,new_phonenumber):
-    #     return CrewLL().ChangeHomeAddress(crew_id,new_phonenumber)
-
-    # def changePilotLicense(self,crew_id,new_license):
-    #     return CrewLL().ChangePilotLicense(crew_id,new_license)
 
     def changeCrewInfo(self,employee):
         return CrewLL().ChangeCrewInfo(employee)
