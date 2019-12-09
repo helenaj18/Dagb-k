@@ -55,21 +55,26 @@ class VoyageUI:
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
-
-        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
-            voyage_duration_min))
         
         if aircraft_ID != 'No aircraft assigned to voyage':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             total_seats = airplane.get_planeCapacity()
-            sold_seats = voyage.getSoldSeats()
+            sold_seats_out,sold_seats_home = voyage.getSeatsSold()
         else:
             total_seats = 'No information'
-            sold_seats = '0'
+            sold_seats_out,sold_seats_home = '0','0'
+
+        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_out,\
+            sold_seats_out,total_seats))
+        print('\t Seats sold on flight {}: {}/{}'.format(flight_no_home,\
+            sold_seats_home,total_seats))
+
+        print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
+            voyage_duration_min))
+        
 
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
-        print('\t Seats sold: {}/{}'.format(sold_seats,total_seats))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
 
@@ -225,8 +230,6 @@ class VoyageUI:
             print()
             start_datetime = VoyageUI().getDateInput()
 
-        dateinvoyageUI = type(start_datetime)
-
 
         if end_datetime == '':
             print('Enter end date for time period')
@@ -304,24 +307,17 @@ class VoyageUI:
         
 
 
-    def addVoyage(self):
-
-        dest = self.getDest()
-        print('Enter departure time: ')
-
-        departure_time = self.getDateWithTime()
-
     
-    def getAirplaneInput(self):
+    def getAirplaneInput(self,departure_datetime):
         print('Please choose an airplane.')
 
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_time)
+        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
 
         for plane in airplanes_class_list:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        plane_name = input('Chosen plane (type name of plane): ').upper()
+        plane_name = input('Chosen plane (type name of plane): ').upper().strip()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
         while check == False:
@@ -353,7 +349,7 @@ class VoyageUI:
             selection = input()
 
         if selection == 'y':
-            plane_name = self.getAirplaneInput()
+            plane_name = self.getAirplaneInput(departure_datetime)
         else:
             plane_name = 'empty'
 
