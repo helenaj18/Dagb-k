@@ -42,25 +42,22 @@ class EditExistingVoyage:
                 airplane_insignia_list = AirplaneUI().getAirplaneInsigniaList()
                 if voyage.getAircraftID() in airplane_insignia_list:
                     print('Airplane already assigned to Voyage')
-                    return
+                    continue
                 else:
                     VoyageUI().addAircraftToVoyage(voyage)
-                    continue 
-
+                    continue
             
             elif user_selection == '2':
                 if voyage.getAircraftID() == self.EMPTY:
-
                     print()
                     print('No aircraft assigned to voyage')
                     print('Aircraft must me assigned before staff can be added')
                     print() 
-                
 
                 else:
-
-                    #crew_on_voyage_list = voyage.getCrewOnVoyage()
-                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
+                    
+                    insignia = voyage.getAircraftID()
+                    CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
                     print()
 
                     return VoyageUI().addCrewToVoyage(voyage)
