@@ -12,11 +12,8 @@ class IO_API:
     def loadDestinationFromFile(self):
         return DestinationIO().loadDestinationFromFile()
 
-    def changeEmergencyPhone(self,destination_name,new_emergency_contact):
-        return DestinationIO().changeEmergencyPhone()
-
-    def changeEmergencyContact(self,destination_name,new_emergency_phone):
-        return DestinationIO().changeEmergencyContact()
+    def changeDestinationFile(self,destination):
+        return DestinationIO().changeDestinationFile(destination)
 
     def addDestinationToFile(self,new_destination):
         return DestinationIO().addDestinationToFile(new_destination)

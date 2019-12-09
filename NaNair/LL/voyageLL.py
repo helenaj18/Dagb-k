@@ -73,7 +73,7 @@ class VoyageLL:
 
 
     def getVoyageInDateRange(self, start_datetime, end_datetime):
-        ''' Returns all voyages in a certain date range'''
+        ''' Returns a list of instances of all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
 
@@ -190,7 +190,7 @@ class VoyageLL:
 
 
     def checkPlaneInput(self, plane_input, list_of_planes):
-        
+
         BoolCheck = False
         for plane in list_of_planes:
             if plane_input == plane.get_planeInsignia():
