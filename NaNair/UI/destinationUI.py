@@ -53,7 +53,7 @@ class DestinationUI:
         
         while check == False:
             print('Please enter a valid destination!')
-            airport_code = input().upper()
+            dest = input().upper()
             check = LL_API().checkDestInput(airport_code)
 
         new_emergency_contact = input('Enter name of new emergency contact: ')
