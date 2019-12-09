@@ -6,7 +6,7 @@ class EditEmployeeLicense:
 
     def isPilotOnFutureVoyage(self,pilot):
         voyage_id_with_pilot = []
-        upcoming_voyage_list = LL_API.get_upcoming_voyages()
+        upcoming_voyage_list = LL_API().get_upcoming_voyages()
         for voyage in upcoming_voyage_list:
             if pilot.getCrewID() in voyage.getCrewOnVoyage():
                 voyage_id_with_pilot.append(voyage.getVoyageID)
@@ -21,7 +21,7 @@ class EditEmployeeLicense:
 
         new_license = CrewUI().getPilotLicense()
         print()
-        voyage_id_with_pilot = self.isPilotOnFutureVoyage()
+        voyage_id_with_pilot = self.isPilotOnFutureVoyage(employee)
 
         if len(voyage_id_with_pilot) != 0:
             print('Pilot is assigned to future voyages')

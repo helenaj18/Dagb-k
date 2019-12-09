@@ -152,14 +152,14 @@ class VoyageUI:
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
-        insignia = voyage.getAircraftID()
+
         airplane = LL_API().getAirplanebyInsignia(voyage.getAircraftID())
-        airplane_type_on_voyage = airplane.get_planeTypeID(insignia)
+        airplane_type_on_voyage = airplane.get_planeTypeID()
 
         crew_on_voyage_list = voyage.getCrewOnVoyage()
 
         if 'empty' in crew_on_voyage_list[0:3]:
-            CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
+            CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print()
 
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
