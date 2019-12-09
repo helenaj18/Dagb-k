@@ -102,14 +102,14 @@ class VoyageLL:
         ''' Returns a list of instances of all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
-        date = type(start_datetime)
+       # date = type(start_datetime)
 
         voyages_on_date = []
 
         list_of_dates = []
         delta = timedelta(days=1)
 
-        while start_datetime < end_datetime:
+        while start_datetime <= end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
             start_datetime += delta
 
