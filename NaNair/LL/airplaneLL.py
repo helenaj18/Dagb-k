@@ -291,7 +291,8 @@ class AirplaneLL:
         airplane_list = self.getAirplanes()
         while True:
             for airplane in airplane_list:
-                if airplane.get_planeInsignia() == planeInsignia:
+                a = airplane.get_planeInsignia()
+                if a == planeInsignia:
                     return airplane
             else:
                 return None
