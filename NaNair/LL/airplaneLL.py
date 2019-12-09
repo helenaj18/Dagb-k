@@ -332,6 +332,15 @@ class AirplaneLL:
             else:
                 print('Invalid Plane insignia!')
 
+    def getAirplaneInsignia(self):
+        airplane_insignia_list = []
+        airplanes = IO_API().loadAirplaneFromFile()
+        for airplane in airplanes:
+            airplane_insignia_list.append(airplane.getAirplaneInsignia())
+
+        return airplane_insignia_list
+
+
 
 # BANNAÐ AÐ FÆRA, VERÐUR AÐ VERA NEÐST
 from LL.voyageLL import VoyageLL

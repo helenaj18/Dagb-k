@@ -75,3 +75,5 @@ class AirplaneUI:
         '''Adds a new Airplane to the airplane file'''
         return LL_API().addAirplane()
 
+    def getAirplaneInsignia(self):
+        return LL_API().getAirplaneInsignia()
