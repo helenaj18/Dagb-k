@@ -30,7 +30,7 @@ class SubMenuRegister:
             print('m - Main menu')
             print()
 
-            selection = input()
+            selection = input().strip()
 
             if selection == '1': 
                 # Add new employee

@@ -1,4 +1,5 @@
 from UI.crewUI import CrewUI
+from API.LL_API import LL_API
 
 class AddExtraCrewmemberMenu:
 
@@ -7,7 +8,7 @@ class AddExtraCrewmemberMenu:
         print('Do you want to add an extra crew member?')
         print('1 - Yes')
         print('2 - No')
-        selection = input()
+        selection = input().strip()
         if selection == '1':
             CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
             print()
@@ -15,10 +16,13 @@ class AddExtraCrewmemberMenu:
             if 'empty' in crew_on_voyage_list[-2:]:
                 if 'empty' in crew_on_voyage_list[-1]:
                     crew_member = CrewUI().queryShowNotWorkingCrew()
-                        
                     voyage.setFlightAttOne(crew_member)
+
                 elif 'empty' in crew_on_voyage_list[-2]:
                     crew_member = CrewUI().queryShowNotWorkingCrew()
                     voyage.setFlightAttTwo(crew_member)
+
+                LL_API().change_voyage(voyage)
+                    
         elif selection == '2':
             return 
