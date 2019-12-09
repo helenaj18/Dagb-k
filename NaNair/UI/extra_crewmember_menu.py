@@ -8,7 +8,7 @@ class AddExtraCrewmemberMenu:
         print('Do you want to add an extra crew member?')
         print('1 - Yes')
         print('2 - No')
-        selection = input()
+        selection = input().strip()
         if selection == '1':
             CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
             print()

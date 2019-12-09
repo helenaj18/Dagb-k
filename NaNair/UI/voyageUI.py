@@ -26,15 +26,15 @@ class VoyageUI:
     def getDateWithTime(self):
         '''Gets a date and time input from the user and returns a datetime object'''
 
-        year_str = input('Year: ')
-        month_str = input('Month: ')
-        day_str = input('Day: ')
+        year_str = input('Year: ').strip()
+        month_str = input('Month: ').strip()
+        day_str = input('Day: ').strip()
         
         # check if date is valid
         year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-        hour_str = input('Hour: ')
-        minutes_str = input('Minute: ')
+        hour_str = input('Hour: ').strip()
+        minutes_str = input('Minute: ').strip()
         print()
 
         # check if time is valid
@@ -192,7 +192,7 @@ class VoyageUI:
 
         while True:
             if voyage == '':
-                voyage_id = input('Enter voyage ID: ')
+                voyage_id = input('Enter voyage ID: ').strip()
             else: 
                 voyage_id = voyage.getVoyageID()
 
@@ -230,7 +230,7 @@ class VoyageUI:
             print('Do you want to add an extra crew member?')
             print('1 - Yes')
             print('2 - No')
-            selection = input()
+            selection = input().strip()
             if selection == '1':
 
                 if 'empty' in crew_on_voyage_list[-2:]:
@@ -245,6 +245,8 @@ class VoyageUI:
 
             elif selection == '2':
                 return 
+            else:
+                print('Invalid selection!')
 
         LL_API().change_voyage(voyage)
 
@@ -262,17 +264,17 @@ class VoyageUI:
         print()
         print('Which Aircraft would you like to assign to voyage {}? (PlaneInsignia)'.format(voyage.getVoyageID()))
         print()
-        aircraft_ID = input().upper()
+        aircraft_ID = input().upper().strip()
         voyage.setAircraftID(aircraft_ID)
 
         return LL_API().change_voyage(voyage)
 
     def changeTimeOfVoyage(self,voyage):
         print('Enter new date and time')
-        year = input('Year: ')
-        month = input('Month: ')
-        day = input('Day: ')
-        time = input('Time: (HH:MM) ')
+        year = input('Year: ').strip()
+        month = input('Month: ').strip()
+        day = input('Day: ').strip()
+        time = input('Time: (HH:MM) ').strip()
         hrs = time[:2]
         mins = time[-2:]
         new_time = datetime.datetime(year,month,day,hrs,mins,0,0).isoformat()
@@ -358,7 +360,7 @@ class VoyageUI:
                  destination.getDestinationAirport()))
 
         print()
-        dest = input('Your destination (3 letters): ').upper()
+        dest = input('Your destination (3 letters): ').upper().strip()
         check = LL_API().checkDestInput(dest)
         
         while check == False:
@@ -404,11 +406,11 @@ class VoyageUI:
 
         print('Would you like to assign an airplane to this voyage? (Y/N)')
         print('(You can also do this later)')
-        selection = input().lower()
+        selection = input().lower().strip()
 
         while selection != 'y' and selection != 'n':
             print('Please enter Y or N to make your choice')
-            selection = input()
+            selection = input().lower().strip()
 
         if selection == 'y':
             plane_name = self.getAirplaneInput(departure_datetime)
