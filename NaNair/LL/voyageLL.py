@@ -67,8 +67,11 @@ class VoyageLL:
 
         time_now = datetime.now()
 
-        voyage_depart_datetime = voyage_instance.getDepartureTime()
-        voyage_arrive_datetime = voyage_instance.getArrivalTimeHome()
+        voyage_depart_date_str = voyage_instance.getDepartureTime()
+        voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
+
+        voyage_depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_date_str)
+        voyage_arrive_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_arrive_date_str)
 
         if time_now < voyage_depart_datetime:
             status = 'Not departed'

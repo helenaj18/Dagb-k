@@ -259,7 +259,7 @@ class VoyageUI:
                     LL_API().get_voyage_duration(voyage)
 
 
-                voyage_state = LL_API().get_status_of_voyage()
+                voyage_state = LL_API().get_status_of_voyage(voyage)
 
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
