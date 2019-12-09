@@ -105,7 +105,7 @@ class VoyageLL:
         voyages_on_date = []
 
         list_of_dates = []
-        delta = datetime.timedelta.timedelta(days=1)
+        delta = datetime.timedelta(days=1)
 
         while start_datetime <= end_datetime:
             list_of_dates.append(start_datetime.date().isoformat())
