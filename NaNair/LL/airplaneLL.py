@@ -334,19 +334,22 @@ class AirplaneLL:
             print('2 - NABAE146')
             print('3 - NAFokkerF28')
             print()
-            planeTypeId = input('Please choose one of the above: ')
+            selection = input('Please choose one of the above: ')
             
-            if planeTypeId == '1':
+            if selection == '1':
+                planeTypeId = 'NAFokkerF100'
                 manufacturer = 'Fokker'
                 seats = '100'
                 return planeTypeId,manufacturer,seats
 
-            elif planeTypeId == '2':
+            elif selection == '2':
+                planeTypeId = 'NABAE146'
                 manufacturer = 'BAE'
                 seats = '82'
                 return planeTypeId,manufacturer,seats
 
-            elif planeTypeId == '3':
+            elif selection == '3':
+                planeTypeId = 'NAFokkerF28'
                 manufacturer = 'Fokker'
                 seats = '65'
                 return planeTypeId,manufacturer,seats

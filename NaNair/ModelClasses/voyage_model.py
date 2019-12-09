@@ -94,23 +94,26 @@ class Voyage:
     def setAircraftID(self, new_id):
         self.__aircraft_ID = new_id
     
-    def setCaptain(self, new_capt):
+    def setCaptain(self, new_capt, airplane_type):
         
-        airplane_type = "NAFokkerF28" ##taka út harðkóðun
+        #airplane_type = "NAFokkerF28" ##taka út harðkóðun
         if not new_capt.canFly(airplane_type):
             raise Exception("Pilot can not fly this type")
     
         self.__captain = new_capt
     
-    def setCopilot(self, new_copilot):
+    def setCopilot(self, new_copilot,airplane_type):
         
-        airplane_type = "NAFokkerF28" ##taka út harðkóðun
+        #airplane_type = "NAFokkerF28" ##taka út harðkóðun
         if not new_copilot.canFly(airplane_type):
             raise Exception("Copilot can not fly this type")
     
         self.__copilot = new_copilot
     
     def setHeadFlightAtt(self, new_head):
+        if not new_head.getHeadFlightAtt():
+            raise Exception('You must add a head flight attendant')
+        
         self.__head_flight_att = new_head
 
 
@@ -126,14 +129,20 @@ class Voyage:
         else:
             self.setCopilot(pilot)
 
-    def addCrewMember(self, crew_member):
-        role = crew_member.getRole()
-        if role == 'Pilot':
-            if crew_member.getCaptain():
-                self.setCaptain(crew_member)
-            else:
-                self.setCopilot(crew_member)
-        elif role == 'Cabincrew':
-            self.setHeadFlightAtt(crew_member)
+    # def addCrewMember(self, crew_member):
+    #     role = crew_member.getRole()
+    #     if role == 'Pilot':
+    #         if crew_member.getCaptain():
+    #             self.setCaptain(crew_member)
+    #         else:
+    #             self.setCopilot(crew_member)
+    #     elif role == 'Cabincrew':
+    #         if crew_member.getHeadFlightAtt():
+    #             self.setHeadFlightAtt()
+    #         else:
+    #             not_head = True
+                
+
+            
 
 
