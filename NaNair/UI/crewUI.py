@@ -270,7 +270,7 @@ class CrewUI:
         while LL_API().doesIDExist(personal_id):
             print('Another crew member already has that ID! Please input another ID.')
             personal_id = input('Personal ID: ')
-            
+
         info_list.append(personal_id)
 
 
@@ -278,21 +278,24 @@ class CrewUI:
         employee_name = self.getName()
         info_list.append(employee_name)
 
-        print('Please choose one of the following job titles:')
+        print('\nPlease choose one of the following job titles:\n')
         print('1 - Captain')
         print('2 - Co-pilot')
         print('3 - Head service manager')
         print('4 - Flight attendant')
-        rank = input()
+        print('m - Back to main menu')
+        rank = input('\nPlease choose a number between 1-4: ').strip()
 
-        while rank != '1' and rank != '2' and rank != '3' and rank != '4':
-            rank = input('Please choose a number between 1-4')
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
+            rank = input('Please choose a number between 1-4: ').strip()
                 
         info_list.append(rank)
 
         if rank == '1' or rank == '2':
             pilot_license = self.getPilotLicense()
             info_list.append(pilot_license)
+        elif rank == 'm':
+            return
 
 
         home_address = self.getHomeAddress()

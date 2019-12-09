@@ -165,6 +165,10 @@ class VoyageUI:
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
                 .format(airplane_type_on_voyage))
             while 'empty' in crew_on_voyage_list[0:3]:
+                insignia = voyage.getAircraftID()
+                CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
+                print()
+
                 crew_member = CrewUI().queryShowNotWorkingCrew()
                 if crew_member.getRole() == 'Pilot':
                     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
@@ -178,10 +182,14 @@ class VoyageUI:
             
 
         elif 'empty' in crew_on_voyage_list:
+            insignia = voyage.getAircraftID()
+            CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
+            print()
+
             AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
 
         else: 
-            print('Voyage is fully staffed')
+            print('\nVoyage is fully staffed!\n')
             return 
 
 
@@ -269,21 +277,6 @@ class VoyageUI:
 
         return LL_API().change_voyage(voyage)
 
-<<<<<<< HEAD
-=======
-    def changeTimeOfVoyage(self,voyage):
-        print('Enter new date and time')
-        year = input('Year: ').strip()
-        month = input('Month: ').strip()
-        day = input('Day: ').strip()
-        time = input('Time (HH:MM): ').strip()
-        hrs = time[:2]
-        mins = time[-2:]
-        new_time = datetime.datetime(year,month,day,hrs,mins,0,0).isoformat()
-        voyage.setDepartureTime(new_time)
-        return LL_API().change_voyage(voyage)
-
->>>>>>> ec44592f60f98876a8bec37915884ceb898f5a43
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
         '''Shows all voyages for a current time period'''

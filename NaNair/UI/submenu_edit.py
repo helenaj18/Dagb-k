@@ -9,9 +9,6 @@ from UI.edit_existing_voyage_menu import EditExistingVoyage
 class SubMenuEdit:
 
     EMPTY = 'empty'
-    def __init__(self, logic_layer):
-        print('sub menu Edit')
-        self.logic_layer = logic_layer
 
     def startSubMenuEdit(self):
         # Header
@@ -43,7 +40,7 @@ class SubMenuEdit:
                 print('1 - Change emergency contact')
                 print('2 - Change emergency phone number')
                 user_selection = input('Please choose one of the above (1 or 2)').strip()
-                
+
                 if user_selection == '1':
                     DestinationUI().changeEmergencyContactName()
                 elif user_selection == '2':
