@@ -195,11 +195,11 @@ class AirplaneLL:
             # All airplanes are free if there's no voyage at the date
             return None
 
-    def seperateDatetimeString(self, datetime_str):   ############ LÍKA Í VOYAGE UI #### NKL SAMA FALL 
+    def seperateDatetimeString(self, datetime_str):   
         '''Seperates a datetime string and returns the date part'''
         return datetime_str[:10],datetime_str[-8:]
 
-    def revertDatetimeStrtoDatetime(self,datetime_str):   ############ LÍKA Í VOYAGE UI #### NKL SAMA FALL 
+    def revertDatetimeStrtoDatetime(self,datetime_str):   
         datetime_str_date, datetime_str_time = self.seperateDatetimeString(datetime_str)
         year,month,day = datetime_str_date.split('-')
         hour,mins,secs = datetime_str_time.split(':')

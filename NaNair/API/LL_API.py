@@ -29,6 +29,12 @@ class LL_API:
         ''' Sends info for new ariplane to be added'''
         return AirplaneLL().addAirplane()
 
+
+
+    def revertDatetimeStrtoDatetime(self,datetime_str):
+        return AirplaneLL().revertDatetimeStrtoDatetime(datetime_str)
+
+
     ### CREW LL 
     
     def get_crew(self):
@@ -42,11 +48,11 @@ class LL_API:
     def get_flight_att(self):
         return CrewLL().getFlightAtt()
 
-    def get_working_crew(self,date_str):
-        return CrewLL().getWorkingCrew(date_str)
+    def get_working_crew(self,datetime_object):
+        return CrewLL().getWorkingCrew(datetime_object)
     
-    def get_not_working_crew(self,date_str):
-        return CrewLL().getNotWorkingCrew(date_str)
+    def get_not_working_crew(self,datetime_object):
+        return CrewLL().getNotWorkingCrew(datetime_object)
     
     def get_work_schedule(self,start_date,end_date,crew_id):
         return CrewLL().getWorkSchedule(start_date,end_date,crew_id)

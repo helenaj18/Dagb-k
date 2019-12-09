@@ -2,7 +2,7 @@ from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
 from UI.crewUI import CrewUI
-#from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
+from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
 
 
 class VoyageUI:
@@ -18,7 +18,8 @@ class VoyageUI:
 
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
         
-        return datetime.datetime(year_int,month_int,day_int,0,0,0)
+        datetime_input = datetime.datetime(year_int,month_int,day_int,0,0,0)
+        return datetime_input
     
     def getDateWithTime(self):
         '''Gets a date input from the user with time'''
@@ -100,18 +101,31 @@ class VoyageUI:
         '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
         crew_on_voyage_list = voyage.getCrewOnVoyage()
+        if 'empty' in crew_on_voyage_list[0:3]:
+            print('You must add 1 captain, 1 copilot, 1 flight atttendant')
+            while 'empty' in crew_on_voyage_list[0:3]:
+                crew_member = CrewUI().queryShowNotWorkingCrew()
+                self.checkPilotAirplaneLicense(crew_member,voyage)
+                crew_on_voyage_list = voyage.getCrewOnVoyage()
 
-        while 'empty' in crew_on_voyage_list[0:3]:
-            crew_member = CrewUI().queryShowNotWorkingCrew()
-            self.checkPilotAirplaneLicense(crew_member,voyage)
-            crew_on_voyage_list = voyage.getCrewOnVoyage()            
+        elif 'empty' in crew_on_voyage_list:
+            AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
+
+        else: 
+            print('Voyage is fully staffed')
+            return 
+
+
     
 
-    def showOneVoyage(self):
+    def showOneVoyage(self,voyage = ''):
         '''Shows one voyage by ID'''
 
         while True:
-            voyage_id = input("Enter voyage ID: ")
+            if voyage == '':
+                voyage_id = input("Enter voyage ID: ")
+            else: 
+                voyage_id = voyage.getVoyageID()
             
             voyage = LL_API().getOneVoyage(voyage_id)
             if voyage != None:
@@ -164,11 +178,7 @@ class VoyageUI:
         #return AddExtraCrewmemberMenu().startAddExtraCrewMenu()
 
     def revertDatetimeStrtoDatetime(self,datetime_str):
-        datetime_str_date, datetime_str_time = self.seperateDatetimeString(datetime_str)
-        year,month,day = datetime_str_date.split('-')
-        hour,mins,secs = datetime_str_time.split(':')
-        datetime_object = datetime.datetime(int(year),int(month),int(day),int(hour),int(mins),int(secs))
-        return datetime_object
+        return LL_API().revertDatetimeStrtoDatetime(datetime_str)
 
     
 
@@ -181,7 +191,7 @@ class VoyageUI:
         print()
         aircraft_ID = input()
         voyage.setAircraftID(aircraft_ID)
-        
+
         return LL_API().change_voyage(voyage)
 
     def changeTimeOfVoyage(self,voyage):
@@ -204,6 +214,8 @@ class VoyageUI:
             print('Enter start date for time period')
             print()
             start_datetime = VoyageUI().getDateInput()
+
+        dateinvoyageUI = type(start_datetime)
 
 
         if end_datetime == '':

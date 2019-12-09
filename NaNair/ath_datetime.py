@@ -43,4 +43,4 @@ if type(yes) == datetime.datetime:
     print('JAAAS')
 
 yesyes = yes.date().isoformat()
-print(yesyes)
+print(type(yesyes))

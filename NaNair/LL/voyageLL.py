@@ -76,6 +76,7 @@ class VoyageLL:
         ''' Returns all voyages in a certain date range'''
 
         voyages = IO_API().loadVoyageFromFile()
+        date = type(start_datetime)
 
         voyages_on_date = []
 
@@ -85,7 +86,9 @@ class VoyageLL:
         print(type(start_datetime))
 
         while start_datetime <= end_datetime:
-            list_of_dates.append(start_datetime.date().isoformat())
+            start_date = start_datetime.date()
+            start_date_str = start_date.isoformat()
+            list_of_dates.append(start_date_str)
             start_datetime += delta
 
             
