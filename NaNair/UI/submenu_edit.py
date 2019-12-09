@@ -31,7 +31,7 @@ class SubMenuEdit:
             print('3 - Employee')
             print('m - Main menu')
 
-            selection = input()
+            selection = input().strip()
 
             if selection == '1':
                 EditExistingVoyage().startEditExistingVoyage()
@@ -41,7 +41,7 @@ class SubMenuEdit:
                 # Change destination emergency contact
                 print('1 - Change emergency contact')
                 print('2 - Change emergency phone number')
-                user_selection = input()
+                user_selection = input().strip()
                 if user_selection == '1':
                     DestinationUI().changeEmergencyContactName()
                 elif user_selection == '2':
