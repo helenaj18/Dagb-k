@@ -206,7 +206,7 @@ class VoyageLL:
 
 
     def getAvailablePlanes(self, departure_time):
-        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time.isoformat())
+        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time)
         
         if available_tuple != None:
             not_available_planes,available_planes = available_tuple
