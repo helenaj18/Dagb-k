@@ -68,7 +68,7 @@ class CrewUI:
 
         qualified_crew_list = LL_API().getQualifiedCrew(depart_time, plane_license)
 
-        printCrew(qualified_crew_list, False)
+        self.printCrew(qualified_crew_list, False)
         
 
     def checkRank(self,crew_member):

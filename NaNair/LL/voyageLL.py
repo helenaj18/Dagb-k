@@ -131,7 +131,7 @@ class VoyageLL:
             elif arrival_date in list_of_dates:
                 voyages_on_date_list.append(voyage)
 
-        return voyages_on_date
+        return voyages_on_date_list
     
     def getCompletedVoyagesInRange(self, start_datetime, end_datetime):
         '''Gets a list of completed voyages
@@ -144,9 +144,7 @@ class VoyageLL:
                 completed_voyage_list.append(voyage)
         
         return completed_voyage_list
-        return voyages_on_date_list
             
-
 
     def assignVoyageID(self):
         '''Assign a voyage an id based on last voyage in file.'''
