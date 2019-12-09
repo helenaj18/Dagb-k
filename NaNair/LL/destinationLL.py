@@ -17,6 +17,7 @@ class DestinationLL:
 
 
     def checkIfInt(self,a_str):
+        '''Checks if given str is an int'''
         try:
             int(a_str)
             return True
@@ -25,4 +26,5 @@ class DestinationLL:
 
 
     def changeDestinationFile(self, new_dest_instance):
+        ''' Updates Destination file with new information '''
         return IO_API().changeDestinationFile(new_dest_instance)
