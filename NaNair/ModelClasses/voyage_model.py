@@ -1,6 +1,6 @@
 
 class Voyage:
-    def __init__(self,voyage_ID,flight_no,flight_no_home,departure_location,destination,\
+    def __init__(self,voyage_ID,flight_no,seats_sold_out,flight_no_home,seats_sold_home,departure_location,destination,\
                     departure_time,departure_time_out,arrival_time_out,arrival_time_home,aircraft_ID,captain,copilot,\
                         head_flight_att,flight_att_one,flight_att_two,sold_seats = 0):
 
@@ -19,7 +19,8 @@ class Voyage:
         self.__head_flight_att = head_flight_att
         self.__flight_att_one = flight_att_one
         self.__flight_att_two = flight_att_two
-        self.__sold_seats = sold_seats
+        self.__seats_sold_out = seats_sold_out
+        self.__seats_sold_home = seats_sold_home
         
     def getDepartureLocation(self):
         return self.__departure_location
@@ -35,6 +36,9 @@ class Voyage:
         
     def getArrivalTimeHome(self):
         return self.__arrival_time_home
+
+    def getSeatsSold(self):
+        return self.__seats_sold_out,self.__seats_sold_home
 
     def getCrewOnVoyage(self):
         crew_on_voyage_list = [self.__captain, self.__copilot, self.__head_flight_att,\
@@ -71,8 +75,6 @@ class Voyage:
     def getVoyageID(self):
         return self.__voyage_ID
 
-    def getSoldSeats(self):
-        pass
     
 
 
