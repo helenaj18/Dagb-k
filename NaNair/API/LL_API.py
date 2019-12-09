@@ -40,11 +40,13 @@ class LL_API:
         ''' Sends info for new airplane to be added'''
         return AirplaneLL().addAirplane()
 
-    def getAirplaneInsignia(self):
+    def getAirplaneInsigniaList(self):
+        '''Returns a list of all airplane insignias.'''
         return AirplaneLL().getAirplaneInsignia()
 
 
     def revertDatetimeStrtoDatetime(self,datetime_str):
+        '''Takes in a datetime string and returns a datetime object'''
         return AirplaneLL().revertDatetimeStrtoDatetime(datetime_str)
 
 
@@ -166,10 +168,10 @@ class LL_API:
         return DestinationLL().getDestination()
     
     def changeEmergencyContact(self, destination_instance):
-
+        '''Takes in an updated instance and writes it into the destinations file'''
         return DestinationLL().changeDestinationFile(destination_instance)
 
     def addDestination(self,new_destination):
+        '''Creates a new destination in file'''
         return DestinationLL().addDestination(new_destination)
         
-#LL_API.show_all_planes()
