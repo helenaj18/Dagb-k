@@ -10,8 +10,7 @@ from datetime import datetime
 class VoyageLL:
     ''' LL class for voyage '''
 
-    # When a new voyage is added
-    # the sold seats are 0
+    # When a new voyage is added there are no sold seats
     seats_sold_out = '0'
     seats_sold_home = '0'
 
@@ -38,14 +37,18 @@ class VoyageLL:
 
 
     def getVoyageDuration(self,voyage_instance):
-        ''' Returns voyage duration, flight duration back and forth plus a one hr layover'''
-
+        ''' Returns voyage duration in hours and minutes'''
+        
+        # duration of the trip in hrs and mins
         destination_duration_str = voyage_instance.getDestination().getDestinationDuration()
+
+        # hrs and mins isolated
         destination_duration_hrs = int(destination_duration_str[: -4])
         destination_duration_minutes = int(destination_duration_str[-3: -1])
         voyage_duration_min = destination_duration_minutes * 2
 
-        voyage_duration_hrs = destination_duration_hrs * 2 + 1 # Both ways plus one hr layover
+        # Duration of round trip plus 1 hour layover
+        voyage_duration_hrs = destination_duration_hrs * 2 + 1 
 
         if voyage_duration_min == 60:
             voyage_duration_hrs = voyage_duration_hrs + 1
@@ -59,6 +62,8 @@ class VoyageLL:
 
 
     def isEmployeeWorkingOnDate(self, date, employee_id):
+        '''Checks if an inputted employee is working on an inputted date.
+        Returns True if he is, else False.'''
 
         voyages = self.getVoyageInDateRange(date, date)
         for voyage in voyages:
@@ -68,26 +73,32 @@ class VoyageLL:
 
 
     def getVoyageStatus(self, voyage_instance):
-        '''Returns the status of voyage'''
+        '''Takes a voyage instance and checks its status based on current time. A string describing 
+        the status is returned.'''
 
         time_now = datetime.now()
-
+        
         voyage_depart_date_str = voyage_instance.getDepartureTime()
         voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
 
+        # Turn depart and arrive time string into a datetime value
         voyage_depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_date_str)
         voyage_arrive_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_arrive_date_str)
 
+        # if voyage departed before current time
         if time_now < voyage_depart_datetime:
             status = 'Not departed'
+        # if voyage departed before current time but has not yet arrived
         elif time_now >= voyage_depart_datetime and time_now < voyage_arrive_datetime:
             status = 'In air'
+        # if voyage has arrived    
         else:
             status = 'Completed'
         
         return status
 
     def addCaptain(self, voyage_id, date, employee_id):
+        '''Captain added to an existing voyage'''
 
         is_unavailable = self.isEmployeeWorkingOnDate(date, employee_id)
         if is_unavailable:
@@ -132,17 +143,18 @@ class VoyageLL:
 
 
     def assignVoyageID(self):
-        '''Find last voyage id in file by finding id of last voyage'''
+        '''Assign a voyage an id based on last voyage in file.'''
         
+        # get voyage id of last voyage in file
         last_voyageID = self.voyage_list[-1].getVoyageID()
  
         new_id = int(last_voyageID) + 1
- 
         return str(new_id)
  
 
     def assignFlightNo(self, destination, depart_time):
-        '''assigns a departing and arriving flight number based on a location'''
+        '''Assigns a departing and arriving flight number based on a location
+        and other trips that day.'''
     
         # first two letters are dictated by destination
         if destination == 'LYR':
@@ -159,15 +171,22 @@ class VoyageLL:
         # all voyages on departing day
         voyage_list = self.getVoyageInDateRange(depart_time, depart_time)
 
+        # if no voyages are on the departing day
         latter_two_depart = '00'
         latter_two_arrive = '01'
 
         for voyage_instance in voyage_list:
+            # if the dest IATA code matches the voyage in file there is another voyage to 
+            # the same destination on the same day
             if destination == voyage_instance.getDestination().getDestinationAirport():
+                # flight numbers of registered voyage:
                 depart_num, arrival_num = voyage_instance.getFlightNumbers()
+
+                # if the registered voyage has higher numbers
                 if latter_two_depart <= depart_num[-2:]:
                     latter_two_depart = str( int(depart_num[-2:]) + 2 )
                     latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
+                # int() removes the zero so it is added back in
                 if len(latter_two_depart) == 1:
                     latter_two_depart = '0' + latter_two_depart
                     latter_two_arrive = '0' + latter_two_arrive
@@ -179,7 +198,8 @@ class VoyageLL:
 
 
     def TimeDifference(self, time, dest_code):
-        '''calculates time difference from iceland time'''
+        '''Calculates time difference between KEF and destinations'''
+        
         if dest_code == 'LYR':
             time = time + timedelta(hours=1)
         elif dest_code == 'GOH' or dest_code == 'KUS':
@@ -191,14 +211,24 @@ class VoyageLL:
 
 
     def findArrivalTime(self, dest_code, depart_time):
+        '''FTakes in destination code and departure time and returns arrival time at
+        destination as datetime object.'''
+
         destinations_instances = DestinationLL().getDestination()
 
+        # finds duration of flight to destination as string
         for destination in destinations_instances:
             if dest_code == destination.getDestinationAirport():
-                duration = destination.getDestinationDuration()
+                duration_str = destination.getDestinationDuration()
         
-        hrs = int(duration[0])
-        mins = int(duration[2:3])
+        # turns duration string into int values, form of string is xxhxxm where x are numbers
+        index_of_h = duration_str.find('h')
+
+        if index_of_h == 1:    
+            hrs = int(duration_str[0])
+        else:
+            hrs = int(duration_str[ :(index_of_h - 1) ])
+        mins = int(duration_str[(index_of_h + 1):3])
         
         arrival_time = depart_time + timedelta(hours=hrs, minutes=mins)
 
@@ -206,11 +236,14 @@ class VoyageLL:
 
 
     def getAvailablePlanes(self, departure_time):
+        '''Finds which planes are available at departing time. Returns list of insatnces of 
+        available planes.'''
+        
         available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time)
         
+        # if available tuple is None all planes are available
         if available_tuple != None:
-            not_available_planes,available_planes = available_tuple
-            
+            not_available_planes,available_planes = available_tuple    
         else:
             available_planes = AirplaneLL().getAirplanes()
         
@@ -218,6 +251,7 @@ class VoyageLL:
 
 
     def checkPlaneInput(self, plane_input, list_of_planes):
+        '''Checks if inputted plane exists in inputted list of available planes'''
 
         BoolCheck = False
         for plane in list_of_planes:
@@ -228,57 +262,34 @@ class VoyageLL:
 
  
     def addVoyage(self,destination, departure_time, plane):
+        '''Finds values from input to register a new voyage. Returns a list with all info.'''    
     
-        info_list = []
         voyage_id = self.assignVoyageID()
 
-        info_list.append( voyage_id )
-
-        # Flight number
+        # Flight numbers
         flight_depart_num, flight_arrive_num = self.assignFlightNo(destination, departure_time)
 
-        info_list.append(flight_depart_num)
-        
-        info_list.append(VoyageLL.seats_sold_out)
-
-        #departing airport added to info
-        info_list.append('KEF')
-        info_list.append(destination)
-
-        info_list.append(departure_time.isoformat())
-
+        # arrival time in other country added, time difference taken into account
         arrival_time_gmt = self.findArrivalTime(destination, departure_time)
-
-        # arrival time in other country added
         arrival_time_out = self.TimeDifference(arrival_time_gmt, destination)
-        info_list.append(arrival_time_out.isoformat())
 
-        info_list.append(flight_arrive_num)
-        info_list.append(VoyageLL.seats_sold_home)
-
-        #ARRIVING TRIP
-
-        # departing from and arriving at when on return trip appended
-        info_list.append(destination)
-        info_list.append('KEF')
-
-
-        # depart time added to list
         # plane stops at destination for 1 hour 
         departure_time_back = arrival_time_out + timedelta(hours=1)
-        info_list.append(departure_time_back.isoformat())
 
         arrival_time_back = self.findArrivalTime(destination, departure_time_back)
-        info_list.append( arrival_time_back.isoformat() )
 
-        info_list.append(plane)
+        # info added to list in same order as in allvoyages.csv
+        info_list = [voyage_id, flight_depart_num, self.seats_sold_out, 'KEF', destination,\
+                    departure_time.isoformat(), arrival_time_out.isoformat(),\
+                    flight_arrive_num, self.seats_sold_home, destination, 'KEF',\
+                    departure_time_back.isoformat(), arrival_time_back.isoformat(),\
+                    plane]
 
         # staff not yet added so those values will be empty
         for i in range(5):
             info_list.append('empty')
         
         new_voyage_str = ','.join(info_list)
-
 
         IO_API().addVoyageToFile(new_voyage_str)
 
@@ -303,16 +314,19 @@ class VoyageLL:
         datetime_list = []
 
         # assume one plane can leave each half hour
-        
         start_time = departure_datetime + timedelta(minutes=-30)
         end_time = departure_datetime + timedelta(minutes=30)
 
+        # list of voyages that depart the same day
         voyages_during_departure_date = self.getVoyageInDateRange(start_time, end_time)
 
+        # list of all times in restricted hour
         while start_time <= end_time:
             datetime_list.append(start_time.isoformat())
             start_time += timedelta(minutes=1)
 
+        # if a voyage that departs the same day as inputted voyage is also in datetime_list
+        # it is too close in time
         for voyage in voyages_during_departure_date:
             if voyage.getDepartureTime() in datetime_list:
                 taken = True
@@ -323,6 +337,7 @@ class VoyageLL:
 
 
     def changeVoyageFile(self,voyage):
+        '''Sends class instance of updated employee into IO layer to read into file'''
         return IO_API().changeVoyageFile(voyage)
 
 
