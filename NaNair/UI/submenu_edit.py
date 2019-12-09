@@ -30,6 +30,7 @@ class SubMenuEdit:
             print('2 - Destination')
             print('3 - Employee')
             print('m - Main menu')
+            print()
 
             selection = input().strip()
 
