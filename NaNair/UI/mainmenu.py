@@ -1,7 +1,3 @@
-# import sys
-# sys.path.insert(1,'/Users/valaroff/Desktop/T111PROG/verklegt1/NaNair/API')
-# import LL_API
-
 from API.LL_API import LL_API
 from UI.submenu_register import SubMenuRegister
 from UI.submenu_edit import SubMenuEdit
