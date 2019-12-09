@@ -68,7 +68,10 @@ class CrewUI:
 
         qualified_crew_list = LL_API().getQualifiedCrew(depart_time_str, plane_insignia)
 
+<<<<<<< HEAD
         self.printCrew(qualified_crew_list, False)
+=======
+>>>>>>> 4fbad637010b6077487ba63a90f0f5730d39cfac
         if qualified_crew_list != None:
             self.printCrew(qualified_crew_list, False)
         else:
@@ -268,6 +271,8 @@ class CrewUI:
         personal_id = self.getPersonalID()
         info_list.append(personal_id)
 
+
+
         employee_name = self.getName()
         info_list.append(employee_name)
 
@@ -385,6 +390,10 @@ class CrewUI:
         while True:
             personal_id = input('Personal ID (required): ')
 
+            while LL_API().doesIDExist(personal_id):
+                print('Another crew member already has that ID! Please input another ID.')
+                personal_id = input('Personal ID: ')
+
             if DestinationUI().checkIfInt(personal_id):
                 if len(personal_id) == 10:
                     return personal_id
@@ -405,7 +414,7 @@ class CrewUI:
             start_day_str = input('Day: ')
 
             start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
-            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0)
+            start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0) #VERIFY INPUT
             
             print('Enter the "To date" for work schedule')
             end_year_str = input('Year: ')
@@ -413,7 +422,7 @@ class CrewUI:
             end_day_str = input('Day: ')
 
             end_year_int, end_month_int, end_day_int = LL_API().verifyDate(end_year_str, end_month_str, end_day_str)
-            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0)
+            end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0) # VERIFY INPUT
             
             work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
             

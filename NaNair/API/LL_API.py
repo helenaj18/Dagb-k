@@ -106,7 +106,12 @@ class LL_API:
         return CrewLL().ChangeCrewInfo(employee)
     
     def getQualifiedCrew(self, depart_time, plane_insignia):
+        '''Returns a list of instances of crew that can fly a specific plane at a specific time'''
         return CrewLL().getQualifiedCrew(depart_time, plane_insignia)
+
+    def doesIDExist(self, crew_id):
+        '''Checks if a crew member already has inputted ID'''
+        return CrewLL().doesIDExist(crew_id)
 
 
     
