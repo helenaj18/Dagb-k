@@ -2,6 +2,7 @@ from UI.crewUI import CrewUI
 from API.LL_API import LL_API
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
+from UI.edit_employee_licence import EditEmployeeLicense
 
 
 class EditEmployeeMenu:
@@ -64,10 +65,7 @@ class EditEmployeeMenu:
 
         elif selection == '5':
             ''' The software asks for new license and assigns it to the owner of given ID'''
-            new_license = CrewUI().getPilotLicense()
-            print()
-            employee.setLicense(new_license)
-            CrewUI().changeEmployeeInfo(employee)
+            EditEmployeeLicense().startEditEmployeeLicense(employee)
 
         else:
             print("Invalid input")  

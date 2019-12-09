@@ -164,6 +164,9 @@ class LL_API:
         '''Returns status of voyage at the current time'''
         return VoyageLL().getVoyageStatus(voyage_instance)
 
+    def get_upcoming_voyages(self):
+        return VoyageLL().getUpcomingVoyges()
+
 
     ## DESTINATION LL
 

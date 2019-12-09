@@ -314,7 +314,7 @@ class CrewUI:
                 pilot_license = 'NAFokkerF100'
                 return pilot_license
             elif pilot_license == '2':
-                pilot_license = 'NAFOKKERF28'
+                pilot_license = 'NAFokkerF28'
                 return pilot_license
             elif pilot_license == '3':
                 pilot_license = 'NABAE146'
