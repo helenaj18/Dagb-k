@@ -2,6 +2,7 @@ from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
 from UI.crewUI import CrewUI
+from LL.airplaneLL import AirplaneLL
 #from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
 
 
@@ -56,9 +57,12 @@ class VoyageUI:
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
             voyage_duration_min))
 
+        total_seats = AirplaneLL().getAirplanebyModel(aircraft_ID)
+        
+
         print('\t Aircraft: {}'.format(aircraft_ID))
         print('\t Status on staff: {}'.format(voyage_staffed))
-        print('\t Seats sold: {}/{}'.format('ATH no info','total seats'))
+        print('\t Seats sold: {}/{}'.format('ATH no info',total_seats))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
 
