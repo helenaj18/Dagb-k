@@ -19,6 +19,8 @@ class Voyage:
         self.__flight_att_one = flight_att_one
         self.__flight_att_two = flight_att_two
         
+    def getDepartureLocation(self):
+        return self.__departure_location
 
     def getDepartureTime(self):
         return self.__departure_time
@@ -43,8 +45,23 @@ class Voyage:
     def getAircraftID(self):
         return self.__aircraft_ID
 
-    def getDestinationName(self):
-        return self.__destination_name
+    def getCaptain(self):
+        return self.__captain
+
+    def getCopilot(self):
+        return self.__copilot
+    
+    def getHeadFlightAtt(self):
+        return self.__head_flight_att
+    
+    def getFlightAttOne(self):
+        return self.__flight_att_one
+
+    def getFlightAttTwo(self):
+        return self.__flight_att_two
+
+    # def getDestinationName(self):
+    #     return self.__destination_name
 
     def getVoyageID(self):
         return self.__voyage_ID
@@ -86,6 +103,7 @@ class Voyage:
     def setHeadFlightAtt(self, new_head):
         self.__head_flight_att = new_head
 
+
     def setFlightAttOne(self, new_att):
         self.__flight_att_one = new_att
     
@@ -100,7 +118,12 @@ class Voyage:
 
     def addCrewMember(self, crew_member):
         role = crew_member.getRole()
-        if role == "Pilot":
-            self.setPilot(crew_member)
-        elif role == "Flightasdfasd":
-            pass
+        if role == 'Pilot':
+            if crew_member.getCaptain():
+                self.setCaptain(crew_member)
+            else:
+                self.setCopilot(crew_member)
+        elif role == 'Cabincrew':
+            self.setHeadFlightAtt(crew_member)
+
+

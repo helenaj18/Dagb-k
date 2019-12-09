@@ -172,3 +172,15 @@ gera addemployee í voyage.
 Morgunfundur 08.12.2019 kl 12:00
 Erum með 2 A-kröfur eftir, ætlum að klára þær í dag. Svo ætlum við að reyna klára
 allt það sem við minntumst á fyrir ofan.
+
+kl 20:00
+
+Vala er að vinna í síðustu A - kröfunum
+Lokuðum öllum skrám, löguðum fasta, löguðum menus í display
+Breyttum nokkrum föllum og löguðum til
+
+Á morgun:
+- Laga register menus og edit menus
+- Laga breytunöfn og kommenta!!!!
+- Klára B - kröfur
+- Skoða öll villuboð, vantar á marga staði!

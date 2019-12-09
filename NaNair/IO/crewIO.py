@@ -19,7 +19,9 @@ class CrewIO:
 
         crew_file= open(self.__crew_filename,'r')
 
-        reader_crew= csv.DictReader(crew_file)
+        reader_crew = csv.DictReader(crew_file)
+
+        
 
         for row in reader_crew:
             if row['role'] == CrewIO.PILOT:
@@ -32,7 +34,8 @@ class CrewIO:
                 crewmember = FlightAttendant(row['name'],row['ssn'],row['address'],row['phonenumber'],row['email'],\
                     row['captain/head_flight_attendant'],row['license'],row['role'])
                 crew_list.append(crewmember)
-                
+
+        crew_file.close()  
         return crew_list
 
 

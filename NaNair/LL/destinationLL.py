@@ -1,9 +1,7 @@
 from API.IO_API import IO_API
 from IO.destinationIO import DestinationIO
-
-DESTINATION_NAME_const = 1
-EMERGENCY_CONTACT_NAME_const = 5
-EMERGENCY_CONTACT_PHONE_const = 6
+from ModelClasses.destination_model import Destination
+from LL.airplaneLL import AirplaneLL
 
 class DestinationLL:
 
@@ -12,14 +10,63 @@ class DestinationLL:
 
         return IO_API().loadDestinationFromFile()
 
-    def getAirport(self, dest_code):
-        ''' Gets destination code (IATA)'''
-        destinations_instances = self.getDestination()
+    def addDestination(self):
+        '''Gets information about a new destination
+           and adds it to destination file'''
 
-        #Reads everyline in the file and returns destination code (IATA) 
-        for destination in destinations_instances:
-            if dest_code == destination.getDestinationName():
-                return destination.getDestinationAirport()
+        while True:
+            destination_airport = input('Destination airport code (3char airport code): ').upper()
+
+            if len(destination_airport) == 3:
+                destination_name = input('Name of destination: ').capitalize()
+                
+                print('Enter flight duration')
+
+                flight_duration_hours_str = input('Hours: ')
+                flight_duration_minutes_str = input('Minutes: ')
+
+                AirplaneLL().verifyTime(flight_duration_hours_str,flight_duration_minutes_str)
+
+                flight_duration_str = flight_duration_hours_str + 'h' + flight_duration_minutes_str + 'm'
+
+
+                while True:
+
+                    destination_distance = input('Distance in km: ')
+
+                    if self.checkIfInt(destination_distance):
+                        destination_distance += 'km'
+                    
+                        emergency_contact_name = input('Enter the emergency contact name: ').capitalize()
+
+                        while True:
+                            emergency_contact_phone = input("Enter the emergency contact's phone number: ")
+
+                            if self.checkIfInt(emergency_contact_phone):
+                                if len(emergency_contact_phone) == 7:
+                                    new_destination = Destination(destination_name,destination_airport,\
+                                        flight_duration_str, destination_distance,emergency_contact_name,\
+                                            emergency_contact_phone)
+
+                                    return IO_API().addDestinationToFile(new_destination)
+
+                                else:
+                                    print('Invalid phone number')
+
+                            else:
+                                print('Invalid phone number')
+                    else:
+                        print('Invalid distance')
+                         
+            else:
+                print('Invalid airport code')
+
+    def checkIfInt(self,a_str):
+        try:
+            int(a_str)
+            return True
+        except ValueError:
+            return False
 
 
     def changeEmergencyContactName(self,destination_name,new_emergency_contact):

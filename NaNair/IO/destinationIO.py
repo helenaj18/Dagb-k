@@ -13,16 +13,17 @@ class DestinationIO:
 
     def loadDestinationFromFile(self):
         '''Reads file and returns destination list'''
-        file_object = open(self.__destination_filename,'r')
+        destination_file = open(self.__destination_filename,'r')
         destination_list = []
         i = 0
-        for line in file_object:
+        for line in destination_file:
             if i != 0:
                 airport,name,duration,distance,contact,emergency_phone_number = line.strip().split(',')
                 destination_instance = Destination(name,airport,duration,distance,contact,emergency_phone_number)
                 destination_list.append(destination_instance)
             i += 1
-            
+        
+        destination_file.close()
         return destination_list
 
 
@@ -39,10 +40,13 @@ class DestinationIO:
                 writer.writerow([destination.getDestinationAirport(),destination.getDestinationName(),destination.getDestinationDuration(),destination.getDestinationDistance(),destination.getDestinationContact(),destination.getDestinationEmergencyPhoneNumber()])
 
 
-    def addDestinationToFile(self,new_destination_str):
+    def addDestinationToFile(self,destination):
         '''Adds the destination into file'''
         file_object = open(self.__destination_filename,'a')
-        file_object.write(new_destination_str+'\n')
-
+        file_object.write(destination.getDestinationAirport()+','+destination.getDestinationName()+\
+            ','+destination.getDestinationDistance()+','+ destination.getDestinationDuration()+\
+                ','+destination.getDestinationContact()+','+destination.getDestinationEmergencyPhoneNumber())
+        
+        print('Destination successfully added!')
         return file_object
 

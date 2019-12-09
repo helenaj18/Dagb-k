@@ -25,9 +25,9 @@ class LL_API:
     def verifyTime(self,hour_str,minute_str):
         return AirplaneLL().verifyTime(hour_str,minute_str)
     
-    def addAirplane(self,planeInsignia,planeTypeId,manufacturer,seats):
+    def addAirplane(self):
         ''' Sends info for new ariplane to be added'''
-        return AirplaneLL().addAirplane(planeInsignia,planeTypeId,manufacturer,seats)
+        return AirplaneLL().addAirplane()
 
     ### CREW LL 
     
@@ -90,9 +90,9 @@ class LL_API:
     
 
     ### VOYAGE LL 
-
-    def change_voyage_dates(self,new_datetime_str,flight_number): # BÆTA INN EH TIME PERIOD
-        return VoyageLL().changeDateTimeOfVoyage(new_datetime_str,flight_number)
+ 
+    def change_voyage(self,voyage):
+        return VoyageLL().changeVoyageFile(voyage)
 
     def add_voyage(self,destination, time, plane):
         return VoyageLL().addVoyage(destination,time, plane)
@@ -107,7 +107,7 @@ class LL_API:
         return VoyageLL().checkDestInput(dest_input)
     
     def showPlanesForNewVoyage(self, time):
-        return VoyageLL().showPlanes(time)
+        return VoyageLL().getAvailablePlanes(time)
     
     def checkPlaneInput(self, plane, list_of_planes):
         return VoyageLL().checkPlaneInput(plane, list_of_planes)
@@ -115,7 +115,11 @@ class LL_API:
     def checkTimeInput(self, year, month, day, hour, min):
         return VoyageLL().checkTimeInput(year, month, day, hour, min)
         
+    def getOneVoyage(self,voyage_id):
+        return VoyageLL().getOneVoyage(voyage_id)
 
+    def checkIfTakenDate(self, time_datetime):
+        return VoyageLL().checkIfTakenTime(time_datetime)
 
     ### DESTINATION LL
 
@@ -160,4 +164,7 @@ class LL_API:
                
         return DestinationLL().changeEmergencyContactPhone(destination_name,new_emergency_phone)
 
+    def addDestination(self):
+        return DestinationLL().addDestination()
+        
 #LL_API.show_all_planes()

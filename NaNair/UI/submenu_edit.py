@@ -3,6 +3,7 @@ from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 from UI.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
+from UI.airplaneUI import AirplaneUI
 
 class SubMenuEdit:
     def __init__(self, logic_layer):
@@ -31,45 +32,38 @@ class SubMenuEdit:
             if selection == '1':
                 print("Select date range to find a voyage to edit")
                 voyage = VoyageUI().queryOneVoyage()
-                keep_editing = True
-                while keep_editing:
+
+                
+                while True:
                     print("\nWhat do you want to change in voyage {}".format(voyage.getVoyageID()))
                     # Change existing voyage
-                    print('1 - Register employee on a voyage')
-                    print('2 - Change date')
-                    print("m - go back")
+                    print('1 - Add an airplane to a voyage')
+                    print('2 - Add employees to a voyage')
+                    print('3 - Change date')
+                    print("m - Back to main menu")
                     user_selection = input()
-
                     if user_selection == '1':
-                        
-                        crew_member = CrewUI().queryShowNotWorkingCrew(voyage.getDepartureTime())
+                        return VoyageUI().addAircraftToVoyage(voyage)
+
+                    elif user_selection == '2':
+
+                        #crew_on_voyage_list = voyage.getCrewOnVoyage()
+                        CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
                         print('You must add 1 captain, 1 copilot, 1 flight atttendant')
-                        success = True
-                        while True:
-                            try:
-                                voyage.addCrewMember(crew_member)
-
-                            except Exception as e:
-                                success = False
-                                print(e)
-                                input("Press any key to try continue editing voyage")
-                            
-                            if success:
-                                print('{} - {}, was added to voyage {}'.format(
-                                            crew_member.getName(),
-                                            crew_member.getRole(), 
-                                            voyage.getVoyageID()
-                                        ))
-                                #if crew_member.getRole() 
-
-                                            
-                    elif selection == '2':
-                        # change date
-                        new_datetime_str = input('Enter new date - (format 2019-11-20T15:24:00)') 
-                        flight_number = input('Enter flight voyage - (format NAXXXX)') 
-                        #ATH voyage id og breyta í voyage LL líka
+                        print()
+                        return VoyageUI().addCrewToVoyage(voyage)
                         
-                        LL_API().change_voyage_dates(new_datetime_str,flight_number)
+                                            
+                    elif user_selection == '3':
+                        # change date
+                    
+                        return VoyageUI().changeTimeOfVoyage()
+                    
+                    elif user_selection == 'm':
+                        return
+                    
+                    else:
+                        print('Invalid selection')
 
 
             elif selection == '2':
