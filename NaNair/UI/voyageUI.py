@@ -52,11 +52,21 @@ class VoyageUI:
 
             if year_now<=year_int \
                 and month_now <= month_int \
-                    and day_now <= day_int \
-                        and hour_now <= hour_int \
-                            and minutes_now <= minutes_int:
+                    and day_now <= day_int:
 
-                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                    if day_now == day_int and month_now == month_int and year_int == year_now:
+                        if hour_now <= hour_int:
+                            if hour_now == hour_int:
+                                if minutes_now <= minutes_int:
+                                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                                else:
+                                    print('Date has already passed!')
+                            else:
+                                return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                        else:
+                            print('Date has already passed!')
+                    else:
+                        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
             else:
                 print('Date has already passed')
 
@@ -135,6 +145,9 @@ class VoyageUI:
                     return voyage
             else:
                 print('\nNo voyage with this ID\n')
+
+    def changeSoldSeats(self,voyage,a_str):
+        return LL_API().changeSoldSeats(voyage,a_str)
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
@@ -215,10 +228,11 @@ class VoyageUI:
         
                 crew_member = CrewUI().queryShowNotWorkingCrew()
                 if crew_member:
-                    if crew_member.getRole() == 'Pilot':
-                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-                    elif crew_member.getRole() == 'Cabincrew':
-                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    # if crew_member.getRole() == 'Pilot':
+                    #     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    # elif crew_member.getRole() == 'Cabincrew':
+                    #     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
                 
                     crew_on_voyage_list = voyage.getCrewOnVoyage()
                 else:
@@ -241,11 +255,7 @@ class VoyageUI:
         else: 
             print('\nVoyage is fully staffed!\n')
             return 
-#
 
-
-
-    
 
     def showOneVoyage(self,voyage = ''):
         '''Shows one voyage by ID'''

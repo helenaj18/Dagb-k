@@ -75,7 +75,6 @@ class Voyage:
     def getVoyageID(self):
         return self.__voyage_ID
 
-    
 
 
     def __str__(self):
@@ -123,7 +122,11 @@ class Voyage:
     def setFlightAttTwo(self, new_att):
         self.__flight_att_two = new_att.getCrewID()
 
-
+    def setSeatsSoldOut(self,new_seat_number):
+        self.__seats_sold_out = new_seat_number
+        
+    def setSeatsSoldHome(self,new_seat_number):
+        self.__seats_sold_home = new_seat_number
                 
 
             
