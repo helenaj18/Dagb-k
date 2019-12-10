@@ -321,61 +321,11 @@ class AirplaneLL:
         return airplanes_type_list
  
 
-    def addAirplane(self):
+    def addAirplane(self,planeInsignia,planeTypeID,manufacturer,seats):
         '''Gets information about a new airplane
            and adds it to the file'''
 
-        planeInsignia = self.getAirplaneInsigniaInput()
-        planeTypeID,manufacturer,seats = self.getPlaneTypeIDInput()
-
         return IO_API().addAirplaneToFile(planeInsignia,planeTypeID,manufacturer,seats)
-
-
-    def getPlaneTypeIDInput(self):
-        '''Gets plane type id input from user'''
-
-        print('\nChoose planeTypeId:\n')
-
-        while True:
-                    
-            print('1 - NAFokkerF100')
-            print('2 - NABAE146')
-            print('3 - NAFokkerF28')
-            print()
-            selection = input('Please choose one of the above (1/2/3): ').strip()
-            
-            if selection == '1':
-                planeTypeId = 'NAFokkerF100'
-                manufacturer = 'Fokker'
-                seats = '100'
-                return planeTypeId,manufacturer,seats
-
-            elif selection == '2':
-                planeTypeId = 'NABAE146'
-                manufacturer = 'BAE'
-                seats = '82'
-                return planeTypeId,manufacturer,seats
-
-            elif selection == '3':
-                planeTypeId = 'NAFokkerF28'
-                manufacturer = 'Fokker'
-                seats = '65'
-                return planeTypeId,manufacturer,seats
-
-            else:
-                print('\nInvalid Type ID!\n')
-
-
-    def getAirplaneInsigniaInput(self):
-        '''Gets plane insignia from user'''
-        while True:
-            planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper()
-            if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
-                return planeInsignia
-            else:
-                print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
-
-
 
 
     def getAirplaneInsigniaList(self):
