@@ -7,10 +7,6 @@ import datetime
 
 
 class SubMenuRegister: 
-    def __init__(self, logic_layer): 
-        print('Register Menu')
-        self.logic_layer = logic_layer
-
 
     def startSubMenuRegister(self):
         # Header

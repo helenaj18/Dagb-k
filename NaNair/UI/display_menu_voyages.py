@@ -20,7 +20,7 @@ class DisplayMenuVoyages:
             print('m - Back to main menu')
             print()
 
-            selection = input()
+            selection = input('Please choose one of the above (1/2/m): ').strip()
 
             if selection == '1':
                 '''Goes to a new menu where the user

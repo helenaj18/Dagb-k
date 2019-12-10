@@ -13,11 +13,13 @@ class DisplayMenuWorkingCrew:
             print('m - Back to main menu')
             print()
 
-            selection = input()
+            selection = input('Please choose one of the above (1/2/m): ').strip()
+
             print('Enter the date you want to display')
-            year_str = input('Year: ')
-            month_str = input('Month: ')
-            day_str = input('Day: ')
+            year_str = input('Year: ').strip()
+            month_str = input('Month: ').strip()
+            day_str = input('Day: ').strip()
+            
             #verifies if the date is correct
             year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 

@@ -29,7 +29,7 @@ class EditEmployeeMenu:
         self.printEditEmployeeMenu(crew_id,employee)
         
         
-        selection = input()
+        selection = input('Please choose one of the above: ').strip()
         if selection == '1':
             ''' The software asks for new home adress and assigns it to the owner of given ID'''
             new_address = CrewUI().getHomeAddress()
@@ -63,7 +63,7 @@ class EditEmployeeMenu:
                     print('1 - Head service manager')
                     print('m - Back to main menu')
                 
-                new_rank = input('Please choose one of the above 1/2/m): ').strip()
+                new_rank = input('Please choose one of the above 0/1/m): ').strip()
 
                 if new_rank != '0' and new_rank != '1' and new_rank != 'm':
                     print('\nInvalid rank!\n')

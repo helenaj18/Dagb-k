@@ -23,7 +23,7 @@ class DisplayMenuEmployee:
             print('6 - Work Schedule for employee by ID')
             print('m - Back to main menu')
             print()
-            selection = input().strip()
+            selection = input('Please choose one of the above (1-6 or m): ').strip()
             
             # All employees are displayed
             if selection == '1':
@@ -32,7 +32,7 @@ class DisplayMenuEmployee:
             # A single employee is displayed with more percise info
             elif selection =='2':
                 while True:
-                    crew_id = input('Enter the Crew members ID (SSN): ')
+                    crew_id = input('Enter the Crew members ID (SSN): ').strip()
                     
                     # checks if the personal ID is 10 letters and an integer
                     try:
@@ -61,7 +61,7 @@ class DisplayMenuEmployee:
             elif selection == '6':
 
                 while True:
-                    crew_id = input('Enter the Crew members ID (SSN): ')
+                    crew_id = input('Enter the Crew members ID (SSN): ').strip()
                     
                     try:
                         # checks if personal ID is 10 letters and an integer

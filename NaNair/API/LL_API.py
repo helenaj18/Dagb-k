@@ -36,9 +36,9 @@ class LL_API:
         return AirplaneLL().verifyTime(hour_str,minute_str)
     
 
-    def addAirplane(self):
+    def addAirplane(self,planeInsignia,planeTypeID,manufacturer,seats):
         ''' Sends info for new airplane to be added'''
-        return AirplaneLL().addAirplane()
+        return AirplaneLL().addAirplane(planeInsignia,planeTypeID,manufacturer,seats)
 
     def getAirplaneInsigniaList(self):
         '''Returns a list of all airplane insignias.'''

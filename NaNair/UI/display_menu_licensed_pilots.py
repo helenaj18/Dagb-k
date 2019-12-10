@@ -10,11 +10,11 @@ class DisplayMenuAirplaneType:
             print('2 - NAFokkerF28')
             print('3 - NABAE146')
             print('m - Back to main menu')
-            selection = input()
+            selection = input('Please choose one of the above (1/2/3/4/m)').strip()
 
             while selection != '1' and selection != '2' and selection != '3' and selection != 'm':
                 print('Invalid selection')
-                selection = input('Try again: ')
+                selection = input('Try again: ').strip()
 
             if selection == '1':
                 license_ID = 'NAFokkerF100'
