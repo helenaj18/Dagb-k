@@ -109,28 +109,32 @@ class VoyageUI:
             voyages_on_date, completed_voyages_in_range = voyages_tuple
             
             if len(completed_voyages_in_range) < len(voyages_on_date):
-
-                while True:
-                    voyage_id = input("Enter voyage ID to select: ").strip()
-                    voyage = LL_API().getOneVoyage(voyage_id)
-                    if voyage:
-                        voyage_state = LL_API().get_status_of_voyage(voyage)
-                        if voyage_state == 'Completed':
-                            print('Voyage is completed, not possible to change')
-                        else:
-                            return voyage
-                    print("Invalid voyage id")
+                voyage = self.checkCompleted()
+                return voyage
             else:
-                print('All voyages in range are completed, not possible to change')
+                print('\nAll voyages in range are completed, not possible to change\n')
                 return None
 
         else:
-            print()
-            print('No voyages on these dates.')
-            print()
+            print('\nNo voyages on these dates.\n')
             return None
     
 
+    def checkCompleted(self):
+        '''Checks if a voyage is completed'''
+        while True:
+            voyage_id = input("Enter voyage ID to select: ").strip()
+            voyage = LL_API().getOneVoyage(voyage_id)
+            if voyage:
+                voyage_state = LL_API().get_status_of_voyage(voyage)
+                if voyage_state == 'Completed':
+                    print('\nVoyage is completed, not possible to change\n')
+                    print('-'*30)
+                    return None
+                else:
+                    return voyage
+            else:
+                print('\˜No voyage with this ID\n')
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
