@@ -6,6 +6,7 @@ import datetime
 
 class DisplayMenuEmployee: 
     def startDisplayMenuEmployee(self):
+        '''Main display for employees'''    
         # banner:
         print()
         print('-'*36)

@@ -3,6 +3,7 @@ from UI.airplaneUI import AirplaneUI
 class DisplayMenuAirplaneType:
     
     def startDisplayAirplaneType(self):
+        '''Menu for displaying airplane types'''
 
         while True:
             print('\nWhat type would you like to list? Please choose one of the following')
