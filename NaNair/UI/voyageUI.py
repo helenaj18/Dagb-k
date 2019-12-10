@@ -134,7 +134,7 @@ class VoyageUI:
                 else:
                     return voyage
             else:
-                print('\˜No voyage with this ID\n')
+                print('\nNo voyage with this ID\n')
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):

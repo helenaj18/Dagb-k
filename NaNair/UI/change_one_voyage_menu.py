@@ -16,6 +16,7 @@ class ChangeOneVoyageMenu:
             # Change existing voyage
             print('1 - Add an airplane to a voyage')
             print('2 - Add employees to a voyage')
+            print('3 - Change number of sold seats')
             print('m - Back to edit menu voyage\n')
             user_selection = input('Please choose one of the above (1/2/m): ').strip()
             
@@ -40,6 +41,9 @@ class ChangeOneVoyageMenu:
                 else:
                     return VoyageUI().addCrewToVoyage(self.voyage)
             
+            elif user_selection == '3':
+                pass
+
             elif user_selection == 'm':
                 return
             
