@@ -5,6 +5,7 @@ from LL.voyageLL import VoyageLL
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
 from LL.airplaneLL import AirplaneLL
+import datetime
 
 class CrewLL:
 
@@ -146,7 +147,6 @@ class CrewLL:
         # destination they're going to
         working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
 
-        #format_str = ''
 
         if working_crew_id_list != None:
             for working_crew_per_voyage in working_crew_id_list:
@@ -160,7 +160,7 @@ class CrewLL:
             
             return working_crew_list
 
-        #if no one is working on the inputted date
+        # If no one is working on the inputted date
         else:
             return None
 
@@ -170,7 +170,7 @@ class CrewLL:
 
         # Voyages on a specific date:
         voyage_list = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
-        self.working_crew_id_list = []
+        self.working_crew_id_info_list = []
         
         #iterates through voyages on a specific date and adds the IDs of working crew 
         # to list as well as the voyage destination
@@ -178,10 +178,10 @@ class CrewLL:
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 destination_of_voyage = voyage.getDestination()
-                self.working_crew_id_list.append((crew_on_voyage_list,destination_of_voyage))
+                self.working_crew_id_info_list.append((crew_on_voyage_list,destination_of_voyage))
 
-            if len(self.working_crew_id_list) != 0:
-                return self.working_crew_id_list
+            if len(self.working_crew_id_info_list) != 0:
+                return self.working_crew_id_info_list
             # if no crew was assigned to the voyages
             else:
                 return None
@@ -194,19 +194,30 @@ class CrewLL:
         '''Gets a list of instances of crew members
            that are not working on a specific day'''
         
-        self.getWorkingCrew(datetime_object)
+        working_crew_info_list = self.getWorkingCrew(datetime_object)
+        working_crew_id_list = []
         not_working_crew_list = []
         all_crew = IO_API().loadCrewFromFile()
 
-        #Checks if the crew memeber is in working list, if not, the crew member is added
-        # to list of not working crew members
-        if len(all_crew) != 0:
+        if working_crew_info_list:
+            # Gets a list of all id's of the working crew
+            for crew_member, destination in working_crew_info_list:
+                working_crew_id_list.append(crew_member.getCrewID())
+
+            #Checks if the crew memeber is in working list, if not, the crew member is added
+            # to list of not working crew members
+
+            
             for crew_member in all_crew:
-                if crew_member.getCrewID() not in self.working_crew_id_list:
+                if crew_member.getCrewID() not in working_crew_id_list:
                     not_working_crew_list.append(crew_member)
+
             return not_working_crew_list
+        
         else:
-            return None
+            # All crew members are available if
+            # workin_crew_info_list is empty
+            return all_crew
 
     def getQualifiedCrew(self, depart_time, plane_insignia):
         '''Returns a instance list of crew that is both qualified for a specific plane 
@@ -215,6 +226,7 @@ class CrewLL:
         plane_instance = AirplaneLL().getAirplanebyInsignia(plane_insignia)
         plane_license = plane_instance.get_planeTypeID()
 
+        
         depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(depart_time)
 
         not_working_list = self.getNotWorkingCrew(depart_datetime)

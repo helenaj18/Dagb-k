@@ -5,15 +5,15 @@ class DisplayMenuAirplaneType:
     def startDisplayLicensedPilots(self):
 
         while True:
-            print('Please pick one license of the following:')
+            print('\nPlease pick one license of the following:\n')
             print('1 - NAFokkerF100')
             print('2 - NAFokkerF28')
             print('3 - NABAE146')
             print('m - Back to main menu')
-            selection = input('Please choose one of the above (1/2/3/4/m)').strip()
+            selection = input('\nPlease choose one of the above (1-4 or m): ').strip()
 
             while selection != '1' and selection != '2' and selection != '3' and selection != 'm':
-                print('Invalid selection')
+                print('\nInvalid selection!\n')
                 selection = input('Try again: ').strip()
 
             if selection == '1':

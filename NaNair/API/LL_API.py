@@ -19,6 +19,8 @@ class LL_API:
         '''Returns a list of airplane instances that have a type inputted by user'''
         return AirplaneLL().getAirplanesByType(planeTypeId)
 
+    def showAirplaneTypes(self):
+        return AirplaneLL().getNumberOfPilotsWithLicense()
 
     def showAirplanesByDateTime(self,date_str):
         '''Returns a tuple of lists of instances. First tuple is planes that are not available,

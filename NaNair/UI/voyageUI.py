@@ -24,23 +24,42 @@ class VoyageUI:
         return datetime_input
     
     def getDateWithTime(self):
-        '''Gets a date and time input from the user and returns a datetime object'''
-
-        year_str = input('Year: ').strip()
-        month_str = input('Month: ').strip()
-        day_str = input('Day: ').strip()
+        '''Gets a date and time input from the user
+        and returns a datetime object'''
         
-        # check if date is valid
-        year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
+        while True:
+            year_str = input('Year: ').strip()
+            month_str = input('Month: ').strip()
+            day_str = input('Day: ').strip()
+            
+            # Check if date is valid
+            year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-        hour_str = input('Hour: ').strip()
-        minutes_str = input('Minute: ').strip()
-        print()
+            hour_str = input('Hour: ').strip()
+            minutes_str = input('Minute: ').strip()
+            print()
 
-        # check if time is valid
-        hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
+            # check if time is valid
+            hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
-        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+            time_now = datetime.datetime.now()
+
+            year_now = time_now.year
+            month_now = time_now.month
+            day_now = time_now.day
+            hour_now = time_now.hour
+            minutes_now = time_now.minute
+
+            if year_now<=year_int \
+                and month_now <= month_int \
+                    and day_now <= day_int \
+                        and hour_now <= hour_int \
+                            and minutes_now <= minutes_int:
+
+                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+            else:
+                print('Date has already passed')
+
 
 
     def seperateDatetimeString(self, datetime_str):
@@ -90,28 +109,32 @@ class VoyageUI:
             voyages_on_date, completed_voyages_in_range = voyages_tuple
             
             if len(completed_voyages_in_range) < len(voyages_on_date):
-
-                while True:
-                    voyage_id = input("Enter voyage ID to select: ").strip()
-                    voyage = LL_API().getOneVoyage(voyage_id)
-                    if voyage:
-                        voyage_state = LL_API().get_status_of_voyage(voyage)
-                        if voyage_state == 'Completed':
-                            print('Voyage is completed, not possible to change')
-                        else:
-                            return voyage
-                    print("Invalid voyage id")
+                voyage = self.checkCompleted()
+                return voyage
             else:
-                print('All voyages in range are completed, not possible to change')
+                print('\nAll voyages in range are completed, not possible to change\n')
                 return None
 
         else:
-            print()
-            print('No voyages on these dates.')
-            print()
+            print('\nNo voyages on these dates.\n')
             return None
     
 
+    def checkCompleted(self):
+        '''Checks if a voyage is completed'''
+        while True:
+            voyage_id = input("Enter voyage ID to select: ").strip()
+            voyage = LL_API().getOneVoyage(voyage_id)
+            if voyage:
+                voyage_state = LL_API().get_status_of_voyage(voyage)
+                if voyage_state == 'Completed':
+                    print('\nVoyage is completed, not possible to change\n')
+                    print('-'*30)
+                    return None
+                else:
+                    return voyage
+            else:
+                print('\˜No voyage with this ID\n')
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
@@ -175,6 +198,8 @@ class VoyageUI:
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight attendant'\
                 .format(airplane_type_on_voyage))
+            print(60*'-')
+            print()
                 
             while 'empty' in crew_on_voyage_list[0:3]:
         
@@ -191,6 +216,8 @@ class VoyageUI:
                 
             if crew_member:
                 LL_API().change_voyage(voyage)
+                print('A captain, pilot and head flight attendant have been added to voyage {}'\
+                    .format(voyage.getVoyageID()))
             else:
                 return 
             
@@ -244,7 +271,7 @@ class VoyageUI:
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
                     voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
                 
-                return
+                return voyage
 
             else:
                 return None
@@ -379,7 +406,6 @@ class VoyageUI:
             check = LL_API().checkDestInput(dest)
         
         return dest
-        
 
 
 

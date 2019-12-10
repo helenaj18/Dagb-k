@@ -23,6 +23,17 @@ class AirplaneUI:
             print(format_str)
         print()
     
+    def showAllAirplaneTypes(self):
+        airplane_type_dict = LL_API().showAirplaneTypes()
+        
+        print()
+        print('{:<20}{:<10}'.format('Airplane Type','Number of Licensed Pilots'))
+        print('-'*45)
+
+        for key,value in airplane_type_dict.items():
+            print('{:<20}{:>15}'.format(key,value))
+        
+        print('-'*45)
 
     def showAirplanesByType(self,planeTypeID):
         '''Shows Airplanes by type'''
@@ -157,14 +168,14 @@ class AirplaneUI:
         
         return plane_name
 
-    # def getAirplaneInsigniaInput(self):
-    #     '''Gets plane insignia from user'''
-    #     while True:
-    #         planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper().strip()
-    #         if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
-    #             return planeInsignia
-    #         else:
-    #             print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
+    def getAirplaneInsigniaInput(self):
+        '''Gets plane insignia from user'''
+        while True:
+            planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper().strip()
+            if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
+                return planeInsignia
+            else:
+                print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
 
 
     def getAirplaneInsigniaList(self):
