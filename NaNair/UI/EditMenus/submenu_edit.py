@@ -1,11 +1,11 @@
 # from UI.mainmenu import MainMenu
 from API.LL_API import LL_API
 from UI.crewUI import CrewUI
-from UI.edit_employee_info_menu import EditEmployeeMenu
+from UI.EditMenus.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
 from UI.destinationUI import DestinationUI
-from UI.edit_existing_voyage_menu import EditExistingVoyage
+from UI.EditMenus.edit_existing_voyage_menu import EditExistingVoyage
 class SubMenuEdit:
 
     EMPTY = 'empty'
