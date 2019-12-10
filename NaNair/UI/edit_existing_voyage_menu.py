@@ -20,6 +20,10 @@ class EditExistingVoyage:
             
             if voyage != None:
                 VoyageUI().showOneVoyage(voyage)
+            else:
+                print('No voyage with that ID')
+                print()
+                
         
         elif selection == '2':
             print("Select date range to find a voyage to edit")
@@ -61,7 +65,6 @@ class EditExistingVoyage:
 
                 else:
                     
-
                     return VoyageUI().addCrewToVoyage(voyage)
             
             elif user_selection == 'm':
