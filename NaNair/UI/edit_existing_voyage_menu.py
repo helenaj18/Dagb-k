@@ -14,6 +14,7 @@ class EditExistingVoyage:
             print('m - Back to edit menu')
             print()
             selection = input('Please choose one of the above (1/2/m): ').strip()
+            print()
 
             if selection == '1':
                 voyage = VoyageUI().checkCompleted()
@@ -36,6 +37,8 @@ class EditExistingVoyage:
             else:
                 print('Invalid selection!')
                 print()
+                return
+                
 
             if voyage:
 

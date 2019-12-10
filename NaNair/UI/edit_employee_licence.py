@@ -9,16 +9,15 @@ class EditEmployeeLicense:
         upcoming_voyage_list = LL_API().get_upcoming_voyages()
         for voyage in upcoming_voyage_list:
             if pilot.getCrewID() in voyage.getCrewOnVoyage():
-                voyage_id_with_pilot.append(voyage.getVoyageID)
-                return voyage_id_with_pilot
+                voyage_id_with_pilot.append(voyage.getVoyageID())
 
-            else:
-                return voyage_id_with_pilot
+        return voyage_id_with_pilot
 
 
 
     def startEditEmployeeLicense(self,employee):
 
+        old_license = employee.getLicense()
         new_license = CrewUI().getPilotLicense()
         print()
         voyage_id_with_pilot = self.isPilotOnFutureVoyage(employee)
@@ -32,4 +31,7 @@ class EditEmployeeLicense:
         else:
             employee.setLicense(new_license)
     
-        CrewUI().changeEmployeeInfo(employee)
+            CrewUI().changeEmployeeInfo(employee)
+
+            print('License for {} has been changed from {} to {}'\
+                .format(employee.getName(),old_license,new_license))

@@ -73,7 +73,8 @@ class EditEmployeeMenu:
 
                 else:
                     employee.setRank(new_rank)
-                    return CrewUI().changeEmployeeInfo(employee)
+                    CrewUI().changeEmployeeInfo(employee)
+
             
 
         elif selection == '5':
