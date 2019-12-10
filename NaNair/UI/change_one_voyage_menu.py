@@ -48,7 +48,7 @@ class ChangeOneVoyageMenu:
                 pass
 
             elif user_selection == '4':
-                ChangeEmployeeOnVoyage().startChangeEmployeeOnVoyage()
+                ChangeEmployeeOnVoyage().startChangeEmployeeOnVoyage(self.voyage)
 
             elif user_selection == 'm':
                 return
