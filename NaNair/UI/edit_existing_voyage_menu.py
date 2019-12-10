@@ -37,7 +37,8 @@ class EditExistingVoyage:
             else:
                 print('Invalid selection!')
                 print()
-                return
+                voyage = None
+                
                 
 
             if voyage:
