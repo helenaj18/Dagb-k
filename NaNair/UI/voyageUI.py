@@ -28,50 +28,55 @@ class VoyageUI:
         and returns a datetime object'''
         
         while True:
-            year_str = input('Year: ').strip()
-            month_str = input('Month: ').strip()
-            day_str = input('Day: ').strip()
+            cancel = input('Press c to cancel, anything else to continue: ').lower().strip()
             
-            # Check if date is valid
-            year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
+            if cancel != 'c':
+                year_str = input('Year: ').strip()
+                month_str = input('Month: ').strip()
+                day_str = input('Day: ').strip()
+                
+                # Check if date is valid
+                year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-            hour_str = input('Hour: ').strip()
-            minutes_str = input('Minute: ').strip()
-            print()
+                hour_str = input('Hour: ').strip()
+                minutes_str = input('Minute: ').strip()
+                print()
 
-            # check if time is valid
-            hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
+                # check if time is valid
+                hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
-            time_now = datetime.datetime.now()
+                time_now = datetime.datetime.now()
 
-            year_now = time_now.year
-            month_now = time_now.month
-            day_now = time_now.day
-            hour_now = time_now.hour
-            minutes_now = time_now.minute
+                year_now = time_now.year
+                month_now = time_now.month
+                day_now = time_now.day
+                hour_now = time_now.hour
+                minutes_now = time_now.minute
 
-            if year_now<=year_int:
-                if year_now == year_int\
-                    and month_now <= month_int \
-                        and day_now <= day_int:
+                if year_now<=year_int:
+                    if year_now == year_int\
+                        and month_now <= month_int \
+                            and day_now <= day_int:
 
-                    if day_now == day_int and month_now == month_int and year_int == year_now:
-                        if hour_now <= hour_int:
-                            if hour_now == hour_int:
-                                if minutes_now <= minutes_int:
-                                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                        if day_now == day_int and month_now == month_int and year_int == year_now:
+                            if hour_now <= hour_int:
+                                if hour_now == hour_int:
+                                    if minutes_now <= minutes_int:
+                                        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                                    else:
+                                        print('Date has already passed!')
                                 else:
-                                    print('Date has already passed!')
+                                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                             else:
-                                return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                                print('Date has already passed!')
                         else:
-                            print('Date has already passed!')
+                            return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                     else:
-                        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                        return print('Date has already passed!')
                 else:
-                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                    print('Date has already passed!')
             else:
-                print('Date has already passed')
+                return
 
 
 
@@ -444,28 +449,34 @@ class VoyageUI:
 
         dest = self.getDest()
         print('Enter departure time: ')
-
         departure_datetime = self.getDateWithTime()
-        arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
-        while LL_API().checkIfTakenDate(departure_datetime) == True:
-            print('Another voyage is departing or arriving at that time. Please choose another date.')
-            departure_datetime = self.getDateWithTime()
+        while True:   
+            if departure_datetime != None:
+                arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
-        print('Would you like to assign an airplane to this voyage? (Y/N)')
-        print('(You can also do this later)')
-        selection = input().lower().strip()
+                while LL_API().checkIfTakenDate(departure_datetime) == True:
+                    print('Another voyage is departing or arriving at that time. Please choose another date.')
+                    departure_datetime = self.getDateWithTime()
 
-        while selection != 'y' and selection != 'n':
-            print('Please enter Y or N to make your choice')
-            selection = input().lower().strip()
+                print('Would you like to assign an airplane to this voyage? (Y/N)')
+                print('(You can also do this later)')
+                selection = input().lower().strip()
 
-        if selection == 'y':
-            plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
-        else:
-            plane_name = 'empty'
+                while selection != 'y' and selection != 'n':
+                    print('Please enter Y or N to make your choice')
+                    selection = input().lower().strip()
 
-        LL_API().add_voyage(dest, departure_datetime, plane_name)
+                if selection == 'y':
+                    plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
+                else:
+                    plane_name = 'empty'
 
-        print()
-        print('New voyage succesfully added!\n')
+                LL_API().add_voyage(dest, departure_datetime, plane_name)
+
+                print()
+                print('New voyage succesfully added!\n')
+            else:
+                return
+
+
