@@ -50,9 +50,10 @@ class VoyageUI:
             hour_now = time_now.hour
             minutes_now = time_now.minute
 
-            if year_now<=year_int \
-                and month_now <= month_int \
-                    and day_now <= day_int:
+            if year_now<=year_int:
+                if year_now == year_int\
+                    and month_now <= month_int \
+                        and day_now <= day_int:
 
                     if day_now == day_int and month_now == month_int and year_int == year_now:
                         if hour_now <= hour_int:
@@ -67,6 +68,8 @@ class VoyageUI:
                             print('Date has already passed!')
                     else:
                         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                else:
+                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
             else:
                 print('Date has already passed')
 
