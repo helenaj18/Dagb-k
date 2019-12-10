@@ -3,8 +3,9 @@ from API.LL_API import LL_API
 
 
 class AddExtraCrewmemberMenu:
-
     def startAddExtraCrewMenu(self,voyage,crew_on_voyage_list):
+        '''Menu for adding extra crew members onto a voyage'''
+
         print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
         print('Do you want to add an extra crew member?')
         print('1 - Yes')

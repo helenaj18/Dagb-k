@@ -9,9 +9,9 @@ class DisplayMenuEmployee:
         '''Main display for employees'''    
         # banner:
         print()
-        print('-'*36)
-        print('{:^36}'.format('DISPLAY - Employees'))
-        print('-'*36)
+        print('-'*40)
+        print('{:^40}'.format('DISPLAY - Employees'))
+        print('-'*40)
         print()
 
         while True: 

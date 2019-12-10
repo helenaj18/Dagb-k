@@ -16,8 +16,7 @@ class DisplayVoyageTimeFrame:
             selection = input('\nPlease choose one of the above (1/2/m): ').strip()
 
             if selection == '1':
-                '''Lists up all voyages during a 
-                   specific time frame'''
+                # Lists up all voyages during a specific time frame
                 
                 if VoyageUI().showAllVoyagesInRange() != None:
                     return
@@ -25,7 +24,7 @@ class DisplayVoyageTimeFrame:
                     print('\nNo voyages on these dates\n')
   
             elif selection == '2':
-                ''' Lists all voyages on a specific day'''
+                # Lists all voyages on a specific day inputted by user
                 print()
                 date_str = VoyageUI().getDateInput()
 
@@ -35,7 +34,7 @@ class DisplayVoyageTimeFrame:
                     print('\nNo voyages on this date\n')
                 
             elif selection == 'm':
-                '''Goes back to main menu'''
+                #Goes back to main menu
                 return 
             
             else:

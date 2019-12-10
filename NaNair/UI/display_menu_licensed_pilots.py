@@ -3,6 +3,7 @@ from UI.crewUI import CrewUI
 class DisplayMenuAirplaneType:
     
     def startDisplayLicensedPilots(self):
+        '''Display menu for licensed pilots'''
 
         while True:
             print('\nPlease pick one license of the following:\n')
@@ -12,6 +13,7 @@ class DisplayMenuAirplaneType:
             print('m - Back to main menu')
             selection = input('\nPlease choose one of the above (1-4 or m): ').strip()
 
+            # if none of the possible options are chosen
             while selection != '1' and selection != '2' and selection != '3' and selection != 'm':
                 print('\nInvalid selection!\n')
                 selection = input('Try again: ').strip()

@@ -2,15 +2,14 @@ from UI.voyageUI import VoyageUI
 from UI.display_menu_voyage_time_frame import DisplayVoyageTimeFrame
 
 class DisplayMenuVoyages: 
-
+    '''Main display menu for voyages'''
 
     def startDisplayVoyages(self):
         print()
-        print('#'*30)
-        print('{:^30}'.format('DISPLAY - Voyages'))
-        print('#'*30)
+        print('-'*40)
+        print('{:^40}'.format('DISPLAY - Voyages'))
+        print('-'*40)
         print()
-
 
         while True: 
             print('What would you like to display?')
@@ -23,14 +22,13 @@ class DisplayMenuVoyages:
             selection = input('Please choose one of the above (1/2/m): ').strip()
 
             if selection == '1':
-                '''Goes to a new menu where the user
-                   can choose a time frame or a 
-                   specific day'''
+                #Goes to a new menu where the user can choose a time frame or a 
+                #specific day
 
                 return DisplayVoyageTimeFrame().startDisplayVoyageTimeFrame()
 
             elif selection == '2':
-                ''' Lists one voyage by ID'''
+                # Lists one voyage by ID
 
                 if VoyageUI().showOneVoyage() != None:
                     return
@@ -39,7 +37,7 @@ class DisplayMenuVoyages:
 
 
             elif selection == 'm':
-                '''Goes back to main menu'''
+                #Goes back to main menu
                 return
             
             else:

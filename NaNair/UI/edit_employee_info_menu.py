@@ -6,26 +6,29 @@ from UI.edit_employee_licence import EditEmployeeLicense
 
 
 class EditEmployeeMenu:
-    def __init__(self):
-        pass
+    def printEditEmployeeMenu(self,crew_id, employee):
+        '''Editing menu for a single crew member'''
 
-    def printEditEmployeeMenu(self,crew_id,employee):
-        #crew_member = LL_API().get_crew_member_by_id(crew_id)
         print('What would you like to change?')
         print()
         print('1 - Address')
         print('2 - Phone number')
         print('3 - Email')
         print('4 - Rank')
-        print('m - Back to main menu')
 
+        # flight attendants do not have a license
         if type(employee) == Pilot:
             print('5 - License')
-            
+
+        print('m - Back to main menu')
         print()
 
     def editSelection(self,crew_id):
+        '''Redirects to UI methods based on user selection'''
+        
+        # employee instance found from crew id
         employee = LL_API().get_crew_member_by_id(crew_id)
+        
         self.printEditEmployeeMenu(crew_id,employee)
         
         
@@ -49,8 +52,7 @@ class EditEmployeeMenu:
             return CrewUI().changeEmployeeInfo(employee)
 
         elif selection == '4':
-            ''' The software asks for new rank and 
-                assigns it to the owner of given ID'''
+            ''' The software asks for new rank and assigns it to the owner of given ID'''
             while True:
                 if type(employee) == Pilot:
                     print('Please choose one: ')
@@ -74,14 +76,13 @@ class EditEmployeeMenu:
                 else:
                     employee.setRank(new_rank)
                     CrewUI().changeEmployeeInfo(employee)
-
             
-
         elif selection == '5':
             ''' The software asks for new license and assigns it to the owner of given ID'''
             return EditEmployeeLicense().startEditEmployeeLicense(employee)
 
         elif selection == 'm':
+            '''user is redirected to main menu'''
             return
 
         else:
