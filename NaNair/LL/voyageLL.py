@@ -14,11 +14,15 @@ class VoyageLL:
     
     def getUpcomingVoyges(self):
         voyage_list = IO_API().loadVoyageFromFile()
-        date_today =  datetime.datetime.today()
+        date_today =  datetime.date.today()
         upcoming_voyages_list = []
+    
+
 
         for voyage in voyage_list: 
-            if voyage.getDepartureTime() >= date_today:
+            voyage_departure_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage.getDepartureTime())
+            voyage_departure_date = voyage_departure_datetime.date()
+            if voyage_departure_date >= date_today:
                 upcoming_voyages_list.append(voyage)
 
         return upcoming_voyages_list
@@ -254,7 +258,7 @@ class VoyageLL:
         available planes.'''
         
         available_tuples_by_time = []
-        delta = datetime.timedelta(minutes=1)
+        delta = datetime.timedelta(hours=0.1)
 
         while departure_time <= arrival_time:
             available_tuples_by_time.append( AirplaneLL().getAirplanesByDateTime(departure_time) )
@@ -264,13 +268,13 @@ class VoyageLL:
         not_available_planes_insignia = []
         available_planes = []
 
-        for plane in all_airplanes:
-            for available_tuple in available_tuples_by_time:
-                if available_tuple != None:
-                    not_available_planes_at_time,available_planes_at_time = available_tuple
+        for available_tuple in available_tuples_by_time:
+            if available_tuple != None:
+                not_available_planes_at_time,available_planes_at_time = available_tuple
 
-                    if plane in not_available_planes_at_time:
-                        not_available_planes_insignia.append(plane.get_planeInsignia())
+                for item in not_available_planes_at_time:
+                    if item[0].get_planeInsignia() not in not_available_planes_insignia:
+                        not_available_planes_insignia.append(item[0].get_planeInsignia())
 
         for plane in all_airplanes:
             if plane.get_planeInsignia() not in not_available_planes_insignia:
@@ -377,6 +381,34 @@ class VoyageLL:
                 taken = True
         
         return taken
+
+
+    def changeSoldSeats(self,voyage,a_str):
+        all_airplanes = IO_API().loadAirplaneFromFile()
+
+        airplane_id = voyage.getAircraftID()
+        
+        if airplane_id != 'empty':
+
+            for airplane in all_airplanes:
+                if airplane.get_planeInsignia() == airplane_id:
+                    total_seats = airplane.get_planeCapacity()
+            
+            while True:
+                new_seats_str = input('Enter number of seats sold: ')
+                if int(new_seats_str) <= int(total_seats):
+
+                    if a_str == 'home':
+                        voyage.setSeatsSoldHome(new_seats_str)
+                    else:
+                        voyage.setSeatsSoldOut(new_seats_str)
+
+                    return IO_API().changeVoyageFile(voyage)
+                else:
+                    print('Invalid input! The airplane only has {} seats!'.format(int(total_seats)))
+        
+        else:
+            print('\nNo aircraft has been assigned to the voyage, please add an aircraft first!\n')
 
 
     def changeVoyageFile(self,voyage):

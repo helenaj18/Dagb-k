@@ -52,11 +52,21 @@ class VoyageUI:
 
             if year_now<=year_int \
                 and month_now <= month_int \
-                    and day_now <= day_int \
-                        and hour_now <= hour_int \
-                            and minutes_now <= minutes_int:
+                    and day_now <= day_int:
 
-                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                    if day_now == day_int and month_now == month_int and year_int == year_now:
+                        if hour_now <= hour_int:
+                            if hour_now == hour_int:
+                                if minutes_now <= minutes_int:
+                                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                                else:
+                                    print('Date has already passed!')
+                            else:
+                                return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                        else:
+                            print('Date has already passed!')
+                    else:
+                        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
             else:
                 print('Date has already passed')
 
@@ -101,40 +111,59 @@ class VoyageUI:
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
 
-    def queryOneVoyage(self):
-        '''Helps user find one voyage and returns it'''
+    def checkVoyagesInRange(self):
+        '''Checks if the voyages in a date range are completed
+           returns None if they're all completed or if
+           there are no voyages on the dates'''
+        
+        # Gets a tuple with a list of all voyages 
+        # in a date range and a list of all completed 
+        # voyages in a date range
         voyages_tuple = self.showAllVoyagesInRange()
 
         if voyages_tuple:
             voyages_on_date, completed_voyages_in_range = voyages_tuple
             
+            # All voyages are completed if the lists are equally long
             if len(completed_voyages_in_range) < len(voyages_on_date):
                 voyage = self.checkCompleted()
                 return voyage
             else:
-                print('\nAll voyages in range are completed, not possible to change\n')
+                print('-'*40+'\n')
+                print('All voyages in range are completed, not possible to change')
+                print('\n'+'-'*40)
                 return None
 
         else:
-            print('\nNo voyages on these dates.\n')
+            print('-'*40+'\n')
+            print('No voyages on these dates.')
+            print('\n'+'-'*40)
             return None
     
 
     def checkCompleted(self):
-        '''Checks if a voyage is completed'''
+        '''Gets an voyage id as an input and
+           checks if the voyage is completed'''
         while True:
             voyage_id = input("Enter voyage ID to select: ").strip()
             voyage = LL_API().getOneVoyage(voyage_id)
             if voyage:
                 voyage_state = LL_API().get_status_of_voyage(voyage)
                 if voyage_state == 'Completed':
-                    print('\nVoyage is completed, not possible to change\n')
-                    print('-'*30)
+                    print('-'*40+'\n')
+                    print('Voyage is completed, not possible to change')
+                    print('\n'+'-'*40)
                     return None
                 else:
                     return voyage
             else:
-                print('\˜No voyage with this ID\n')
+                print('\nNo voyage with this ID\n')
+
+    def changeSoldSeats(self,voyage,a_str):
+        LL_API().changeSoldSeats(voyage,a_str)
+        print('-'*40+'\n')
+        print('Number of sold seats successfully changed!')
+        print('\n'+'-'*40)
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
@@ -163,27 +192,33 @@ class VoyageUI:
         if role == 'Pilot':
             if crew_member.getCaptain():
                 if voyage.getCaptain() == 'empty':
+                    if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
+                        raise Exception('Captain is assigned to another voyage on the same date\n\
+                            Please chose another captain\n')
+
                     voyage.setCaptain(crew_member,airplane_type_on_voyage)
                 else: 
-                    raise Exception('Captain already added to voyage')
+                    raise Exception('A captain is already assigned to the voyage\n')
             else:
                 if voyage.getCopilot() == 'empty':
+                    if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
+                        raise Exception('pilot is assigned to another voyage on the same date\n\
+                            Please chose another pilot\n')
                     voyage.setCopilot(crew_member,airplane_type_on_voyage)
                 else: 
-                    raise Exception('Copilot already added to voyage')
-                # GERA eh do you want to replace him 
-#############################################
+                    raise Exception('A copilot is already assigned to the voyage\n')
 
         elif role == 'Cabincrew':
             
             if voyage.getHeadFlightAtt() == 'empty':
+                if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
+                        raise Exception('Head flight attendant is assigned to another voyage on the same date\n\
+                            Please chose another head flight attendant\n')
                 voyage.setHeadFlightAtt(crew_member)
             else:
-                raise Exception('Head flight attendant already added to voyage')
+                raise Exception('A head flight attendant is already assigned to voyage\n')
             
                 
-            
-
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
@@ -192,23 +227,20 @@ class VoyageUI:
         airplane_type_on_voyage = airplane.get_planeTypeID()
 
         crew_on_voyage_list = voyage.getCrewOnVoyage()
-
+        
         if 'empty' in crew_on_voyage_list[0:3]:
             print()
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight attendant'\
                 .format(airplane_type_on_voyage))
-            print(60*'-')
+            print(95*'-')
             print()
                 
             while 'empty' in crew_on_voyage_list[0:3]:
         
                 crew_member = CrewUI().queryShowNotWorkingCrew()
                 if crew_member:
-                    if crew_member.getRole() == 'Pilot':
-                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-                    elif crew_member.getRole() == 'Cabincrew':
-                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
                 
                     crew_on_voyage_list = voyage.getCrewOnVoyage()
                 else:
@@ -216,8 +248,10 @@ class VoyageUI:
                 
             if crew_member:
                 LL_API().change_voyage(voyage)
-                print('A captain, pilot and head flight attendant have been added to voyage {}'\
+                print('A captain, pilot and head flight attendant have been added to voyage {}\n'\
                     .format(voyage.getVoyageID()))
+                AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
+                
             else:
                 return 
             
@@ -231,12 +265,7 @@ class VoyageUI:
         else: 
             print('\nVoyage is fully staffed!\n')
             return 
-############ gera change crew members menu 
 
-
-
-
-    
 
     def showOneVoyage(self,voyage = ''):
         '''Shows one voyage by ID'''
