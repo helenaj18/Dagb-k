@@ -98,15 +98,15 @@ class AirplaneLL:
                 # Else asks for a new input
                 else:
                     print('Invalid date! Try again: ')
-                    year_str = input('Year: ')
-                    month_str = input('Month: ')
-                    day_str = input('Day: ')
+                    year_str = input('Year: ').strip()
+                    month_str = input('Month: ').strip()
+                    day_str = input('Day: ').strip()
 
             except ValueError:
                 print('Invalid date! Try again: ')
-                year_str = input('Year: ')
-                month_str = input('Month: ')
-                day_str = input('Day: ')
+                year_str = input('Year: ').strip()
+                month_str = input('Month: ').strip()
+                day_str = input('Day: ').strip()
     
 
     def verifyTime(self,hour_str,minute_str):
@@ -131,13 +131,13 @@ class AirplaneLL:
                 # Else asks for a new input
                 else:
                     print('Invalid time! Try again: ')
-                    hour_str = input('Hour: ')
-                    minute_str = input('Minute: ')
+                    hour_str = input('Hour: ').strip()
+                    minute_str = input('Minute: ').strip()
 
             except ValueError:
                 print('Invalid time! Try again: ')
-                hour_str = input('Hour: ')
-                minute_str = input('Minute: ')
+                hour_str = input('Hour: ').strip()
+                minute_str = input('Minute: ').strip()
 
 
     def checkIfTimeValid(self,hour_int,minute_int):
@@ -342,7 +342,7 @@ class AirplaneLL:
             print('2 - NABAE146')
             print('3 - NAFokkerF28')
             print()
-            selection = input('Please choose one of the above (1/2/3): ')
+            selection = input('Please choose one of the above (1/2/3): ').strip()
             
             if selection == '1':
                 planeTypeId = 'NAFokkerF100'
