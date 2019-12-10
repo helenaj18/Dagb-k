@@ -25,7 +25,8 @@ class VoyageUI:
     
     def getDateWithTime(self):
         '''Gets a date and time input from the user
-        and returns a datetime object'''
+        and returns a datetime object or a string
+        if the user wants to quit'''
         
         while True:
             cancel = input('Press c to cancel, anything else to continue: ').lower().strip()
