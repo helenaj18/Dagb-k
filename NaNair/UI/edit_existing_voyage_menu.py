@@ -24,7 +24,7 @@ class EditExistingVoyage:
             
             elif selection == '2':
                 print("Select date range to find a voyage to edit")
-                voyage = VoyageUI().queryOneVoyage()
+                voyage = VoyageUI().checkVoyagesInRange()
                 if voyage:
                     VoyageUI().showOneVoyage(voyage)
                     print()

@@ -111,13 +111,20 @@ class VoyageUI:
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
         
 
-    def queryOneVoyage(self):
-        '''Helps user find one voyage and returns it'''
+    def checkVoyagesInRange(self):
+        '''Checks if the voyages in a date range are completed
+           returns None if they're all completed or if
+           there are no voyages on the dates'''
+        
+        # Gets a tuple with a list of all voyages 
+        # in a date range and a list of all completed 
+        # voyages in a date range
         voyages_tuple = self.showAllVoyagesInRange()
 
         if voyages_tuple:
             voyages_on_date, completed_voyages_in_range = voyages_tuple
             
+            # All voyages are completed if the lists are equally long
             if len(completed_voyages_in_range) < len(voyages_on_date):
                 voyage = self.checkCompleted()
                 return voyage
@@ -135,7 +142,8 @@ class VoyageUI:
     
 
     def checkCompleted(self):
-        '''Checks if a voyage is completed'''
+        '''Gets an voyage id as an input and
+           checks if the voyage is completed'''
         while True:
             voyage_id = input("Enter voyage ID to select: ").strip()
             voyage = LL_API().getOneVoyage(voyage_id)
@@ -210,10 +218,6 @@ class VoyageUI:
             else:
                 raise Exception('A head flight attendant is already assigned to voyage\n')
             
-
-            
-
-
                 
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
@@ -223,23 +227,20 @@ class VoyageUI:
         airplane_type_on_voyage = airplane.get_planeTypeID()
 
         crew_on_voyage_list = voyage.getCrewOnVoyage()
-
+        
         if 'empty' in crew_on_voyage_list[0:3]:
             print()
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight attendant'\
                 .format(airplane_type_on_voyage))
-            print(90*'-')
+            print(95*'-')
             print()
                 
             while 'empty' in crew_on_voyage_list[0:3]:
         
                 crew_member = CrewUI().queryShowNotWorkingCrew()
                 if crew_member:
-                    if crew_member.getRole() == 'Pilot':
-                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-                    elif crew_member.getRole() == 'Cabincrew':
-                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
                 
                     crew_on_voyage_list = voyage.getCrewOnVoyage()
                 else:
@@ -247,8 +248,10 @@ class VoyageUI:
                 
             if crew_member:
                 LL_API().change_voyage(voyage)
-                print('A captain, pilot and head flight attendant have been added to voyage {}'\
+                print('A captain, pilot and head flight attendant have been added to voyage {}\n'\
                     .format(voyage.getVoyageID()))
+                AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
+                
             else:
                 return 
             

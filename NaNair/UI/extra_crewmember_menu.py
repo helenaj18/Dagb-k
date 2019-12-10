@@ -5,40 +5,51 @@ from API.LL_API import LL_API
 class AddExtraCrewmemberMenu:
 
     def startAddExtraCrewMenu(self,voyage,crew_on_voyage_list):
-        print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
-        print('Do you want to add an extra crew member?')
-        print('1 - Yes')
-        print('2 - No')
-        selection = input().strip()
-        if selection == '1':
-            CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
-            print()
+        while True:
+            print('Voyage {} has enough staff'.format(voyage.getVoyageID()))
+            print('Do you want to add an extra crew member?')
+            print('1 - Yes')
+            print('2 - No (Go back)')
+            selection = input('Please choose one of the above (1/2): ').strip()
 
-            if 'empty' in crew_on_voyage_list[-2:]:
-                if 'empty' in crew_on_voyage_list[-1]:
-                    crew_member = CrewUI().queryShowNotWorkingCrew()
-                    if crew_member:
-                        if self.checkIfCrewmemberWorking(voyage,crew_member):
-                            raise Exception('Flight attendant is assigned to another voyage on the same date\n\
-                                please chose another flight attendant\n')
-                        voyage.setFlightAttOne(crew_member)
-                    else:
-                        return 
+            if selection == '1':
+                CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
+                print()
+
+                if 'empty' in crew_on_voyage_list[-2:]:
+                    if 'empty' in crew_on_voyage_list[-2]:
+                        crew_member = CrewUI().queryShowNotWorkingCrew()
+                        if crew_member:
+                            if self.checkIfCrewmemberWorking(voyage,crew_member):
+                                raise Exception('Flight attendant is assigned to another voyage on the same date\n\
+                                    please chose another flight attendant\n')
+                            voyage.setFlightAttOne(crew_member)
                     
-                elif 'empty' in crew_on_voyage_list[-2]:
-                    crew_member = CrewUI().queryShowNotWorkingCrew()
-                    if crew_member:
-                        if self.checkIfCrewmemberWorking(voyage,crew_member):
-                            raise Exception('Flight attendant is assigned to another voyage on the same date\n\
-                                please chose another flight attendant\n')
-                        voyage.setFlightAttTwo(crew_member)
-                    else:
-                        return 
-                
-                LL_API().change_voyage(voyage)
+                        LL_API().change_voyage(voyage)
+                        crew_on_voyage_list = voyage.getCrewOnVoyage()
+                        print('\nEmployee successfully added!\n')
+
+                        
+                    elif 'empty' in crew_on_voyage_list[-1]:
+                        crew_member = CrewUI().queryShowNotWorkingCrew()
+                        if crew_member:
+                            if self.checkIfCrewmemberWorking(voyage,crew_member):
+                                raise Exception('Flight attendant is assigned to another voyage on the same date\n\
+                                    please chose another flight attendant\n')
+                            voyage.setFlightAttTwo(crew_member)
                     
-        elif selection == '2':
-            return 
+                        LL_API().change_voyage(voyage)
+                        crew_on_voyage_list = voyage.getCrewOnVoyage()
+                        print('\nEmployee successfully added!\n')
+                        print('The voyage is fully staffed!\n')
+                        return
+
+                else:
+                    print('The voyage is fully staffed!')
+                    return
+                        
+            elif selection == '2':
+                break 
 
     #def setEmpty(self,voyage):
 
