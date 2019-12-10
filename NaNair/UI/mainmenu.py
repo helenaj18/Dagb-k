@@ -8,9 +8,11 @@ class MainMenu:
 
     def start(self):
         # Header
-        print('#'*20)
-        print('{:^20}'.format('WELCOME'))
-        print('#'*20)
+        print()
+        print()
+        print('#'*28)
+        print('{:^28}'.format('WELCOME'))
+        print('#'*28)
 
         while True: 
             print()

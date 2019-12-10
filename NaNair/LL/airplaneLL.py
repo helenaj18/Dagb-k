@@ -97,7 +97,7 @@ class AirplaneLL:
                     return date_tuple
                 # Else asks for a new input
                 else:
-                    print('Invalid date! Try again: ')
+                    print('\nInvalid date! Try again: ')
                     year_str = input('Year: ').strip()
                     month_str = input('Month: ').strip()
                     day_str = input('Day: ').strip()

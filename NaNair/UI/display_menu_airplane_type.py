@@ -5,7 +5,7 @@ class DisplayMenuAirplaneType:
     def startDisplayAirplaneType(self):
 
         while True:
-            print('What type would you like to list? Please choose one of the following')
+            print('\nWhat type would you like to list? Please choose one of the following')
             print('1 - NAFokkerF100')
             print('2 - NAFokkerF28')
             print('3 - NABAE146')

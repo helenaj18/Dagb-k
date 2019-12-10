@@ -220,7 +220,7 @@ class VoyageUI:
 
         while True:
             if voyage == '':
-                voyage_id = input('Enter voyage ID: ').strip()
+                voyage_id = input('\nEnter voyage ID: ').strip()
             else: 
                 voyage_id = voyage.getVoyageID()
 
@@ -292,21 +292,20 @@ class VoyageUI:
         aircraft_ID = AirplaneUI().getAirplaneInput(datetime_object)
         voyage.setAircraftID(aircraft_ID)
 
-        return LL_API().change_voyage(voyage)
         print('Airplane has been added to voyage {}'.format(voyage.getVoyageID()))
-
+        return LL_API().change_voyage(voyage)
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
         '''Shows all voyages for a current time period'''
  
         if start_datetime == '':
-            print('Enter start date for time period')
+            print('\nEnter start date for time period')
             print()
             start_datetime = VoyageUI().getDateInput()
 
 
         if end_datetime == '':
-            print('Enter end date for time period')
+            print('\nEnter end date for time period')
             print()
             end_datetime = VoyageUI().getDateInput()
         

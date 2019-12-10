@@ -6,9 +6,10 @@ from API.LL_API import LL_API
 class DisplayMenuAirplanes: 
 
     def startDisplayAirplanes(self):
-        print('-'*20)
-        print('{:^20}'.format('DISPLAY - Airplanes'))
-        print('-'*20)
+        print()
+        print('-'*56)
+        print('{:^56}'.format('DISPLAY - Airplanes'))
+        print('-'*56)
         print()
 
         while True: 
@@ -36,7 +37,7 @@ class DisplayMenuAirplanes:
             
             # Gets availability status on airplanes at an inputted date
             elif selection == '4':
-                print('Enter the date you want to display')
+                print('\nEnter the date you want to display')
                 year_str = input('Year: ').strip()
                 month_str = input('Month: ').strip()
                 day_str = input('Day: ').strip()

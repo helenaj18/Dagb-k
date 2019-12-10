@@ -188,7 +188,7 @@ class CrewUI:
             
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        print('\n'+'-'*50)
+        print('\n'+'-'*44)
 
         if crew_member == None:
             print('Employee with this id not found!')
@@ -282,12 +282,12 @@ class CrewUI:
            crew file'''
 
         info_list = []
-        print('Please fill in the following information. Press enter to skip.\n')
+        print('\nPlease fill in the following information. Press enter to skip.\n')
 
         personal_id = self.getPersonalID()
 
         while LL_API().doesIDExist(personal_id):
-            print('Another crew member already has that ID! Please input another ID.')
+            print('Another crew member already has that ID! Please input another ID.\n')
             personal_id = input('Personal ID: ').strip()
 
         info_list.append(personal_id)

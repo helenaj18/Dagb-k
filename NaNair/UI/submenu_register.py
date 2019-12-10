@@ -10,9 +10,10 @@ class SubMenuRegister:
 
     def startSubMenuRegister(self):
         # Header
-        print('#'*20)
-        print('{:^20}'.format('REGISTER'))
-        print('#'*20)
+        print()
+        print('#'*28)
+        print('{:^28}'.format('REGISTER'))
+        print('#'*28)
         print()
 
         while True:

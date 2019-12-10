@@ -7,7 +7,7 @@ class DestinationUI:
         '''Shows all destinations of NanAir'''
         destinations = LL_API().get_destinations()
 
-        header_str = '{:<15}{:<15}{:<10}{:<12}{:<20}{:<12}'.format('Airport Code',
+        header_str = '\n{:<15}{:<15}{:<10}{:<12}{:<20}{:<12}'.format('Airport Code',
                                                                     'Destination',
                                                                     'Duration',
                                                                     'Distance',
@@ -130,7 +130,7 @@ class DestinationUI:
     def getDestinationAirport(self):
         '''Gets destination airport code from user'''
         while True:
-            destination_airport = input('Destination airport code (3char airport code): ').upper().strip()
+            destination_airport = input('\nDestination airport code (3char airport code): ').upper().strip()
             for letter in destination_airport:
                 if letter.isdigit():
                     print('Invalid airport code!')

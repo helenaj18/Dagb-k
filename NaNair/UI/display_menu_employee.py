@@ -7,9 +7,11 @@ import datetime
 class DisplayMenuEmployee: 
     def startDisplayMenuEmployee(self):
         # banner:
-        print('-'*20)
-        print('{:^20}'.format('DISPLAY - Employees'))
-        print('-'*20)
+        print()
+        print('-'*36)
+        print('{:^36}'.format('DISPLAY - Employees'))
+        print('-'*36)
+        print()
 
         while True: 
             print('What would you like to display?') 
@@ -31,6 +33,7 @@ class DisplayMenuEmployee:
 
             # A single employee is displayed with more percise info
             elif selection =='2':
+                print()
                 while True:
                     crew_id = input('Enter the Crew members ID (SSN): ').strip()
                     

@@ -7,7 +7,7 @@ class AirplaneUI:
     def showAllPlanes(self):
         '''Shows information about all airplanes NanAir owns'''
         
-        header_str = '{:<15}{:<15}{:<15}{:<15}{:<15}'.format('PlaneInsignia',\
+        header_str = '\n{:<15}{:<15}{:<15}{:<15}{:<15}'.format('PlaneInsignia',\
             'planeTypeId','Manufacturer','Model','Capacity')
         print(header_str)
         print('-'*len(header_str))
@@ -41,7 +41,7 @@ class AirplaneUI:
         # Gets a list of airplane instances of the same type
         airplanes_list = LL_API().showAirplanesByType(planeTypeID)
 
-        header_str = '{:<15}{:<15}{:<15}{:<15}{:<15}'.format('PlaneInsignia',\
+        header_str = '\n{:<15}{:<15}{:<15}{:<15}{:<15}'.format('PlaneInsignia',\
             'planeTypeId','Manufacturer','Model','Capacity')
         print(header_str)
         print('-'*len(header_str))
@@ -107,7 +107,7 @@ class AirplaneUI:
         planeTypeID,manufacturer,seats = self.getPlaneTypeIDInput()
 
         LL_API().addAirplane(planeInsignia,planeTypeID,manufacturer,seats)
-        print('Airplane successfully added!')
+        print('\nAirplane successfully added!')
 
 
     def getPlaneTypeIDInput(self):
@@ -171,7 +171,7 @@ class AirplaneUI:
     def getAirplaneInsigniaInput(self):
         '''Gets plane insignia from user'''
         while True:
-            planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper().strip()
+            planeInsignia = input('\nEnter Insignia of the new plane (TF-XXX): ').upper().strip()
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
                 return planeInsignia
             else:
