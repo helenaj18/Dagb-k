@@ -24,23 +24,42 @@ class VoyageUI:
         return datetime_input
     
     def getDateWithTime(self):
-        '''Gets a date and time input from the user and returns a datetime object'''
-
-        year_str = input('Year: ').strip()
-        month_str = input('Month: ').strip()
-        day_str = input('Day: ').strip()
+        '''Gets a date and time input from the user
+        and returns a datetime object'''
         
-        # check if date is valid
-        year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
+        while True:
+            year_str = input('Year: ').strip()
+            month_str = input('Month: ').strip()
+            day_str = input('Day: ').strip()
+            
+            # Check if date is valid
+            year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-        hour_str = input('Hour: ').strip()
-        minutes_str = input('Minute: ').strip()
-        print()
+            hour_str = input('Hour: ').strip()
+            minutes_str = input('Minute: ').strip()
+            print()
 
-        # check if time is valid
-        hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
+            # check if time is valid
+            hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
-        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+            time_now = datetime.datetime.now()
+
+            year_now = time_now.year
+            month_now = time_now.month
+            day_now = time_now.day
+            hour_now = time_now.hour
+            minutes_now = time_now.minute
+
+            if year_now<=year_int \
+                and month_now <= month_int \
+                    and day_now <= day_int \
+                        and hour_now <= hour_int \
+                            and minutes_now <= minutes_int:
+
+                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+            else:
+                print('Date has already passed')
+
 
 
     def seperateDatetimeString(self, datetime_str):
