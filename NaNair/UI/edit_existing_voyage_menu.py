@@ -1,8 +1,7 @@
 from UI.voyageUI import VoyageUI
-from UI.airplaneUI import AirplaneUI
 from UI.crewUI import CrewUI
 from API.LL_API import LL_API
-from UI.change_one_voyage_menu import ChangeVoyageMenu
+from UI.change_one_voyage_menu import ChangeOneVoyageMenu
 
 class EditExistingVoyage:
     EMPTY = 'empty'
@@ -43,5 +42,4 @@ class EditExistingVoyage:
 
             if voyage:
 
-                ChangeVoyageMenu(voyage).startChangeVoyageMenu()
-                
+                ChangeOneVoyageMenu(voyage).startChangeOneVoyageMenu()
