@@ -1,6 +1,5 @@
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
-from UI.change_employee_on_voyage_menu import ChangeEmployeeOnVoyage
 
 class ChangeOneVoyageMenu:
 
@@ -19,7 +18,6 @@ class ChangeOneVoyageMenu:
             print('2 - Add employees to a voyage')
             print('3 - Change number of sold seats out')
             print('4 - Change number of sold seats home')
-            print('5 - Change employees on voyage')
 
             print('m - Back to edit menu voyage\n')
             user_selection = input('Please choose one of the above (1-4 or m): ').strip()
@@ -54,9 +52,6 @@ class ChangeOneVoyageMenu:
             
             elif user_selection == '4':
                 VoyageUI().changeSoldSeats(self.voyage,'home')
-
-            elif user_selection == '5':
-                ChangeEmployeeOnVoyage().startChangeEmployeeOnVoyage()
 
             elif user_selection == 'm':
                 return
