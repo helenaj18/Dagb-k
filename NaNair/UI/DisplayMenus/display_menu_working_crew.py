@@ -5,7 +5,7 @@ import datetime
 class DisplayMenuWorkingCrew:
     
     def startDisplayMenuWorkingCrew(self):
-
+        '''Menu for displaying working/nonworking crew'''
         while True:
             print()
             print('What would you like to see?')
@@ -26,20 +26,19 @@ class DisplayMenuWorkingCrew:
                 #verifies if the date is correct
                 year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 
-                year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
-
+                # creates datetime object from input
                 date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
 
             if selection == '1':
-
+                # goes to menu to show working crew on specific day
                 return CrewUI().showWorkingCrew(date_datetime)
 
             elif selection == '2':
-
+                # goes to menu to show nonworking crew on specific day
                 return CrewUI().showNotWorkingCrew(date_datetime)
             
             elif selection == 'm':
-
+                # goes back to main menu
                 return
                 
             else:
