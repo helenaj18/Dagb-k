@@ -15,17 +15,18 @@ class DisplayMenuWorkingCrew:
 
             selection = input('Please choose one of the above (1/2/m): ').strip()
 
-            print('Enter the date you want to display')
-            year_str = input('Year: ').strip()
-            month_str = input('Month: ').strip()
-            day_str = input('Day: ').strip()
-            
-            #verifies if the date is correct
-            year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
+            if selection == '1' or selection == '2':
+                print('Enter the date you want to display')
+                year_str = input('Year: ').strip()
+                month_str = input('Month: ').strip()
+                day_str = input('Day: ').strip()
+                
+                #verifies if the date is correct
+                year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 
-            year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
+                year_int,month_int,day_int = AirplaneLL().verifyDate(year_str,month_str,day_str)
 
-            date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
+                date_datetime = datetime.datetime(year_int,month_int,day_int,0,0,0).isoformat()
 
             if selection == '1':
 

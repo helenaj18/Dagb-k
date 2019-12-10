@@ -5,7 +5,7 @@ import datetime
 
 
 class DisplayMenuEmployee: 
-    def startDisplayMenu(self):
+    def startDisplayMenuEmployee(self):
         # banner:
         print('-'*20)
         print('{:^20}'.format('DISPLAY - Employees'))
@@ -22,8 +22,8 @@ class DisplayMenuEmployee:
             print('5 - Working status by date')
             print('6 - Work Schedule for employee by ID')
             print('m - Back to main menu')
-            print()
-            selection = input('Please choose one of the above (1-6 or m): ').strip()
+
+            selection = input('\nPlease choose one of the above (1-6 or m): ').strip()
             
             # All employees are displayed
             if selection == '1':
@@ -41,9 +41,9 @@ class DisplayMenuEmployee:
                             # Prints information about one crew member
                             return CrewUI().showOneCrewMember(crew_id)
                         else:
-                            print('Invalid SSN')
+                            print('\nInvalid SSN!\n')
                     except ValueError:
-                        print('Invalid SSN')
+                        print('\nInvalid SSN!\n')
             
             # Goes to pilot display menu
             elif selection == '3':
@@ -59,26 +59,14 @@ class DisplayMenuEmployee:
             
             # allows user to see working schedule for a single crew member
             elif selection == '6':
-
-                while True:
-                    crew_id = input('Enter the Crew members ID (SSN): ').strip()
-                    
-                    try:
-                        # checks if personal ID is 10 letters and an integer
-                        int(crew_id)
-                        if len(crew_id) == 10:
-
-                            # Prints a work schedule for a crew member if he exists
-                            get_schedule = CrewUI().showSchedule(crew_id)
-                            if get_schedule == False:
-                                print('No employee with this ID')
-                            else:
-                                return
-                        else:
-                            print('Invalid SSN')
-        
-                    except ValueError:
-                        print('Invalid SSN')
+                crew_id = CrewUI().checkSSN()
+                
+                # Prints a work schedule for a crew member if he exists
+                get_schedule = CrewUI().showSchedule(crew_id)
+                if get_schedule == False:
+                    print('\nNo employee with this ID\n')
+                else:
+                    return 
                 
             # Goes back to main menu
             elif selection == 'm':

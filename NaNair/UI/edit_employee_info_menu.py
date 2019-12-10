@@ -84,4 +84,4 @@ class EditEmployeeMenu:
             return
 
         else:
-            print("Invalid input")
+            print("\nInvalid input!\n")

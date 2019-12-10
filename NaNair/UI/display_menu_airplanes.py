@@ -15,8 +15,9 @@ class DisplayMenuAirplanes:
             print('What would you like to display?')
             print()
             print('1 - List all airplanes')
-            print('2 - List airplanes by type')
-            print('3 - List airplanes by date and time')
+            print('2 - List all airplane types and number of licensed pilots')
+            print('3 - List airplanes by type')
+            print('4 - List airplanes by date and time')
             print('m - Back to main menu')
             print()
 
@@ -25,13 +26,16 @@ class DisplayMenuAirplanes:
             #Prints all airplanes owned by NaN Air
             if selection == '1':
                 return AirplaneUI().showAllPlanes()
+            
+            elif selection == '2':
+                return AirplaneUI().showAllAirplaneTypes()
 
             # Prints all airplanes that are a certain type, type is chosen on next screen
-            elif selection == '2':
+            elif selection == '3':
                 return DisplayMenuAirplaneType().startDisplayAirplaneType()
             
             # Gets availability status on airplanes at an inputted date
-            elif selection == '3':
+            elif selection == '4':
                 print('Enter the date you want to display')
                 year_str = input('Year: ').strip()
                 month_str = input('Month: ').strip()
