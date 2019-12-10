@@ -7,9 +7,10 @@ from API.LL_API import LL_API
 class SubMenuDisplay: 
     def startSubMenuDisplay(self):
         # Header
-        print('#'*20)
-        print('{:^20}'.format('DISPLAY'))
-        print('#'*20)
+        print()
+        print('#'*28)
+        print('{:^28}'.format('DISPLAY'))
+        print('#'*28)
         print()
 
         while True:

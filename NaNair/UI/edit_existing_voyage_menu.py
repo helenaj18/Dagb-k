@@ -7,22 +7,20 @@ class EditExistingVoyage:
     EMPTY = 'empty'
 
     def startEditExistingVoyage(self):
-        print()
-        print('1 - Enter voyage ID')
-        print('2 - See a list of voyages on a specific time range')
-        print('m - Back to main menu')
-        print()
         while True:
+            print()
+            print('1 - Enter voyage ID')
+            print('2 - See a list of voyages on a specific time range')
+            print('m - Back to edit menu')
+            print()
             selection = input('Please choose one of the above (1/2/m): ').strip()
             print()
 
             if selection == '1':
-                voyage_id = input('Enter voyage ID: ').strip()
-                voyage = LL_API().getOneVoyage(voyage_id)
+                voyage = VoyageUI().checkCompleted()
                 
                 if voyage != None:
                     VoyageUI().showOneVoyage(voyage)
-                    print()
             
             elif selection == '2':
                 print("Select date range to find a voyage to edit")
@@ -38,9 +36,9 @@ class EditExistingVoyage:
 
             else:
                 print('Invalid selection!')
-                p
-                
+                print()
                 return
+                
 
             if voyage:
 
@@ -65,10 +63,8 @@ class EditExistingVoyage:
                     
                     elif user_selection == '2':
                         if voyage.getAircraftID() == self.EMPTY:
-                            print()
-                            print('No aircraft assigned to voyage')
-                            print('Aircraft must me assigned before staff can be added')
-                            print() 
+                            print('\nNo aircraft assigned to voyage')
+                            print('Aircraft must me assigned before staff can be added\n')
 
                         else:
                             

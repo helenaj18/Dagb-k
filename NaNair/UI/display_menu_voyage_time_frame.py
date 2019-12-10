@@ -6,7 +6,7 @@ class DisplayVoyageTimeFrame:
     def startDisplayVoyageTimeFrame(self):
 
         while True: 
-            print('What would you like to display?')
+            print('\nWhat would you like to display?')
             print()
             print('1 - In a certain time frame')
             print('2 - On a specific day')
@@ -26,6 +26,7 @@ class DisplayVoyageTimeFrame:
   
             elif selection == '2':
                 ''' Lists all voyages on a specific day'''
+                print()
                 date_str = VoyageUI().getDateInput()
 
                 if VoyageUI().showAllVoyagesInRange(date_str, date_str):

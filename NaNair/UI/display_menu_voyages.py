@@ -5,9 +5,10 @@ class DisplayMenuVoyages:
 
 
     def startDisplayVoyages(self):
-        print('#'*20)
-        print('{:^20}'.format('DISPLAY - Voyages'))
-        print('#'*20)
+        print()
+        print('#'*30)
+        print('{:^30}'.format('DISPLAY - Voyages'))
+        print('#'*30)
         print()
 
 

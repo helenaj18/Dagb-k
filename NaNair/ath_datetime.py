@@ -13,8 +13,20 @@ departure_time2 = datetime.datetime(2020,12,4,0,0,0)
 
 print(departure_time2)
 
+<<<<<<< HEAD
 print('date')
 print(departure_time2.date())
+=======
+time_now = datetime.datetime.now()
+
+year_now = time_now.year
+month_now = time_now.month
+day_now = time_now.day
+hour_now = time_now.hour
+mintue_now = time_now.minute
+
+
+>>>>>>> 6a96f8b06e90bd9fb0f8366bad886a3f89492e22
 print('idag')
 today = datetime.date.today()
 print(today)
