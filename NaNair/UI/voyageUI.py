@@ -196,7 +196,7 @@ class VoyageUI:
         if 'empty' in crew_on_voyage_list[0:3]:
             print()
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
-            print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
+            print('You must add 1 captain and 1 copilot with license for {} and 1 head flight attendant'\
                 .format(airplane_type_on_voyage))
             print(60*'-')
             print()
@@ -309,10 +309,11 @@ class VoyageUI:
     
 
     def addAircraftToVoyage(self,voyage):
-        datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
+        depart_datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
+        arrival_datetime_object = self.revertDatetimeStrtoDatetime(voyage.getArrivalTimeHome())
 
         print()
-        aircraft_ID = AirplaneUI().getAirplaneInput(datetime_object)
+        aircraft_ID = AirplaneUI().getAirplaneInput(depart_datetime_object, arrival_datetime_object)
         voyage.setAircraftID(aircraft_ID)
 
         return LL_API().change_voyage(voyage)
@@ -414,6 +415,7 @@ class VoyageUI:
         print('Enter departure time: ')
 
         departure_datetime = self.getDateWithTime()
+        arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
         while LL_API().checkIfTakenDate(departure_datetime) == True:
             print('Another voyage is departing or arriving at that time. Please choose another date.')
@@ -428,7 +430,7 @@ class VoyageUI:
             selection = input().lower().strip()
 
         if selection == 'y':
-            plane_name = AirplaneUI().getAirplaneInput(departure_datetime)
+            plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
         else:
             plane_name = 'empty'
 

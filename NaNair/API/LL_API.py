@@ -123,6 +123,10 @@ class LL_API:
     def change_voyage(self,voyage):
         '''Adds changed info of an existing voyage chosen by user to file. '''
         return VoyageLL().changeVoyageFile(voyage)
+
+    def getArrivalTime(self, departure_datetime, dest):
+        '''Finds the arrival time home based on destination and departure time'''
+        return VoyageLL().findArrivalTimeHome(departure_datetime, dest)
     
     def getCompletedVoyagesInRange(self,start_datetime, end_datetime):
         return VoyageLL().getCompletedVoyagesInRange(start_datetime, end_datetime)
@@ -149,9 +153,9 @@ class LL_API:
         return VoyageLL().checkDestInput(dest_input)
     
 
-    def showPlanesForNewVoyage(self, time):
+    def showPlanesForNewVoyage(self, depart_time, arrival_time):
         '''Returns a list of class instances of those planes that are available at a certain time.'''
-        return VoyageLL().getAvailablePlanes(time)
+        return VoyageLL().getAvailablePlanes(depart_time, arrival_time)
     
     
     def checkPlaneInput(self, plane, list_of_planes):

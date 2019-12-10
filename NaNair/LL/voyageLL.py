@@ -228,6 +228,7 @@ class VoyageLL:
         destination as datetime object.'''
 
         destinations_instances = DestinationLL().getDestination()
+        duration_str = ''
 
         # finds duration of flight to destination as string
         for destination in destinations_instances:
@@ -248,19 +249,35 @@ class VoyageLL:
         return arrival_time_datetime
 
 
-    def getAvailablePlanes(self, departure_time):
-        '''Finds which planes are available at departing time. Returns list of insatnces of 
+    def getAvailablePlanes(self, departure_time, arrival_time):
+        '''Finds which planes are available at departing and arriving time. Returns list of instances of 
         available planes.'''
         
-        available_tuple = AirplaneLL().getAirplanesByDateTime(departure_time)
-        
-        # if available tuple is None all planes are available
-        if available_tuple != None:
-            not_available_planes,available_planes = available_tuple    
-        else:
-            available_planes = AirplaneLL().getAirplanes()
+        available_tuples_by_time = []
+        delta = datetime.timedelta(minutes=1)
+
+        while departure_time <= arrival_time:
+            available_tuples_by_time.append( AirplaneLL().getAirplanesByDateTime(departure_time) )
+            departure_time += delta    
+
+        all_airplanes = AirplaneLL().getAirplanes()
+        not_available_planes_insignia = []
+        available_planes = []
+
+        for plane in all_airplanes:
+            for available_tuple in available_tuples_by_time:
+                if available_tuple != None:
+                    not_available_planes_at_time,available_planes_at_time = available_tuple
+
+                    if plane in not_available_planes_at_time:
+                        not_available_planes_insignia.append(plane.get_planeInsignia())
+
+        for plane in all_airplanes:
+            if plane.get_planeInsignia() not in not_available_planes_insignia:
+                available_planes.append(plane)
         
         return available_planes
+
 
 
     def checkPlaneInput(self, plane_input, list_of_plane_instances):
@@ -274,6 +291,18 @@ class VoyageLL:
         return BoolCheck
 
  
+    def findArrivalTimeHome(self, departure_datetime, dest):
+        '''Finds arrival time home based on location and destination'''
+
+        arrival_time_gmt = self.findArrivalTime(dest, departure_datetime)
+        arrival_time_out = self.TimeDifference(arrival_time_gmt, dest)
+
+        departure_time_back = arrival_time_out + datetime.timedelta(hours=1)
+        arrival_time_back = self.findArrivalTime(dest, departure_time_back)
+
+        return arrival_time_back
+
+
     def addVoyage(self,destination, departure_time, plane):
         '''Finds values from input to register a new voyage. Returns a list with all info.'''    
     
@@ -289,7 +318,7 @@ class VoyageLL:
         # plane stops at destination for 1 hour 
         departure_time_back = arrival_time_out + datetime.timedelta(hours=1)
 
-        arrival_time_back = self.findArrivalTime(destination, departure_time_back)
+        arrival_time_back = self.findArrivalTimeHome(departure_time,destination)
 
         # info added to list in same order as in allvoyages.csv
         info_list = [voyage_id, flight_depart_num, self.seats_sold_out, 'KEF', destination,\
