@@ -2,6 +2,7 @@ from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
 from UI.crewUI import CrewUI
 from API.LL_API import LL_API
+from UI.change_one_voyage_menu import ChangeVoyageMenu
 
 class EditExistingVoyage:
     EMPTY = 'empty'
@@ -42,37 +43,5 @@ class EditExistingVoyage:
 
             if voyage:
 
-                while True:
-                    print("\nWhat do you want to change in voyage {}?".format(voyage.getVoyageID()))
-                    print(40*'-'+'\n')
+                ChangeVoyageMenu(voyage).startChangeVoyageMenu()
                 
-                    # Change existing voyage
-                    print('1 - Add an airplane to a voyage')
-                    print('2 - Add employees to a voyage')
-                    print('m - Back to edit menu\n')
-                    user_selection = input('Please choose one of the above (1/2/m): ').strip()
-                    
-                    if user_selection == '1':
-                        airplane_insignia_list = AirplaneUI().getAirplaneInsigniaList()
-                        if voyage.getAircraftID() in airplane_insignia_list:
-                            print('Airplane already assigned to Voyage')
-                            continue
-                        else:
-                            VoyageUI().addAircraftToVoyage(voyage)
-                            continue
-                    
-                    elif user_selection == '2':
-                        if voyage.getAircraftID() == self.EMPTY:
-                            print('\nNo aircraft assigned to voyage')
-                            print('Aircraft must me assigned before staff can be added\n')
-
-                        else:
-                            
-                            return VoyageUI().addCrewToVoyage(voyage)
-                    
-                    elif user_selection == 'm':
-                        return
-                    
-                    else:
-                        print('Invalid selection')
-                        
