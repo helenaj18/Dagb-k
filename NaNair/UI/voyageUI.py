@@ -146,8 +146,8 @@ class VoyageUI:
             else:
                 print('\nNo voyage with this ID\n')
 
-    def changeSoldSeats(self,voyage):
-        return LL_API().changeSoldSeats(voyage)
+    def changeSoldSeats(self,voyage,a_str):
+        return LL_API().changeSoldSeats(voyage,a_str)
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):

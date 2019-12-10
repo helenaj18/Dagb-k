@@ -383,25 +383,32 @@ class VoyageLL:
         return taken
 
 
-    def changeSoldSeats(self,voyage):
+    def changeSoldSeats(self,voyage,a_str):
         all_airplanes = IO_API().loadAirplaneFromFile()
 
-        # The maximum total seats
-        total_seats = '100'
-
         airplane_id = voyage.getAircraftID()
-
-        for airplane in all_airplanes:
-            if airplane.get_planeInsignia() == airplane_id:
-                total_seats = airplane.get_planeCapacity()
         
-        while True:
-            new_seats_str = input('Enter number of seats sold: ')
-            if int(new_seats_str) <= int(total_seats):
-                voyage.setSeatsSoldOut(new_seats_str)
-                return IO_API().changeVoyageFile(voyage)
-            else:
-                print('Invalid input! The airplane only has {} seats!'.format(int(total_seats)))
+        if airplane_id != 'empty':
+
+            for airplane in all_airplanes:
+                if airplane.get_planeInsignia() == airplane_id:
+                    total_seats = airplane.get_planeCapacity()
+            
+            while True:
+                new_seats_str = input('Enter number of seats sold: ')
+                if int(new_seats_str) <= int(total_seats):
+
+                    if a_str == 'home':
+                        voyage.setSeatsSoldHome(new_seats_str)
+                    else:
+                        voyage.setSeatsSoldOut(new_seats_str)
+
+                    return IO_API().changeVoyageFile(voyage)
+                else:
+                    print('Invalid input! The airplane only has {} seats!'.format(int(total_seats)))
+        
+        else:
+            print('\nNo aircraft has been assigned to the voyage, please add an aircraft first!\n')
 
 
     def changeVoyageFile(self,voyage):
