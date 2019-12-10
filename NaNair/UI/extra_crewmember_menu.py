@@ -11,17 +11,23 @@ class AddExtraCrewmemberMenu:
         print('1 - Yes')
         print('2 - No')
         selection = input().strip()
+
+        # if user chooses to add extra crew member
         if selection == '1':
             CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
             print()
-
+            
+            # if there is no flight attendant assigned (except head flight attendant)
             if 'empty' in crew_on_voyage_list[-2:]:
+                # if there is only one flight attendant
                 if 'empty' in crew_on_voyage_list[-1]:
                     crew_member = CrewUI().queryShowNotWorkingCrew()
                     if crew_member:
+                        # check if crew member is already working on that day
                         if self.checkIfCrewmemberWorking(voyage,crew_member):
                             raise Exception('Flight attendant is assigned to another voyage on the same date\n\
                                 please chose another flight attendant\n')
+                        # assign crew member to flight
                         voyage.setFlightAttOne(crew_member)
                     else:
                         return 
@@ -36,6 +42,7 @@ class AddExtraCrewmemberMenu:
                     else:
                         return 
                 
+                # new data sent to be written in file
                 LL_API().change_voyage(voyage)
                     
         elif selection == '2':
