@@ -107,7 +107,7 @@ class VoyageUI:
 
         else:
             print()
-            print('No voyages on these dates')
+            print('No voyages on these dates.')
             print()
             return None
     

@@ -20,15 +20,17 @@ class EditExistingVoyage:
                 voyage = LL_API().getOneVoyage(voyage_id)
                 
                 if voyage != None:
-                    return VoyageUI().showOneVoyage(voyage)
+                    VoyageUI().showOneVoyage(voyage)
+                    print()
             
             elif selection == '2':
                 print("Select date range to find a voyage to edit")
                 voyage = VoyageUI().queryOneVoyage()
                 if voyage:
-                    return VoyageUI().showOneVoyage(voyage)
+                    VoyageUI().showOneVoyage(voyage)
+                    print()
                 else:
-                    return voyage
+                    return 
 
             elif selection == 'm':
                 return
