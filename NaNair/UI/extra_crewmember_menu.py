@@ -1,6 +1,7 @@
 from UI.crewUI import CrewUI
 from API.LL_API import LL_API
 
+
 class AddExtraCrewmemberMenu:
 
     def startAddExtraCrewMenu(self,voyage,crew_on_voyage_list):
@@ -17,6 +18,9 @@ class AddExtraCrewmemberMenu:
                 if 'empty' in crew_on_voyage_list[-1]:
                     crew_member = CrewUI().queryShowNotWorkingCrew()
                     if crew_member:
+                        if self.checkIfCrewmemberWorking(voyage,crew_member):
+                            raise Exception('Flight attendant is assigned to another voyage on the same date\n\
+                                please chose another flight attendant\n')
                         voyage.setFlightAttOne(crew_member)
                     else:
                         return 
@@ -24,6 +28,9 @@ class AddExtraCrewmemberMenu:
                 elif 'empty' in crew_on_voyage_list[-2]:
                     crew_member = CrewUI().queryShowNotWorkingCrew()
                     if crew_member:
+                        if self.checkIfCrewmemberWorking(voyage,crew_member):
+                            raise Exception('Flight attendant is assigned to another voyage on the same date\n\
+                                please chose another flight attendant\n')
                         voyage.setFlightAttTwo(crew_member)
                     else:
                         return 
@@ -34,3 +41,19 @@ class AddExtraCrewmemberMenu:
             return 
 
     #def setEmpty(self,voyage):
+
+    def checkIfCrewmemberWorking(self,voyage,crew_member):
+        voyage_departuredate_str = voyage.getDepartureTime()
+        voyage_departure_datetime = LL_API().revertDatetimeStrtoDatetime(voyage_departuredate_str)
+
+        voyage_arrivaldate_str = voyage.getArrivalTimeHome()
+        voyage_arrival_datetime = LL_API().revertDatetimeStrtoDatetime(voyage_arrivaldate_str)
+
+
+        voyages_on_date = LL_API().get_all_voyages_in_date_range(voyage_departure_datetime,voyage_arrival_datetime)
+
+        for voyage in voyages_on_date:
+            if crew_member.getCrewID() in voyage.getCrewOnVoyage():
+                return True
+
+

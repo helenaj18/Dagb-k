@@ -14,11 +14,15 @@ class VoyageLL:
     
     def getUpcomingVoyges(self):
         voyage_list = IO_API().loadVoyageFromFile()
-        date_today =  datetime.datetime.today()
+        date_today =  datetime.date.today()
         upcoming_voyages_list = []
+    
+
 
         for voyage in voyage_list: 
-            if voyage.getDepartureTime() >= date_today:
+            voyage_departure_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage.getDepartureTime())
+            voyage_departure_date = voyage_departure_datetime.date()
+            if voyage_departure_date >= date_today:
                 upcoming_voyages_list.append(voyage)
 
         return upcoming_voyages_list

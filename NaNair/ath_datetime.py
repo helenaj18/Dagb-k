@@ -9,13 +9,12 @@ date, time = departure_time.split('T')
 
 print(date)
 
-departure_time2 = datetime.datetime(2020,12,4,0,0,0).isoformat()
+departure_time2 = datetime.datetime(2020,12,4,0,0,0)
 
 print(departure_time2)
 
-
-
-
+print('date')
+print(departure_time2.date())
 print('idag')
 today = datetime.date.today()
 print(today)

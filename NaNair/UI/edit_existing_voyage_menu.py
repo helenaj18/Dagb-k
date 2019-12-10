@@ -14,6 +14,7 @@ class EditExistingVoyage:
         print()
         while True:
             selection = input('Please choose one of the above (1/2/m): ').strip()
+            print()
 
             if selection == '1':
                 voyage_id = input('Enter voyage ID: ').strip()
@@ -37,14 +38,16 @@ class EditExistingVoyage:
 
             else:
                 print('Invalid selection!')
-                print()
+                p
                 
                 return
 
             if voyage:
 
                 while True:
-                    print("\nWhat do you want to change in voyage {}?\n".format(voyage.getVoyageID()))
+                    print("\nWhat do you want to change in voyage {}?".format(voyage.getVoyageID()))
+                    print(40*'-'+'\n')
+                
                     # Change existing voyage
                     print('1 - Add an airplane to a voyage')
                     print('2 - Add employees to a voyage')

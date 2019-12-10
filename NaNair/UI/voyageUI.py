@@ -140,27 +140,37 @@ class VoyageUI:
         if role == 'Pilot':
             if crew_member.getCaptain():
                 if voyage.getCaptain() == 'empty':
+                    if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
+                        raise Exception('Captain is assigned to another voyage on the same date\n\
+                            Please chose another captain\n')
+
                     voyage.setCaptain(crew_member,airplane_type_on_voyage)
                 else: 
-                    raise Exception('Captain already added to voyage')
+                    raise Exception('A captain is already assigned to the voyage\')
             else:
                 if voyage.getCopilot() == 'empty':
+                    if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
+                        raise Exception('pilot is assigned to another voyage on the same date\n\
+                            Please chose another pilot\n')
                     voyage.setCopilot(crew_member,airplane_type_on_voyage)
                 else: 
-                    raise Exception('Copilot already added to voyage')
-                # GERA eh do you want to replace him 
-#############################################
+                    raise Exception('A copilot is already assigned to the voyage\n')
 
         elif role == 'Cabincrew':
             
             if voyage.getHeadFlightAtt() == 'empty':
+                if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
+                        raise Exception('Head flight attendant is assigned to another voyage on the same date\n\
+                            Please chose another head flight attendant\n')
                 voyage.setHeadFlightAtt(crew_member)
             else:
-                raise Exception('Head flight attendant already added to voyage')
-            
-                
+                raise Exception('A head flight attendant is already assigned to voyage\n')
             
 
+            
+
+
+                
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
         #crew_member = CrewUI().queryShowNotWorkingCrew()
@@ -175,7 +185,7 @@ class VoyageUI:
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
                 .format(airplane_type_on_voyage))
-            print(60*'-')
+            print(90*'-')
             print()
                 
             while 'empty' in crew_on_voyage_list[0:3]:
@@ -208,8 +218,7 @@ class VoyageUI:
         else: 
             print('\nVoyage is fully staffed!\n')
             return 
-############ gera change crew members menu 
-
+#
 
 
 
