@@ -31,7 +31,9 @@ class ChangeOneVoyageMenu:
                 # If an aircraft is assigned to the voyage 
                 # the aircraft ID would be in the airplane insignia list
                 if self.voyage.getAircraftID() in airplane_insignia_list:
-                    print('Airplane already assigned to Voyage')
+                    print('-'*40+'\n')
+                    print('Airplane already assigned to Voyage!')
+                    print('\n'+'-'*40)
                     continue
                 else:
                     VoyageUI().addAircraftToVoyage(self.voyage)
@@ -39,8 +41,10 @@ class ChangeOneVoyageMenu:
             
             elif user_selection == '2':
                 if self.voyage.getAircraftID() == self.EMPTY:
-                    print('\nNo aircraft assigned to voyage')
-                    print('Aircraft must me assigned before staff can be added\n')
+                    print('-'*40+'\n')
+                    print('No aircraft assigned to voyage')
+                    print('Aircraft must me assigned before staff can be added')
+                    print('\n'+'-'*40)
 
                 else:
                     return VoyageUI().addCrewToVoyage(self.voyage)
