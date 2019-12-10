@@ -13,7 +13,13 @@ departure_time2 = datetime.datetime(2020,12,4,0,0,0).isoformat()
 
 print(departure_time2)
 
+time_now = datetime.datetime.now()
 
+year_now = time_now.year
+month_now = time_now.month
+day_now = time_now.day
+hour_now = time_now.hour
+mintue_now = time_now.minute
 
 
 print('idag')

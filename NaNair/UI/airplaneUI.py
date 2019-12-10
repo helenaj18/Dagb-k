@@ -145,11 +145,11 @@ class AirplaneUI:
                 print('\nInvalid Type ID!\n')
 
 
-    def getAirplaneInput(self,departure_datetime):
+    def getAirplaneInput(self,departure_datetime, arrival_datetime):
         print('Available airplanes at time of departure:')
         print()
 
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
+        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime, arrival_datetime)
         print('{:<10}{:<15}'.format('Insignia', 'Type'))
         print('-'*25)
 

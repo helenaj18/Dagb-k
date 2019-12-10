@@ -206,10 +206,10 @@ class AirplaneLL:
         if voyages_on_date_list != None:
             # Go through all voyages on the date and match it with an airplane
             for voyage in voyages_on_date_list:
-                for airplane in airplane_list:
-                    # If the voyage hasn't been assigned to an airplane, 
-                    # break and go to the next voyage
-                    if voyage.getAircraftID() != 'empty':
+                # If the voyage hasn't been assigned to an airplane, 
+                # go to the next voyage
+                if voyage.getAircraftID() != 'empty':
+                    for airplane in airplane_list:
                         if voyage.getAircraftID() == airplane.get_planeInsignia():
                             # Add the airplane and information tuple to the list of airplanes 
                             # that are in use that day
@@ -217,16 +217,15 @@ class AirplaneLL:
                                 voyage.getDestination().getDestinationName(),\
                                     voyage.getDepartureTime(),voyage.getArrivalTimeOut(),\
                                         voyage.getArrivalTimeHome(),voyage.getFlightNumbers()))
-                    else:
-                        break
-            else:
-                # All airplanes are free if the airplanes on date info list is empty
-                if len(airplanes_on_date_info_list) != 0:
-                    return airplanes_on_date_info_list
-                else:
-                    return None
+            
         else:
             # All airplanes are free if there's no voyage at the date
+            return None
+        
+        # All airplanes are free if the airplanes on date info list is empty
+        if len(airplanes_on_date_info_list) != 0:
+            return airplanes_on_date_info_list
+        else:
             return None
 
     def seperateDatetimeString(self, datetime_str):   
