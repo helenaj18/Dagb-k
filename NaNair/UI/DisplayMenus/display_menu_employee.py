@@ -1,6 +1,6 @@
 from UI.crewUI import CrewUI
-from UI.display_menu_pilots import DisplayMenuPilots
-from UI.display_menu_working_crew import DisplayMenuWorkingCrew
+from UI.DisplayMenus.display_menu_pilots import DisplayMenuPilots
+from UI.DisplayMenus.display_menu_working_crew import DisplayMenuWorkingCrew
 import datetime
 
 

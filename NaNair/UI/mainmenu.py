@@ -1,7 +1,7 @@
 from API.LL_API import LL_API
 from UI.submenu_register import SubMenuRegister
-from UI.submenu_edit import SubMenuEdit
-from UI.submenu_display import SubMenuDisplay
+from UI.EditMenus.submenu_edit import SubMenuEdit
+from UI.DisplayMenus.submenu_display import SubMenuDisplay
 
 
 class MainMenu:

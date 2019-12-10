@@ -2,7 +2,7 @@ from API.LL_API import LL_API
 import datetime
 from UI.airplaneUI import AirplaneUI
 from UI.crewUI import CrewUI
-from UI.extra_crewmember_menu import AddExtraCrewmemberMenu
+from UI.EditMenus.extra_crewmember_menu import AddExtraCrewmemberMenu
 import datetime
 
 

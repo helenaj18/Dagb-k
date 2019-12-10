@@ -1,7 +1,7 @@
 from UI.voyageUI import VoyageUI
 from UI.crewUI import CrewUI
 from API.LL_API import LL_API
-from UI.change_one_voyage_menu import ChangeOneVoyageMenu
+from UI.EditMenus.change_one_voyage_menu import ChangeOneVoyageMenu
 
 class EditExistingVoyage:
     EMPTY = 'empty'
@@ -21,6 +21,7 @@ class EditExistingVoyage:
                 
                 if voyage != None:
                     VoyageUI().showOneVoyage(voyage)
+
             
             elif selection == '2':
                 print("Select date range to find a voyage to edit")
@@ -39,8 +40,14 @@ class EditExistingVoyage:
                 print()
                 voyage = None
                 
-                
+            # voyage_state = LL_API().get_status_of_voyage(voyage)    
 
             if voyage:
 
                 ChangeOneVoyageMenu(voyage).startChangeOneVoyageMenu()
+
+            # elif voyage_state == 'Completed':
+            #     print('Voyage is completed\n\
+            #         Do you want to add sold seats?')
+            #     print()
+            #     selection = input()

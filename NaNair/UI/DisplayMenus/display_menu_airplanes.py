@@ -1,5 +1,5 @@
 from UI.airplaneUI import AirplaneUI
-from UI.display_menu_airplane_type import DisplayMenuAirplaneType
+from UI.DisplayMenus.display_menu_airplane_type import DisplayMenuAirplaneType
 import datetime
 from API.LL_API import LL_API
 

@@ -51,7 +51,6 @@ class AddExtraCrewmemberMenu:
             elif selection == '2':
                 break 
 
-    #def setEmpty(self,voyage):
 
     def checkIfCrewmemberWorking(self,voyage,crew_member):
         voyage_departuredate_str = voyage.getDepartureTime()
