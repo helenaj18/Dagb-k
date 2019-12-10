@@ -74,7 +74,7 @@ class VoyageUI:
                         else:
                             return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                     else:
-                        return print('Date has already passed!')
+                        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                 else:
                     print('Date has already passed!')
             else:
