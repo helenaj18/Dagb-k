@@ -188,18 +188,18 @@ class CrewUI:
             
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        print('\n'+'-'*44)
+        print('\n'+'-'*45)
 
         if crew_member == None:
             print('Employee with this id not found!')
             print()
             return False
         else:
-            print('Name: {}'.format(crew_member.getName()))
-            print('SSN: {}'.format(crew_member.getCrewID()))
-            print('Address: {}'.format(crew_member.getAddress()))
-            print('Phone number: {}'.format(crew_member.getPhoneNumber()))
-            print('Email: {}'.format(crew_member.getEmail()))
+            print('Name: {:<15}'.format(crew_member.getName()))
+            print('SSN: {:<15}'.format(crew_member.getCrewID()))
+            print('Address: {:<15}'.format(crew_member.getAddress()))
+            print('Phone number: {:<15}'.format(crew_member.getPhoneNumber()))
+            print('Email: {:<15}'.format(crew_member.getEmail()))
 
             if type(crew_member) == Pilot:
                 if crew_member.getBool():
@@ -470,7 +470,7 @@ class CrewUI:
             start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
             start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0) #VERIFY INPUT
             
-            end_year_str,end_month_str,endt_day_str = self.getDateInput('end')
+            end_year_str,end_month_str,end_day_str = self.getDateInput('end')
 
             end_year_int, end_month_int, end_day_int = LL_API().verifyDate(end_year_str, end_month_str, end_day_str)
             end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0) # VERIFY INPUT
@@ -478,7 +478,7 @@ class CrewUI:
             work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
             
         
-            name_header_str = '{:^45}\nID: {:^45}'.format(employee.getName(),crew_ID)
+            name_header_str = '{:^45}\n{:^45}'.format(employee.getName(),'ID:'+rew_ID)
             date_str = '{}.{}.{}-{}.{}.{}'.format(\
                 start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
             header_str = '{:^45}\n{:^45}'.format('Working Schedule',date_str)
