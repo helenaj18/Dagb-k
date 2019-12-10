@@ -2,7 +2,7 @@ from UI.crewUI import CrewUI
 from API.LL_API import LL_API
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
-from UI.edit_employee_licence import EditEmployeeLicense
+from UI.EditMenus.edit_employee_licence import EditEmployeeLicense
 
 
 class EditEmployeeMenu:

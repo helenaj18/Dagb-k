@@ -1,5 +1,5 @@
 from UI.crewUI import CrewUI
-from UI.display_menu_licensed_pilots import DisplayMenuAirplaneType
+from UI.DisplayMenus.display_menu_licensed_pilots import DisplayMenuAirplaneType
 
 class DisplayMenuPilots: 
     def startDisplayPilots(self):

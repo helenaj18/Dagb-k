@@ -1,7 +1,7 @@
-from UI.display_menu_airplanes import DisplayMenuAirplanes
-from UI.display_menu_voyages import DisplayMenuVoyages
+from UI.DisplayMenus.display_menu_airplanes import DisplayMenuAirplanes
+from UI.DisplayMenus.display_menu_voyages import DisplayMenuVoyages
 from UI.destinationUI import DestinationUI
-from UI.display_menu_employee import DisplayMenuEmployee
+from UI.DisplayMenus.display_menu_employee import DisplayMenuEmployee
 from API.LL_API import LL_API
 
 class SubMenuDisplay: 

@@ -1,5 +1,5 @@
 from UI.voyageUI import VoyageUI
-from UI.display_menu_voyage_time_frame import DisplayVoyageTimeFrame
+from UI.DisplayMenus.display_menu_voyage_time_frame import DisplayVoyageTimeFrame
 
 class DisplayMenuVoyages: 
     '''Main display menu for voyages'''

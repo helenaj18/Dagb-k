@@ -1,11 +1,11 @@
 # from UI.mainmenu import MainMenu
 from API.LL_API import LL_API
 from UI.crewUI import CrewUI
-from UI.edit_employee_info_menu import EditEmployeeMenu
+from UI.EditMenus.edit_employee_info_menu import EditEmployeeMenu
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
 from UI.destinationUI import DestinationUI
-from UI.edit_existing_voyage_menu import EditExistingVoyage
+from UI.EditMenus.edit_existing_voyage_menu import EditExistingVoyage
 class SubMenuEdit:
 
     EMPTY = 'empty'
@@ -49,24 +49,18 @@ class SubMenuEdit:
                     print('Invalid selection!')
 
             elif selection == '3':
-                crew_id = CrewUI().getPersonalID()
-
                 while True:
-                    #lista upplýsingar um starfsmanninn
-                    #employee = LL_API().get_crew_member_by_id(crew_id)
-                    crew_member_found = CrewUI().showOneCrewMember(crew_id) #prentar út upplýsingar um starfsmann
+                    # Prints out information about an employee
+                    crew_id = CrewUI().getPersonalID()
+                    crew_member_found = CrewUI().showOneCrewMember(crew_id) 
                     if crew_member_found: 
-                        return EditEmployeeMenu().editSelection(crew_id)    
-                    else: 
-                        crew_id = input('Input employee ID: ')
                         if DestinationUI().checkIfInt(crew_id):
                             if len(crew_id) == 10:
-                                return crew_id
+                                return EditEmployeeMenu().editSelection(crew_id) 
                             else:
                                 print('Invalid personal ID!')
                         else:
                             print('Invalid personal ID!')
-                        
 
             elif selection == 'm':
                 # Back to main menu
