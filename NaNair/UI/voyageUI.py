@@ -461,7 +461,7 @@ class VoyageUI:
 
                 print('Would you like to assign an airplane to this voyage? (Y/N)')
                 print('(You can also do this later)')
-                selection = input().lower().strip()
+                selection = input('Y/N: ').lower().strip()
 
                 while selection != 'y' and selection != 'n':
                     print('Please enter Y or N to make your choice')
@@ -476,6 +476,7 @@ class VoyageUI:
 
                 print()
                 print('New voyage succesfully added!\n')
+                return
             else:
                 return
 
