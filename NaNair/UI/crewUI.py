@@ -55,13 +55,16 @@ class CrewUI:
 
         while True:
             print('What staff member do you want to pick from the list above (Employee ID): ')
+            print('1 - cancel and go back')
             
             crew_id = input().lower().strip()
-
-            employee = LL_API().get_crew_member_by_id(crew_id)
-            if employee != None:
-                return employee
-            print('Employee not found, try again')
+            if crew_id != '1':
+                employee = LL_API().get_crew_member_by_id(crew_id)
+                if employee != None:
+                    return employee
+                print('Employee not found, try again')
+            else:
+                return
 
 
     def showQualifiedCrew(self, depart_time_str, plane_insignia):

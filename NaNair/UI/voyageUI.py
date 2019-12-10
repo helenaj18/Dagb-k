@@ -107,7 +107,7 @@ class VoyageUI:
 
         else:
             print()
-            print('No voyages on these dates')
+            print('No voyages on these dates.')
             print()
             return None
     
@@ -152,6 +152,7 @@ class VoyageUI:
 #############################################
 
         elif role == 'Cabincrew':
+            
             if voyage.getHeadFlightAtt() == 'empty':
                 voyage.setHeadFlightAtt(crew_member)
             else:
@@ -174,25 +175,28 @@ class VoyageUI:
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
                 .format(airplane_type_on_voyage))
+                
             while 'empty' in crew_on_voyage_list[0:3]:
-                # insignia = voyage.getAircraftID()
-                # CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
-                print()
-
+        
                 crew_member = CrewUI().queryShowNotWorkingCrew()
-                if crew_member.getRole() == 'Pilot':
-                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-                elif crew_member.getRole() == 'Cabincrew':
-                    self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-               
-                crew_on_voyage_list = voyage.getCrewOnVoyage()
-            
-            LL_API().change_voyage(voyage)
+                if crew_member:
+                    if crew_member.getRole() == 'Pilot':
+                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                    elif crew_member.getRole() == 'Cabincrew':
+                        self.checkRank(crew_member,voyage,airplane_type_on_voyage)
+                
+                    crew_on_voyage_list = voyage.getCrewOnVoyage()
+                else:
+                    break
+                
+            if crew_member:
+                LL_API().change_voyage(voyage)
+            else:
+                return 
             
 
         elif 'empty' in crew_on_voyage_list:
-            insignia = voyage.getAircraftID()
-            CrewUI().showQualifiedCrew(voyage.getDepartureTime(), insignia)
+           
             print()
 
             AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
@@ -200,6 +204,9 @@ class VoyageUI:
         else: 
             print('\nVoyage is fully staffed!\n')
             return 
+############ gera change crew members menu 
+
+
 
 
     
@@ -277,14 +284,12 @@ class VoyageUI:
     def addAircraftToVoyage(self,voyage):
         datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
 
-        AirplaneUI().showAirplanesByDateTime(datetime_object)
         print()
-        print('Which Aircraft would you like to assign to voyage {}? (PlaneInsignia)'.format(voyage.getVoyageID()))
-        print()
-        aircraft_ID = input().upper().strip()
+        aircraft_ID = AirplaneUI().getAirplaneInput(datetime_object)
         voyage.setAircraftID(aircraft_ID)
 
         return LL_API().change_voyage(voyage)
+        print('Airplane has been added to voyage {}'.format(voyage.getVoyageID()))
 
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
@@ -373,27 +378,6 @@ class VoyageUI:
             check = LL_API().checkDestInput(dest)
         
         return dest
-        
-
-
-    
-    def getAirplaneInput(self,departure_datetime):
-        print('Please choose an airplane.')
-
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
-
-        for plane in airplanes_class_list:
-            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
-                    plane.get_planeTypeID()))        
-
-        plane_name = input('\nChosen plane (type name of plane on this format TF-XXX): ').upper().strip()
-        check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
-
-        while check == False:
-            plane_name = input('Please choose one of the listed planes: ').upper().strip()
-            check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
-        
-        return plane_name
 
 
 
@@ -417,7 +401,7 @@ class VoyageUI:
             selection = input().lower().strip()
 
         if selection == 'y':
-            plane_name = self.getAirplaneInput(departure_datetime)
+            plane_name = AirplaneUI().getAirplaneInput(departure_datetime)
         else:
             plane_name = 'empty'
 
