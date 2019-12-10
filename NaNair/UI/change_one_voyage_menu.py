@@ -21,7 +21,7 @@ class ChangeOneVoyageMenu:
             print('4 - Change employees on voyage')
 
             print('m - Back to edit menu voyage\n')
-            user_selection = input('Please choose one of the above (1/2/m): ').strip()
+            user_selection = input('Please choose one of the above (1-4 or m): ').strip()
             
             if user_selection == '1':
                 # Gets a list of all airplane insignias
@@ -45,7 +45,7 @@ class ChangeOneVoyageMenu:
                     return VoyageUI().addCrewToVoyage(self.voyage)
             
             elif user_selection == '3':
-                pass
+                VoyageUI().changeSoldSeats(self.voyage)
 
             elif user_selection == '4':
                 ChangeEmployeeOnVoyage().startChangeEmployeeOnVoyage()
