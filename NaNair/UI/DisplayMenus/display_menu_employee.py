@@ -63,6 +63,7 @@ class DisplayMenuEmployee:
             
             # allows user to see working schedule for a single crew member
             elif selection == '6':
+                print()
                 crew_id = CrewUI().checkSSN()
                 
                 # Prints a work schedule for a crew member if he exists
