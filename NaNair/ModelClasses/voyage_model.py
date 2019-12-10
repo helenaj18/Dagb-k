@@ -118,29 +118,12 @@ class Voyage:
 
 
     def setFlightAttOne(self, new_att):
-        self.__flight_att_one = new_att
+        self.__flight_att_one = new_att.getCrewID()
     
     def setFlightAttTwo(self, new_att):
-        self.__flight_att_two = new_att
+        self.__flight_att_two = new_att.getCrewID()
 
-    def setPilot(self, pilot):
-        if pilot.isCaptain():
-            self.setCaptain(pilot)
-        else:
-            self.setCopilot(pilot)
 
-    # def addCrewMember(self, crew_member):
-    #     role = crew_member.getRole()
-    #     if role == 'Pilot':
-    #         if crew_member.getCaptain():
-    #             self.setCaptain(crew_member)
-    #         else:
-    #             self.setCopilot(crew_member)
-    #     elif role == 'Cabincrew':
-    #         if crew_member.getHeadFlightAtt():
-    #             self.setHeadFlightAtt()
-    #         else:
-    #             not_head = True
                 
 
             
