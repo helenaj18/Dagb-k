@@ -99,10 +99,10 @@ class CrewUI:
         format_str = ''
 
         if crew_list != None:
-            print('\n'+'#'*30)
-            print('{:^30}'.format(header))
+            print('\n'+'-'*45)
+            print('{:^45}'.format(header))
             print()
-            print('#'*30+'\n')
+            print('-'*45+'\n')
             if header == 'Working Crew':
                 header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}'.format(
                     'Role','Name','Employee Id','Position','Email',\
@@ -159,13 +159,16 @@ class CrewUI:
 
             print()
         else:
-            print('\nNo voyages on this day\n')
+            print()
+            print('{:^45}'.fomat('No voyages on this day!'))
+            print('-'*45)
 
     def checkSSN(self):
         '''Checks if an SSN input is correct and returns the SSN'''
 
         while True:
-            crew_id = input('Enter the Crew members ID (SSN): ').strip()
+            print('\nEnter the Crew members ID\n(SSN format XXXXXXXXXX)')
+            crew_id = input('').strip()
             
             try:
                 # checks if personal ID is 10 letters and an integer
@@ -195,24 +198,24 @@ class CrewUI:
             print()
             return False
         else:
-            print('Name: {:<15}'.format(crew_member.getName()))
-            print('SSN: {:<15}'.format(crew_member.getCrewID()))
-            print('Address: {:<15}'.format(crew_member.getAddress()))
-            print('Phone number: {:<15}'.format(crew_member.getPhoneNumber()))
-            print('Email: {:<15}'.format(crew_member.getEmail()))
+            print('{:<15}{:<15}'.format('Name:',crew_member.getName()))
+            print('{:<15}{:<15}'.format('SSN:',crew_member.getCrewID()))
+            print('{:<15}{:<15}'.format('Address:',crew_member.getAddress()))
+            print('{:<15}{:<15}'.format('Phone number:',crew_member.getPhoneNumber()))
+            print('{:<15}{:<15}'.format('Email:',crew_member.getEmail()))
 
             if type(crew_member) == Pilot:
                 if crew_member.getBool():
-                    print('Rank: Captain')
-                    print('License: {}'.format(crew_member.getLicense()))
+                    print('{:<15}{:<15}'.format('Rank:','Captain'))
+                    print('{:<15}{:<15}'.format('License:',crew_member.getLicense()))
                 else:
-                    print('Rank: Co-pilot')
-                    print('License: {}'.format(crew_member.getLicense()))
+                    print('{:<15}{:<15}'.format('Rank:','Co-pilot'))
+                    print('{:<15}{:<15}'.format('License:',crew_member.getLicense()))
             else:
                 if crew_member.getBool():
-                    print('Rank: Head service manager')
+                    print('{:<15}{:<15}'.format('Rank:','Head service manager'))
                 else:
-                    print('Rank: Flight attendant')
+                    print('{:<15}{:<15}'.format('Rank:','Flight attendant'))
 
             print()
             return True
@@ -296,9 +299,7 @@ class CrewUI:
             print('{:^45}'.format('Please input another ID.'))
             print('-'*45)
             print()
-
-            #personal_id = input('Personal ID: ').strip()
-#################            
+          
             personal_id = self.getPersonalID()
 
         info_list.append(personal_id)
@@ -345,9 +346,9 @@ class CrewUI:
 
         #info_list for pilots is longer because of license
 
-        print(' * '*15)
-        print('New Employee added!') 
-        print(' * '*15)
+        
+        print('\nNew Employee added!\n') 
+       
 
         return
     
