@@ -122,11 +122,15 @@ class VoyageUI:
                 voyage = self.checkCompleted()
                 return voyage
             else:
-                print('\nAll voyages in range are completed, not possible to change\n')
+                print('-'*40+'\n')
+                print('All voyages in range are completed, not possible to change')
+                print('\n'+'-'*40)
                 return None
 
         else:
-            print('\nNo voyages on these dates.\n')
+            print('-'*40+'\n')
+            print('No voyages on these dates.')
+            print('\n'+'-'*40)
             return None
     
 
@@ -138,8 +142,9 @@ class VoyageUI:
             if voyage:
                 voyage_state = LL_API().get_status_of_voyage(voyage)
                 if voyage_state == 'Completed':
-                    print('\nVoyage is completed, not possible to change\n')
-                    print('-'*30)
+                    print('-'*40+'\n')
+                    print('Voyage is completed, not possible to change')
+                    print('\n'+'-'*40)
                     return None
                 else:
                     return voyage
@@ -147,7 +152,10 @@ class VoyageUI:
                 print('\nNo voyage with this ID\n')
 
     def changeSoldSeats(self,voyage,a_str):
-        return LL_API().changeSoldSeats(voyage,a_str)
+        LL_API().changeSoldSeats(voyage,a_str)
+        print('-'*40+'\n')
+        print('Number of sold seats successfully changed!')
+        print('\n'+'-'*40)
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
