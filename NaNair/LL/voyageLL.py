@@ -258,7 +258,7 @@ class VoyageLL:
         available planes.'''
         
         available_tuples_by_time = []
-        delta = datetime.timedelta(minutes=1)
+        delta = datetime.timedelta(hours=0.1)
 
         while departure_time <= arrival_time:
             available_tuples_by_time.append( AirplaneLL().getAirplanesByDateTime(departure_time) )
@@ -268,13 +268,13 @@ class VoyageLL:
         not_available_planes_insignia = []
         available_planes = []
 
-        for plane in all_airplanes:
-            for available_tuple in available_tuples_by_time:
-                if available_tuple != None:
-                    not_available_planes_at_time,available_planes_at_time = available_tuple
+        for available_tuple in available_tuples_by_time:
+            if available_tuple != None:
+                not_available_planes_at_time,available_planes_at_time = available_tuple
 
-                    if plane in not_available_planes_at_time:
-                        not_available_planes_insignia.append(plane.get_planeInsignia())
+                for item in not_available_planes_at_time:
+                    if item[0].get_planeInsignia() not in not_available_planes_insignia:
+                        not_available_planes_insignia.append(item[0].get_planeInsignia())
 
         for plane in all_airplanes:
             if plane.get_planeInsignia() not in not_available_planes_insignia:
