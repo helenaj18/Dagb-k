@@ -7,6 +7,7 @@ class DisplayMenuWorkingCrew:
     def startDisplayMenuWorkingCrew(self):
 
         while True:
+            print()
             print('What would you like to see?')
             print('1 - Working crew on a specific day')
             print('2 - Nonworking crew on a specific day')
@@ -14,6 +15,7 @@ class DisplayMenuWorkingCrew:
             print()
 
             selection = input('Please choose one of the above (1/2/m): ').strip()
+            print()
 
             if selection == '1' or selection == '2':
                 print('Enter the date you want to display')
