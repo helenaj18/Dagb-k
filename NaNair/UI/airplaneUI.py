@@ -23,6 +23,17 @@ class AirplaneUI:
             print(format_str)
         print()
     
+    def showAllAirplaneTypes(self):
+        airplane_type_dict = LL_API().showAirplaneTypes()
+        
+        print()
+        print('{:<20}{:<10}'.format('Airplane Type','Number of Licensed Pilots'))
+        print('-'*45)
+
+        for key,value in airplane_type_dict.items():
+            print('{:<20}{:>15}'.format(key,value))
+        
+        print('-'*45)
 
     def showAirplanesByType(self,planeTypeID):
         '''Shows Airplanes by type'''

@@ -39,7 +39,7 @@ class SubMenuDisplay:
 
             elif selection == '4':
                 # Display Menu Employees
-                return DisplayMenuEmployee().startDisplayMenu()
+                return DisplayMenuEmployee().startDisplayMenuEmployee()
         
             elif selection == 'm':
                 # Back to main menu

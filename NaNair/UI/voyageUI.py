@@ -237,7 +237,7 @@ class VoyageUI:
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
                     voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
                 
-                return
+                return voyage
 
             else:
                 return None
@@ -386,12 +386,11 @@ class VoyageUI:
             print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        plane_name = input('Chosen plane (type name of plane on this format TF-XXX): ').upper().strip()
+        plane_name = input('\nChosen plane (type name of plane on this format TF-XXX): ').upper().strip()
         check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
 
         while check == False:
-            print('Please choose one of the listed planes.')
-            plane_name = input().upper().strip()
+            plane_name = input('Please choose one of the listed planes: ').upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
         
         return plane_name
