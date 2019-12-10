@@ -277,11 +277,13 @@ class VoyageUI:
     def addAircraftToVoyage(self,voyage):
         datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
 
-        AirplaneUI().showAirplanesByDateTime(datetime_object)
+
+#        AirplaneUI().showAirplanesByDateTime(datetime_object)
         print()
         print('Which Aircraft would you like to assign to voyage {}? (PlaneInsignia)'.format(voyage.getVoyageID()))
         print()
-        aircraft_ID = input().upper().strip()
+        #aircraft_ID = input().upper().strip()
+        plane_name = self.getAirplaneInput(departure_datetime)
         voyage.setAircraftID(aircraft_ID)
 
         return LL_API().change_voyage(voyage)
