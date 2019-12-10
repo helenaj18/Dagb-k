@@ -29,8 +29,9 @@ class VoyageUI:
         
         while True:
             cancel = input('Press c to cancel, anything else to continue: ').lower().strip()
-            
+
             if cancel != 'c':
+                print('Enter departure time: ')
                 year_str = input('Year: ').strip()
                 month_str = input('Month: ').strip()
                 day_str = input('Day: ').strip()
@@ -76,7 +77,7 @@ class VoyageUI:
                 else:
                     print('Date has already passed!')
             else:
-                return
+                return cancel
 
 
 
@@ -448,36 +449,44 @@ class VoyageUI:
     def addVoyage(self):
 
         dest = self.getDest()
-        print('Enter departure time: ')
         departure_datetime = self.getDateWithTime()
 
-        while True:   
-            if departure_datetime != None:
-                arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
-                while LL_API().checkIfTakenDate(departure_datetime) == True:
-                    print('Another voyage is departing or arriving at that time. Please choose another date.')
-                    departure_datetime = self.getDateWithTime()
+        while True:
+            if departure_datetime != 'c':
+                if departure_datetime != None:
+                    arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
-                print('Would you like to assign an airplane to this voyage? (Y/N)')
-                print('(You can also do this later)')
-                selection = input('Y/N: ').lower().strip()
+                    while LL_API().checkIfTakenDate(departure_datetime) == True:
+                        print('Another voyage is departing or arriving at that time. Please choose another date.')
+                        departure_datetime = self.getDateWithTime()
 
-                while selection != 'y' and selection != 'n':
-                    print('Please enter Y or N to make your choice')
-                    selection = input().lower().strip()
+                        if departure_datetime != 'c':
+                            continue
+                        else:
+                            return
 
-                if selection == 'y':
-                    plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
+                    print('Would you like to assign an airplane to this voyage? (Y/N)')
+                    print('(You can also do this later)')
+                    selection = input('Y/N: ').lower().strip()
+
+                    while selection != 'y' and selection != 'n':
+                        print('Please enter Y or N to make your choice')
+                        selection = input().lower().strip()
+
+                    if selection == 'y':
+                        plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
+                    else:
+                        plane_name = 'empty'
+
+                    LL_API().add_voyage(dest, departure_datetime, plane_name)
+
+                    print()
+                    print('New voyage succesfully added!\n')
+                    return
                 else:
-                    plane_name = 'empty'
-
-                LL_API().add_voyage(dest, departure_datetime, plane_name)
-
-                print()
-                print('New voyage succesfully added!\n')
-                return
+                    departure_datetime = self.getDateWithTime()
+                    continue
             else:
                 return
-
 
