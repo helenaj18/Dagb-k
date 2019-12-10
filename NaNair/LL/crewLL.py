@@ -5,6 +5,7 @@ from LL.voyageLL import VoyageLL
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
 from LL.airplaneLL import AirplaneLL
+import datetime
 
 class CrewLL:
 
@@ -223,6 +224,7 @@ class CrewLL:
         plane_instance = AirplaneLL().getAirplanebyInsignia(plane_insignia)
         plane_license = plane_instance.get_planeTypeID()
 
+        
         depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(depart_time)
 
         not_working_list = self.getNotWorkingCrew(depart_datetime)

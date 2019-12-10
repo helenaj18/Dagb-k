@@ -175,6 +175,8 @@ class VoyageUI:
             CrewUI().showQualifiedCrew(voyage.getDepartureTime(), voyage.getAircraftID())
             print('You must add 1 captain and 1 copilot with license for {} and 1 head flight atttendant'\
                 .format(airplane_type_on_voyage))
+            print(60*'-')
+            print()
                 
             while 'empty' in crew_on_voyage_list[0:3]:
         
@@ -191,6 +193,8 @@ class VoyageUI:
                 
             if crew_member:
                 LL_API().change_voyage(voyage)
+                print('A captain, pilot and head flight attendant have been added to voyage {}'\
+                    .format(voyage.getVoyageID()))
             else:
                 return 
             
