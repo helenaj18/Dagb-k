@@ -21,12 +21,13 @@ class EditExistingVoyage:
             if selection == '1':
                 # check if voyage was in the past and cannot be changed
                 voyage = VoyageUI().checkCompleted()
+                voyage_state = LL_API().get_status_of_voyage(voyage)
                 
-                if voyage != None:
+                if voyage_state != 'Completed':
                     # print info on voyage
                     VoyageUI().showOneVoyage(voyage)
 
-            
+
             # voyage found by viewing all voyages during an inputted time frame
             elif selection == '2':
                 print("Select date range to find a voyage to edit")

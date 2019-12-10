@@ -12,16 +12,18 @@ class SubMenuEdit:
 
     def startSubMenuEdit(self):
         # Header
-        print('#'*20)
-        print('{:^20}'.format('EDIT EXISTING DATA'))
-        print('#'*20)
+        print('#'*45)
+        print('{:^45}'.format('EDIT EXISTING DATA'))
+        print('#'*45)
         print()
 
         
 
         start = True
         while start: 
-            print('What would you like to edit? ')
+            print('-'*45)
+            print('{:^45}'.format('What would you like to edit? '))
+            print('-'*45)
             print()
             print('1 - Existing voyage')
             print('2 - Destination')

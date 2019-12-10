@@ -1,5 +1,5 @@
 from API.LL_API import LL_API
-from UI.submenu_register import SubMenuRegister
+from UI.RegisterMenu.submenu_register import SubMenuRegister
 from UI.EditMenus.submenu_edit import SubMenuEdit
 from UI.DisplayMenus.submenu_display import SubMenuDisplay
 
@@ -10,14 +10,19 @@ class MainMenu:
         # Header
         print()
         print()
-        print('#'*28)
-        print('{:^28}'.format('WELCOME'))
-        print('#'*28)
+        print('#'*45)
+        print('{:^45}'.format('WELCOME'))
+        
 
         while True: 
             print()
-            print('What would you like to do?')
-            print('_'*28)
+            print('#'*45)
+            print('{:^45}'.format('MAIN MENU'))
+            print('#'*45)
+            print()
+            print('-'*45)
+            print('{:^45}'.format('What would you like to do?'))
+            print('-'*45)
             print() 
 
             print('1 - Register')

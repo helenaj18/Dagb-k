@@ -11,13 +11,15 @@ class SubMenuRegister:
     def startSubMenuRegister(self):
         # Header
         print()
-        print('#'*28)
-        print('{:^28}'.format('REGISTER'))
-        print('#'*28)
+        print('#'*45)
+        print('{:^45}'.format('REGISTER'))
+        print('#'*45)
         print()
 
         while True:
-            print('What would you like to do?')
+            print('-'*45)
+            print('{:^45}'.format('What would you like to do?'))
+            print('-'*45)
             print()
             print('1 - Add new Employee')
             print('2 - Add new Voyage')

@@ -8,13 +8,15 @@ class SubMenuDisplay:
     def startSubMenuDisplay(self):
         # Header
         print()
-        print('#'*28)
-        print('{:^28}'.format('DISPLAY'))
-        print('#'*28)
+        print('#'*45)
+        print('{:^45}'.format('DISPLAY'))
+        print('#'*45)
         print()
 
         while True:
-            print('What would you like to display? ')
+            print('-'*45)
+            print('{:^45}'.format('What would you like to display? '))
+            print('-'*45)
             print()
 
             print('1 - Airplanes')

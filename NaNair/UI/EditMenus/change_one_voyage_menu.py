@@ -1,6 +1,7 @@
 from UI.voyageUI import VoyageUI
 from UI.airplaneUI import AirplaneUI
 
+
 class ChangeOneVoyageMenu:
 
     EMPTY = 'empty'
@@ -10,6 +11,45 @@ class ChangeOneVoyageMenu:
 
     def startChangeOneVoyageMenu(self):
 
+        voyage_state = VoyageUI().getStatusOfVoyage(self.voyage)
+        if voyage_state != 'Completed':
+            self.changeNotCompletedVoyage()
+        elif voyage_state == 'Completed':
+            print('\nDo you want to change sold seats on voyage?\n')
+            print('1 - Yes\n2 - No (Go back to edit existing voyage)')
+            selection = input().strip()
+            if selection == '1':
+                VoyageUI().showOneVoyage(self.voyage)
+                self.changeCompletedVoyage()
+            elif selection == '2':
+                return 
+            else:
+                print('invalid selection')
+
+    def changeCompletedVoyage(self):
+        while True:
+            print("\nWhat do you want to change in voyage {}?\n".format(self.voyage.getVoyageID()))
+            print('1 - Change number of sold seats out')
+            print('2 - Change number of sold seats home')
+
+            print('m - Back to edit existing voyage\n')
+            user_selection = input('Please choose one of the above (1-2 or m): ').strip()
+
+            if user_selection == '1':
+                VoyageUI().changeSoldSeats(self.voyage,'out')
+            
+            elif user_selection == '2':
+                VoyageUI().changeSoldSeats(self.voyage,'home')
+
+            elif user_selection == 'm':
+                return
+            
+            else:
+                print('Invalid selection')
+
+            
+                
+    def changeNotCompletedVoyage(self):
         while True:
             print("\nWhat do you want to change in voyage {}?\n".format(self.voyage.getVoyageID()))
 
@@ -58,4 +98,3 @@ class ChangeOneVoyageMenu:
             
             else:
                 print('Invalid selection')
-                

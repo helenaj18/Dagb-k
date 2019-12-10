@@ -383,7 +383,7 @@ class VoyageLL:
         return taken
 
 
-    def changeSoldSeats(self,voyage,a_str):
+    def changeSoldSeats(self,voyage,a_str,new_seats_str):
         all_airplanes = IO_API().loadAirplaneFromFile()
 
         airplane_id = voyage.getAircraftID()
@@ -395,7 +395,6 @@ class VoyageLL:
                     total_seats = airplane.get_planeCapacity()
             
             while True:
-                new_seats_str = input('Enter number of seats sold: ')
                 if int(new_seats_str) <= int(total_seats):
 
                     if a_str == 'home':

@@ -161,19 +161,22 @@ class VoyageUI:
                 voyage_state = LL_API().get_status_of_voyage(voyage)
                 if voyage_state == 'Completed':
                     print('-'*40+'\n')
-                    print('Voyage is completed, not possible to change')
+                    print('{:^40}'.format('Voyage is completed'))
                     print('\n'+'-'*40)
-                    return None
+
+                    return voyage
                 else:
                     return voyage
             else:
                 print('\nNo voyage with this ID\n')
 
+
     def changeSoldSeats(self,voyage,a_str):
-        LL_API().changeSoldSeats(voyage,a_str)
-        print('-'*40+'\n')
-        print('Number of sold seats successfully changed!')
-        print('\n'+'-'*40)
+        new_seats_str = input('Enter number of seats sold: ')
+        LL_API().changeSoldSeats(voyage,a_str,new_seats_str)
+        print('-'*45+'\n')
+        print('{:^45}'.format('Number of sold seats successfully changed!'))
+        print('\n'+'-'*45)
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
@@ -276,6 +279,8 @@ class VoyageUI:
             print('\nVoyage is fully staffed!\n')
             return 
 
+    def getStatusOfVoyage(self,voyage):
+        return LL_API().get_status_of_voyage(voyage)
 
     def showOneVoyage(self,voyage = ''):
         '''Shows one voyage by ID'''
@@ -286,7 +291,7 @@ class VoyageUI:
             else: 
                 voyage_id = voyage.getVoyageID()
 
-            print('-'*30)
+            print('-'*50)
             
             voyage = LL_API().getOneVoyage(voyage_id)
             if voyage != None:
@@ -294,7 +299,7 @@ class VoyageUI:
                 voyage_duration_hrs, voyage_duration_min = \
                 LL_API().get_voyage_duration(voyage)
 
-                voyage_state = LL_API().get_status_of_voyage(voyage)
+                voyage_state = self.getStatusOfVoyage(voyage)
                 
                 flight_no_out, flight_no_home = voyage.getFlightNumbers()
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
@@ -396,7 +401,7 @@ class VoyageUI:
                     LL_API().get_voyage_duration(voyage)
 
 
-                voyage_state = LL_API().get_status_of_voyage(voyage)
+                voyage_state = self.getStatusOfVoyage(voyage)
 
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and

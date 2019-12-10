@@ -183,8 +183,8 @@ class LL_API:
     def get_upcoming_voyages(self):
         return VoyageLL().getUpcomingVoyges()
     
-    def changeSoldSeats(self,voyage,a_str):
-        return VoyageLL().changeSoldSeats(voyage,a_str)
+    def changeSoldSeats(self,voyage,a_str,new_seats_str):
+        return VoyageLL().changeSoldSeats(voyage,a_str,new_seats_str)
 
 
     ## DESTINATION LL
