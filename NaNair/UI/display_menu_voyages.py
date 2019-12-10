@@ -2,8 +2,7 @@ from UI.voyageUI import VoyageUI
 from UI.display_menu_voyage_time_frame import DisplayVoyageTimeFrame
 
 class DisplayMenuVoyages: 
-    def __init__(self, logic_layer):
-        print('Display voyages')
+
 
     def startDisplayVoyages(self):
         print('#'*20)
@@ -31,6 +30,7 @@ class DisplayMenuVoyages:
 
             elif selection == '2':
                 ''' Lists one voyage by ID'''
+
                 if VoyageUI().showOneVoyage() != None:
                     return
                 else:
@@ -42,4 +42,4 @@ class DisplayMenuVoyages:
                 return
             
             else:
-                print('Invalid selection')
+                print('\nInvalid selection\n')

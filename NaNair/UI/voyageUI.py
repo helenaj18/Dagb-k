@@ -248,7 +248,7 @@ class VoyageUI:
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
                     voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
                 
-                return
+                return voyage
 
             else:
                 return None
@@ -289,12 +289,11 @@ class VoyageUI:
         datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
 
         print()
-        print('Which Aircraft would you like to assign to voyage {}? (PlaneInsignia)'.format(voyage.getVoyageID()))
-        print()
-        aircraft_ID = self.getAirplaneInput(datetime_object)
+        aircraft_ID = AirplaneUI().getAirplaneInput(datetime_object)
         voyage.setAircraftID(aircraft_ID)
 
         return LL_API().change_voyage(voyage)
+        print('Airplane has been added to voyage {}'.format(voyage.getVoyageID()))
 
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
@@ -383,28 +382,6 @@ class VoyageUI:
             check = LL_API().checkDestInput(dest)
         
         return dest
-        
-
-
-    
-    def getAirplaneInput(self,departure_datetime):
-        print('Please choose an airplane.')
-
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
-
-        for plane in airplanes_class_list:
-            print('\t{:<6}: {:<10}'.format(plane.get_planeInsignia(),\
-                    plane.get_planeTypeID()))        
-
-        plane_name = input('Chosen plane (type name of plane on this format TF-XXX): ').upper().strip()
-        check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
-
-        while check == False:
-            print('Please choose one of the listed planes.')
-            plane_name = input().upper().strip()
-            check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
-        
-        return plane_name
 
 
 
@@ -428,7 +405,7 @@ class VoyageUI:
             selection = input().lower().strip()
 
         if selection == 'y':
-            plane_name = self.getAirplaneInput(departure_datetime)
+            plane_name = AirplaneUI().getAirplaneInput(departure_datetime)
         else:
             plane_name = 'empty'
 

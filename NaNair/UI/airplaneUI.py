@@ -23,6 +23,17 @@ class AirplaneUI:
             print(format_str)
         print()
     
+    def showAllAirplaneTypes(self):
+        airplane_type_dict = LL_API().showAirplaneTypes()
+        
+        print()
+        print('{:<20}{:<10}'.format('Airplane Type','Number of Licensed Pilots'))
+        print('-'*45)
+
+        for key,value in airplane_type_dict.items():
+            print('{:<20}{:>15}'.format(key,value))
+        
+        print('-'*45)
 
     def showAirplanesByType(self,planeTypeID):
         '''Shows Airplanes by type'''
@@ -134,14 +145,37 @@ class AirplaneUI:
                 print('\nInvalid Type ID!\n')
 
 
-    def getAirplaneInsigniaInput(self):
-        '''Gets plane insignia from user'''
-        while True:
-            planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper().strip()
-            if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
-                return planeInsignia
-            else:
-                print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
+    def getAirplaneInput(self,departure_datetime):
+        print('Available airplanes at time of departure:')
+        print()
+
+        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime)
+        print('{:<10}{:<15}'.format('Insignia', 'Type'))
+        print('-'*25)
+
+        for plane in airplanes_class_list:
+            print('{:<10} {:<15}'.format(plane.get_planeInsignia(),\
+                    plane.get_planeTypeID()))        
+
+        print()
+        plane_name = input('Enter Insignia of the plane (TF-XXX): ').upper().strip()
+        check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
+
+        while check == False:
+            print('Please choose one of the listed planes.')
+            plane_name = input().upper().strip()
+            check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
+        
+        return plane_name
+
+    # def getAirplaneInsigniaInput(self):
+    #     '''Gets plane insignia from user'''
+    #     while True:
+    #         planeInsignia = input('Enter Insignia of the new plane (TF-XXX): ').upper().strip()
+    #         if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
+    #             return planeInsignia
+    #         else:
+    #             print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
 
 
     def getAirplaneInsigniaList(self):

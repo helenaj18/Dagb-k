@@ -7,9 +7,9 @@ from UI.destinationUI import DestinationUI
 
 class CrewUI:
 
-    pilot_header = '{:<25}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
+    pilot_header = '\n{:<25}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
     pilot_header += '-'*85
-    flight_att_header = '{:<25}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
+    flight_att_header = '\n{:<25}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
     flight_att_header += '-'*70
 
     def showCrew(self):
@@ -41,7 +41,6 @@ class CrewUI:
     def showWorkingCrew(self,date_str):
         datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
         working_crew_list = LL_API().get_working_crew(datetime_object)
-        print(working_crew_list)
         self.printCrew(working_crew_list,True)
 
 
@@ -100,10 +99,10 @@ class CrewUI:
         format_str = ''
 
         if crew_list != None:
-            print('#'*30)
+            print('\n'+'#'*30)
             print('{:^30}'.format(header))
             print()
-            print('#'*30)
+            print('#'*30+'\n')
             if header == 'Working Crew':
                 header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}'.format(
                     'Role','Name','Employee Id','Position','Email',\
@@ -162,6 +161,22 @@ class CrewUI:
         else:
             print('\nNo voyages on this day\n')
 
+    def checkSSN(self):
+        '''Checks if an SSN input is correct and returns the SSN'''
+
+        while True:
+            crew_id = input('Enter the Crew members ID (SSN): ').strip()
+            
+            try:
+                # checks if personal ID is 10 letters and an integer
+                int(crew_id)
+                if len(crew_id) == 10:
+                    return crew_id
+                else:
+                    print('\nInvalid SSN!\n')
+
+            except ValueError:
+                print('\nInvalid SSN!\n')
 
     def changeEmployeeInfo(self,employee):
         return LL_API().changeCrewInfo(employee)
@@ -173,7 +188,7 @@ class CrewUI:
             
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        print('-'*50)
+        print('\n'+'-'*50)
 
         if crew_member == None:
             print('Employee with this id not found!')
@@ -288,10 +303,10 @@ class CrewUI:
         print('3 - Head service manager')
         print('4 - Flight attendant')
         print('m - Back to main menu')
-        rank = input('\nPlease choose a number between 1-4: ').strip()
+        rank = input('\nPlease choose a number between 1-4 or m: ').strip()
 
         while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
-            rank = input('Please choose a number between 1-4: ').strip()
+            rank = input('Please choose a number between 1-4 or m: ').strip()
                 
         info_list.append(rank)
 
@@ -411,7 +426,7 @@ class CrewUI:
         employee = LL_API().get_crew_member_by_id(crew_ID)
         
         if employee != None:
-            print('Enter the "From date" for the work schedule')
+            print('\nEnter the "From date" for the work schedule\n')
             
             start_year_str = input('Year: ').strip()
             start_month_str = input('Month: ').strip()
@@ -420,7 +435,7 @@ class CrewUI:
             start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
             start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0) #VERIFY INPUT
             
-            print('Enter the "To date" for work schedule')
+            print('\nEnter the "To date" for work schedule\n')
             end_year_str = input('Year: ').strip()
             end_month_str = input('Month: ').strip()
             end_day_str = input('Day: ').strip()
