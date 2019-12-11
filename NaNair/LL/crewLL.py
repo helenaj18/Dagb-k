@@ -159,22 +159,24 @@ class CrewLL:
 
 
     def getWorkingCrew(self,datetime_object):
-        ''' Returns a list of tuples with a working crew member
-        and the destination he's going to'''
+        ''' Returns a list of tuples where each tuple 
+        is a working crew member and the destination he's going to'''
         
         working_crew_list = []
 
-        # Gets a list of the people working on inputted date and the
-        # destination they're going to
-        working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
+        # Gets a list of tuples where each tuple is a list of IDs for the 
+        # people working on a voyage that on inputted date and 
+        # the destination they're going to
+
+        working_crew_voyage_info_list = self.getWorkingCrewIdList(datetime_object)
 
 
-        if working_crew_id_list != None:
-            for working_crew_per_voyage in working_crew_id_list:
-                destination_instance = working_crew_per_voyage[1]
+        if working_crew_voyage_info_list != None:
+            for working_crew_per_voyage_info in working_crew_voyage_info_list:
+                destination_instance = working_crew_per_voyage_info[1]
                 destination_name = destination_instance.getDestinationName()
 
-                for crew_id in working_crew_per_voyage[0]:
+                for crew_id in working_crew_per_voyage_info[0]:
                     if crew_id != 'empty':
                         crew_member = self.getOneCrewMember(crew_id)
                         working_crew_list.append((crew_member,destination_name))
@@ -187,26 +189,28 @@ class CrewLL:
 
 
     def getWorkingCrewIdList(self,datetime_object):
-        '''Takes in a date and returns a list of IDs for the people working on that date'''
+        '''Takes in a date and returns a list of tuples where each tuple is
+        a list of IDs for the people working on a voyage that day and 
+        the destination they're going to'''
 
         # Voyages on a specific date:
         voyage_list = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
-        self.working_crew_id_info_list = []
+        self.working_crew_voyage_info_list = []
         
-        #iterates through voyages on a specific date and adds the IDs of working crew 
+        # Iterates through voyages on a specific date and adds the IDs of working crew 
         # to list as well as the voyage destination
         if voyage_list != None:
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 destination_of_voyage = voyage.getDestination()
-                self.working_crew_id_info_list.append((crew_on_voyage_list,destination_of_voyage))
+                self.working_crew_voyage_info_list.append((crew_on_voyage_list,destination_of_voyage))
 
-            if len(self.working_crew_id_info_list) != 0:
-                return self.working_crew_id_info_list
-            # if no crew was assigned to the voyages
+            if len(self.working_crew_voyage_info_list) != 0:
+                return self.working_crew_voyage_info_list
+            # If no crew was assigned to the voyages
             else:
                 return None
-        # if there are no voyages on a chosen date
+        # If there are no voyages on a chosen date
         else:
             return None
 
@@ -214,8 +218,10 @@ class CrewLL:
     def getNotWorkingCrew(self,datetime_object):
         '''Gets a list of instances of crew members
            that are not working on a specific day'''
-        
+        # Gets a list of tuples where each tuple is a crew 
+        # instance and the destination they're going to
         working_crew_info_list = self.getWorkingCrew(datetime_object)
+
         working_crew_id_list = []
         not_working_crew_list = []
         all_crew = IO_API().loadCrewFromFile()
@@ -225,10 +231,10 @@ class CrewLL:
             for crew_member, destination in working_crew_info_list:
                 working_crew_id_list.append(crew_member.getCrewID())
 
-            #Checks if the crew memeber is in working list, if not, the crew member is added
-            # to list of not working crew members
+            # Checks if the crew memeber is in the working list, 
+            # if not, the crew member is added to list of not 
+            # working crew members
 
-            
             for crew_member in all_crew:
                 if crew_member.getCrewID() not in working_crew_id_list:
                     not_working_crew_list.append(crew_member)
@@ -241,7 +247,7 @@ class CrewLL:
             return all_crew
 
     def getQualifiedCrew(self, depart_time, plane_insignia):
-        '''Returns a instance list of crew that is both qualified for a specific plane 
+        '''Returns a list of crew instances that is both qualified for a specific plane 
         and is not working'''
 
         plane_instance = AirplaneLL().getAirplanebyInsignia(plane_insignia)
@@ -261,8 +267,8 @@ class CrewLL:
 
             qualified_crew_list = []
 
-            # appends only pilots that are not working and have a specific license
-            # appends all flight attendants that are not working
+            # Appends only pilots that are not working and have a specific license
+            # Appends all flight attendants that are not working
             for crew_member in not_working_list:
                 if type(crew_member) == Pilot:
                     if crew_member.getCrewID() in licensed_pilots_id_list:
@@ -274,17 +280,25 @@ class CrewLL:
         else:
             return None
 
-    def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
-        #Checks if the crew memeber is in working list, if not, the crew member is added
-        # to list of not working crew members
-        for crew_member in crew_instance_list:
-            crew_id = crew_member.getCrewID()
-            if crew_id not in self.working_crew_id_list:
-                not_working_crew_id_list.append(crew_id)
+
+    # Erum við að nota?
+    # def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
+    #     '''Checks if the crew member is in the working list, if not, the crew member is added
+    #     to list of not working crew members'''
+
+    #     for crew_member in crew_instance_list:
+    #         crew_id = crew_member.getCrewID()
+    #         if crew_id not in self.working_crew_voyage_info_list:
+    #             not_working_crew_id_list.append(crew_id)
 
 
     def getWorkSchedule(self,start_date,end_date,crew_id):
+        '''Gets a work schedule list with all voyage instances
+        for an employee in a specific date range. 
+        Returns None if the employee has no voyages in the date range'''
+
         voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
+
         if voyage_list != None:
             work_schedule_list = []
 
@@ -293,6 +307,7 @@ class CrewLL:
                 for crew_member_id in crew_on_voyage_list:
                     if crew_member_id == crew_id:
                         work_schedule_list.append(voyage)
+
             if len(work_schedule_list) != 0:
                 return work_schedule_list
             else:

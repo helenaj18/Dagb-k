@@ -19,6 +19,7 @@ class AddExtraCrewmemberMenu:
                 if 'empty' in crew_on_voyage_list[-2:]:
                     if 'empty' in crew_on_voyage_list[-2]:
                         crew_member = CrewUI().queryShowNotWorkingCrew()
+                        crew_member
                         if crew_member:
                             if self.checkIfCrewmemberWorking(voyage,crew_member):
                                 raise Exception('Flight attendant is assigned to another voyage on the same date\n\
