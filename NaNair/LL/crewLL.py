@@ -9,16 +9,22 @@ import datetime
 
 class CrewLL:
 
-
+    
     ROLE_const = 2
     RANK_const = 3
     LICENSE_const = 4
 
+    def getCrew(self):
+        ''' Returns a list of class instances for all crew '''
+        return IO_API().loadCrewFromFile()
+
     def getPilots(self):
-        ''' Gets the pilots '''
-        crew_list = IO_API().loadCrewFromFile()
+        ''' Gets a list of pilot instances '''
+        crew_list = self.getCrew()
         pilot_list = []
-        #iterates through crew file and appends the pilots to pilot list
+
+        # Iterates through a list of all crew members 
+        # and appends the pilots to pilot list
         for employee in crew_list:
             if type(employee) == Pilot:
                 pilot_list.append(employee)
@@ -27,10 +33,13 @@ class CrewLL:
     
     
     def getFlightAtt(self):
-        ''' Gets the flight attendants '''
-        crew_list = IO_API().loadCrewFromFile()
+        ''' Gets a list of flight 
+        attendants instances '''
+        crew_list = self.getCrew()
         flight_att_list = []
-        #iterates through crew file and appends the flight attendants to flith attendants list
+
+        # Iterates through a list of all crew members 
+        # and appends the flight attendants to flith attendants list
         for employee in crew_list:
             if type(employee) == FlightAttendant:
                 flight_att_list.append(employee)
@@ -38,15 +47,17 @@ class CrewLL:
         return flight_att_list
 
 
-    def getCrew(self):
-        ''' Returns a list of class instances for all crew '''
-        return IO_API().loadCrewFromFile()
     
 
     def getOneCrewMember(self,input_crew_id):
-        ''' Returns crew memeber which holds given ID number'''
+        ''' Returns a crew member instance
+        which holds given ID number, returns None if 
+        the crew member isn't found'''
+
         crew = self.getCrew()
-        #itirates through the crew file and finds memeber with given ID
+        # Iterates through a list of all crew members 
+        # and finds member with given ID
+
         while True:
             for crew_member in crew:
                 crew_id = crew_member.getCrewID()
@@ -57,12 +68,15 @@ class CrewLL:
  
     
     def getLicensedPilots(self, pilot_license):
-        '''Takes in a pilot license and finds all pilots who have the inputted license.
-        Returns a list of class instances'''
+        '''Takes in a pilot license and finds all pilots 
+        who have the inputted license.
+        Returns a list of pilot instances'''
+
         pilots_instances_list = self.getPilots()
         licensedPilots = []
 
-        # Checks all pilots if they have inputted license. IF they do they are added to a list
+        # Checks all pilots if they have inputted license. 
+        # If they do they are added to a list
         for pilot in pilots_instances_list:
             if pilot_license == pilot.getLicense():
                 licensedPilots.append(pilot)
@@ -71,26 +85,28 @@ class CrewLL:
  
  
     def addCrew(self, CrewData):
-        '''Takes in a list of data and formats it to a string to add to file.
-        '''
-        # add necessary data that can be found from user input
-        # if 'Captain' was selected in UI layer
-        if CrewData[2] == '1': 
+        '''Takes in a list of data and formats 
+        it to a string to add to file.'''
+
+        # Add necessary data that can be found from user input
+
+        # If 'Captain' was selected in UI layer
+        if CrewData[self.ROLE_const] == '1': 
             CrewData.insert(self.ROLE_const, 'Pilot')
             CrewData[self.RANK_const] = '1'
 
-        # if 'Copilot' was selected in UI layer
-        elif CrewData[2] == '2':
+        # If 'Copilot' was selected in UI layer
+        elif CrewData[self.ROLE_const] == '2':
             CrewData.insert(self.ROLE_const, 'Pilot')
             CrewData[self.RANK_const] = '0'
 
-        # if 'Head service manager' was selected in UI layer
-        elif CrewData[2] == '3':
+        # If 'Head service manager' was selected in UI layer
+        elif CrewData[self.ROLE_const] == '3':
             CrewData.insert(self.ROLE_const, 'Cabincrew')
             CrewData.insert(self.LICENSE_const, 'N/A')
             CrewData[self.RANK_const] = '1'
         
-        # if 'Flight Attendant' was selected in UI layer
+        # If 'Flight Attendant' was selected in UI layer
         else:
             CrewData.insert(self.ROLE_const, 'Cabincrew')
             CrewData.insert(self.LICENSE_const, 'N/A')
@@ -109,16 +125,18 @@ class CrewLL:
 
 
     def sortPilotsByLicense(self):
-        '''Sorts all pilots by their license'''
+        '''Sorts all pilots by their license, 
+        returns a list of sorted pilots'''
+
         pilot_list = self.getPilots()
         sorted_pilots_list = []
 
         licenses = set()
-        # make a set of all licenses to iterate through
+        # Make a set of all licenses to iterate through
         for pilot in pilot_list:
-            licenses.add( pilot.getLicense() )
+            licenses.add(pilot.getLicense())
 
-        # checks if a pilot has a specific license and append them to a list if so  
+        # Checks if a pilot has a specific license and append them to a list if so  
         for a_license in licenses:
             for pilot in pilot_list:
                 if pilot.getLicense() == a_license:
@@ -127,7 +145,8 @@ class CrewLL:
         return sorted_pilots_list
  
     def doesIDExist(self, crew_id):
-        '''Checks if a crew member already has inputted ID. Returns true if so, else false'''
+        '''Checks if a crew member already exists 
+        (the inputted id is taken). Returns true if so, else false'''
 
         crew_instance_list = IO_API().loadCrewFromFile()
         BoolCheck = False
@@ -140,9 +159,11 @@ class CrewLL:
 
 
     def getWorkingCrew(self,datetime_object):
-        ''' Returns a string of the working crew on a date inputted by user'''
+        ''' Returns a list of tuples with a working crew member
+        and the destination he's going to'''
         
         working_crew_list = []
+
         # Gets a list of the people working on inputted date and the
         # destination they're going to
         working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
