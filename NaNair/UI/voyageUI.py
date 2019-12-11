@@ -498,7 +498,9 @@ class VoyageUI:
                     LL_API().add_voyage(dest, departure_datetime, plane_name)
 
                     print()
-                    print('New voyage succesfully added!\n')
+                    print('~'*45)
+                    print('{:^45}'.format('New voyage succesfully added!')) 
+                    print('~'*45)
                     return
                 else:
                     departure_datetime = self.getDateWithTime()

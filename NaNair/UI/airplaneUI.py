@@ -107,7 +107,10 @@ class AirplaneUI:
         planeTypeID,manufacturer,seats = self.getPlaneTypeIDInput()
 
         LL_API().addAirplane(planeInsignia,planeTypeID,manufacturer,seats)
-        print('\nAirplane successfully added!')
+        print()
+        print('~'*45)
+        print('{:^45}'.format('Airplane successfully added!')) 
+        print('~'*45)
 
 
     def getPlaneTypeIDInput(self):
@@ -142,7 +145,7 @@ class AirplaneUI:
                 return planeTypeId,manufacturer,seats
 
             else:
-                print('\nInvalid Type ID!\n')
+                print('\nInvalid selection!\n')
 
 
     def getAirplaneInput(self,departure_datetime, arrival_datetime):

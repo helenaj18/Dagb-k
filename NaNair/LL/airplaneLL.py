@@ -103,7 +103,7 @@ class AirplaneLL:
                     day_str = input('Day: ').strip()
 
             except ValueError:
-                print('Invalid date! Try again: ')
+                print('\nInvalid date! Try again: ')
                 year_str = input('Year: ').strip()
                 month_str = input('Month: ').strip()
                 day_str = input('Day: ').strip()
@@ -130,12 +130,12 @@ class AirplaneLL:
 
                 # Else asks for a new input
                 else:
-                    print('Invalid time! Try again: ')
+                    print('\nInvalid time! Try again: ')
                     hour_str = input('Hour: ').strip()
                     minute_str = input('Minute: ').strip()
 
             except ValueError:
-                print('Invalid time! Try again: ')
+                print('\nInvalid time! Try again: ')
                 hour_str = input('Hour: ').strip()
                 minute_str = input('Minute: ').strip()
 
