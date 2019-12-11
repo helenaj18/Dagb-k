@@ -62,6 +62,9 @@ class IO_API:
         '''Returns an instance list of all airplanes'''
         return AirplaneIO().loadAirplaneFromFile()
 
+    def loadAirplaneTypes(self):
+        '''Reads file and returns a list of airplane instances'''
+        return AirplaneIO().loadAircraftTypes()
 
     def changeAirplaneInFile(self):
         '''Inserts a changed instance into file'''
@@ -71,3 +74,9 @@ class IO_API:
     def addAirplaneToFile(self,planeInsignia,planeTypeId,manufacturer,seats):
         '''Adds new airplane into file'''
         return AirplaneIO().addAirplaneToFile(planeInsignia,planeTypeId,manufacturer,seats)
+    
+    def addAirplaneType(self,planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan):
+        '''Adds new airplane type to the file'''
+        return AirplaneIO().addAirplaneType(planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)

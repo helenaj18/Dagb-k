@@ -23,7 +23,8 @@ class SubMenuRegister:
             print()
             print('1 - Add new Employee')
             print('2 - Add new Voyage')
-            print('3 - Add new Airplane')
+            print('3 - Add new Airplane with an existing type')
+            print('4 - Add new Airplane Type')
             print('4 - Add new Destination')
 
             print('m - Main menu')
@@ -45,8 +46,12 @@ class SubMenuRegister:
                 # Add new Airplane
 
                 return AirplaneUI().addAirplane()
-
+            
             elif selection == '4':
+                
+                return AirplaneUI().addAirplaneType()
+
+            elif selection == '5':
                 # Add new destination
 
                 return DestinationUI().addDestination()

@@ -1,5 +1,6 @@
 import os
 from ModelClasses.airplane_model import Airplane
+from ModelClasses.aircraft_type_model import AircraftTypeModel
 import csv
 
 class AirplaneIO:
@@ -48,9 +49,45 @@ class AirplaneIO:
         return airplanes_list
 
 
+    def loadAircraftTypes(self):
+        '''Reads file and returns a list of airplane instances'''
+        i = 0 
+        aircraft_type_filename = open(self.__aircraft_type_filename,'r')
+        airplane_types_list = []
+        
+        for line in aircraft_type_filename:
+            if i != 0:
+                planeTypeId_in_aircraft_file,\
+                    manufacturer,model,\
+                        capacity,emptyWeight,\
+                            maxTakeoffWeight,unitThrust,\
+                                serviceCeiling,length,height,wingspan = line.strip().split(',')
+
+                aircraft_type_instance = AircraftTypeModel(planeTypeId_in_aircraft_file,\
+                    manufacturer,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,\
+                                    serviceCeiling,length,height,wingspan)
+
+                airplane_types_list.append(aircraft_type_instance)
+                
+            i += 1
+            
+        aircraft_type_filename.close()
+
+        return airplane_types_list
+
     def addAirplaneToFile(self, planeInsignia,planeTypeId,manufacturer,seats):
         '''Adds an airplane to the airplane file'''
         aircraft_file = open(self.__aircraft_filename,'a')
         aircraft_file.write(planeInsignia+','+planeTypeId+','+manufacturer+','+seats+'\n')
         
         return aircraft_file
+    
+    def addAirplaneType(self,planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan):
+        aircraft_type_file = open(self.__aircraft_type_filename,'a')
+
+        aircraft_type_file.write(planeTypeId+','+manufacturer+','+model+','+capacity+','\
+            +emptyWeight+','+maxTakeoffWeight+','+unitThrust+','+serviceCeiling+','\
+                +length+','+height+','+wingspan+'\n')
+        
+        return aircraft_type_file
