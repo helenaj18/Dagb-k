@@ -90,10 +90,11 @@ class VoyageUI:
     def prettyprint(self,voyage,voyage_staffed,aircraft_ID,voyage_duration_hrs,\
                 flight_no_out, flight_no_home, voyage_duration_min, voyage_state):
         '''Prints out a voyage'''
-
+        print('\n'+'-'*50)
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
             voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+        print('-'*50)
 
         print('\t Status: {}'.format(voyage_state))
 
@@ -115,10 +116,10 @@ class VoyageUI:
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,\
             voyage_duration_min))
         
-
-        
         print('\t Status on staff: {}'.format(voyage_staffed))
         print('\t Voyage ID: {}'.format(voyage.getVoyageID()))
+
+        print('-'*50)
         
 
     def checkVoyagesInRange(self):
@@ -192,12 +193,14 @@ class VoyageUI:
         
         if success:
             position = CrewUI().checkRank(crew_member)
-            print('{} - {}, {}, was added to voyage {}'.format(
-                        crew_member.getName(),
-                        crew_member.getRole(), 
-                        position,
-                        voyage.getVoyageID()
-                    ))
+            if position == 'Pilot':
+                position = 'Copilot'
+            print('\n'+'~'*45)
+            a_str = '{} - {}, {},'.format(crew_member.getName(),crew_member.getRole(),position)
+            b_str = 'was added to voyage {}'.format(voyage.getVoyageID())
+            print('{:^45}'.format(a_str))
+            print('{:^45}'.format(b_str))
+            print('~'*45+'\n')
 
     def addCrewMember(self, crew_member, voyage,airplane_type_on_voyage):
         role = crew_member.getRole()
@@ -206,8 +209,9 @@ class VoyageUI:
             if crew_member.getCaptain():
                 if voyage.getCaptain() == 'empty':
                     if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
-                        raise Exception('Captain is assigned to another voyage on the same date\n\
-                            Please chose another captain\n')
+                        a_str = '\nCaptain is assigned to another voyage on the same date\n\
+                            Please chose another captain\n'
+                        raise Exception(a_str)
 
                     voyage.setCaptain(crew_member,airplane_type_on_voyage)
                 else: 
@@ -215,21 +219,30 @@ class VoyageUI:
             else:
                 if voyage.getCopilot() == 'empty':
                     if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
-                        raise Exception('pilot is assigned to another voyage on the same date\n\
-                            Please chose another pilot\n')
+                        a_str = 'pilot is assigned to another voyage on the same date\n\
+                            Please chose another pilot\n'
+                        raise Exception(a_str)
                     voyage.setCopilot(crew_member,airplane_type_on_voyage)
                 else: 
                     raise Exception('A copilot is already assigned to the voyage\n')
 
         elif role == 'Cabincrew':
-            
+            # if crew_member.getBool():
             if voyage.getHeadFlightAtt() == 'empty':
                 if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
-                        raise Exception('Head flight attendant is assigned to another voyage on the same date\n\
-                            Please chose another head flight attendant\n')
+                    a_str = 'pilot is assigned to another voyage on the same date\n\
+                        Please chose another pilot\n'
+                    raise Exception(a_str)
                 voyage.setHeadFlightAtt(crew_member)
             else:
-                raise Exception('A head flight attendant is already assigned to voyage\n')
+                raise Exception('\nA head flight attendant is already assigned to voyage\n')
+            # elif crew_member.getBool() == False:
+            #     raise Exception('You must add a Head Flight Attendant first\n')
+
+        
+                        
+
+        
             
                 
     def addCrewToVoyage(self,voyage):
@@ -248,21 +261,24 @@ class VoyageUI:
                 .format(airplane_type_on_voyage))
             print(95*'-')
             print()
+            
                 
             while 'empty' in crew_on_voyage_list[0:3]:
         
                 crew_member = CrewUI().queryShowNotWorkingCrew()
                 if crew_member:
                     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
-                
                     crew_on_voyage_list = voyage.getCrewOnVoyage()
+
                 else:
                     break
                 
             if crew_member:
                 LL_API().change_voyage(voyage)
+                print('~'*70)
                 print('A captain, pilot and head flight attendant have been added to voyage {}\n'\
                     .format(voyage.getVoyageID()))
+                print('~'*70)
                 AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
                 
             else:
@@ -291,7 +307,7 @@ class VoyageUI:
             else: 
                 voyage_id = voyage.getVoyageID()
 
-            print('-'*50)
+            
             
             voyage = LL_API().getOneVoyage(voyage_id)
             if voyage != None:

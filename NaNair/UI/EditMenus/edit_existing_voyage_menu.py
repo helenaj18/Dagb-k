@@ -9,7 +9,9 @@ class EditExistingVoyage:
     def startEditExistingVoyage(self):
         '''Menu for editing existing voyages'''
         while True:
-            print()
+            print('\n'+'-'*45)
+            print('{:^45}'.format('Edit existing voyage menu'))
+            print('-'*45)
             print('1 - Enter voyage ID')
             print('2 - See a list of voyages on a specific time range')
             print('m - Back to edit menu')
@@ -52,8 +54,4 @@ class EditExistingVoyage:
                 # voyage instance sent to editing menu
                 ChangeOneVoyageMenu(voyage).startChangeOneVoyageMenu()
 
-            # elif voyage_state == 'Completed':
-            #     print('Voyage is completed\n\
-            #         Do you want to add sold seats?')
-            #     print()
-            #     selection = input()
+  
