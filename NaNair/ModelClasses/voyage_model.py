@@ -103,6 +103,12 @@ class Voyage:
         '''Sets the aircraft id'''
         self.__aircraft_ID = new_id
     
+    def setDepartNum(self, new_number):
+        self.__flight_no_out = new_number
+    
+    def setArrivalNum(self, new_number):
+        self.__flight_no_home = new_number
+    
     def setCaptain(self, new_capt, airplane_type):
         '''Check if captain can fly this type 
         and set the new captain if he can'''

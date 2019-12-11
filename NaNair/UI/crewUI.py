@@ -495,7 +495,7 @@ class CrewUI:
             work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
             
         
-            name_header_str = '{:^45}\n{:^45}'.format(employee.getName(),'ID:'+rew_ID)
+            name_header_str = '{:^45}\n{:^45}'.format(employee.getName(),'ID:'+crew_ID)
             date_str = '{}.{}.{}-{}.{}.{}'.format(\
                 start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
             header_str = '{:^45}\n{:^45}'.format('Working Schedule',date_str)

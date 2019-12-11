@@ -12,6 +12,7 @@ class SubMenuEdit:
     def startSubMenuEdit(self):
         '''Main editing menu'''
         # Header
+        print()
         print('#'*45)
         print('{:^45}'.format('EDIT EXISTING DATA'))
         print('#'*45)

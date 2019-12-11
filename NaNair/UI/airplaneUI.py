@@ -1,6 +1,6 @@
 from API.LL_API import LL_API
 from ModelClasses.airplane_model import Airplane
-
+from ModelClasses.aircraft_type_model import AircraftTypeModel
 
 class AirplaneUI:
 
@@ -116,38 +116,143 @@ class AirplaneUI:
         print('~'*45)
 
 
+    def addAirplaneType(self):
+        '''Gets information about a new airplane
+        type and adds it to the file'''
+
+        planeTypeId = input('Enter plane type id: ').strip()
+        manufacturer = input('Enter manufacturer: ').strip()
+        model = input('Enter model: ').strip()
+        capacity = self.getNumberOfSeats()
+        emptyWeight = self.getEmptyWeight()
+        maxTakeoffWeight = self.getMaxTakeOffWeight()
+        unitThrust = self.getUnitThrust()
+        serviceCeiling = self.getServiceCeiling()
+        length = self.getLength()
+        height = self.getHeight()
+        wingspan = self.getWingspan()
+
+        LL_API().addAirplaneType(planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
+
+        print()
+        print('~'*45)
+        print('{:^45}'.format('Airplane type successfully added!')) 
+        print('~'*45)
+
+
+    def getWingspan(self):
+        '''Gets wingspan input from user'''
+
+        while True:
+            wingspan = input('Enter the wingspan (m): ').strip()
+            try:
+                float(wingspan)
+                return wingspan
+            except ValueError:
+                print('\nYou have to enter a float!\n')
+
+
+    def getHeight(self):
+        '''Gets length input from user'''
+        while True:
+            height = input('Enter the height (m): ').strip()
+            try:
+                float(height)
+                return height
+            except ValueError:
+                print('\nYou have to enter a float!\n')
+
+    def getLength(self):
+        '''Gets length input from user'''
+        while True:
+            length = input('Enter the length (m): ').strip()
+            try:
+                float(length)
+                return length
+            except ValueError:
+                print('\nYou have to enter a float!\n')
+
+
+    def getServiceCeiling(self):
+        '''Gets service ceiling input from user'''
+        while True:
+            serviceCeiling = input('Enter service ceiling (m): ').strip()
+            try:
+                int(serviceCeiling)
+                return serviceCeiling
+            except ValueError:
+                print('\nYou have to enter a integer!\n')
+
+
+    def getUnitThrust(self):
+        '''Gets unit thrust input from user'''
+        while True:
+            unitThrust = input('Enter unit thrust: ').strip()
+            try:
+                float(unitThrust)
+                return unitThrust
+            except ValueError:
+                print('\nYou have to enter a float!\n')
+    
+
+    def getMaxTakeOffWeight(self):
+        '''Gets max take off weight input from user'''
+        while True:
+            maxTakeoffWeight = input('Enter max take off weight (kg): ').strip()
+            try:
+                int(maxTakeoffWeight)
+                return maxTakeoffWeight
+            except ValueError:
+                print('\nYou have to enter an integer!\n')
+    
+
+    def getNumberOfSeats(self):
+        '''Gets number of seats input from user'''
+        while True:
+            seats = input('Enter number of seats: ').strip()
+            try:
+                int(seats)
+                return seats
+            except ValueError:
+                print('\nYou have to enter an integer!\n')
+    
+    def getEmptyWeight(self):
+        '''Gets empty weight input from user'''
+        while True:
+            emptyWeight = input('Enter empty weight (kg): ').strip()
+            try:
+                int(emptyWeight)
+                return emptyWeight
+            except ValueError:
+                print('\nYou have to enter an integer!\n')
+
+
     def getPlaneTypeIDInput(self):
         '''Gets plane type id input from user'''
+
+        success = False
+        airplane_types = LL_API().loadAirplaneTypes()
 
         print('\nChoose planeTypeId:\n')
 
         while True:
-                    
-            print('1 - NAFokkerF100')
-            print('2 - NABAE146')
-            print('3 - NAFokkerF28')
-            print()
-            selection = input('Please choose one of the above (1/2/3): ').strip()
-            
-            if selection == '1':
-                planeTypeId = 'NAFokkerF100'
-                manufacturer = 'Fokker'
-                seats = '100'
-                return planeTypeId,manufacturer,seats
+            counter = 1
+            for airplane_type in airplane_types:
+                print('{} - {}'.format(counter,airplane_type))
+                counter += 1
 
-            elif selection == '2':
-                planeTypeId = 'NABAE146'
-                manufacturer = 'BAE'
-                seats = '82'
-                return planeTypeId,manufacturer,seats
+            selection = input('\nPlease choose one of the above: ').strip()
 
-            elif selection == '3':
-                planeTypeId = 'NAFokkerF28'
-                manufacturer = 'Fokker'
-                seats = '65'
-                return planeTypeId,manufacturer,seats
+            for i in range(1,counter+1):
+                if selection == str(i):
+                    planeTypeId = airplane_types[i-1].getplaneTypeID()
+                    manufacturer = airplane_types[i-1].getManufacturer()
+                    seats = airplane_types[i-1].getCapacity()
+                    success = True
+                    return planeTypeId,manufacturer,seats
 
-            else:
+            if not success:
                 print('\nInvalid selection!\n')
 
 
@@ -175,7 +280,7 @@ class AirplaneUI:
             print('{:^45}'.format('This plane is not available on this date,\
             please choose one of the listed planes.'))
             print('-'*45)
-            
+
             plane_name = input().upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_list)
         

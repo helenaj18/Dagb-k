@@ -15,6 +15,12 @@ class LL_API:
         '''Returns an airplane instance 
         with the input planeinsignia'''
         return AirplaneLL().getAirplanebyInsignia(planeInsignia)
+    
+    def getAirplaneTypes(self):
+        return AirplaneLL().getAirplaneTypes()
+    
+    def loadAirplaneTypes(self):
+        return AirplaneLL().loadAirplaneTypes()
 
     def showAirplanesByType(self, planeTypeId = ''):
         '''Returns a list of airplane instances that have a type inputted by user'''
@@ -49,6 +55,12 @@ class LL_API:
     def addAirplane(self,planeInsignia,planeTypeID,manufacturer,seats):
         ''' Sends info for new airplane to be added'''
         return AirplaneLL().addAirplane(planeInsignia,planeTypeID,manufacturer,seats)
+    
+    def addAirplaneType(self,planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan):
+        '''Adds an airplane'''
+        return AirplaneLL().addAirplaneType(planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
 
     def getAirplaneInsigniaList(self):
         '''Returns a list of all airplane insignias.'''

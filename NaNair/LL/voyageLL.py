@@ -214,25 +214,61 @@ class VoyageLL:
         latter_two_arrive = '01'
 
         for voyage_instance in voyage_list:
+
+            voyage_instance_depart_time = AirplaneLL().revertDatetimeStrtoDatetime( voyage_instance.getDepartureTime() )
             # if the dest IATA code matches the voyage in file there is another voyage to 
             # the same destination on the same day
             if destination == voyage_instance.getDestination().getDestinationAirport():
-                # flight numbers of registered voyage:
-                depart_num, arrival_num = voyage_instance.getFlightNumbers()
+                if depart_time >= voyage_instance_depart_time:
+                    # flight numbers of registered voyage:
+                    depart_num, arrival_num = voyage_instance.getFlightNumbers()
 
-                # if the registered voyage has higher numbers
-                if latter_two_depart <= depart_num[-2:]:
-                    latter_two_depart = str( int(depart_num[-2:]) + 2 )
-                    latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
-                # int() removes the zero so it is added back in
-                if len(latter_two_depart) == 1:
-                    latter_two_depart = '0' + latter_two_depart
-                    latter_two_arrive = '0' + latter_two_arrive
+                    # if the registered voyage has higher numbers
+                    if latter_two_depart <= depart_num[-2:]:
+                        latter_two_depart = str( int(depart_num[-2:]) + 2 )
+                        latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
+                    # int() removes the zero so it is added back in
+                    if len(latter_two_depart) == 1:
+                        latter_two_depart = '0' + latter_two_depart
+                        latter_two_arrive = '0' + latter_two_arrive
+                else:
+                    # change flight number of old voyage
+                    self.changeFlightNo(voyage_instance)
+                    departing_num, arriving_num = voyage_instance.getFlightNumbers()
+
 
         departing_num = 'NA' + first_two + latter_two_depart
         arriving_num = 'NA' + first_two + latter_two_arrive
 
         return departing_num, arriving_num
+
+
+    def changeFlightNo(self, voyage_instance):
+        '''Changes flight number of later voyages if a new voyage is added earlier time'''
+        
+        #flight numbers
+        depart_num, arrival_num = voyage_instance.getFlightNumbers()
+
+        # add 2 to the numbers
+        latter_two_depart = str( int(depart_num[-2:]) + 2 )
+        latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
+
+        # zero is removed in int() so it is added back if needed
+        if len(latter_two_depart) == 1:
+            latter_two_depart = '0' + latter_two_depart
+            latter_two_arrive = '0' + latter_two_arrive
+
+        # new numbers
+        new_depart_num = depart_num[:-2] + latter_two_depart
+        new_arrival_num = arrival_num[:-2] + latter_two_arrive
+
+        # add new numbers to instance
+        voyage_instance.setDepartNum(new_depart_num)
+        voyage_instance.setArrivalNum(new_arrival_num)
+
+        # load to file
+        IO_API().changeVoyageFile(voyage_instance)
+
 
 
     def TimeDifference(self, time_datetime, dest_code):

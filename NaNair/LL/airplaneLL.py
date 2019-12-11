@@ -358,7 +358,17 @@ class AirplaneLL:
            and adds it to the file'''
 
         return IO_API().addAirplaneToFile(planeInsignia,planeTypeID,manufacturer,seats)
+    
+    def addAirplaneType(self,planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan):
+        '''Adds an airplane type a file'''
 
+        return IO_API().addAirplaneType(planeTypeId,manufacturer,model,capacity,\
+            emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
+    
+    def loadAirplaneTypes(self):
+        '''Gets a list of airplane types'''
+        return IO_API().loadAirplaneTypes()
 
     def getAirplaneInsigniaList(self):
         '''Gets a list of all airplane
