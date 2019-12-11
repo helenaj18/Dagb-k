@@ -32,7 +32,7 @@ class EditExistingVoyage:
 
             # voyage found by viewing all voyages during an inputted time frame
             elif selection == '2':
-                print("Select date range to find a voyage to edit")
+                print('Select date range to find a voyage to edit')
                 voyage = VoyageUI().checkVoyagesInRange()
                 if voyage:
                     VoyageUI().showOneVoyage(voyage)
@@ -46,8 +46,7 @@ class EditExistingVoyage:
 
             else:
                 # if none of the possible options was chosen
-                print('Invalid selection!')
-                print()
+                print('Invalid selection!\n')
                 voyage = None
                 
             if voyage:

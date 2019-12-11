@@ -56,18 +56,14 @@ class SubMenuEdit:
                 while True:
                     # Prints out information about an employee with inputted crew id
                     crew_id = CrewUI().getPersonalID()
-                    crew_member_found = CrewUI().showOneCrewMember(crew_id) 
-                    # check if id is valid
-                    if crew_member_found: 
-                        if DestinationUI().checkIfInt(crew_id):
-                            if len(crew_id) == 10:
-                                # if valid id, go to change employee
-                                return EditEmployeeMenu().editSelection(crew_id) 
-                            else:
-                                print('Invalid personal ID!')
-                        else:
-                            print('Invalid personal ID!')
-
+                    if crew_id:
+                        crew_member_found = CrewUI().showOneCrewMember(crew_id) 
+                        # Check if id is valid
+                        if crew_member_found:
+                            return EditEmployeeMenu().editSelection(crew_id)
+                    else:
+                        return
+                        
             elif selection == 'm':
                 # Back to main menu
                 return 
