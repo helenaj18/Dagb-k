@@ -29,56 +29,56 @@ class VoyageUI:
         if the user wants to quit'''
         
         while True:
-            cancel = input('Press c to cancel, anything else to continue: ').lower().strip()
 
-            if cancel != 'c':
-                print('Enter departure time: ')
-                year_str = input('Year: ').strip()
-                month_str = input('Month: ').strip()
-                day_str = input('Day: ').strip()
-                
-                # Check if date is valid
-                year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
+            print('Enter departure time: ')
+            year_str = input('Year: ').strip()
+            month_str = input('Month: ').strip()
+            day_str = input('Day: ').strip()
+            
+            # Check if date is valid
+            year_int, month_int, day_int = LL_API().verifyDate(year_str, month_str, day_str)
 
-                hour_str = input('Hour: ').strip()
-                minutes_str = input('Minute: ').strip()
-                print()
+            hour_str = input('Hour: ').strip()
+            minutes_str = input('Minute: ').strip()
+            print()
 
-                # check if time is valid
-                hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
+            # check if time is valid
+            hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
-                time_now = datetime.datetime.now()
+            time_now = datetime.datetime.now()
 
-                year_now = time_now.year
-                month_now = time_now.month
-                day_now = time_now.day
-                hour_now = time_now.hour
-                minutes_now = time_now.minute
+            year_now = time_now.year
+            month_now = time_now.month
+            day_now = time_now.day
+            hour_now = time_now.hour
+            minutes_now = time_now.minute
 
-                if year_now<=year_int:
-                    if year_now == year_int\
-                        and month_now <= month_int \
-                            and day_now <= day_int:
+            if year_now<=year_int:
+                if year_now == year_int\
+                    and month_now <= month_int \
+                        and day_now <= day_int:
 
-                        if day_now == day_int and month_now == month_int and year_int == year_now:
-                            if hour_now <= hour_int:
-                                if hour_now == hour_int:
-                                    if minutes_now <= minutes_int:
-                                        return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
-                                    else:
-                                        print('Date has already passed!')
-                                else:
+                    if day_now == day_int and month_now == month_int and year_int == year_now:
+                        if hour_now <= hour_int:
+                            if hour_now == hour_int:
+                                if minutes_now <= minutes_int:
                                     return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                                else:
+                                    print('Date has already passed!')
                             else:
-                                print('Date has already passed!')
+                                return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                         else:
-                            return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                            print('Date has already passed!')
                     else:
                         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                elif year_now == year_int\
+                    and month_now > month_int:
+                        print('Date has already passed!')
                 else:
-                    print('Date has already passed!')
+                    # if year_int is bigger than year now
+                    return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
             else:
-                return cancel
+                print('Date has already passed!')
 
 
 
@@ -455,11 +455,21 @@ class VoyageUI:
     def addVoyage(self):
 
         dest = self.getDest()
-        departure_datetime = self.getDateWithTime()
+        selection = 'R'
 
+        while selection == 'R':
+            departure_datetime = self.getDateWithTime()
 
-        while True:
-            if departure_datetime != 'c':
+            print('Please enter one of the following: ')
+            print('V - verify input')
+            print('R - redo input')
+            print('C - cancel voyage registration')
+            print()
+            selection = input().strip().upper()
+            print()
+
+        if selection == 'V':   
+            while True:
                 if departure_datetime != None:
                     arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
@@ -493,6 +503,8 @@ class VoyageUI:
                 else:
                     departure_datetime = self.getDateWithTime()
                     continue
-            else:
-                return
+        elif selection == 'C':
+            return
+        else:
+            print('Invalid input')
 
