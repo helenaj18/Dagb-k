@@ -163,23 +163,6 @@ class CrewUI:
             print('{:^45}'.fomat('No voyages on this day!'))
             print('-'*45)
 
-    def checkSSN(self):
-        '''Checks if an SSN input is correct and returns the SSN'''
-
-        while True:
-            print('\nEnter the Crew members ID\n(SSN format XXXXXXXXXX)')
-            crew_id = input('').strip()
-            
-            try:
-                # checks if personal ID is 10 letters and an integer
-                int(crew_id)
-                if len(crew_id) == 10:
-                    return crew_id
-                else:
-                    print('\nInvalid SSN!\n')
-
-            except ValueError:
-                print('\nInvalid SSN!\n')
 
     def changeEmployeeInfo(self,employee):
         return LL_API().changeCrewInfo(employee)
@@ -452,15 +435,20 @@ class CrewUI:
         '''Gets personal ID from user'''
 
         while True:
-            personal_id = input('Personal ID (SSN - 10 digits, no hyphen): ').strip()
-
-            if DestinationUI().checkIfInt(personal_id):
-                if len(personal_id) == 10:
-                    return personal_id
+            print('\nInput personal ID of emlployee(SSN - 10 digits, no hyphen)')
+            print('m - Back to main menu')
+            personal_id = input('Input your choice: ').strip()
+            if personal_id != 'm':
+                if DestinationUI().checkIfInt(personal_id):
+                    if len(personal_id) == 10:
+                        return personal_id
+                    else:
+                        print('\nInvalid personal ID!\n')
                 else:
-                    print('Invalid personal ID!')
+                    print('\nInvalid personal ID!\n')
             else:
-                print('Invalid personal ID!')
+                return 
+           
 
     def getDateInput(self,a_string):
         b_str = 'Enter the {} date for the period'.format(a_string)
