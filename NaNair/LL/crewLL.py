@@ -302,6 +302,8 @@ class CrewLL:
         if voyage_list != None:
             work_schedule_list = []
 
+            # Go through all the voyages and check
+            # if the crew member is working
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 for crew_member_id in crew_on_voyage_list:
