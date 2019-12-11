@@ -18,7 +18,7 @@ class DisplayMenuPilots:
             print('m - Back to main menu')
             print()
 
-            selection = input('Please choose one of the above (1/2/m): ').strip()
+            selection = input('Please choose one of the above: ').strip()
 
             if selection == '1':
                 # Goes to another menu where the user can pick a license to list

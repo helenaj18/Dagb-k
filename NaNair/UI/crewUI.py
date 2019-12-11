@@ -276,15 +276,17 @@ class CrewUI:
         print()
 
         personal_id = self.getPersonalID()
+        if personal_id:
+            while LL_API().doesIDExist(personal_id):
 
-        while LL_API().doesIDExist(personal_id):
-
-            print('{:^45}'.format('Another crew member already has that ID!'))
-            print('{:^45}'.format('Please input another ID.'))
-            print('-'*45)
-            print()
-          
-            personal_id = self.getPersonalID()
+                print('{:^45}'.format('Another crew member already has that ID!'))
+                print('{:^45}'.format('Please input another ID.'))
+                print('-'*45)
+                print()
+            
+                personal_id = self.getPersonalID()
+        else:
+            return
 
         info_list.append(personal_id)
 
@@ -292,6 +294,23 @@ class CrewUI:
         employee_name = self.getName()
         info_list.append(employee_name)
 
+        print()
+        print('-'*45)
+        print('{:^45}'.format('Please choose one of the following'))
+        print('{:^45}'.format('job titles:'))
+        print('-'*45)
+        print()
+        print('1 - Captain')
+        print('2 - Co-pilot')
+        print('3 - Head service manager')
+        print('4 - Flight attendant')
+        print('m - Back to main menu')
+        rank = input('\nPlease choose a number between 1-4 or m: ').strip()
+
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
+            rank = input('Please choose a number between 1-4 or m: ').strip()
+                
+        info_list.append(rank)
         print()
         print('-'*45)
         print('{:^45}'.format('Please choose one of the following'))
@@ -316,27 +335,33 @@ class CrewUI:
         elif rank == 'm':
             return
 
+            if rank == '1' or rank == '2':
+                pilot_license = self.getPilotLicense()
+                info_list.append(pilot_license)
+            elif rank == 'm':
+                return
 
-        home_address = self.getHomeAddress()
-        info_list.append(home_address)
 
-        phone_number = self.getPhoneNumber()
-        info_list.append(phone_number)
+            home_address = self.getHomeAddress()
+            info_list.append(home_address)
 
-        email_address = self.getEmail()
-        info_list.append(email_address)
+            phone_number = self.getPhoneNumber()
+            info_list.append(phone_number)
 
-        LL_API().addCrew(info_list)
+            email_address = self.getEmail()
+            info_list.append(email_address)
 
-        #info_list for pilots is longer because of license
-        print()
-        print('~'*45)
-        print('{:^45}'.format('New Employee added!')) 
-        print('~'*45)
-       
+            LL_API().addCrew(info_list)
 
-        return
-    
+            #info_list for pilots is longer because of license
+            print()
+            print('~'*45)
+            print('{:^45}'.format('New Employee added!')) 
+            print('~'*45)
+        
+            return
+
+        
     def getHomeAddress(self):
         '''Gets home address of an 
            employee from user'''

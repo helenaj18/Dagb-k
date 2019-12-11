@@ -26,7 +26,7 @@ class DisplayMenuEmployee:
             print('6 - Work Schedule for employee by ID')
             print('m - Back to main menu')
 
-            selection = input('\nPlease choose one of the above (1-6 or m): ').strip()
+            selection = input('\nPlease choose one of the above: ').strip()
             
             # All employees are displayed
             if selection == '1':

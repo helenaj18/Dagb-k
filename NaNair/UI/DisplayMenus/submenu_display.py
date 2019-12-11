@@ -24,9 +24,8 @@ class SubMenuDisplay:
             print('3 - Voyages')
             print('4 - Employees')
             print('m - Main menu')
-            print()
 
-            selection = input()
+            selection = input('\nPlease choose one of the above: ')
 
             if selection == '1': 
                 # Display Menu Airplanes

@@ -31,7 +31,7 @@ class MainMenu:
             print('3 - Edit existing data')
             print('q - Quit')
             print()
-            selection = input()
+            selection = input('Please choose one of the above: ')
             
 
             if selection == '1':
