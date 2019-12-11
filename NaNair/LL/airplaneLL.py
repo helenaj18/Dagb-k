@@ -19,8 +19,8 @@ class AirplaneLL:
         '''Checks if date is valid, returns a tuple with the date if valid 
            else it returns None'''
 
-        # Checks if the year is between 0 and 2020
-        if 0<year_int<=2020:
+        # Checks if the year is between 0 and 2050
+        if 0<year_int<=2050:
 
             # Checks if the month is between 0 and 12
             if 0<month_int<=12:
