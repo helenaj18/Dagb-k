@@ -4,6 +4,9 @@ from UI.airplaneUI import AirplaneUI
 
 class ChangeOneVoyageMenu:
 
+    def __init__(self,voyage):
+        self.voyage = voyage
+
     EMPTY = 'empty'
     
     def startChangeOneVoyageMenu(self):
