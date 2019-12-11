@@ -16,7 +16,7 @@ class EditExistingVoyage:
             print('2 - See a list of voyages on a specific time range')
             print('m - Back to edit menu')
             print()
-            selection = input('Please choose one of the above (1/2/m): ').strip()
+            selection = input('Please choose one of the above: ').strip()
             print()
 
             # voyage found by entering voyage 

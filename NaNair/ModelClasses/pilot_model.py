@@ -17,11 +17,6 @@ class Pilot(Crew):
         the pilot is the same as the airplane type,
         else False'''
         return self.getLicense() == type_of_airplane
-        
-    def getCaptain(self): # TAKA ÚT
-        '''Gets the bool that returns True if
-        the pilot is a captain, else false'''
-        return self.__captain
 
     def getRole(self):
         '''Gets the role of the pilot'''

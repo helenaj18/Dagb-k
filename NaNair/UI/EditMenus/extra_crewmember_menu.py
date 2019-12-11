@@ -76,7 +76,7 @@ class AddExtraCrewmemberMenu:
                 break 
 
             else: 
-                print('\nInvalid input!\n')
+                print('\nInvalid selection!\n')
 
     def isPilot(self,crew_member):
         if crew_member.getRole() == 'Pilot':
