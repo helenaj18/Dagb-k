@@ -8,9 +8,9 @@ class DisplayMenuAirplanes:
     def startDisplayAirplanes(self):
         '''Main display for airplanes'''
         print()
-        print('-'*40)
-        print('{:^40}'.format('DISPLAY - Airplanes'))
-        print('-'*40)
+        print('-'*45)
+        print('{:^45}'.format('DISPLAY - Airplanes'))
+        print('-'*45)
         print()
 
         while True: 

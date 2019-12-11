@@ -5,16 +5,17 @@ from UI.airplaneUI import AirplaneUI
 class ChangeOneVoyageMenu:
 
     EMPTY = 'empty'
-
-    def __init__(self,voyage):
-        self.voyage = voyage
-
+    
     def startChangeOneVoyageMenu(self):
+        '''Menu to change one voyage'''
 
-        voyage_state = VoyageUI().getStatusOfVoyage(self.voyage)
-        if voyage_state != 'Completed':
+        # status of voyage (not departed, in air, completed)
+        voyage_state_str = VoyageUI().getStatusOfVoyage(self.voyage)
+
+        if voyage_state_str != 'Completed':
             self.changeNotCompletedVoyage()
-        elif voyage_state == 'Completed':
+        
+        elif voyage_state_str == 'Completed':
             print('\nDo you want to change sold seats on voyage?\n')
             print('1 - Yes\n2 - No (Go back to edit existing voyage)')
             selection = input().strip()
