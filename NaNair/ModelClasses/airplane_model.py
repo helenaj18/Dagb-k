@@ -17,22 +17,22 @@ class Airplane:
 
 # GET METHODS
     def get_planeTypeID(self):
+        '''Gets plane type ID'''
         return self.__planeTypeID
 
     def get_planeInsignia(self):
+        '''Gets plane insignia'''
         return self.__planeInsignia
 
     def get_planeManufacturer(self):
+        '''Gets plane manufacturer'''
         return self.__manufacturer
 
     def get_planeModel(self):
+        '''Gets plane model'''
         return self.__model
 
     def get_planeCapacity(self):
+        '''Gets plane capacity'''
         return self.__capacity
     
-    def get_planeLength(self):
-        return self.__length
-
-    def get_planeHeight(self):
-        return self.__height

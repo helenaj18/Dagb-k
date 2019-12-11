@@ -3,8 +3,9 @@ from API.LL_API import LL_API
 
 
 class AddExtraCrewmemberMenu:
-
     def startAddExtraCrewMenu(self,voyage,crew_on_voyage_list):
+        '''Menu for adding an extra crew member'''
+       
         while True:
             print('Voyage {} has enough staff'.format(voyage.getVoyageID()))
             print('Do you want to add an extra crew member?')
@@ -12,13 +13,16 @@ class AddExtraCrewmemberMenu:
             print('2 - No (Go back)')
             selection = input('Please choose one of the above (1/2): ').strip()
 
+            # add extra crew member is chosen
             if selection == '1':
+                # show list of crew that is not working on particular day
                 CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
                 print()
-
+                
                 if 'empty' in crew_on_voyage_list[-2:]:
                     if 'empty' in crew_on_voyage_list[-2]:
                         crew_member = CrewUI().queryShowNotWorkingCrew()
+                        crew_member
                         if crew_member:
                             if self.checkIfCrewmemberWorking(voyage,crew_member):
                                 raise Exception('Flight attendant is assigned to another voyage on the same date\n\

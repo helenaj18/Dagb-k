@@ -206,7 +206,7 @@ class VoyageUI:
             if crew_member.getCaptain():
                 if voyage.getCaptain() == 'empty':
                     if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
-                        raise Exception('Captain is assigned to another voyage on the same date\n\
+                         Exception('Captain is assigned to another voyage on the same date\n\
                             Please chose another captain\n')
 
                     voyage.setCaptain(crew_member,airplane_type_on_voyage)
@@ -461,9 +461,9 @@ class VoyageUI:
             departure_datetime = self.getDateWithTime()
 
             print('Please enter one of the following: ')
-            print('1 - confirm input')
-            print('2 - redo input')
-            print('3 - cancel voyage registration')
+            print('1 - Confirm input')
+            print('2 - Redo input')
+            print('3 - Cancel voyage registration')
             print()
             selection = input().strip()
             print()
