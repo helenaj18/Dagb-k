@@ -3,7 +3,6 @@ from LL.destinationLL import DestinationLL
 from LL.crewLL import CrewLL
 from LL.voyageLL import VoyageLL
 
-#from UI.crewUI import CrewUI
 
 class LL_API:
 
