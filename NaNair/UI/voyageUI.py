@@ -338,6 +338,8 @@ class VoyageUI:
             (completed, in air, not departed)'''
         return LL_API().get_status_of_voyage(voyage)
 
+    
+    
     def showOneVoyage(self,voyage = ''):
         '''Shows one voyage by ID'''
 
@@ -379,6 +381,7 @@ class VoyageUI:
         LL_API().change_voyage(voyage)
 
 
+    
     def revertDatetimeStrtoDatetime(self,datetime_str):
         return LL_API().revertDatetimeStrtoDatetime(datetime_str)
 
@@ -461,18 +464,23 @@ class VoyageUI:
     def getDest(self):
         '''Gets user input for a 3 letter destination code'''
 
+        # all destinations
         destinations_class_list = LL_API().get_destinations()
         print()
         print('Please choose a destination. Available destinations are:')
 
+        # print destinations with 3 letter IATA code
         for destination in destinations_class_list[:-1]:
             print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
                  destination.getDestinationAirport()))
 
         print()
         dest = input('Your destination (3 letters): ').upper().strip()
+        
+        # check if input is valid
         check = LL_API().checkDestInput(dest)
         
+        # while input is not valid
         while check == False:
             dest = input('Please enter a valid destination: ').upper().strip()
             check = LL_API().checkDestInput(dest)
@@ -482,11 +490,15 @@ class VoyageUI:
 
 
     def addVoyage(self):
-
+        '''Gets input from user to add voyage to file'''
         dest = self.getDest()
+        
+        # put selection as 2 so while loop is entered
         selection = '2'
 
+        # while user chooses to redo input
         while selection == '2':
+            # get datetime input
             departure_datetime = self.getDateWithTime()
 
             print('Please enter one of the following: ')
@@ -497,11 +509,14 @@ class VoyageUI:
             selection = input('Please choose one of the above: ').strip()
             print()
 
+        # if user confirms input
         if selection == '1':   
             while True:
                 if departure_datetime != None:
+                    # arrival time found from departure time
                     arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
 
+                    # if date is taken by another voyage
                     while LL_API().checkIfTakenDate(departure_datetime) == True:
                         print('Another voyage is departing or arriving at that time. Please choose another date.')
                         departure_datetime = self.getDateWithTime()
@@ -515,11 +530,14 @@ class VoyageUI:
                     print('(You can also do this later)')
                     selection = input('Y/N: ').lower().strip()
 
+                    # while input is neither y or n
                     while selection != 'y' and selection != 'n':
                         selection = input('Please enter Y or N to make your choice: ').lower().strip()
 
+                    # if chosen to add airplane
                     if selection == 'y':
                         plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
+                    # if chosen to add airplane later
                     else:
                         plane_name = 'empty'
 
@@ -533,10 +551,15 @@ class VoyageUI:
                 else:
                     departure_datetime = self.getDateWithTime()
                     continue
+        
+        # user cancels registration
         elif selection == '3':
             return
+        # if nothing else is chosen
         else:
             print('\nInvalid input!\n')
+
+
 
     def removeCrewFromVoyage(self,voyage):
         crew_members_counter = 0

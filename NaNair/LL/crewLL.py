@@ -281,17 +281,6 @@ class CrewLL:
             return None
 
 
-    # Erum við að nota?
-    # def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
-    #     '''Checks if the crew member is in the working list, if not, the crew member is added
-    #     to list of not working crew members'''
-
-    #     for crew_member in crew_instance_list:
-    #         crew_id = crew_member.getCrewID()
-    #         if crew_id not in self.working_crew_voyage_info_list:
-    #             not_working_crew_id_list.append(crew_id)
-
-
     def getWorkSchedule(self,start_date,end_date,input_crew_id):
         '''Gets a work schedule list with all voyage instances
         for an employee in a specific date range. 

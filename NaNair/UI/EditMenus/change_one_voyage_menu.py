@@ -70,6 +70,7 @@ class ChangeOneVoyageMenu:
                 
     def changeNotCompletedVoyage(self):
         '''Change info of voyage that has not yet departed'''
+        
         while True:
             print('-'*45)
             print("\nWhat do you want to change in voyage {}?\n".format(self.voyage.getVoyageID()))

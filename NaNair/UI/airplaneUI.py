@@ -292,6 +292,7 @@ class AirplaneUI:
         print('Available airplanes at time of departure:')
         print()
 
+        # Gets a list of available planes
         airplanes_list = LL_API().showPlanesForNewVoyage(departure_datetime, arrival_datetime)
         print('{:<10}{:<15}'.format('Insignia', 'Type'))
         print('-'*25)
@@ -302,6 +303,8 @@ class AirplaneUI:
 
         print()
         plane_name = input('Enter Insignia of the plane (TF-XXX): ').upper().strip()
+
+        # Checks if an airplane already exists
         check = LL_API().checkPlaneInput(plane_name, airplanes_list)
 
         while check == False:
@@ -313,6 +316,7 @@ class AirplaneUI:
             plane_name = input('Please try again: ').upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_list)
         
+        return plane_name
 
     def getAirplaneInsigniaInput(self):
         '''Gets plane insignia from user'''
