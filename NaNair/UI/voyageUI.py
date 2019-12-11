@@ -140,15 +140,16 @@ class VoyageUI:
                 voyage = self.checkCompleted()
                 return voyage
             else:
-                print('-'*40+'\n')
-                print('All voyages in range are completed, not possible to change')
-                print('\n'+'-'*40)
+                print('-'*45+'\n')
+                print('{:^45}'.format('All voyages in range are completed'))
+                print('{:^45}'.format('not possible to change'))
+                print('\n'+'-'*45)
                 return None
 
         else:
-            print('-'*40+'\n')
+            print('-'*45+'\n')
             print('No voyages on these dates.')
-            print('\n'+'-'*40)
+            print('\n'+'-'*45)
             return None
     
 
@@ -161,9 +162,9 @@ class VoyageUI:
             if voyage:
                 voyage_state = LL_API().get_status_of_voyage(voyage)
                 if voyage_state == 'Completed':
-                    print('-'*40+'\n')
-                    print('{:^40}'.format('Voyage is completed'))
-                    print('\n'+'-'*40)
+                    print('-'*45+'\n')
+                    print('{:^45}'.format('Voyage is completed'))
+                    print('\n'+'-'*45)
 
                     return voyage
                 else:
