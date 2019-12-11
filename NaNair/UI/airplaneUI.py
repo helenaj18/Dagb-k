@@ -316,6 +316,7 @@ class AirplaneUI:
             plane_name = input('Please try again: ').upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_list)
         
+        return plane_name
 
     def getAirplaneInsigniaInput(self):
         '''Gets plane insignia from user'''

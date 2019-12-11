@@ -56,6 +56,7 @@ class AddExtraCrewmemberMenu:
                                 print('Flight attendant is assigned to another voyage on the same date\n\
                                     please chose another flight attendant\n')
                                 continue
+
                             voyage.setFlightAttTwo(crew_member)
                     
                         LL_API().change_voyage(voyage)
@@ -78,7 +79,10 @@ class AddExtraCrewmemberMenu:
             else: 
                 print('\nInvalid selection!\n')
 
+
     def isPilot(self,crew_member):
+        '''Checks if crewmember is a pilot, prints message 
+            and returns True if crewmember is Pilot'''
         if crew_member.getRole() == 'Pilot':
             print('-'*45)
             a_str = '\nCrewmember {} is a Pilot'.format(crew_member.getName())
@@ -89,6 +93,8 @@ class AddExtraCrewmemberMenu:
         return False
 
     def checkIfCrewmemberWorking(self,voyage,crew_member):
+        '''Checks if crewmember is working on the day of the voyage'''
+        
         voyage_departuredate_str = voyage.getDepartureTime()
         voyage_departure_datetime = LL_API().revertDatetimeStrtoDatetime(voyage_departuredate_str)
 
