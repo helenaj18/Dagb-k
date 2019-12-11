@@ -48,7 +48,7 @@ class ChangeOneVoyageMenu:
             print('1 - Change number of sold seats out')
             print('2 - Change number of sold seats home')            
             print('m - Back to edit existing voyage\n')
-            user_selection = input('Please choose one of the above (1-2 or m): ').strip()
+            user_selection = input('Please choose one of the above: ').strip()
 
             if user_selection == '1':
                 #user goes to change nr of sold seats on flight out
@@ -70,16 +70,18 @@ class ChangeOneVoyageMenu:
     def changeNotCompletedVoyage(self):
         '''Change info of voyage that has not yet departed'''
         while True:
+            print('-'*45)
             print("\nWhat do you want to change in voyage {}?\n".format(self.voyage.getVoyageID()))
-
+            print('-'*45+'\n')
             # Change existing voyage
             print('1 - Add an airplane to a voyage')
             print('2 - Add employees to a voyage')
             print('3 - Change number of sold seats out')
             print('4 - Change number of sold seats home')
+            print('5 - Remove all employees from voyage')
 
             print('m - Back to edit menu voyage\n')
-            user_selection = input('Please choose one of the above (1-4 or m): ').strip()
+            user_selection = input('Please choose one of the above: ').strip()
             
             if user_selection == '1':
                 # Gets a list of all airplane insignias
@@ -117,6 +119,11 @@ class ChangeOneVoyageMenu:
             # change number of sold seats home
             elif user_selection == '4':
                 VoyageUI().changeSoldSeats(self.voyage,'home')
+
+            elif user_selection == '5':
+               VoyageUI().removeCrewFromVoyage(self.voyage)
+
+
 
             # go to edit menu
             elif user_selection == 'm':

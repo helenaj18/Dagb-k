@@ -81,7 +81,7 @@ class CrewUI:
     def checkRank(self,crew_member):
         role = crew_member.getRole()
         if role == 'Pilot':
-            if crew_member.getCaptain(): 
+            if crew_member.getBool(): 
                 position = 'Captain'
             else: 
                 position = 'Pilot'

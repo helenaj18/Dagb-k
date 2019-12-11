@@ -182,16 +182,20 @@ class VoyageUI:
 
 
     def changeSoldSeats(self,voyage,a_str):
-        '''Takes in a voyage instance and string describing which flight is being changed (home/out)
-        Changes instance attribute of sold seats in voyage'''
-        
-        new_seats_str = input('Enter number of seats sold: ')
-        
-        # sent to be changed in LL
-        LL_API().changeSoldSeats(voyage,a_str,new_seats_str)
-        print('-'*45+'\n')
-        print('{:^45}'.format('Number of sold seats successfully changed!'))
-        print('\n'+'-'*45)
+        while True:
+            print('\nEnter number of seats sold')
+            print('m - to go back\n')
+            new_seats_str = input('Enter your input: ').strip()
+            if new_seats_str == 'm':
+                return 
+            elif new_seats_str.isdigit():
+                LL_API().changeSoldSeats(voyage,a_str,new_seats_str)
+                print('-'*45+'\n')
+                print('{:^45}'.format('Number of sold seats successfully changed!'))
+                print('\n'+'-'*45)
+                return
+            else: 
+                print('\nInvalid input!')
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
@@ -227,7 +231,7 @@ class VoyageUI:
 
         if role == 'Pilot':
             # if crew member is captain
-            if crew_member.getCaptain():
+            if crew_member.getBool():
                 # if there is no captain assigned to voyage
                 if voyage.getCaptain() == 'empty':
                     # check if crew member is working on another voyage that day
@@ -267,10 +271,7 @@ class VoyageUI:
             # elif crew_member.getBool() == False:
             #     raise Exception('You must add a Head Flight Attendant first\n')
 
-        
-                        
-
-        
+          
             
                 
     def addCrewToVoyage(self,voyage):
@@ -323,7 +324,10 @@ class VoyageUI:
             print('\nVoyage is fully staffed!\n')
             return 
 
+   
+   
     def getStatusOfVoyage(self,voyage):
+        '''Takes voyage instance and returns the status of the flight (completed, in air, not departed)'''
         return LL_API().get_status_of_voyage(voyage)
 
     def showOneVoyage(self,voyage = ''):
@@ -548,5 +552,35 @@ class VoyageUI:
         elif selection == '3':
             return
         else:
-            print('Invalid input')
+            print('Invalid input!')
+
+    def removeCrewFromVoyage(self,voyage):
+        crew_members_counter = 0
+        crew_on_voyage = voyage.getCrewOnVoyage()
+        for crew_member in crew_on_voyage:
+            if crew_member != 'empty':
+                crew_members_counter += 1
+        if crew_members_counter == 0:
+            print('\n'+45*'-')
+            print('No crewmembers are assigned to the voyage!')
+            print(45*'-'+'\n')
+        else:
+            print('-'*45)
+            print('{:^45}'.format('Are you sure you want to'))
+            print('{:^45}'.format('remove all crew members?'))
+            print('-'*45+'\n')
+            print('1 - Yes\n2 - No (Go back)\n')
+            selection = input('Please choose one of the above: ').strip()
+            if selection == '1':
+                voyage.removeCrewFromVoyage()
+                LL_API().change_voyage(voyage)
+                print('~'*45)
+                print('{:^45}'.format('All crewmembers have been removed!'))
+                print('~'*45+'\n')
+
+            elif selection == '2':
+                return 
+            else:
+                print('Invalid selection!')
+
 
