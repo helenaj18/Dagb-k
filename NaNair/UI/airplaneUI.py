@@ -226,17 +226,19 @@ class AirplaneUI:
                 return emptyWeight
             except ValueError:
                 print('\nYou have to enter an integer!\n')
-
+    
+    def getAirplaneTypes(self):
+        '''Gets a list or airplane type instances'''
+        return LL_API().loadAirplaneTypes()
 
     def getPlaneTypeIDInput(self):
         '''Gets plane type id input from user'''
 
         success = False
-        airplane_types = LL_API().loadAirplaneTypes()
-
-        print('\nChoose planeTypeId:\n')
+        airplane_types = self.getAirplaneTypes()
 
         while True:
+            print('\nChoose planeTypeId:\n')
             counter = 1
             for airplane_type in airplane_types:
                 print('{} - {}'.format(counter,airplane_type))

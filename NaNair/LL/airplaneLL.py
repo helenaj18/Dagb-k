@@ -154,36 +154,36 @@ class AirplaneLL:
         else:
             return None
 
-    def getAirplaneTypes(self):
-        '''Returns a list of all airplane
-        types as a string'''
-        all_airplanes = self.getAirplanes()
-        airplane_type_list = []
+    # def getAirplaneTypes(self):
+    #     '''Returns a list of all airplane
+    #     types as a string'''
+    #     all_airplanes = self.getAirplanes()
+    #     airplane_type_list = []
 
-        for airplane in all_airplanes:
-            if airplane.get_planeTypeID() not in airplane_type_list:
-                airplane_type_list.append(airplane.get_planeTypeID())
+    #     for airplane in all_airplanes:
+    #         if airplane.get_planeTypeID() not in airplane_type_list:
+    #             airplane_type_list.append(airplane.get_planeTypeID())
         
-        return airplane_type_list
+    #     return airplane_type_list
 
     def getNumberOfPilotsWithLicense(self):
         '''Returns a dictionary with airplane types as keys
         and number of pilots with license
         on that type as value'''
 
-        airplane_type_list = self.getAirplaneTypes()
+        airplane_type_list = self.loadAirplaneTypes()
         crew_list = IO_API().loadCrewFromFile()
         airplane_type_dict = {}
 
         # Go through all the crew members and match their 
         # license with an airplane type, add them to the dict
         for crew_member in crew_list:
-            for airplane_type_str in airplane_type_list:
-                if crew_member.getLicense() == airplane_type_str:
-                    if airplane_type_str in airplane_type_dict:
-                        airplane_type_dict[airplane_type_str] += 1
+            for airplane_type in airplane_type_list:
+                if crew_member.getLicense() == airplane_type.getplaneTypeID():
+                    if str(airplane_type) in airplane_type_dict:
+                        airplane_type_dict[str(airplane_type)] += 1
                     else:
-                        airplane_type_dict[airplane_type_str] = 1
+                        airplane_type_dict[str(airplane_type)] = 1
         
         return airplane_type_dict
 
