@@ -5,35 +5,23 @@ class DisplayMenuAirplaneType:
     def startDisplayAirplaneType(self):
         '''Menu for displaying airplane types'''
 
+        success = False
+        airplane_types = AirplaneUI().getAirplaneTypes()
+
         while True:
             print('\nWhat type would you like to list? Please choose one of the following')
-            print('1 - NAFokkerF100')
-            print('2 - NAFokkerF28')
-            print('3 - NABAE146')
-            print('m - Back to main menu')
-            print()
-            selection = input().strip()
+            counter = 1
+            for airplane_type in airplane_types:
+                print('{} - {}'.format(counter,airplane_type))
+                counter += 1
 
-            # User chooses NAFokkerF100
-            if selection == '1':
-                planeTypeID = 'NAFokkerF100'
-                return AirplaneUI().showAirplanesByType(planeTypeID)
-            
-            # User chooses NAFokkerF28
-            elif selection == '2':
-                planeTypeID = 'NAFokkerF28'
-                return AirplaneUI().showAirplanesByType(planeTypeID)
-            
-            # User chooses NABAE146
-            elif selection == '3':
-                planeTypeID = 'NABAE146'
-                return AirplaneUI().showAirplanesByType(planeTypeID)
-            
-            # User chooses to go back to main menu
-            elif selection == 'm':
-                return
-                
-            # User does not choose any of the given possibilities
-            else:
-                print('Invalid selection!')
-                print()
+            selection = input('\nPlease choose one of the above: ').strip()
+
+            for i in range(1,counter+1):
+                if selection == str(i):
+                    planeTypeId = airplane_types[i-1].getplaneTypeID()
+                    success = True
+                    return AirplaneUI().showAirplanesByType(planeTypeId)
+
+            if not success:
+                print('\nInvalid selection!\n')

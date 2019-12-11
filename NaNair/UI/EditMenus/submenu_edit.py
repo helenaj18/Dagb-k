@@ -39,9 +39,11 @@ class SubMenuEdit:
 
             elif selection == '2':
                 # Change destination emergency contact
+                print()
                 print('1 - Change emergency contact')
                 print('2 - Change emergency phone number')
-                user_selection = input('Please choose one of the above (1 or 2)').strip()
+                print()
+                user_selection = input('Please choose one of the above:').strip()
 
                 if user_selection == '1':
                     # name of emergency contact changed
@@ -54,6 +56,7 @@ class SubMenuEdit:
 
             elif selection == '3':
                 while True:
+                    print()
                     # Prints out information about an employee with inputted crew id
                     crew_id = CrewUI().getPersonalID()
                     if crew_id:

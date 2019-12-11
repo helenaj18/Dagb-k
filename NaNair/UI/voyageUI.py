@@ -20,16 +20,15 @@ class VoyageUI:
         # check if date is valid
         year_int,month_int,day_int = LL_API().verifyDate(year_str,month_str,day_str)
 
+        # turn date input into datetime object
         datetime_input = datetime.datetime(year_int,month_int,day_int,0,0,0)
         return datetime_input
     
     def getDateWithTime(self):
-        '''Gets a date and time input from the user
-        and returns a datetime object or a string
+        '''Gets a date and time input from the user and returns a datetime object or a string
         if the user wants to quit'''
         
         while True:
-
             print('Enter departure time: ')
             year_str = input('Year: ').strip()
             month_str = input('Month: ').strip()
@@ -45,6 +44,7 @@ class VoyageUI:
             # check if time is valid
             hour_int, minutes_int = LL_API().verifyTime(hour_str, minutes_str)
 
+            # get date and time now
             time_now = datetime.datetime.now()
 
             year_now = time_now.year
@@ -53,7 +53,9 @@ class VoyageUI:
             hour_now = time_now.hour
             minutes_now = time_now.minute
 
+            # check if date has passed
             if year_now<=year_int:
+                # if it is the same year but input months are in the future
                 if year_now == year_int\
                     and month_now <= month_int \
                         and day_now <= day_int:
@@ -71,6 +73,7 @@ class VoyageUI:
                             print('Date has already passed!')
                     else:
                         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
+                # if input is earlier this year
                 elif year_now == year_int\
                     and month_now > month_int:
                         print('Date has already passed!')
@@ -84,6 +87,7 @@ class VoyageUI:
 
     def seperateDatetimeString(self, datetime_str):
         '''Seperates a datetime string and returns the split parts'''
+               # date             time
         return datetime_str[:10],datetime_str[-8:]
 
 
@@ -91,15 +95,18 @@ class VoyageUI:
                 flight_no_out, flight_no_home, voyage_duration_min, voyage_state):
         '''Prints out a voyage'''
         print('\n'+'-'*50)
+        # destination
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(),\
             voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
         print('-'*50)
-
+        
+        # status
         print('\t Status: {}'.format(voyage_state))
 
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         
+        # if aircraft is assigned
         if aircraft_ID != 'EMPTY' and aircraft_ID != 'empty':
             airplane = LL_API().getAirplanebyInsignia(aircraft_ID)
             aircraft_type = airplane.get_planeTypeID()
@@ -121,11 +128,9 @@ class VoyageUI:
 
         print('-'*50)
         
-
     def checkVoyagesInRange(self):
-        '''Checks if the voyages in a date range are completed
-           returns None if they're all completed or if
-           there are no voyages on the dates'''
+        '''Checks if the voyages in a date range are completed.
+           Returns None if they're all completed or if there are no voyages on the dates'''
         
         # Gets a tuple with a list of all voyages 
         # in a date range and a list of all completed 
@@ -154,12 +159,15 @@ class VoyageUI:
     
 
     def checkCompleted(self):
-        '''Gets an voyage id as an input and
-           checks if the voyage is completed'''
+        '''Gets an voyage id as an input and checks if the voyage is completed'''
+        
         while True:
             voyage_id = input("Enter voyage ID to select: ").strip()
+            
+            # class instance of voyage with inputted ID
             voyage = LL_API().getOneVoyage(voyage_id)
             if voyage:
+                # get status of voyage (completed, not departed, in air)
                 voyage_state = LL_API().get_status_of_voyage(voyage)
                 if voyage_state == 'Completed':
                     print('-'*45+'\n')
@@ -212,27 +220,41 @@ class VoyageUI:
             print('{:^45}'.format(b_str))
             print('~'*45+'\n')
 
+
+
     def addCrewMember(self, crew_member, voyage,airplane_type_on_voyage):
+        '''Takes in crew member instance, voyage instance and airplane type.
+        Adds crew member to voyage'''
+        
+        # get role of crew member, where role is pilot or cabincrew
         role = crew_member.getRole()
 
         if role == 'Pilot':
+            # if crew member is captain
             if crew_member.getBool():
+                # if there is no captain assigned to voyage
                 if voyage.getCaptain() == 'empty':
+                    # check if crew member is working on another voyage that day
                     if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
                         a_str = '\nCaptain is assigned to another voyage on the same date\n\
                             Please chose another captain\n'
                         raise Exception(a_str)
 
                     voyage.setCaptain(crew_member,airplane_type_on_voyage)
+                # if there is already a captain
                 else: 
                     raise Exception('A captain is already assigned to the voyage\n')
+            # if crewmember is copilot
             else:
+                # if there is no assigned copilot
                 if voyage.getCopilot() == 'empty':
+                    # check if pilot is working on the same day
                     if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
                         a_str = 'pilot is assigned to another voyage on the same date\n\
                             Please chose another pilot\n'
                         raise Exception(a_str)
                     voyage.setCopilot(crew_member,airplane_type_on_voyage)
+                # if there is already a copilot
                 else: 
                     raise Exception('A copilot is already assigned to the voyage\n')
 
@@ -249,10 +271,7 @@ class VoyageUI:
             # elif crew_member.getBool() == False:
             #     raise Exception('You must add a Head Flight Attendant first\n')
 
-        
-                        
-
-        
+          
             
                 
     def addCrewToVoyage(self,voyage):
@@ -305,7 +324,10 @@ class VoyageUI:
             print('\nVoyage is fully staffed!\n')
             return 
 
+   
+   
     def getStatusOfVoyage(self,voyage):
+        '''Takes voyage instance and returns the status of the flight (completed, in air, not departed)'''
         return LL_API().get_status_of_voyage(voyage)
 
     def showOneVoyage(self,voyage = ''):

@@ -362,29 +362,31 @@ class CrewUI:
                         return 'empty'
 
     def getPilotLicense(self):
+        '''Gets pilot license from user '''
+        success = False
+        airplane_types = LL_API().loadAirplaneTypes()
+
         print('-'*45)
         print('{:^45}'.format('Please chose one of the following'))
         print('{:^45}'.format('pilot licenses:'))
         print('-'*45)
         print()
         
-        print('1 - NAFokkerF100')
-        print('2 - NAFokkerF28')
-        print('3 - NABAE146')
-
         while True:
-            pilot_license = input('\nPlease choose a number between 1-3: ').strip()
+            counter = 1
+            for airplane_type in airplane_types:
+                print('{} - {}'.format(counter,airplane_type))
+                counter += 1
 
-            if pilot_license == '1':
-                pilot_license = 'NAFokkerF100'
-                return pilot_license
-            elif pilot_license == '2':
-                pilot_license = 'NAFokkerF28'
-                return pilot_license
-            elif pilot_license == '3':
-                pilot_license = 'NABAE146'
-                return pilot_license
-            else:
+            selection = input('\nPlease choose one of the above: ').strip()
+
+            for i in range(1,counter+1):
+                if selection == str(i):
+                    pilot_license = airplane_types[i-1].getplaneTypeID()
+                    success = True
+                    return pilot_license
+
+            if not success:
                 print('\nInvalid selection!\n')
 
 

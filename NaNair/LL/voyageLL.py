@@ -97,19 +97,31 @@ class VoyageLL:
 
         time_now_datetime = datetime.datetime.now()
 
-        voyage_depart_date_str = voyage_instance.getDepartureTime()
-        voyage_arrive_date_str = voyage_instance.getArrivalTimeHome()
+        # departing and arriving time of flight at KEF
+        voyage_depart_time_home_str = voyage_instance.getDepartureTime()
+        voyage_arrive_time_home_str = voyage_instance.getArrivalTimeHome()
 
+        # departing and arriving time of flight at destination
+        voyage_arrive_time_out_str = voyage_instance.getArrivalTimeOut()
+        voyage_depart_time_out_str = voyage_instance.getDepartureTimeAtDestination()
+        
         # Turn depart and arrive time string into a datetime value
-        voyage_depart_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_date_str)
-        voyage_arrive_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_arrive_date_str)
+        voyage_depart_home_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_time_home_str)
+        voyage_arrive_home_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_time_home_str)
+
+        voyage_depart_out_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_time_out_str)
+        voyage_arrive_out_datetime = AirplaneLL().revertDatetimeStrtoDatetime(voyage_depart_time_out_str)
 
         # if voyage departed before current time
-        if time_now_datetime < voyage_depart_datetime:
+        if time_now_datetime < voyage_depart_home_datetime:
             status_str = 'Not departed'
-        # if voyage departed before current time but has not yet arrived
-        elif time_now_datetime >= voyage_depart_datetime and time_now_datetime < voyage_arrive_datetime:
-            status_str = 'In air'
+        # if voyage departed before current time but has not yet arrived out OR if it has departed back home and hasnt arrived
+        elif (time_now_datetime >= voyage_depart_home_datetime and time_now_datetime < voyage_arrive_out_datetime)\
+            or (time_now_datetime >= voyage_depart_out_datetime and time_now_datetime < voyage_arrive_home_datetime):
+                status_str = 'In air'
+        # if voyage has landed in destination but not departed back
+        elif time_now_datetime >= voyage_arrive_out_datetime and time_now_datetime < voyage_depart_out_datetime:
+            status_str = 'At destination'
         # if voyage has arrived    
         else:
             status_str = 'Completed'

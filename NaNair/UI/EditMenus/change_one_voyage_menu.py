@@ -22,22 +22,23 @@ class ChangeOneVoyageMenu:
         
         # if voyage was in the past
         elif voyage_state_str == 'Completed':
-            print('\nDo you want to change sold seats on voyage?\n')
-            print('1 - Yes\n2 - No (Go back to edit existing voyage)')
-            selection = input().strip()
+            while True:
+                print('\nDo you want to change sold seats on voyage?\n')
+                print('1 - Yes\n2 - No (Go back to edit existing voyage)')
+                selection = input().strip()
 
-            # go to change sold seats on voyage
-            if selection == '1':
-                # info on one voyage printed
-                VoyageUI().showOneVoyage(self.voyage)
+                # go to change sold seats on voyage
+                if selection == '1':
+                    # info on one voyage printed
+                    VoyageUI().showOneVoyage(self.voyage)
 
-                # go to change voyage
-                self.changeCompletedVoyage()
-            # go back
-            elif selection == '2':
-                return 
-            else:
-                print('invalid selection')
+                    # go to change voyage
+                    self.changeCompletedVoyage()
+                # go back
+                elif selection == '2':
+                    return 
+                else:
+                    print('invalid selection')
 
     def changeCompletedVoyage(self):
         '''Allows user to modify voyages that were in the past'''
