@@ -14,7 +14,7 @@ class DisplayMenuWorkingCrew:
             print('m - Back to main menu')
             print()
 
-            selection = input('Please choose one of the above (1/2/m): ').strip()
+            selection = input('Please choose one of the above: ').strip()
             print()
 
             if selection == '1' or selection == '2':

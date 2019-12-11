@@ -15,7 +15,7 @@ class DisplayVoyageTimeFrame:
             print('m - Back to main menu')
             print()
 
-            selection = input('\nPlease choose one of the above (1/2/m): ').strip()
+            selection = input('\nPlease choose one of the above: ').strip()
 
             if selection == '1':
                 # Lists up all voyages during a specific time frame

@@ -21,9 +21,8 @@ class DisplayMenuAirplanes:
             print('3 - List airplanes by type')
             print('4 - List airplanes by date and time')
             print('m - Back to main menu')
-            print()
 
-            selection = input().strip()
+            selection = input('\nPlease choose one of the above: ').strip()
 
             #Prints all airplanes owned by NaN Air
             if selection == '1':

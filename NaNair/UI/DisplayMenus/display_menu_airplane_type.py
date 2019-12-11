@@ -9,7 +9,7 @@ class DisplayMenuAirplaneType:
         airplane_types = AirplaneUI().getAirplaneTypes()
 
         while True:
-            print('\nWhat type would you like to list? Please choose one of the following')
+            print('\nWhat type would you like to list? Please choose one of the following:')
             counter = 1
             for airplane_type in airplane_types:
                 print('{} - {}'.format(counter,airplane_type))
