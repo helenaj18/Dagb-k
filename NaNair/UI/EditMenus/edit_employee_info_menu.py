@@ -55,17 +55,19 @@ class EditEmployeeMenu:
             ''' The software asks for new rank and assigns it to the owner of given ID'''
             while True:
                 if type(employee) == Pilot:
+                    print()
                     print('Please choose one: ')
                     print('0 - Co-pilot')
                     print('1 - Captain')
                     print('m - Back to main menu')
                 else: 
+                    print()
                     print('Please choose one: ')
                     print('0 - Flight attendant')
                     print('1 - Head service manager')
                     print('m - Back to main menu')
-                
-                new_rank = input('Please choose one of the above 0/1/m): ').strip()
+                print()
+                new_rank = input('Please choose one of the above: ').strip()
 
                 if new_rank != '0' and new_rank != '1' and new_rank != 'm':
                     print('\nInvalid rank!\n')
@@ -76,6 +78,7 @@ class EditEmployeeMenu:
                 else:
                     employee.setRank(new_rank)
                     CrewUI().changeEmployeeInfo(employee)
+                    return
             
         elif selection == '5':
             ''' The software asks for new license and assigns it to the owner of given ID'''
