@@ -372,8 +372,8 @@ class VoyageUI:
             print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
             print('Do you want to add an extra crew member?')
             print('1 - Yes')
-            print('2 - No')
-            selection = input().strip()
+            print('2 - No (Go back)')
+            selection = input('Please choose one of the above: ').strip()
             if selection == '1':
 
                 if 'empty' in crew_on_voyage_list[-2:]:
