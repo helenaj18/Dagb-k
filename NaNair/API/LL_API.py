@@ -3,7 +3,6 @@ from LL.destinationLL import DestinationLL
 from LL.crewLL import CrewLL
 from LL.voyageLL import VoyageLL
 
-#from UI.crewUI import CrewUI
 
 class LL_API:
 
@@ -13,6 +12,8 @@ class LL_API:
         return AirplaneLL().getAirplanes() 
     
     def getAirplanebyInsignia(self, planeInsignia):
+        '''Returns an airplane instance 
+        with the input planeinsignia'''
         return AirplaneLL().getAirplanebyInsignia(planeInsignia)
 
     def showAirplanesByType(self, planeTypeId = ''):
@@ -20,21 +21,28 @@ class LL_API:
         return AirplaneLL().getAirplanesByType(planeTypeId)
 
     def showAirplaneTypes(self):
+        '''Returns a dictionary with airplane types as keys
+        and number of pilots with license
+        on that type as value'''
         return AirplaneLL().getNumberOfPilotsWithLicense()
 
     def showAirplanesByDateTime(self,date_str):
-        '''Returns a tuple of lists of instances. First tuple is planes that are not available,
-        the second is planes that are available at the time  inputted by user.'''
+        '''Returns a tuple of lists of instances. First tuple 
+        is planes that are not available,
+        the second is planes that are available at the time
+        inputted by user.'''
         return AirplaneLL().getAirplanesByDateTime(date_str)
     
 
     def verifyDate(self,year_str,month_str,day_str):
-        '''Checks if date is valid. If it is not valid, it will ask user to input another date.'''
+        '''Checks if date is valid. If it is not valid, 
+        it will ask user to input another date.'''
         return AirplaneLL().verifyDate(year_str,month_str,day_str)
 
 
     def verifyTime(self,hour_str,minute_str):
-        '''Checks if time is valid. If it is not valid, it will ask user to input another time.'''
+        '''Checks if time is valid. If it is not valid, 
+        it will ask user to input another time.'''
         return AirplaneLL().verifyTime(hour_str,minute_str)
     
 
@@ -69,37 +77,44 @@ class LL_API:
         return CrewLL().getFlightAtt()
 
     def get_working_crew(self,datetime_object):
-        '''Returns a formatted string of crew that are working at an inputted time'''
+        '''Returns a formatted string of crew that are
+         working at an inputted time'''
         return CrewLL().getWorkingCrew(datetime_object)
     
     def get_not_working_crew(self,datetime_object):
-        '''Returns a list of instances of the crew that is not working on a specific day.'''
+        '''Returns a list of instances of the crew that
+         is not working on a specific day.'''
         return CrewLL().getNotWorkingCrew(datetime_object)
     
 
     def get_work_schedule(self,start_date,end_date,crew_id):
-        '''Returns a list of instances of the voyages that a specific crew member is working in
+        '''Returns a list of instances of the voyages that a 
+        specific crew member is working in
         for an inputted date.'''
         return CrewLL().getWorkSchedule(start_date,end_date,crew_id)
 
     
     def get_crew_member_by_id(self,crew_id):
-        '''Returns the class instance for the crew member that has the inputted crew id.'''
+        '''Returns the class instance for the crew member that
+         has the inputted crew id.'''
         return CrewLL().getOneCrewMember(crew_id)
     
 
     def get_licensed_pilots(self, pilot_license):
-        '''Returns a list of class instances of the pilots that have the inputted license.'''
+        '''Returns a list of class instances of the pilots
+         that have the inputted license.'''
         return CrewLL().getLicensedPilots(pilot_license)
     
 
     def sortPilotsByLicense(self):
-        '''Returns a list of class instances of all pilots, sorted by their licenses.'''
+        '''Returns a list of class instances of all pilots, 
+        sorted by their licenses.'''
         return CrewLL().sortPilotsByLicense()
 
 
     def addCrew(self, info_list):
-        '''Takes a list of information for a specific crew member and adds them to file.'''
+        '''Takes a list of information for a specific
+        crew member and adds them to file.'''
         return CrewLL().addCrew(info_list)
     
 
@@ -108,7 +123,8 @@ class LL_API:
         return CrewLL().ChangeCrewInfo(employee)
     
     def getQualifiedCrew(self, depart_time, plane_insignia):
-        '''Returns a list of instances of crew that can fly a specific plane at a specific time'''
+        '''Returns a list of instances of crew that can fly a 
+        specific plane at a specific time'''
         return CrewLL().getQualifiedCrew(depart_time, plane_insignia)
 
     def doesIDExist(self, crew_id):
@@ -129,6 +145,7 @@ class LL_API:
         return VoyageLL().findArrivalTimeHome(departure_datetime, dest)
     
     def getCompletedVoyagesInRange(self,start_datetime, end_datetime):
+        '''Gets a list of completed voyages in a date range'''
         return VoyageLL().getCompletedVoyagesInRange(start_datetime, end_datetime)
 
     def add_voyage(self,destination, time, plane):
@@ -138,41 +155,45 @@ class LL_API:
 
 
     def get_all_voyages_in_date_range(self,start_date,end_date):
-        '''Returns a list of instances of all voyages in a specific time range inputted by user.'''
+        '''Returns a list of instances of all voyages in a specific
+        time range inputted by user.'''
         return VoyageLL().getVoyageInDateRange(start_date,end_date)
 
 
     def get_voyage_duration(self,voyage):
-        '''Returns a tuple of hours, minutes of a round trip to a destination inputted by user.'''
+        '''Returns a tuple of hours, minutes of a 
+        round trip to a destination inputted by user.'''
         return VoyageLL().getVoyageDuration(voyage)
 
 
     def checkDestInput(self, dest_input):
-        '''Checks if destination code input is correct. Returns True if it is correct, 
-        otherwise False.'''
+        '''Checks if destination code input is correct. 
+        Returns True if it is correct, otherwise False.'''
         return VoyageLL().checkDestInput(dest_input)
     
 
     def showPlanesForNewVoyage(self, depart_time, arrival_time):
-        '''Returns a list of class instances of those planes that are available at a certain time.'''
+        '''Returns a list of class instances of those planes
+        that are available at a certain time.'''
         return VoyageLL().getAvailablePlanes(depart_time, arrival_time)
     
     
     def checkPlaneInput(self, plane, list_of_planes):
-        '''Checks if inputted plane exists in list of available planes inputted by user.
+        '''Checks if inputted plane exists in list of 
+        available planes inputted by user.
         Returns true if it exists, otherwise False.'''
         return VoyageLL().checkPlaneInput(plane, list_of_planes)
 
         
     def getOneVoyage(self,voyage_id):
-        '''Returns a class instance of voyage with an inputted ID, if it does not exist, 
-        None is returned.'''
+        '''Returns a class instance of voyage with an 
+        inputted ID, if it does not exist, None is returned.'''
         return VoyageLL().getOneVoyage(voyage_id)
 
 
     def checkIfTakenDate(self, time_datetime):
-        '''Checks if a voyage is registered at an inputted time. Returns True if 
-        date is taken, otherwise False.'''
+        '''Checks if a voyage is registered at an inputted time. 
+        Returns True if date is taken, otherwise False.'''
         return VoyageLL().checkIfTakenTime(time_datetime)
 
 
@@ -190,11 +211,13 @@ class LL_API:
     ## DESTINATION LL
 
     def get_destinations(self):
-        '''Gets all destinations NaN Air flies to and returns a list of class instances'''
+        '''Gets all destinations NaN Air flies to and 
+        returns a list of class instances'''
         return DestinationLL().getDestination()
     
     def changeEmergencyContact(self, destination_instance):
-        '''Takes in an updated instance and writes it into the destinations file'''
+        '''Takes in an updated instance and writes 
+        it into the destinations file'''
         return DestinationLL().changeDestinationFile(destination_instance)
 
     def addDestination(self,new_destination):

@@ -99,10 +99,10 @@ class CrewUI:
         format_str = ''
 
         if crew_list != None:
-            print('\n'+'#'*30)
-            print('{:^30}'.format(header))
+            print('\n'+'-'*45)
+            print('{:^45}'.format(header))
             print()
-            print('#'*30+'\n')
+            print('-'*45+'\n')
             if header == 'Working Crew':
                 header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}'.format(
                     'Role','Name','Employee Id','Position','Email',\
@@ -159,13 +159,16 @@ class CrewUI:
 
             print()
         else:
-            print('\nNo voyages on this day\n')
+            print()
+            print('{:^45}'.fomat('No voyages on this day!'))
+            print('-'*45)
 
     def checkSSN(self):
         '''Checks if an SSN input is correct and returns the SSN'''
 
         while True:
-            crew_id = input('Enter the Crew members ID (SSN): ').strip()
+            print('\nEnter the Crew members ID\n(SSN format XXXXXXXXXX)')
+            crew_id = input('').strip()
             
             try:
                 # checks if personal ID is 10 letters and an integer
@@ -188,31 +191,31 @@ class CrewUI:
             
     def showOneCrewMember(self,crew_id):
         crew_member = LL_API().get_crew_member_by_id(crew_id)
-        print('\n'+'-'*44)
+        print('\n'+'-'*45)
 
         if crew_member == None:
             print('Employee with this id not found!')
             print()
             return False
         else:
-            print('Name: {}'.format(crew_member.getName()))
-            print('SSN: {}'.format(crew_member.getCrewID()))
-            print('Address: {}'.format(crew_member.getAddress()))
-            print('Phone number: {}'.format(crew_member.getPhoneNumber()))
-            print('Email: {}'.format(crew_member.getEmail()))
+            print('{:<15}{:<15}'.format('Name:',crew_member.getName()))
+            print('{:<15}{:<15}'.format('SSN:',crew_member.getCrewID()))
+            print('{:<15}{:<15}'.format('Address:',crew_member.getAddress()))
+            print('{:<15}{:<15}'.format('Phone number:',crew_member.getPhoneNumber()))
+            print('{:<15}{:<15}'.format('Email:',crew_member.getEmail()))
 
             if type(crew_member) == Pilot:
                 if crew_member.getBool():
-                    print('Rank: Captain')
-                    print('License: {}'.format(crew_member.getLicense()))
+                    print('{:<15}{:<15}'.format('Rank:','Captain'))
+                    print('{:<15}{:<15}'.format('License:',crew_member.getLicense()))
                 else:
-                    print('Rank: Co-pilot')
-                    print('License: {}'.format(crew_member.getLicense()))
+                    print('{:<15}{:<15}'.format('Rank:','Co-pilot'))
+                    print('{:<15}{:<15}'.format('License:',crew_member.getLicense()))
             else:
                 if crew_member.getBool():
-                    print('Rank: Head service manager')
+                    print('{:<15}{:<15}'.format('Rank:','Head service manager'))
                 else:
-                    print('Rank: Flight attendant')
+                    print('{:<15}{:<15}'.format('Rank:','Flight attendant'))
 
             print()
             return True
@@ -282,22 +285,35 @@ class CrewUI:
            crew file'''
 
         info_list = []
-        print('\nPlease fill in the following information. Press enter to skip.\n')
+        print('-'*45)
+        print('{:^45}'.format('Please fill in the following information.'))
+        print('{:^45}'.format('Press enter to skip.'))
+        print('-'*45)
+        print()
 
         personal_id = self.getPersonalID()
 
         while LL_API().doesIDExist(personal_id):
-            print('Another crew member already has that ID! Please input another ID.\n')
-            personal_id = input('Personal ID: ').strip()
+
+            print('{:^45}'.format('Another crew member already has that ID!'))
+            print('{:^45}'.format('Please input another ID.'))
+            print('-'*45)
+            print()
+          
+            personal_id = self.getPersonalID()
 
         info_list.append(personal_id)
-
 
 
         employee_name = self.getName()
         info_list.append(employee_name)
 
-        print('\nPlease choose one of the following job titles:\n')
+        print()
+        print('-'*45)
+        print('{:^45}'.format('Please choose one of the following'))
+        print('{:^45}'.format('job titles:'))
+        print('-'*45)
+        print()
         print('1 - Captain')
         print('2 - Co-pilot')
         print('3 - Head service manager')
@@ -330,7 +346,9 @@ class CrewUI:
 
         #info_list for pilots is longer because of license
 
+        
         print('\nNew Employee added!\n') 
+       
 
         return
     
@@ -345,13 +363,18 @@ class CrewUI:
             return 'empty'
 
     def getPilotLicense(self):
-        print('Pilot license:')
+        print('-'*45)
+        print('{:^45}'.format('Please chose one of the following'))
+        print('{:^45}'.format('pilot licenses:'))
+        print('-'*45)
+        print()
+        
         print('1 - NAFokkerF100')
         print('2 - NAFokkerF28')
         print('3 - NABAE146')
 
         while True:
-            pilot_license = input('Please choose one of the above: ').strip()
+            pilot_license = input('\nPlease choose a number between 1-3: ').strip()
 
             if pilot_license == '1':
                 pilot_license = 'NAFokkerF100'
@@ -363,7 +386,7 @@ class CrewUI:
                 pilot_license = 'NABAE146'
                 return pilot_license
             else:
-                print('Invalid selection')
+                print('\nInvalid selection!\n')
 
 
     def getPhoneNumber(self):
@@ -375,11 +398,11 @@ class CrewUI:
                 if len(employee_phone_number) == 7:
                     return employee_phone_number
                 else:
-                    print('Invalid phone number')
+                    print('\nInvalid phone number!\n')
             elif len(employee_phone_number) == 0:
                 return 'empty'
             else:
-                print('Invalid phone number')
+                print('\nInvalid phone number!\n')
 
 
     def getEmail(self):
@@ -391,27 +414,27 @@ class CrewUI:
             elif '@' and '.' in email_address and len(email_address) != 0:
                 return email_address
             else:
-                print('Invalid email address!')
+                print('\nInvalid email address!\n')
 
     def getName(self):
         while True:
             employee_name = input("Enter the employee's name: ").capitalize().strip()
             for letter in employee_name:
                 if letter.isdigit():
-                    print('Invalid name, please enter only letters!')
+                    print('\nInvalid name, please enter only letters!\n')
                     break
             else:
                 if len(employee_name) != 0:
                     return employee_name
                 else:
-                    print('The name is required')
+                    print('\nThe name is required!\n')
 
 
     def getPersonalID(self):
         '''Gets personal ID from user'''
 
         while True:
-            personal_id = input('Personal ID (required): ').strip()
+            personal_id = input('Personal ID (xxxxxxxxxx): ').strip()
 
             if DestinationUI().checkIfInt(personal_id):
                 if len(personal_id) == 10:
@@ -421,24 +444,34 @@ class CrewUI:
             else:
                 print('Invalid personal ID!')
 
+    def getDateInput(self,a_string):
+        b_str = 'Enter the {} date for the period'.format(a_string)
+        print('\n'+'-'*45)
+        print('{:^45}'.format(b_str))
+        print('{:^45}'.format('on work schedule'))
+        print('-'*45+'\n')
+        
+        year_str = input('Year: ').strip()
+        month_str = input('Month: ').strip()
+        day_str = input('Day: ').strip()
+
+        return year_str,month_str,day_str
+
+
     def showSchedule(self, crew_ID):
         ''' Shows the schedule for a specific crew member '''
         employee = LL_API().get_crew_member_by_id(crew_ID)
         
         if employee != None:
-            print('\nEnter the "From date" for the work schedule\n')
+        
             
-            start_year_str = input('Year: ').strip()
-            start_month_str = input('Month: ').strip()
-            start_day_str = input('Day: ').strip()
+            start_year_str,start_month_str,start_day_str = self.getDateInput('start')
+            
 
             start_year_int, start_month_int, start_day_int = LL_API().verifyDate(start_year_str, start_month_str, start_day_str)
             start_date = datetime.datetime(start_year_int,start_month_int,start_day_int,0,0,0) #VERIFY INPUT
             
-            print('\nEnter the "To date" for work schedule\n')
-            end_year_str = input('Year: ').strip()
-            end_month_str = input('Month: ').strip()
-            end_day_str = input('Day: ').strip()
+            end_year_str,end_month_str,end_day_str = self.getDateInput('end')
 
             end_year_int, end_month_int, end_day_int = LL_API().verifyDate(end_year_str, end_month_str, end_day_str)
             end_date = datetime.datetime(end_year_int,end_month_int,end_day_int,0,0,0) # VERIFY INPUT
@@ -446,12 +479,16 @@ class CrewUI:
             work_schedule_list = LL_API().get_work_schedule(start_date,end_date,crew_ID)
             
         
-            name_header_str = '{:<10} {:<10}'.format(employee.getName(),crew_ID)
-            header_str = 'Working Schedule {}.{}.{}-{}.{}.{}'.format(start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
-            print()
+            name_header_str = '{:^45}\n{:^45}'.format(employee.getName(),'ID:'+rew_ID)
+            date_str = '{}.{}.{}-{}.{}.{}'.format(\
+                start_day_int,start_month_int,start_year_int,end_day_int,end_month_int,end_year_int)
+            header_str = '{:^45}\n{:^45}'.format('Working Schedule',date_str)
+
+            
+            print('\n'+'-'*45)
             print(name_header_str)
             print(header_str)
-            print(len(header_str)*'-')
+            print(45*'-'+'\n')
 
             if work_schedule_list != None: 
                 for voyage in work_schedule_list:
@@ -466,13 +503,17 @@ class CrewUI:
                 return True
         else:
             return False
+
+    #def prettyprintScheduleHeader(self)
             
     def prettyprint(self,voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
         aircraft_ID):
 
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(), voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
+        print(45*'-')
         print('\t Flight numbers: {} - {}'.format(flight_no_out, flight_no_home))
         print('\t Total time: {} hrs {} min'.format(voyage_duration_hrs,voyage_duration_min))
         print('\t Aircraft: {}'.format(aircraft_ID))
+        print()
 

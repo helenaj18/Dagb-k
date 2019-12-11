@@ -455,20 +455,20 @@ class VoyageUI:
     def addVoyage(self):
 
         dest = self.getDest()
-        selection = 'R'
+        selection = '3'
 
         while selection == 'R':
             departure_datetime = self.getDateWithTime()
 
             print('Please enter one of the following: ')
-            print('V - verify input')
-            print('R - redo input')
-            print('C - cancel voyage registration')
+            print('1 - confirm input')
+            print('2 - redo input')
+            print('3 - cancel voyage registration')
             print()
-            selection = input().strip().upper()
+            selection = input().strip()
             print()
 
-        if selection == 'V':   
+        if selection == '1':   
             while True:
                 if departure_datetime != None:
                     arrival_time = LL_API().getArrivalTime(departure_datetime, dest)
@@ -503,7 +503,7 @@ class VoyageUI:
                 else:
                     departure_datetime = self.getDateWithTime()
                     continue
-        elif selection == 'C':
+        elif selection == '3':
             return
         else:
             print('Invalid input')
