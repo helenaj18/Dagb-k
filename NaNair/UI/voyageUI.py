@@ -428,15 +428,11 @@ class VoyageUI:
                     
                 aircraft_ID = voyage.getAircraftID().upper()
 
-                # if aircraft_ID == VoyageUI.EMPTY: 
-                #     aircraft_ID = None
-
 
                 VoyageUI().prettyprint(voyage,voyage_staffed,aircraft_ID,\
                     voyage_duration_hrs, flight_no_out, flight_no_home, \
                         voyage_duration_min, voyage_state)
 
-                print(60*VoyageUI.SEPERATOR)
 
             return voyages_on_date,completed_voyages_in_range
         else:
