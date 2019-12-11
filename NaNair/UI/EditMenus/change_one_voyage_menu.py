@@ -42,9 +42,11 @@ class ChangeOneVoyageMenu:
     def changeCompletedVoyage(self):
         '''Allows user to modify voyages that were in the past'''
         while True:
-            print("\nWhat do you want to change in voyage {}?\n".format(self.voyage.getVoyageID()))
+            print('-'*45)
+            print('What do you want to change in voyage {}?'.format(self.voyage.getVoyageID()))
+            print('-'*45+'\n')
             print('1 - Change number of sold seats out')
-            print('2 - Change number of sold seats home')
+            print('2 - Change number of sold seats home')            
             print('m - Back to edit existing voyage\n')
             user_selection = input('Please choose one of the above (1-2 or m): ').strip()
 
@@ -122,4 +124,4 @@ class ChangeOneVoyageMenu:
             
             # if none of the possibilities were chosen
             else:
-                print('Invalid selection')
+                print('Invalid selection!')
