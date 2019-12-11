@@ -14,9 +14,9 @@ class SubMenuDisplay:
         print()
 
         while True:
-            print('-'*40)
-            print('{:^40}'.format('What would you like to display? '))
-            print('-'*40)
+            print('-'*45)
+            print('{:^45}'.format('What would you like to display? '))
+            print('-'*45)
             print()
 
             print('1 - Airplanes')
@@ -48,5 +48,5 @@ class SubMenuDisplay:
                 # Back to main menu
                 return 
             else:
-                print("Invalid selection")
+                print("Invalid selection!")
                 print()
