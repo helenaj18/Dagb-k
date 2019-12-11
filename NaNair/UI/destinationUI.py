@@ -47,7 +47,7 @@ class DestinationUI:
 
   
     def changeEmergencyContactName(self):
-
+        print()
         airport_code = input('Enter airport code (IATA - 3 letters): ').upper().strip()
         
         check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
@@ -69,6 +69,7 @@ class DestinationUI:
 
 
     def changeEmergencyContactPhoneNumber(self):
+        print()
         airport_code = input('Enter airport code (IATA - 3 letters): ').strip()
         check = LL_API().checkDestInput(airport_code)   #Verifies if the airport code is valid
         while check == False:
