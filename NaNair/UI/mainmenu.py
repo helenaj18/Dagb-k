@@ -12,7 +12,7 @@ class MainMenu:
         print()
         print('#'*45)
         print()
-        print('{:^45}'.format('Welcome to the NaN Air booking system!'))
+        print('{:^45}'.format('Welcome to the NaN Air system!'))
         
 
         while True: 

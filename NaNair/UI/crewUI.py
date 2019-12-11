@@ -320,10 +320,10 @@ class CrewUI:
         print('3 - Head service manager')
         print('4 - Flight attendant')
         print('m - Back to main menu')
-        rank = input('\nPlease choose a number between 1-4 or m: ').strip()
+        rank = input('\nPlease choose a number between: ').strip()
 
         while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
-            rank = input('Please choose a number between 1-4 or m: ').strip()
+            rank = input('Please choose a number between: ').strip()
                 
         info_list.append(rank)
 
