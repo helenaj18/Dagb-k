@@ -7,25 +7,28 @@ class FlightAttendant(Crew):
         self.__license = 'N/A'
         self.__role = 'Cabincrew'
 
-    # def __str__(self):
-    #     return 'FLIGHT ATTENDANT'
-
-    def setRank(self,new_rank):
-        self.__head_flight_att= new_rank
-        return self.__head_flight_att
+    # GET METHODS
 
     def getHeadFlightAtt(self):
+        '''Gets head flight attendant'''
         return self.__head_flight_att
     
     def getRole(self):
+        '''Gets role of attendant'''
         return self.__role
     
     def getBool(self):
+        '''Gets the bool that returns True if the
+        flight attendant is a head flight attendant'''
         return self.__head_flight_att
     
     def getLicense(self):
+        '''Gets license of a flight attendant '''
         return self.__license
 
-    # def getCrewID(self):
-    #     return Crew.__crewID
-
+    # SET METHODS
+    
+    def setRank(self,new_rank):
+        '''Sets rank of a head flight attendant'''
+        self.__head_flight_att= new_rank
+        return self.__head_flight_att
