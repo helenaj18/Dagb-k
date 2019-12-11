@@ -16,6 +16,7 @@ class VoyageIO:
     def loadVoyageFromFile(self):
         '''Loads existing voyages from the file,
            returns a list of voyage instances'''
+
         voyage_list = []
 
         voyage_file = open(self.__allVoyages_filename)
@@ -60,15 +61,14 @@ class VoyageIO:
                     voyage_list.append(voyage_instance)
 
         voyage_file.close()
+
         return voyage_list
 
 
     def changeVoyageFile(self, updated_voyage):
         '''Updates the file with new changes'''
+
         allvoyages = self.loadVoyageFromFile()
-        
-        #new_voyage = updated_voyage
-        #old_voyage = allvoyages[0]
 
         file_object = open(self.__allVoyages_filename,'w')
         with file_object:
@@ -136,6 +136,7 @@ class VoyageIO:
                         'fa2':voyage.getFlightAttTwo()
 
                     })
+                    
         file_object.close()
 
 
@@ -145,5 +146,7 @@ class VoyageIO:
         file_object = open(self.__allVoyages_filename,'a')
         file_object.write(new_voyage_str+'\n')
 
-        return file_object
+        file_object.close()
+
+        #return file_object
 
