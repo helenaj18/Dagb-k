@@ -455,9 +455,9 @@ class VoyageUI:
     def addVoyage(self):
 
         dest = self.getDest()
-        selection = '3'
+        selection = '2'
 
-        while selection == 'R':
+        while selection == '2':
             departure_datetime = self.getDateWithTime()
 
             print('Please enter one of the following: ')

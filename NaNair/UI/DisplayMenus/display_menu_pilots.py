@@ -5,9 +5,9 @@ class DisplayMenuPilots:
     def startDisplayPilots(self):
         '''Main display menu for pilots'''
         print()
-        print('-'*40)
-        print('{:^40}'.format('DISPLAY - Pilots'))
-        print('-'*40)
+        print('-'*45)
+        print('{:^45}'.format('DISPLAY - Pilots'))
+        print('-'*45)
         print()
 
         while True: 
