@@ -285,30 +285,32 @@ class CrewUI:
                 print()
             
                 personal_id = self.getPersonalID()
+        else:
+            return
 
-            info_list.append(personal_id)
+        info_list.append(personal_id)
 
 
-            employee_name = self.getName()
-            info_list.append(employee_name)
+        employee_name = self.getName()
+        info_list.append(employee_name)
 
-            print()
-            print('-'*45)
-            print('{:^45}'.format('Please choose one of the following'))
-            print('{:^45}'.format('job titles:'))
-            print('-'*45)
-            print()
-            print('1 - Captain')
-            print('2 - Co-pilot')
-            print('3 - Head service manager')
-            print('4 - Flight attendant')
-            print('m - Back to main menu')
-            rank = input('\nPlease choose a number between 1-4 or m: ').strip()
+        print()
+        print('-'*45)
+        print('{:^45}'.format('Please choose one of the following'))
+        print('{:^45}'.format('job titles:'))
+        print('-'*45)
+        print()
+        print('1 - Captain')
+        print('2 - Co-pilot')
+        print('3 - Head service manager')
+        print('4 - Flight attendant')
+        print('m - Back to main menu')
+        rank = input('\nPlease choose a number between 1-4 or m: ').strip()
 
-            while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
-                rank = input('Please choose a number between 1-4 or m: ').strip()
-                    
-            info_list.append(rank)
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
+            rank = input('Please choose a number between 1-4 or m: ').strip()
+                
+        info_list.append(rank)
         print()
         print('-'*45)
         print('{:^45}'.format('Please choose one of the following'))
@@ -359,8 +361,6 @@ class CrewUI:
         
             return
 
-        else:
-            return
         
     def getHomeAddress(self):
         '''Gets home address of an 
