@@ -6,7 +6,9 @@ class DisplayVoyageTimeFrame:
     def startDisplayVoyageTimeFrame(self):
 
         while True: 
-            print('\nWhat would you like to display?')
+            print('-'*45)
+            print('{:^45}'.format('What would you like to display? '))
+            print('-'*45)
             print()
             print('1 - In a certain time frame')
             print('2 - On a specific day')

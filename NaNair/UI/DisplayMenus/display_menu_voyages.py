@@ -41,4 +41,4 @@ class DisplayMenuVoyages:
                 return
             
             else:
-                print('\nInvalid selection\n')
+                print('\nInvalid selection!\n')
