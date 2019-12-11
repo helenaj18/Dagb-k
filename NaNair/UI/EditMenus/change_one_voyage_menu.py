@@ -25,7 +25,7 @@ class ChangeOneVoyageMenu:
             while True:
                 print('\nDo you want to change sold seats on voyage?\n')
                 print('1 - Yes\n2 - No (Go back to edit existing voyage)')
-                selection = input().strip()
+                selection = input('Please choose one of the above: ').strip()
 
                 # go to change sold seats on voyage
                 if selection == '1':

@@ -372,8 +372,8 @@ class VoyageUI:
             print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
             print('Do you want to add an extra crew member?')
             print('1 - Yes')
-            print('2 - No')
-            selection = input().strip()
+            print('2 - No (Go back)')
+            selection = input('Please choose one of the above: ').strip()
             if selection == '1':
 
                 if 'empty' in crew_on_voyage_list[-2:]:
@@ -509,7 +509,7 @@ class VoyageUI:
             print('2 - Redo input')
             print('3 - Cancel voyage registration')
             print()
-            selection = input().strip()
+            selection = input('Please choose one of the above: ').strip()
             print()
 
         if selection == '1':   
@@ -531,8 +531,7 @@ class VoyageUI:
                     selection = input('Y/N: ').lower().strip()
 
                     while selection != 'y' and selection != 'n':
-                        print('Please enter Y or N to make your choice')
-                        selection = input().lower().strip()
+                        selection = input('Please enter Y or N to make your choice: ').lower().strip()
 
                     if selection == 'y':
                         plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
@@ -552,7 +551,7 @@ class VoyageUI:
         elif selection == '3':
             return
         else:
-            print('Invalid input!')
+            print('\nInvalid input!\n')
 
     def removeCrewFromVoyage(self,voyage):
         crew_members_counter = 0
@@ -581,6 +580,6 @@ class VoyageUI:
             elif selection == '2':
                 return 
             else:
-                print('Invalid selection!')
+                print('\nInvalid selection!\n')
 
 

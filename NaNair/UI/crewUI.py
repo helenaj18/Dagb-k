@@ -309,6 +309,29 @@ class CrewUI:
                 rank = input('Please choose a number between 1-4 or m: ').strip()
                     
             info_list.append(rank)
+        print()
+        print('-'*45)
+        print('{:^45}'.format('Please choose one of the following'))
+        print('{:^45}'.format('job titles:'))
+        print('-'*45)
+        print()
+        print('1 - Captain')
+        print('2 - Co-pilot')
+        print('3 - Head service manager')
+        print('4 - Flight attendant')
+        print('m - Back to main menu')
+        rank = input('\nPlease choose a number between: ').strip()
+
+        while rank != '1' and rank != '2' and rank != '3' and rank != '4' and rank != 'm':
+            rank = input('Please choose a number between: ').strip()
+                
+        info_list.append(rank)
+
+        if rank == '1' or rank == '2':
+            pilot_license = self.getPilotLicense()
+            info_list.append(pilot_license)
+        elif rank == 'm':
+            return
 
             if rank == '1' or rank == '2':
                 pilot_license = self.getPilotLicense()

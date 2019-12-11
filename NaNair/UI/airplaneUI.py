@@ -38,6 +38,7 @@ class AirplaneUI:
         
         print('-'*45)
 
+
     def showAirplanesByType(self,planeTypeID):
         '''Shows Airplanes by type'''
 
@@ -49,7 +50,7 @@ class AirplaneUI:
         print(header_str)
         print('-'*len(header_str))
 
-        # Goes through the list and prints all airplanes
+        # Goes through the list and prints all airplanes of the type
         for airplane in airplanes_list:
             
             format_str = '{:<15}{:<15}{:<15}{:<15}{:<15}'.format(airplane.get_planeInsignia(),\
@@ -144,6 +145,7 @@ class AirplaneUI:
     def getWingspan(self):
         '''Gets wingspan input from user'''
 
+        # Checks if the input is a float
         while True:
             wingspan = input('Enter the wingspan (m): ').strip()
             try:
@@ -155,6 +157,8 @@ class AirplaneUI:
 
     def getHeight(self):
         '''Gets length input from user'''
+
+        # Checks if the input is a float
         while True:
             height = input('Enter the height (m): ').strip()
             try:
@@ -163,8 +167,11 @@ class AirplaneUI:
             except ValueError:
                 print('\nYou have to enter a float!\n')
 
+
     def getLength(self):
         '''Gets length input from user'''
+
+        # Checks if the input is a float
         while True:
             length = input('Enter the length (m): ').strip()
             try:
@@ -176,6 +183,8 @@ class AirplaneUI:
 
     def getServiceCeiling(self):
         '''Gets service ceiling input from user'''
+
+        # Checks if the input is an int
         while True:
             serviceCeiling = input('Enter service ceiling (m): ').strip()
             try:
@@ -187,6 +196,8 @@ class AirplaneUI:
 
     def getUnitThrust(self):
         '''Gets unit thrust input from user'''
+        
+        # Checks if the input is an int
         while True:
             unitThrust = input('Enter unit thrust: ').strip()
             try:
@@ -198,6 +209,8 @@ class AirplaneUI:
 
     def getMaxTakeOffWeight(self):
         '''Gets max take off weight input from user'''
+
+        # Checks if the input is an int
         while True:
             maxTakeoffWeight = input('Enter max take off weight (kg): ').strip()
             try:
@@ -209,6 +222,8 @@ class AirplaneUI:
 
     def getNumberOfSeats(self):
         '''Gets number of seats input from user'''
+
+        # Checks if the input is an int
         while True:
             seats = input('Enter number of seats: ').strip()
             try:
@@ -217,8 +232,11 @@ class AirplaneUI:
             except ValueError:
                 print('\nYou have to enter an integer!\n')
     
+
     def getEmptyWeight(self):
         '''Gets empty weight input from user'''
+
+        # Checks if the input is an int
         while True:
             emptyWeight = input('Enter empty weight (kg): ').strip()
             try:
@@ -227,9 +245,12 @@ class AirplaneUI:
             except ValueError:
                 print('\nYou have to enter an integer!\n')
     
+
     def getAirplaneTypes(self):
         '''Gets a list or airplane type instances'''
+
         return LL_API().loadAirplaneTypes()
+
 
     def getPlaneTypeIDInput(self):
         '''Gets plane type id input from user'''
@@ -240,12 +261,17 @@ class AirplaneUI:
         while True:
             print('\nChoose planeTypeId:\n')
             counter = 1
+
+            # Goes through all the airplane types 
+            # and prints options for the user
             for airplane_type in airplane_types:
                 print('{} - {}'.format(counter,airplane_type))
                 counter += 1
 
             selection = input('\nPlease choose one of the above: ').strip()
 
+            # Goes through all the options and returns 
+            # information about one airplane type
             for i in range(1,counter+1):
                 if selection == str(i):
                     planeTypeId = airplane_types[i-1].getplaneTypeID()
@@ -253,7 +279,8 @@ class AirplaneUI:
                     seats = airplane_types[i-1].getCapacity()
                     success = True
                     return planeTypeId,manufacturer,seats
-
+            
+            # If the user picks something else
             if not success:
                 print('\nInvalid selection!\n')
 
@@ -283,13 +310,13 @@ class AirplaneUI:
             please choose one of the listed planes.'))
             print('-'*45)
 
-            plane_name = input().upper().strip()
+            plane_name = input('Please try again: ').upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_list)
         
-        return plane_name
 
     def getAirplaneInsigniaInput(self):
         '''Gets plane insignia from user'''
+
         while True:
             planeInsignia = input('\nEnter Insignia of the new plane (TF-XXX): ').upper().strip()
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
@@ -301,4 +328,5 @@ class AirplaneUI:
     def getAirplaneInsigniaList(self):
         '''Gets a list of all airplane 
            insignias of airplanes that NanAir has'''
+
         return LL_API().getAirplaneInsigniaList()

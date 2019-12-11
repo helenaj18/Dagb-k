@@ -12,7 +12,7 @@ class MainMenu:
         print()
         print('#'*45)
         print()
-        print('{:^45}'.format('Welcome to the NaN Air booking system!'))
+        print('{:^45}'.format('Welcome to the NaN Air system!'))
         
 
         while True: 
@@ -31,7 +31,7 @@ class MainMenu:
             print('3 - Edit existing data')
             print('q - Quit')
             print()
-            selection = input()
+            selection = input('Please choose one of the above: ')
             
 
             if selection == '1':
