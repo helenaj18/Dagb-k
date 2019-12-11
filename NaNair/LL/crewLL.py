@@ -292,7 +292,7 @@ class CrewLL:
     #             not_working_crew_id_list.append(crew_id)
 
 
-    def getWorkSchedule(self,start_date,end_date,crew_id):
+    def getWorkSchedule(self,start_date,end_date,input_crew_id):
         '''Gets a work schedule list with all voyage instances
         for an employee in a specific date range. 
         Returns None if the employee has no voyages in the date range'''
@@ -303,11 +303,12 @@ class CrewLL:
             work_schedule_list = []
 
             # Go through all the voyages and check
-            # if the crew member is working
+            # if the crew member is working, add the
+            # voyage to the work schedule if he's working
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 for crew_member_id in crew_on_voyage_list:
-                    if crew_member_id == crew_id:
+                    if crew_member_id == input_crew_id:
                         work_schedule_list.append(voyage)
 
             if len(work_schedule_list) != 0:
