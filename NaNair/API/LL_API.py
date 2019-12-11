@@ -202,9 +202,11 @@ class LL_API:
         return VoyageLL().getVoyageStatus(voyage_instance)
 
     def get_upcoming_voyages(self):
-        return VoyageLL().getUpcomingVoyges()
+        '''Returns a list of all upcoming voyages'''
+        return VoyageLL().getUpcomingVoyages()
     
     def changeSoldSeats(self,voyage,a_str,new_seats_str):
+        '''Changes sold seats in a voyage'''
         return VoyageLL().changeSoldSeats(voyage,a_str,new_seats_str)
 
 

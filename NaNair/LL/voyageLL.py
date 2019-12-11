@@ -12,7 +12,7 @@ class VoyageLL:
     seats_sold_home = '0'
 
     
-    def getUpcomingVoyges(self):
+    def getUpcomingVoyages(self):
         voyage_list = IO_API().loadVoyageFromFile()
         date_today =  datetime.date.today()
         upcoming_voyages_list = []
