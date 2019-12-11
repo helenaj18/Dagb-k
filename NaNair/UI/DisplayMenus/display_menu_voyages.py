@@ -6,9 +6,9 @@ class DisplayMenuVoyages:
 
     def startDisplayVoyages(self):
         print()
-        print('-'*40)
-        print('{:^40}'.format('DISPLAY - Voyages'))
-        print('-'*40)
+        print('-'*45)
+        print('{:^45}'.format('DISPLAY - Voyages'))
+        print('-'*45)
         print()
 
         while True: 
@@ -41,4 +41,4 @@ class DisplayMenuVoyages:
                 return
             
             else:
-                print('\nInvalid selection\n')
+                print('\nInvalid selection!\n')

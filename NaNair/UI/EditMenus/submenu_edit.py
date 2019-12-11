@@ -1,4 +1,3 @@
-# from UI.mainmenu import MainMenu
 from API.LL_API import LL_API
 from UI.crewUI import CrewUI
 from UI.EditMenus.edit_employee_info_menu import EditEmployeeMenu
@@ -11,13 +10,12 @@ class SubMenuEdit:
     EMPTY = 'empty'
 
     def startSubMenuEdit(self):
+        '''Main editing menu'''
         # Header
         print('#'*45)
         print('{:^45}'.format('EDIT EXISTING DATA'))
         print('#'*45)
         print()
-
-        
 
         start = True
         while start: 
@@ -31,9 +29,10 @@ class SubMenuEdit:
             print('m - Main menu')
             print()
 
-            selection = input().strip()
+            selection = input('Please chose one of the above: ').strip()
 
             if selection == '1':
+                # edit existing voyage
                 EditExistingVoyage().startEditExistingVoyage()
                
 
@@ -44,20 +43,24 @@ class SubMenuEdit:
                 user_selection = input('Please choose one of the above (1 or 2)').strip()
 
                 if user_selection == '1':
+                    # name of emergency contact changed
                     DestinationUI().changeEmergencyContactName()
                 elif user_selection == '2':
+                    # phone number of emergency contact changed
                     DestinationUI().changeEmergencyContactPhoneNumber()
                 else:
                     print('Invalid selection!')
 
             elif selection == '3':
                 while True:
-                    # Prints out information about an employee
+                    # Prints out information about an employee with inputted crew id
                     crew_id = CrewUI().getPersonalID()
                     crew_member_found = CrewUI().showOneCrewMember(crew_id) 
+                    # check if id is valid
                     if crew_member_found: 
                         if DestinationUI().checkIfInt(crew_id):
                             if len(crew_id) == 10:
+                                # if valid id, go to change employee
                                 return EditEmployeeMenu().editSelection(crew_id) 
                             else:
                                 print('Invalid personal ID!')

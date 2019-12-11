@@ -26,6 +26,7 @@ class EditEmployeeLicense:
         old_license = employee.getLicense()
         new_license = CrewUI().getPilotLicense()
         print()
+        # list of voyages employee is already assigned to
         voyage_id_with_pilot = self.isPilotOnFutureVoyage(employee)
 
         # if pilot is working on future voyages with old license
