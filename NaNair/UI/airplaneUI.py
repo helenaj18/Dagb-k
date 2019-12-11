@@ -24,6 +24,9 @@ class AirplaneUI:
         print()
     
     def showAllAirplaneTypes(self):
+        '''Shows all airplane types and the number of 
+        pilots that have a license for that type'''
+
         airplane_type_dict = LL_API().showAirplaneTypes()
         
         print()
@@ -146,25 +149,32 @@ class AirplaneUI:
 
 
     def getAirplaneInput(self,departure_datetime, arrival_datetime):
+        '''Shows a list of available airplanes and gets 
+        airplane input from the user'''
+
         print('Available airplanes at time of departure:')
         print()
 
-        airplanes_class_list = LL_API().showPlanesForNewVoyage(departure_datetime, arrival_datetime)
+        airplanes_list = LL_API().showPlanesForNewVoyage(departure_datetime, arrival_datetime)
         print('{:<10}{:<15}'.format('Insignia', 'Type'))
         print('-'*25)
 
-        for plane in airplanes_class_list:
+        for plane in airplanes_list:
             print('{:<10} {:<15}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
         print()
         plane_name = input('Enter Insignia of the plane (TF-XXX): ').upper().strip()
-        check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
+        check = LL_API().checkPlaneInput(plane_name, airplanes_list)
 
         while check == False:
-            print('Please choose one of the listed planes.')
+            print('-'*45)
+            print('{:^45}'.format('This plane is not available on this date,\
+            please choose one of the listed planes.'))
+            print('-'*45)
+            
             plane_name = input().upper().strip()
-            check = LL_API().checkPlaneInput(plane_name, airplanes_class_list)
+            check = LL_API().checkPlaneInput(plane_name, airplanes_list)
         
         return plane_name
 
