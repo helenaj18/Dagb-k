@@ -23,109 +23,127 @@ class Voyage:
         self.__seats_sold_home = seats_sold_home
         
     def getDepartureLocation(self):
+        '''Returns the departure location of a voyage'''
         return self.__departure_location
 
     def getDepartureTime(self):
+        '''Returns the departure time of a voyage'''
         return self.__departure_time
 
     def getDepartureTimeAtDestination(self):
+        '''Returns the departure time at destination of a voyage'''
         return self.__departure_time_out
 
     def getArrivalTimeOut(self):
+        '''Returns the arrival time out of a voyage'''
         return self.__arrival_time_out
         
     def getArrivalTimeHome(self):
+        '''Returns the arrival time home of a voyage'''
         return self.__arrival_time_home
 
     def getSeatsSold(self):
+        '''Gets seats sold out and home in a tuple'''
         return self.__seats_sold_out,self.__seats_sold_home
 
     def getCrewOnVoyage(self):
+        '''Gets crew members on a voyage in a list'''
         crew_on_voyage_list = [self.__captain, self.__copilot, self.__head_flight_att,\
             self.__flight_att_one, self.__flight_att_two]
         return crew_on_voyage_list
 
     def getFlightNumbers(self):
+        '''Returns flight numbers of a voyage in a tuple'''
         return self.__flight_no_out, self.__flight_no_home
 
     def getDestination(self):
+        '''Gets destination instance in a voyage'''
         return self.__destination
 
     def getAircraftID(self):
+        '''Gets the aircraft ID of a voyage'''
         return self.__aircraft_ID
 
     def getCaptain(self):
+        '''Gets the captain's ID in a voyage'''
         return self.__captain
 
     def getCopilot(self):
+        '''Gets the copilot's ID in a voyage'''
         return self.__copilot
     
     def getHeadFlightAtt(self):
+        '''Gets the head flight attendant in a voyage'''
         return self.__head_flight_att
     
     def getFlightAttOne(self):
+        '''Gets the flight attendant one in a voyage'''
         return self.__flight_att_one
 
     def getFlightAttTwo(self):
+        ''''Gets the flight attendant two in a voyage'''
         return self.__flight_att_two
 
-    # def getDestinationName(self):
-    #     return self.__destination_name
 
     def getVoyageID(self):
+        '''Gets the voyage id'''
         return self.__voyage_ID
-
-
-
-    def __str__(self):
-        a_string = str(self.__voyage_ID) +',' + str(self.__flight_no)
-    
-        return a_string
 
 
     # SET METHODS
     def setDepartureTime(self, new_time):
+        '''Sets the departure time '''
         self.__departure_time = new_time
     
     def setArrivalTime(self, new_time):
+        '''Sets the arrival time '''
         self.__arrival_time = new_time
     
     def setAircraftID(self, new_id):
+        '''Sets the aircraft id'''
         self.__aircraft_ID = new_id
     
     def setCaptain(self, new_capt, airplane_type):
-        
-        #airplane_type = "NAFokkerF28" ##taka út harðkóðun
+        '''Check if captain can fly this type 
+        and set the new captain if he can'''
+
         if not new_capt.canFly(airplane_type):
             raise Exception("Pilot can not fly this type")
     
         self.__captain = new_capt.getCrewID()
     
     def setCopilot(self, new_copilot,airplane_type):
-        
-        #airplane_type = "NAFokkerF28" ##taka út harðkóðun
+        '''Check if copilot can fly this type 
+        and set the new copilot if he can'''
+
         if not new_copilot.canFly(airplane_type):
             raise Exception("Copilot can not fly this type")
     
         self.__copilot = new_copilot.getCrewID()
     
     def setHeadFlightAtt(self, new_head):
+        '''Check if flight attendant is a head flight attendant 
+        and set the new head flight attendant if he can'''
+
         if not new_head.getHeadFlightAtt():
             raise Exception('You must add a head flight attendant')
         
         self.__head_flight_att = new_head.getCrewID()
 
-
     def setFlightAttOne(self, new_att):
+        '''Sets flight attendant one'''
         self.__flight_att_one = new_att.getCrewID()
     
     def setFlightAttTwo(self, new_att):
+        '''Sets flight attendant two'''
         self.__flight_att_two = new_att.getCrewID()
 
     def setSeatsSoldOut(self,new_seat_number):
+        '''Sets seats sold out'''
         self.__seats_sold_out = new_seat_number
         
     def setSeatsSoldHome(self,new_seat_number):
+        '''Sets seats sold home'''
         self.__seats_sold_home = new_seat_number
                 
 

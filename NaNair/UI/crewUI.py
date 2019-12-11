@@ -3,7 +3,7 @@ import datetime
 from ModelClasses.flight_att_model import FlightAttendant
 from ModelClasses.pilot_model import Pilot
 from UI.destinationUI import DestinationUI
-
+import string
 
 class CrewUI:
 
@@ -285,6 +285,7 @@ class CrewUI:
            crew file'''
 
         info_list = []
+        print()
         print('-'*45)
         print('{:^45}'.format('Please fill in the following information.'))
         print('{:^45}'.format('Press enter to skip.'))
@@ -345,9 +346,10 @@ class CrewUI:
         LL_API().addCrew(info_list)
 
         #info_list for pilots is longer because of license
-
-        
-        print('\nNew Employee added!\n') 
+        print()
+        print('~'*45)
+        print('{:^45}'.format('New Employee added!')) 
+        print('~'*45)
        
 
         return
@@ -355,12 +357,26 @@ class CrewUI:
     def getHomeAddress(self):
         '''Gets home address of an 
            employee from user'''
+           
+        digits_list = []
 
-        home_address = input('Home address: ').strip()
-        if home_address != '':
-            return home_address
-        else:
-            return 'empty'
+        while True:
+            home_address = input('Home address: ').strip()
+            for letter in home_address:
+                if letter in string.punctuation:
+                    print('Invalid home address!')
+                    break
+                elif letter.isdigit():
+                    digits_list.append(letter)
+            else:
+                if len(digits_list) != 0 and len(digits_list) == len(home_address):
+                    print('Invalid home address!')
+                    continue
+                else:
+                    if home_address != '':
+                        return home_address
+                    else:
+                        return 'empty'
 
     def getPilotLicense(self):
         print('-'*45)
@@ -434,7 +450,7 @@ class CrewUI:
         '''Gets personal ID from user'''
 
         while True:
-            personal_id = input('Personal ID (xxxxxxxxxx): ').strip()
+            personal_id = input('Personal ID (SSN - 10 digits, no hyphen): ').strip()
 
             if DestinationUI().checkIfInt(personal_id):
                 if len(personal_id) == 10:

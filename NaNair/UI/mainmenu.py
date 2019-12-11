@@ -10,8 +10,9 @@ class MainMenu:
         # Header
         print()
         print()
-#        print('#'*45)
-        print('{}'.format('Welcome to the NaN Air booking system!'))
+        print('#'*45)
+        print()
+        print('{:^45}'.format('Welcome to the NaN Air booking system!'))
         
 
         while True: 

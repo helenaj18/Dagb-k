@@ -1,5 +1,6 @@
 from API.LL_API import LL_API
 from ModelClasses.destination_model import Destination
+import string
 
 class DestinationUI:
 
@@ -101,45 +102,57 @@ class DestinationUI:
                     emergency_contact_phone)
         
         LL_API().addDestination(new_destination)
-        
-        print('\nDestination successfully added!')
-
+        print()
+        print('~'*45)
+        print('{:^45}'.format('Destination successfully added!')) 
+        print('~'*45)
 
     def getDestinationName(self):
         while True:
             destination_name = input('Name of destination: ').capitalize().strip()
             for letter in destination_name:
                 if letter.isdigit():
-                    print('Invalid destination name, please enter only letters!')
+                    print('\nInvalid destination name, please enter only letters!\n')
                     break
             else:
-                return destination_name
+                if len(destination_name) != 0:
+                    return destination_name
+                else:
+                    print('\nThe destination name is required!\n')
 
 
     def getEmergencyContactName(self):
         while True:
             emergency_contact_name = input('Enter the emergency contact name: ').capitalize().strip()
             for letter in emergency_contact_name:
-                if letter.isdigit():
+                if letter.isdigit() or letter in string.punctuation:
                     print('Invalid name, please enter only letters!')
                     break
             else:
-                return emergency_contact_name
+                if emergency_contact_name != '':
+                    return emergency_contact_name
+                else:
+                    print('\nThe name is required!\n')
 
 
     def getDestinationAirport(self):
         '''Gets destination airport code from user'''
+        
         while True:
-            destination_airport = input('\nDestination airport code (3char airport code): ').upper().strip()
-            for letter in destination_airport:
-                if letter.isdigit():
-                    print('Invalid airport code!')
-                    break
-            else:
-                if len(destination_airport) == 3:
-                    return destination_airport
+            destination_airport = input('Destination airport code (3char airport code): ').upper().strip()
+            check = LL_API().checkDestInput(destination_airport)
+            if check == False:
+                for letter in destination_airport:
+                    if letter.isdigit():
+                        print('\nInvalid airport code!\n')
+                        break
                 else:
-                    print('Invalid airport code')
+                    if len(destination_airport) == 3:
+                        return destination_airport
+                    else:
+                        print('\nInvalid airport code\n')
+            else:
+                print('\nDestination already exists!\n')
     
 
     def getDuration(self):
@@ -167,7 +180,7 @@ class DestinationUI:
                 destination_distance += 'km'
                 return destination_distance
             else:
-                print('Invalid distance')
+                print('\nInvalid distance!\n')
     
     def getDestinationEmergencyPhoneNumber(self):
         '''Gets the destination's emergency 
@@ -178,9 +191,9 @@ class DestinationUI:
                 if len(emergency_contact_phone) == 7:
                     return emergency_contact_phone
                 else:
-                    print('Invalid phone number')
+                    print('\nInvalid phone number!\n')
             else:
-                print('Invalid phone number')
+                print('\nInvalid phone number!\n')
 
 
     def checkIfInt(self,a_str):

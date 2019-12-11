@@ -29,7 +29,7 @@ class SubMenuRegister:
             print('m - Main menu')
             print()
 
-            selection = input().strip()
+            selection = input('Please choose one of the above (1-4 or m): ').strip()
 
             if selection == '1': 
                 # Add new employee
@@ -57,5 +57,5 @@ class SubMenuRegister:
                 return
 
             else:
-                print("Invalid selection")
+                print("\nInvalid selection!\n")
                 
