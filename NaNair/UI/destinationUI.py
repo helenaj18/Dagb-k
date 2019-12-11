@@ -89,6 +89,7 @@ class DestinationUI:
     
     def addDestination(self):
         '''Gets information needed to add a new destination'''
+        print()
         destination_airport = self.getDestinationAirport()
         destination_name = self.getDestinationName()
         destination_distance = self.getDistance()
