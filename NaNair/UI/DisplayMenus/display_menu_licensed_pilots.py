@@ -1,35 +1,29 @@
 from UI.crewUI import CrewUI
+from UI.airplaneUI import AirplaneUI
 
 class DisplayMenuAirplaneType:
     
     def startDisplayLicensedPilots(self):
         '''Display menu for licensed pilots'''
 
+        success = False
+        airplane_types = AirplaneUI().getAirplaneTypes()
+
         while True:
             print('\nPlease pick one license of the following:\n')
-            print('1 - NAFokkerF100')
-            print('2 - NAFokkerF28')
-            print('3 - NABAE146')
-            print('m - Back to main menu')
-            selection = input('\nPlease choose one of the above (1-4 or m): ').strip()
 
-            # if none of the possible options are chosen
-            while selection != '1' and selection != '2' and selection != '3' and selection != 'm':
+            counter = 1
+            for airplane_type in airplane_types:
+                print('{} - {}'.format(counter,airplane_type))
+                counter += 1
+
+            selection = input('\nPlease choose one of the above: ').strip()
+
+            for i in range(1,counter+1):
+                if selection == str(i):
+                    license_ID = airplane_types[i-1].getplaneTypeID()
+                    success = True
+                    return CrewUI().showByLicense(license_ID)
+
+            if not success:
                 print('\nInvalid selection!\n')
-                selection = input('Try again: ').strip()
-
-            if selection == '1':
-                license_ID = 'NAFokkerF100'
-
-            elif selection == '2':
-                license_ID = 'NAFokkerF28'
-
-            elif selection == '3':
-                license_ID = 'NABAE146'
-            
-            else:
-                # Goes back to main menu
-                return
-            
-            return CrewUI().showByLicense(license_ID)
-
