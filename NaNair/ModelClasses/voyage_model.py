@@ -131,7 +131,7 @@ class Voyage:
         '''Check if flight attendant is a head flight attendant 
         and set the new head flight attendant if he can'''
 
-        if not new_head.getHeadFlightAtt():
+        if not new_head.getBool():
             raise Exception('You must add a head flight attendant')
         
         self.__head_flight_att = new_head.getCrewID()
@@ -153,6 +153,11 @@ class Voyage:
         self.__seats_sold_home = new_seat_number
                 
 
-            
-
+    def removeCrewFromVoyage(self):
+        self.__captain = 'empty'
+        self.__copilot = 'empty'
+        self.__head_flight_att = 'empty'
+        self.__flight_att_one = 'empty'
+        self.__flight_att_two = 'empty'
+        
 

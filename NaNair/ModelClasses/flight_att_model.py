@@ -8,10 +8,6 @@ class FlightAttendant(Crew):
         self.__role = 'Cabincrew'
 
     # GET METHODS
-
-    def getHeadFlightAtt(self):
-        '''Gets head flight attendant'''
-        return self.__head_flight_att
     
     def getRole(self):
         '''Gets role of attendant'''

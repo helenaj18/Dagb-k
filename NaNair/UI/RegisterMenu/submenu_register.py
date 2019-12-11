@@ -25,7 +25,7 @@ class SubMenuRegister:
             print('2 - Add new Voyage')
             print('3 - Add new Airplane with an existing type')
             print('4 - Add new Airplane Type')
-            print('4 - Add new Destination')
+            print('5 - Add new Destination')
 
             print('m - Main menu')
             print()

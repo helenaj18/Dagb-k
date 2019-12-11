@@ -246,21 +246,27 @@ class VoyageLL:
     def changeFlightNo(self, voyage_instance):
         '''Changes flight number of later voyages if a new voyage is added earlier time'''
         
+        #flight numbers
         depart_num, arrival_num = voyage_instance.getFlightNumbers()
 
+        # add 2 to the numbers
         latter_two_depart = str( int(depart_num[-2:]) + 2 )
         latter_two_arrive = str( int(arrival_num[-2:]) + 2 )
 
+        # zero is removed in int() so it is added back if needed
         if len(latter_two_depart) == 1:
             latter_two_depart = '0' + latter_two_depart
             latter_two_arrive = '0' + latter_two_arrive
 
+        # new numbers
         new_depart_num = depart_num[:-2] + latter_two_depart
         new_arrival_num = arrival_num[:-2] + latter_two_arrive
 
+        # add new numbers to instance
         voyage_instance.setDepartNum(new_depart_num)
         voyage_instance.setArrivalNum(new_arrival_num)
 
+        # load to file
         IO_API().changeVoyageFile(voyage_instance)
 
 
