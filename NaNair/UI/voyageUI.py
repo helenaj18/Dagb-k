@@ -209,14 +209,9 @@ class VoyageUI:
             if crew_member.getCaptain():
                 if voyage.getCaptain() == 'empty':
                     if AddExtraCrewmemberMenu().checkIfCrewmemberWorking(voyage,crew_member):
-<<<<<<< HEAD
                         a_str = '\nCaptain is assigned to another voyage on the same date\n\
                             Please chose another captain\n'
                         raise Exception(a_str)
-=======
-                         Exception('Captain is assigned to another voyage on the same date\n\
-                            Please chose another captain\n')
->>>>>>> 8de63909d7da45ed636bde6d217df874e0f1f8b0
 
                     voyage.setCaptain(crew_member,airplane_type_on_voyage)
                 else: 
