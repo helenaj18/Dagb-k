@@ -182,6 +182,7 @@ class VoyageUI:
 
 
     def changeSoldSeats(self,voyage,a_str):
+        '''Changes sold seats on a given flight route in a voyage'''
         while True:
             print('\nEnter number of seats sold')
             print('m - to go back\n')
@@ -199,6 +200,8 @@ class VoyageUI:
 
 
     def checkRank(self, crew_member,voyage,airplane_type_on_voyage):
+        '''Checks if rank of a crewmember, exeption raised if crewmember does not 
+            have the right rank, role or licence for the voyage posotion'''
         success = True
         try:
             self.addCrewMember(crew_member,voyage,airplane_type_on_voyage) 
@@ -213,6 +216,7 @@ class VoyageUI:
             position = CrewUI().checkRank(crew_member)
             if position == 'Pilot':
                 position = 'Copilot'
+            
             print('\n'+'~'*45)
             a_str = '{} - {}, {},'.format(crew_member.getName(),crew_member.getRole(),position)
             b_str = 'was added to voyage {}'.format(voyage.getVoyageID())
@@ -276,7 +280,6 @@ class VoyageUI:
                 
     def addCrewToVoyage(self,voyage):
         '''Adds crew to a voyage'''
-        #crew_member = CrewUI().queryShowNotWorkingCrew()
 
         airplane = LL_API().getAirplanebyInsignia(voyage.getAircraftID())
         airplane_type_on_voyage = airplane.get_planeTypeID()
@@ -293,7 +296,9 @@ class VoyageUI:
             
                 
             while 'empty' in crew_on_voyage_list[0:3]:
-        
+                # Captain, copilot and head flight attendant must be added added at the same time
+                # Voyage must have captain, copilot and head flight attendant 
+
                 crew_member = CrewUI().queryShowNotWorkingCrew()
                 if crew_member:
                     self.checkRank(crew_member,voyage,airplane_type_on_voyage)
@@ -315,19 +320,22 @@ class VoyageUI:
             
 
         elif 'empty' in crew_on_voyage_list:
-           
+            # If captain, copilot and head flight attendant are assigned to voyage the
+            # option to add extra flight attendant is presented  
             print()
 
             AddExtraCrewmemberMenu().startAddExtraCrewMenu(voyage,crew_on_voyage_list)
 
         else: 
             print('\nVoyage is fully staffed!\n')
+            # If voyage is fully staffed no more crewmembers can be added
             return 
 
    
    
     def getStatusOfVoyage(self,voyage):
-        '''Takes voyage instance and returns the status of the flight (completed, in air, not departed)'''
+        '''Takes voyage instance and returns the status of the flight 
+            (completed, in air, not departed)'''
         return LL_API().get_status_of_voyage(voyage)
 
     def showOneVoyage(self,voyage = ''):
@@ -339,9 +347,8 @@ class VoyageUI:
             else: 
                 voyage_id = voyage.getVoyageID()
 
-            
-            
             voyage = LL_API().getOneVoyage(voyage_id)
+
             if voyage != None:
 
                 voyage_duration_hrs, voyage_duration_min = \
@@ -354,46 +361,23 @@ class VoyageUI:
                 
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
-                    # one flight attendant 
+                    # one head flight attendant 
                     voyage_staffed = 'Voyage not fully staffed'
                 else: 
                     voyage_staffed = 'Voyage fully staffed'
                 
                 
                 self.prettyprint(voyage,voyage_staffed,voyage.getAircraftID(),\
-                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min, voyage_state)
+                    voyage_duration_hrs,flight_no_out, flight_no_home, voyage_duration_min,\
+                        voyage_state)
                 
                 return voyage
 
             else:
                 return None
-            
-        else:
-            print('Voyage {} fully staffed'.format(voyage.getVoyageID()))
-            print('Do you want to add an extra crew member?')
-            print('1 - Yes')
-            print('2 - No (Go back)')
-            selection = input('Please choose one of the above: ').strip()
-            if selection == '1':
-
-                if 'empty' in crew_on_voyage_list[-2:]:
-                    if 'empty' in crew_on_voyage_list[-1]:
-                        crew_member = CrewUI().queryShowNotWorkingCrew()
-                        voyage.setFlightAttOne(crew_member)
-                        
-
-                    elif 'empty' in crew_on_voyage_list[-2]:
-                        crew_member = CrewUI().queryShowNotWorkingCrew()
-                        voyage.setFlightAttTwo(crew_member)
-
-            elif selection == '2':
-                return 
-            else:
-                print('Invalid selection!')
 
         LL_API().change_voyage(voyage)
 
-        #return AddExtraCrewmemberMenu().startAddExtraCrewMenu()
 
     def revertDatetimeStrtoDatetime(self,datetime_str):
         return LL_API().revertDatetimeStrtoDatetime(datetime_str)
@@ -401,6 +385,7 @@ class VoyageUI:
     
 
     def addAircraftToVoyage(self,voyage):
+        '''Adds aircraft to voyage'''
         depart_datetime_object = self.revertDatetimeStrtoDatetime(voyage.getDepartureTime())
         arrival_datetime_object = self.revertDatetimeStrtoDatetime(voyage.getArrivalTimeHome())
 
