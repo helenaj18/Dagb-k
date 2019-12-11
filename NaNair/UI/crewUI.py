@@ -460,8 +460,8 @@ class CrewUI:
         '''Gets personal ID from user'''
 
         while True:
-            print('\nInput personal ID of emlployee(SSN - 10 digits, no hyphen)')
-            print('m - Back to main menu')
+            print('\nInput personal ID of employee (SSN - 10 digits, no hyphen)')
+            print('You can also enter M to go back to main menu')
             personal_id = input('Input your choice: ').strip()
             if personal_id != 'm':
                 if DestinationUI().checkIfInt(personal_id):
