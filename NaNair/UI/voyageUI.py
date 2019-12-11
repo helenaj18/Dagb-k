@@ -461,9 +461,9 @@ class VoyageUI:
             departure_datetime = self.getDateWithTime()
 
             print('Please enter one of the following: ')
-            print('1 - confirm input')
-            print('2 - redo input')
-            print('3 - cancel voyage registration')
+            print('1 - Confirm input')
+            print('2 - Redo input')
+            print('3 - Cancel voyage registration')
             print()
             selection = input().strip()
             print()
