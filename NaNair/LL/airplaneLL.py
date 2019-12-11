@@ -103,7 +103,7 @@ class AirplaneLL:
                     day_str = input('Day: ').strip()
 
             except ValueError:
-                print('Invalid date! Try again: ')
+                print('\nInvalid date! Try again: ')
                 year_str = input('Year: ').strip()
                 month_str = input('Month: ').strip()
                 day_str = input('Day: ').strip()
@@ -130,12 +130,12 @@ class AirplaneLL:
 
                 # Else asks for a new input
                 else:
-                    print('Invalid time! Try again: ')
+                    print('\nInvalid time! Try again: ')
                     hour_str = input('Hour: ').strip()
                     minute_str = input('Minute: ').strip()
 
             except ValueError:
-                print('Invalid time! Try again: ')
+                print('\nInvalid time! Try again: ')
                 hour_str = input('Hour: ').strip()
                 minute_str = input('Minute: ').strip()
 
@@ -170,17 +170,20 @@ class AirplaneLL:
         '''Returns a dictionary with airplane types as keys
         and number of pilots with license
         on that type as value'''
+
         airplane_type_list = self.getAirplaneTypes()
         crew_list = IO_API().loadCrewFromFile()
         airplane_type_dict = {}
 
+        # Go through all the crew members and match their 
+        # license with an airplane type, add them to the dict
         for crew_member in crew_list:
-            for airplane_type in airplane_type_list:
-                if crew_member.getLicense() == airplane_type:
-                    if airplane_type in airplane_type_dict:
-                        airplane_type_dict[airplane_type] += 1
+            for airplane_type_str in airplane_type_list:
+                if crew_member.getLicense() == airplane_type_str:
+                    if airplane_type_str in airplane_type_dict:
+                        airplane_type_dict[airplane_type_str] += 1
                     else:
-                        airplane_type_dict[airplane_type] = 1
+                        airplane_type_dict[airplane_type_str] = 1
         
         return airplane_type_dict
 
@@ -370,6 +373,6 @@ class AirplaneLL:
 
 
 
-# BANNAÐ AÐ FÆRA, VERÐUR AÐ VERA NEÐST
+# Has to be here for it to work
 from LL.voyageLL import VoyageLL
 

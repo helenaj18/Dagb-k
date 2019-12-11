@@ -9,16 +9,22 @@ import datetime
 
 class CrewLL:
 
-
+    
     ROLE_const = 2
     RANK_const = 3
     LICENSE_const = 4
 
+    def getCrew(self):
+        ''' Returns a list of class instances for all crew '''
+        return IO_API().loadCrewFromFile()
+
     def getPilots(self):
-        ''' Gets the pilots '''
-        crew_list = IO_API().loadCrewFromFile()
+        ''' Gets a list of pilot instances '''
+        crew_list = self.getCrew()
         pilot_list = []
-        #iterates through crew file and appends the pilots to pilot list
+
+        # Iterates through a list of all crew members 
+        # and appends the pilots to pilot list
         for employee in crew_list:
             if type(employee) == Pilot:
                 pilot_list.append(employee)
@@ -27,10 +33,13 @@ class CrewLL:
     
     
     def getFlightAtt(self):
-        ''' Gets the flight attendants '''
-        crew_list = IO_API().loadCrewFromFile()
+        ''' Gets a list of flight 
+        attendants instances '''
+        crew_list = self.getCrew()
         flight_att_list = []
-        #iterates through crew file and appends the flight attendants to flith attendants list
+
+        # Iterates through a list of all crew members 
+        # and appends the flight attendants to flith attendants list
         for employee in crew_list:
             if type(employee) == FlightAttendant:
                 flight_att_list.append(employee)
@@ -38,15 +47,17 @@ class CrewLL:
         return flight_att_list
 
 
-    def getCrew(self):
-        ''' Returns a list of class instances for all crew '''
-        return IO_API().loadCrewFromFile()
     
 
     def getOneCrewMember(self,input_crew_id):
-        ''' Returns crew memeber which holds given ID number'''
+        ''' Returns a crew member instance
+        which holds given ID number, returns None if 
+        the crew member isn't found'''
+
         crew = self.getCrew()
-        #itirates through the crew file and finds memeber with given ID
+        # Iterates through a list of all crew members 
+        # and finds member with given ID
+
         while True:
             for crew_member in crew:
                 crew_id = crew_member.getCrewID()
@@ -57,12 +68,15 @@ class CrewLL:
  
     
     def getLicensedPilots(self, pilot_license):
-        '''Takes in a pilot license and finds all pilots who have the inputted license.
-        Returns a list of class instances'''
+        '''Takes in a pilot license and finds all pilots 
+        who have the inputted license.
+        Returns a list of pilot instances'''
+
         pilots_instances_list = self.getPilots()
         licensedPilots = []
 
-        # Checks all pilots if they have inputted license. IF they do they are added to a list
+        # Checks all pilots if they have inputted license. 
+        # If they do they are added to a list
         for pilot in pilots_instances_list:
             if pilot_license == pilot.getLicense():
                 licensedPilots.append(pilot)
@@ -71,26 +85,28 @@ class CrewLL:
  
  
     def addCrew(self, CrewData):
-        '''Takes in a list of data and formats it to a string to add to file.
-        '''
-        # add necessary data that can be found from user input
-        # if 'Captain' was selected in UI layer
-        if CrewData[2] == '1': 
+        '''Takes in a list of data and formats 
+        it to a string to add to file.'''
+
+        # Add necessary data that can be found from user input
+
+        # If 'Captain' was selected in UI layer
+        if CrewData[self.ROLE_const] == '1': 
             CrewData.insert(self.ROLE_const, 'Pilot')
             CrewData[self.RANK_const] = '1'
 
-        # if 'Copilot' was selected in UI layer
-        elif CrewData[2] == '2':
+        # If 'Copilot' was selected in UI layer
+        elif CrewData[self.ROLE_const] == '2':
             CrewData.insert(self.ROLE_const, 'Pilot')
             CrewData[self.RANK_const] = '0'
 
-        # if 'Head service manager' was selected in UI layer
-        elif CrewData[2] == '3':
+        # If 'Head service manager' was selected in UI layer
+        elif CrewData[self.ROLE_const] == '3':
             CrewData.insert(self.ROLE_const, 'Cabincrew')
             CrewData.insert(self.LICENSE_const, 'N/A')
             CrewData[self.RANK_const] = '1'
         
-        # if 'Flight Attendant' was selected in UI layer
+        # If 'Flight Attendant' was selected in UI layer
         else:
             CrewData.insert(self.ROLE_const, 'Cabincrew')
             CrewData.insert(self.LICENSE_const, 'N/A')
@@ -109,16 +125,18 @@ class CrewLL:
 
 
     def sortPilotsByLicense(self):
-        '''Sorts all pilots by their license'''
+        '''Sorts all pilots by their license, 
+        returns a list of sorted pilots'''
+
         pilot_list = self.getPilots()
         sorted_pilots_list = []
 
         licenses = set()
-        # make a set of all licenses to iterate through
+        # Make a set of all licenses to iterate through
         for pilot in pilot_list:
-            licenses.add( pilot.getLicense() )
+            licenses.add(pilot.getLicense())
 
-        # checks if a pilot has a specific license and append them to a list if so  
+        # Checks if a pilot has a specific license and append them to a list if so  
         for a_license in licenses:
             for pilot in pilot_list:
                 if pilot.getLicense() == a_license:
@@ -127,7 +145,8 @@ class CrewLL:
         return sorted_pilots_list
  
     def doesIDExist(self, crew_id):
-        '''Checks if a crew member already has inputted ID. Returns true if so, else false'''
+        '''Checks if a crew member already exists 
+        (the inputted id is taken). Returns true if so, else false'''
 
         crew_instance_list = IO_API().loadCrewFromFile()
         BoolCheck = False
@@ -140,20 +159,24 @@ class CrewLL:
 
 
     def getWorkingCrew(self,datetime_object):
-        ''' Returns a string of the working crew on a date inputted by user'''
+        ''' Returns a list of tuples where each tuple 
+        is a working crew member and the destination he's going to'''
         
         working_crew_list = []
-        # Gets a list of the people working on inputted date and the
-        # destination they're going to
-        working_crew_id_list = self.getWorkingCrewIdList(datetime_object)
+
+        # Gets a list of tuples where each tuple is a list of IDs for the 
+        # people working on a voyage that on inputted date and 
+        # the destination they're going to
+
+        working_crew_voyage_info_list = self.getWorkingCrewIdList(datetime_object)
 
 
-        if working_crew_id_list != None:
-            for working_crew_per_voyage in working_crew_id_list:
-                destination_instance = working_crew_per_voyage[1]
+        if working_crew_voyage_info_list != None:
+            for working_crew_per_voyage_info in working_crew_voyage_info_list:
+                destination_instance = working_crew_per_voyage_info[1]
                 destination_name = destination_instance.getDestinationName()
 
-                for crew_id in working_crew_per_voyage[0]:
+                for crew_id in working_crew_per_voyage_info[0]:
                     if crew_id != 'empty':
                         crew_member = self.getOneCrewMember(crew_id)
                         working_crew_list.append((crew_member,destination_name))
@@ -166,26 +189,28 @@ class CrewLL:
 
 
     def getWorkingCrewIdList(self,datetime_object):
-        '''Takes in a date and returns a list of IDs for the people working on that date'''
+        '''Takes in a date and returns a list of tuples where each tuple is
+        a list of IDs for the people working on a voyage that day and 
+        the destination they're going to'''
 
         # Voyages on a specific date:
         voyage_list = VoyageLL().getVoyageInDateRange(datetime_object,datetime_object)
-        self.working_crew_id_info_list = []
+        self.working_crew_voyage_info_list = []
         
-        #iterates through voyages on a specific date and adds the IDs of working crew 
+        # Iterates through voyages on a specific date and adds the IDs of working crew 
         # to list as well as the voyage destination
         if voyage_list != None:
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 destination_of_voyage = voyage.getDestination()
-                self.working_crew_id_info_list.append((crew_on_voyage_list,destination_of_voyage))
+                self.working_crew_voyage_info_list.append((crew_on_voyage_list,destination_of_voyage))
 
-            if len(self.working_crew_id_info_list) != 0:
-                return self.working_crew_id_info_list
-            # if no crew was assigned to the voyages
+            if len(self.working_crew_voyage_info_list) != 0:
+                return self.working_crew_voyage_info_list
+            # If no crew was assigned to the voyages
             else:
                 return None
-        # if there are no voyages on a chosen date
+        # If there are no voyages on a chosen date
         else:
             return None
 
@@ -193,8 +218,10 @@ class CrewLL:
     def getNotWorkingCrew(self,datetime_object):
         '''Gets a list of instances of crew members
            that are not working on a specific day'''
-        
+        # Gets a list of tuples where each tuple is a crew 
+        # instance and the destination they're going to
         working_crew_info_list = self.getWorkingCrew(datetime_object)
+
         working_crew_id_list = []
         not_working_crew_list = []
         all_crew = IO_API().loadCrewFromFile()
@@ -204,10 +231,10 @@ class CrewLL:
             for crew_member, destination in working_crew_info_list:
                 working_crew_id_list.append(crew_member.getCrewID())
 
-            #Checks if the crew memeber is in working list, if not, the crew member is added
-            # to list of not working crew members
+            # Checks if the crew memeber is in the working list, 
+            # if not, the crew member is added to list of not 
+            # working crew members
 
-            
             for crew_member in all_crew:
                 if crew_member.getCrewID() not in working_crew_id_list:
                     not_working_crew_list.append(crew_member)
@@ -220,7 +247,7 @@ class CrewLL:
             return all_crew
 
     def getQualifiedCrew(self, depart_time, plane_insignia):
-        '''Returns a instance list of crew that is both qualified for a specific plane 
+        '''Returns a list of crew instances that is both qualified for a specific plane 
         and is not working'''
 
         plane_instance = AirplaneLL().getAirplanebyInsignia(plane_insignia)
@@ -240,8 +267,8 @@ class CrewLL:
 
             qualified_crew_list = []
 
-            # appends only pilots that are not working and have a specific license
-            # appends all flight attendants that are not working
+            # Appends only pilots that are not working and have a specific license
+            # Appends all flight attendants that are not working
             for crew_member in not_working_list:
                 if type(crew_member) == Pilot:
                     if crew_member.getCrewID() in licensed_pilots_id_list:
@@ -253,25 +280,37 @@ class CrewLL:
         else:
             return None
 
-    def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
-        #Checks if the crew memeber is in working list, if not, the crew member is added
-        # to list of not working crew members
-        for crew_member in crew_instance_list:
-            crew_id = crew_member.getCrewID()
-            if crew_id not in self.working_crew_id_list:
-                not_working_crew_id_list.append(crew_id)
+
+    # Erum við að nota?
+    # def appendNotWorkingCrewList(self,crew_instance_list,not_working_crew_id_list):
+    #     '''Checks if the crew member is in the working list, if not, the crew member is added
+    #     to list of not working crew members'''
+
+    #     for crew_member in crew_instance_list:
+    #         crew_id = crew_member.getCrewID()
+    #         if crew_id not in self.working_crew_voyage_info_list:
+    #             not_working_crew_id_list.append(crew_id)
 
 
-    def getWorkSchedule(self,start_date,end_date,crew_id):
+    def getWorkSchedule(self,start_date,end_date,input_crew_id):
+        '''Gets a work schedule list with all voyage instances
+        for an employee in a specific date range. 
+        Returns None if the employee has no voyages in the date range'''
+
         voyage_list = VoyageLL().getVoyageInDateRange(start_date,end_date)
+
         if voyage_list != None:
             work_schedule_list = []
 
+            # Go through all the voyages and check
+            # if the crew member is working, add the
+            # voyage to the work schedule if he's working
             for voyage in voyage_list:
                 crew_on_voyage_list = voyage.getCrewOnVoyage()
                 for crew_member_id in crew_on_voyage_list:
-                    if crew_member_id == crew_id:
+                    if crew_member_id == input_crew_id:
                         work_schedule_list.append(voyage)
+
             if len(work_schedule_list) != 0:
                 return work_schedule_list
             else:

@@ -48,5 +48,5 @@ class SubMenuDisplay:
                 # Back to main menu
                 return 
             else:
-                print("Invalid selection")
+                print("Invalid selection!")
                 print()
