@@ -154,17 +154,6 @@ class AirplaneLL:
         else:
             return None
 
-    # def getAirplaneTypes(self):
-    #     '''Returns a list of all airplane
-    #     types as a string'''
-    #     all_airplanes = self.getAirplanes()
-    #     airplane_type_list = []
-
-    #     for airplane in all_airplanes:
-    #         if airplane.get_planeTypeID() not in airplane_type_list:
-    #             airplane_type_list.append(airplane.get_planeTypeID())
-        
-    #     return airplane_type_list
 
     def getNumberOfPilotsWithLicense(self):
         '''Returns a dictionary with airplane types as keys
