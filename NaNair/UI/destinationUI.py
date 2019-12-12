@@ -242,7 +242,6 @@ class DestinationUI:
 
     def checkIfInt(self,a_str):
         '''Checks if a string is an integer'''
-
         try:
             int(a_str)
             return True

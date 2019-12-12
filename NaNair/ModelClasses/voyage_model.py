@@ -1,5 +1,7 @@
 
 class Voyage:
+    EMPTY = 'empty'
+
     def __init__(self,voyage_ID,flight_no,seats_sold_out,flight_no_home,seats_sold_home,departure_location,destination,\
                     departure_time,departure_time_out,arrival_time_out,arrival_time_home,aircraft_ID,captain,copilot,\
                         head_flight_att,flight_att_one,flight_att_two):
@@ -154,11 +156,11 @@ class Voyage:
                 
 
     def removeCrewFromVoyage(self):
-        self.__captain = 'empty'
-        self.__copilot = 'empty'
-        self.__head_flight_att = 'empty'
-        self.__flight_att_one = 'empty'
-        self.__flight_att_two = 'empty'
+        self.__captain = self.EMPTY
+        self.__copilot = self.EMPTY
+        self.__head_flight_att = self.EMPTY
+        self.__flight_att_one = self.EMPTY
+        self.__flight_att_two = self.EMPTY
         
     def removeAirplaneFromVoyage(self):
-        self.__aircraft_ID = 'empty'
+        self.__aircraft_ID = self.EMPTY
