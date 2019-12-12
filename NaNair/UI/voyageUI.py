@@ -470,9 +470,10 @@ class VoyageUI:
         print('Please choose a destination. Available destinations are:')
 
         # print destinations with 3 letter IATA code
-        for destination in destinations_class_list[:-1]:
-            print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
-                 destination.getDestinationAirport()))
+        for destination in destinations_class_list:
+            if destination.getDestinationAirport() != 'KEF':
+                print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
+                    destination.getDestinationAirport()))
 
         print()
         dest = input('Your destination (3 letters): ').upper().strip()

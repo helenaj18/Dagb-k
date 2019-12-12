@@ -74,8 +74,8 @@ class DestinationIO:
         file_object = open(self.__destination_filename,'a')
         file_object.write(destination.getDestinationAirport()+\
             ','+destination.getDestinationName()+\
-                ','+destination.getDestinationDistance()+\
-                    ','+ destination.getDestinationDuration()+\
+                ','+destination.getDestinationDuration()+\
+                    ','+destination.getDestinationDistance()+\
                         ','+destination.getDestinationContact()+\
                         ','+destination.getDestinationEmergencyPhoneNumber()+'\n')
         
