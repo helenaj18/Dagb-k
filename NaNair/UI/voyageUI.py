@@ -566,11 +566,14 @@ class VoyageUI:
             print('\nInvalid input!\n')
 
     def countCrewmembers(self, voyage):
+        '''counts crewmembrs on voyage'''
+
         crew_members_counter = 0
         crew_on_voyage = voyage.getCrewOnVoyage()
         for crew_member in crew_on_voyage:
             if crew_member != 'empty':
                 crew_members_counter += 1
+
         return crew_members_counter
 
 
@@ -581,7 +584,7 @@ class VoyageUI:
         crew_members_counter = self.countCrewmembers(voyage)
 
         if crew_members_counter == 0:
-            # if no crewmembers are assinged the can not be removed
+            # if no crewmembers are assinged they can not be removed
             print('\n'+45*'-')
             print('No crewmembers are assigned to the voyage!')
             print(45*'-'+'\n')
@@ -635,6 +638,7 @@ class VoyageUI:
 
 
     def removeAirplaneFromVoyageWithStaff(self,voyage,crew_members_counter):
+        ''''''
         while True:
             print('\n'+'-'*45)
             a_str = '{} crewmembers are assigned to the voyage'.format(crew_members_counter)
