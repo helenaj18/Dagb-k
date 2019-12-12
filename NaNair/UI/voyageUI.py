@@ -29,7 +29,7 @@ class VoyageUI:
         if the user wants to quit'''
         
         while True:
-            print('Enter departure time: ')
+            print('Enter departure time\n')
             year_str = input('Year: ').strip()
             month_str = input('Month: ').strip()
             day_str = input('Day: ').strip()
@@ -66,22 +66,22 @@ class VoyageUI:
                                 if minutes_now <= minutes_int:
                                     return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                                 else:
-                                    print('Date has already passed!')
+                                    print('\nDate has already passed!\n')
                             else:
                                 return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                         else:
-                            print('Date has already passed!')
+                            print('\nDate has already passed!\n')
                     else:
                         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                 # if input is earlier this year
                 elif year_now == year_int\
                     and month_now > month_int:
-                        print('Date has already passed!')
+                        print('\nDate has already passed!\n')
                 else:
                     # if year_int is bigger than year now
                     return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
             else:
-                print('Date has already passed!')
+                print('\nDate has already passed!\n')
 
 
 
@@ -467,12 +467,12 @@ class VoyageUI:
         '''Gets user input for a 3 letter destination code'''
 
         # all destinations
-        destinations_class_list = LL_API().get_destinations()
+        destinations_list = LL_API().get_destinations()
         print()
-        print('Please choose a destination. Available destinations are:')
+        print('Please choose a destination.\nAvailable destinations are:\n')
 
         # print destinations with 3 letter IATA code
-        for destination in destinations_class_list[:-1]:
+        for destination in destinations_list:
             print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
                  destination.getDestinationAirport()))
 
@@ -493,6 +493,10 @@ class VoyageUI:
 
     def addVoyage(self):
         '''Gets input from user to add voyage to file'''
+        print('\n'+'-'*45)
+        print('{:^45}'.format('Add new voyage'))
+        print('-'*45)
+
         dest = self.getDest()
         
         # put selection as 2 so while loop is entered

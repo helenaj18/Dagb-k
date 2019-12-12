@@ -7,10 +7,10 @@ import string
 
 class CrewUI:
 
-    pilot_header = '\n{:<25}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
-    pilot_header += '-'*85
-    flight_att_header = '\n{:<25}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
-    flight_att_header += '-'*70
+    pilot_header = '\n{:<40}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
+    pilot_header += '-'*100
+    flight_att_header = '\n{:<40}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
+    flight_att_header += '-'*85
 
     def showCrew(self):
         ''' Shows full list of crew, pilots and flight attendants'''
@@ -23,7 +23,7 @@ class CrewUI:
 
         for employee in crew:
             # Name and ID appended to string
-            string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
+            string = '{:<40}{:<20}'.format(employee.getName(),employee.getCrewID())
 
             # Role appended to string, if employee is pilot license is also appended
             if type(employee) == Pilot:
@@ -70,7 +70,8 @@ class CrewUI:
 
         while True:
             print('Pick a staff member from the list above\n')
-            print('1 - cancel and go back')
+            print('1 - Cancel and go back')
+            print('\tNo employees will be added to voyage')
             
             crew_id = input('What staff member do you want to pick from the list above (Employee ID): ').lower().strip()
             if crew_id != '1':
@@ -127,7 +128,7 @@ class CrewUI:
             # Different prints for working and not working crew
 
             if header == 'Working Crew':
-                header_str = '{:<15}{:<25}{:<15}{:<15}{:<15}{:<20}{:<15}'.format(
+                header_str = '{:<15}{:<40}{:<15}{:<15}{:<15}{:<20}{:<15}'.format(
                     'Role','Name','Employee Id','Position',\
                         'Phone Number','Destination','License')
                 for crew_member_info in crew_list:
@@ -141,7 +142,7 @@ class CrewUI:
                     else:
                         crew_license = crew_member.getLicense()
 
-                    format_str += '{:<15}{:<25}{:<15}{:<15}{:<15}{:<20}{:<15}\n'.format(
+                    format_str += '{:<15}{:<40}{:<15}{:<15}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
@@ -152,7 +153,7 @@ class CrewUI:
                 )
 
             else:
-                header_str = '{:<15}{:<20}{:<15}{:<15}{:<20}{:<15}'.format(
+                header_str = '{:<15}{:<40}{:<15}{:<15}{:<20}{:<15}'.format(
                     'Role','Name','Employee Id','Position',\
                         'Phone Number','License')
 
@@ -164,7 +165,7 @@ class CrewUI:
                         crew_license = crew_member.getLicense()
 
                     position = self.checkRank(crew_member)
-                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<20}{:<15}\n'.format(
+                    format_str += '{:<15}{:<40}{:<15}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
@@ -249,7 +250,7 @@ class CrewUI:
                 rank = 'Copilot'
 
             # Info formatted
-            print('{:<25}{:<20}{:<25}{:<10}'.format(pilot_instance.getName(),\
+            print('{:<40}{:<20}{:<25}{:<10}'.format(pilot_instance.getName(),\
                  pilot_instance.getCrewID(), rank, pilot_instance.getLicense()))
 
         print()
@@ -270,7 +271,7 @@ class CrewUI:
             else:
                 rank = 'Copilot'
             # Info printed
-            print('{:<25}{:<20}{:<25}{:<10}'.format(pilot.getName(), pilot.getCrewID(), rank, pilot.getLicense()))
+            print('{:<40}{:<20}{:<25}{:<10}'.format(pilot.getName(), pilot.getCrewID(), rank, pilot.getLicense()))
     
         print()
 
@@ -290,7 +291,7 @@ class CrewUI:
                 rank = 'Flight attendant'
 
             # Info printed
-            print('{:<25}{:<20}{:<20}'.format(attendant.getName(), attendant.getCrewID(), rank ))
+            print('{:<40}{:<20}{:<20}'.format(attendant.getName(), attendant.getCrewID(), rank ))
         print()
 
 
@@ -480,7 +481,7 @@ class CrewUI:
 
         while True:
             print('\nInput personal ID of employee (SSN - 10 digits, no hyphen)')
-            print('You can also enter M to go back to main menu')
+            print('m - Back to main menu')
             personal_id = input('Input your choice: ').strip()
             if personal_id != 'm':
                 if DestinationUI().checkIfInt(personal_id):

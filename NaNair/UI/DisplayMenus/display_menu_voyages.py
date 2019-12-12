@@ -33,7 +33,9 @@ class DisplayMenuVoyages:
                 if VoyageUI().showOneVoyage() != None:
                     return
                 else:
-                    print('No voyage with this ID\n')
+                    print('\n'+'-'*45)
+                    print('No voyage with this ID!')
+                    print('-'*45+'\n')
 
 
             elif selection == 'm':
