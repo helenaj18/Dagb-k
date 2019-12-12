@@ -10,6 +10,10 @@ class DestinationUI:
         # Gets a list of all destination instances 
         destinations = LL_API().get_destinations()
 
+        print('\n'+'-'*45)
+        print('{:^45}'.format('All destinations'))
+        print('-'*45)
+
         header_str = '\n{:<15}{:<15}{:<10}{:<12}{:<20}{:<12}'.format('Airport Code',
                                                                     'Destination',
                                                                     'Duration',
@@ -37,6 +41,8 @@ class DestinationUI:
                                                                         emergency_phone_number)
             
             print(format_str)
+
+        print('\n\n')
     
     
     def getOneDestination(self, dest_code):

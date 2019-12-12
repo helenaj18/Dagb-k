@@ -469,7 +469,9 @@ class VoyageUI:
         # all destinations
         destinations_list = LL_API().get_destinations()
         print()
-        print('Please choose a destination.\nAvailable destinations are:\n')
+        print('Please choose a destination.')
+        print('Available destinations are:')
+        print(45*'-')
 
         # print destinations with 3 letter IATA code
         for destination in destinations_list:
@@ -507,7 +509,8 @@ class VoyageUI:
             # get datetime input
             departure_datetime = self.getDateWithTime()
 
-            print('Please enter one of the following: ')
+            print('Are you sure you want to add this voyage?')
+            print('-'*45)
             print('1 - Confirm input')
             print('2 - Redo input')
             print('3 - Cancel voyage registration')
@@ -532,16 +535,17 @@ class VoyageUI:
                         else:
                             return
 
-                    print('Would you like to assign an airplane to this voyage? (Y/N)')
+                    print('Would you like to assign an airplane to this voyage?')
                     print('(You can also do this later)')
-                    selection = input('Y/N: ').lower().strip()
+                    print('1 - Yes\n2 - No')
+                    selection = input('Input your selection: ').lower().strip()
 
                     # while input is neither y or n
-                    while selection != 'y' and selection != 'n':
+                    while selection != '1' and selection != '2':
                         selection = input('Please enter Y or N to make your choice: ').lower().strip()
 
                     # if chosen to add airplane
-                    if selection == 'y':
+                    if selection == '1':
                         plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
                     # if chosen to add airplane later
                     else:
@@ -566,11 +570,14 @@ class VoyageUI:
             print('\nInvalid input!\n')
 
     def countCrewmembers(self, voyage):
+        '''counts crewmembrs on voyage'''
+
         crew_members_counter = 0
         crew_on_voyage = voyage.getCrewOnVoyage()
         for crew_member in crew_on_voyage:
             if crew_member != 'empty':
                 crew_members_counter += 1
+
         return crew_members_counter
 
 
@@ -581,7 +588,7 @@ class VoyageUI:
         crew_members_counter = self.countCrewmembers(voyage)
 
         if crew_members_counter == 0:
-            # if no crewmembers are assinged the can not be removed
+            # if no crewmembers are assinged they can not be removed
             print('\n'+45*'-')
             print('No crewmembers are assigned to the voyage!')
             print(45*'-'+'\n')
@@ -635,6 +642,7 @@ class VoyageUI:
 
 
     def removeAirplaneFromVoyageWithStaff(self,voyage,crew_members_counter):
+        ''''''
         while True:
             print('\n'+'-'*45)
             a_str = '{} crewmembers are assigned to the voyage'.format(crew_members_counter)
