@@ -15,12 +15,12 @@ class AddExtraCrewmemberMenu:
             print('-'*45)
             print('{:^45}'.format('Do you want to add an extra crew member?'))
             print('-'*45+'\n')
-            print('1 - Yes')
-            print('2 - No (Go back)')
-            selection = input('\nPlease choose one of the above (1/2): ').strip()
+            print('Y - Yes')
+            print('N - No (Go back)')
+            selection = input('\nPlease choose one of the above (Y/N): ').strip().lower()
 
             # add extra crew member is chosen
-            if selection == '1':
+            if selection == 'y':
                 # show list of crew that is not working on particular day
                 CrewUI().showNotWorkingCrew(voyage.getDepartureTime())
                 print()
@@ -74,7 +74,7 @@ class AddExtraCrewmemberMenu:
                     print('\n'+'~'*45)
                     return
                         
-            elif selection == '2':
+            elif selection == 'n':
                 return 
 
             else: 
