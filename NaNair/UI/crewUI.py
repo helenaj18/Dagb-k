@@ -127,8 +127,8 @@ class CrewUI:
             # Different prints for working and not working crew
 
             if header == 'Working Crew':
-                header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}'.format(
-                    'Role','Name','Employee Id','Position','Email',\
+                header_str = '{:<15}{:<25}{:<15}{:<15}{:<15}{:<20}{:<15}'.format(
+                    'Role','Name','Employee Id','Position',\
                         'Phone Number','Destination','License')
                 for crew_member_info in crew_list:
                     crew_member = crew_member_info[0]
@@ -141,20 +141,19 @@ class CrewUI:
                     else:
                         crew_license = crew_member.getLicense()
 
-                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}\n'.format(
+                    format_str += '{:<15}{:<25}{:<15}{:<15}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
                     position,
-                    crew_member.getEmail(),
                     crew_member.getPhoneNumber(),
                     destination,
                     crew_license
                 )
 
             else:
-                header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<20}{:<15}'.format(
-                    'Role','Name','Employee Id','Position','Email',\
+                header_str = '{:<15}{:<20}{:<15}{:<15}{:<20}{:<15}'.format(
+                    'Role','Name','Employee Id','Position',\
                         'Phone Number','License')
 
                 for crew_member in crew_list:
@@ -165,12 +164,11 @@ class CrewUI:
                         crew_license = crew_member.getLicense()
 
                     position = self.checkRank(crew_member)
-                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<25}{:<20}{:<15}\n'.format(
+                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
                     position,
-                    crew_member.getEmail(),
                     crew_member.getPhoneNumber(),
                     crew_license
                 )
@@ -183,7 +181,7 @@ class CrewUI:
             print()
         else:
             print()
-            print('{:^45}'.fomat('No voyages on this day!'))
+            print('{:^45}'.format('No voyages on this day!'))
             print('-'*45)
 
 
