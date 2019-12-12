@@ -70,11 +70,11 @@ class CrewUI:
 
         while True:
             print('Pick a staff member from the list above\n')
-            print('1 - Cancel and go back')
+            print('C - Cancel and go back')
             print('\tNo employees will be added to voyage')
             
             crew_id = input('What staff member do you want to pick from the list above (Employee ID): ').lower().strip()
-            if crew_id != '1':
+            if crew_id != 'c':
                 employee = LL_API().get_crew_member_by_id(crew_id)
                 if employee != None:
                     return employee
@@ -187,7 +187,11 @@ class CrewUI:
 
     def changeEmployeeInfo(self,employee):
         '''Sends changed instance into LL layer'''
-        return LL_API().changeCrewInfo(employee)
+        
+        LL_API().changeCrewInfo(employee)
+        print('\n'+'~'*45)
+        print('Employee info has been updated!')
+        print('~'*45+'\n')
 
             
     def showOneCrewMember(self,crew_id):

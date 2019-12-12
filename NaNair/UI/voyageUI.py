@@ -54,7 +54,7 @@ class VoyageUI:
             minutes_now = time_now.minute
 
             # check if date has passed
-            if year_now<=year_int:
+            if year_now <= year_int:
                 # if it is the same year but input months are in the future
                 if year_now == year_int\
                     and month_now <= month_int \
@@ -467,16 +467,17 @@ class VoyageUI:
         '''Gets user input for a 3 letter destination code'''
 
         # all destinations
-        destinations_list = LL_API().get_destinations()
+        destinations_class_list = LL_API().get_destinations()
         print()
         print('Please choose a destination.')
         print('Available destinations are:')
         print(45*'-')
 
         # print destinations with 3 letter IATA code
-        for destination in destinations_list:
-            print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
-                 destination.getDestinationAirport()))
+        for destination in destinations_class_list:
+            if destination.getDestinationAirport() != 'KEF':
+                print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
+                    destination.getDestinationAirport()))
 
         print()
         dest = input('Your destination (3 letters): ').upper().strip()
@@ -537,15 +538,14 @@ class VoyageUI:
 
                     print('Would you like to assign an airplane to this voyage?')
                     print('(You can also do this later)')
-                    print('1 - Yes\n2 - No')
-                    selection = input('Input your selection: ').lower().strip()
+                    selection = input('Input your selection (Y/N): ').lower().strip()
 
                     # while input is neither y or n
-                    while selection != '1' and selection != '2':
+                    while selection != 'y' and selection != 'n':
                         selection = input('Please enter Y or N to make your choice: ').lower().strip()
 
                     # if chosen to add airplane
-                    if selection == '1':
+                    if selection == 'y':
                         plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
                     # if chosen to add airplane later
                     else:
