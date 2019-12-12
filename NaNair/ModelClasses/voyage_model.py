@@ -160,4 +160,5 @@ class Voyage:
         self.__flight_att_one = 'empty'
         self.__flight_att_two = 'empty'
         
-
+    def removeAirplaneFromVoyage(self):
+        self.__aircraft_ID = 'empty'

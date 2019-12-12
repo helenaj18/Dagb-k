@@ -249,5 +249,5 @@ Kinga ætlar að gera wireframe
 Vala ætlar að bæta við að taka flugvél af vinnuferð og brjóta code freeze :@
 Helena ætlar að vinna í stöðuriti og klasariti og Vala mun
 svo hjálpa henni þegar hún er búin að bæta við þessari virkni
-Marinella er veik en ætlar að vinna í notkunartilvikum
+Marinella ætlar að vinna í notkunartilvikum
 Sjáumst eftir hádegi kæra dagbók!!!!

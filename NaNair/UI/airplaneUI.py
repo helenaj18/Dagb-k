@@ -203,7 +203,7 @@ class AirplaneUI:
         
         # Checks if the input is an int
         while True:
-            unitThrust = input('Enter unit thrust: ').strip()
+            unitThrust = input('Enter unit thrust (N): ').strip()
             try:
                 float(unitThrust)
                 return unitThrust
