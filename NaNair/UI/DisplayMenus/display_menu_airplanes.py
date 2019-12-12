@@ -15,7 +15,7 @@ class DisplayMenuAirplanes:
 
         while True: 
             print('What would you like to display?')
-            print()
+            print('-'*45)
             print('1 - List all airplanes')
             print('2 - List all airplane types and number of licensed pilots')
             print('3 - List airplanes by type')

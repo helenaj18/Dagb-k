@@ -12,7 +12,7 @@ class DisplayMenuPilots:
 
         while True: 
             print('What would you like to display?')
-            print()
+            print('-'*45)
             print('1 - Pilots with a license for a specific airplane')
             print('2 - All pilots sorted by license')
             print('m - Back to main menu')

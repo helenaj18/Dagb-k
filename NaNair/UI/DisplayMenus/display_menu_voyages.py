@@ -13,7 +13,7 @@ class DisplayMenuVoyages:
 
         while True: 
             print('What would you like to display?')
-            print()
+            print('-'*45)
             print('1 - All voyages')
             print('2 - A single voyage by ID')
             print('m - Back to main menu')
