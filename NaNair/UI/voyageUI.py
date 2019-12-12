@@ -442,7 +442,9 @@ class VoyageUI:
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
                     # one flight attendant 
-                    voyage_staffed = 'Voyage not fully staffed'
+                    voyage_staffed = 'Voyage not staffed'
+                elif VoyageUI.EMPTY in crew_on_voyage_list[-2:]:
+                    voyage_staffed = 'Voyage has enough staff'
                 else: 
                     voyage_staffed = 'Voyage fully staffed'
                     

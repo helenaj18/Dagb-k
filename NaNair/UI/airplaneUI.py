@@ -120,7 +120,11 @@ class AirplaneUI:
     def addAirplaneType(self):
         '''Gets information about a new airplane
         type and adds it to the file'''
-
+        print()
+        print('-'*45)
+        print('{:^45}'.format('Please fill in the following information.'))
+        print('-'*45)
+        print()
         planeTypeId = input('Enter plane type id: ').strip()
         manufacturer = input('Enter manufacturer: ').strip()
         model = input('Enter model: ').strip()
@@ -199,7 +203,7 @@ class AirplaneUI:
         
         # Checks if the input is an int
         while True:
-            unitThrust = input('Enter unit thrust: ').strip()
+            unitThrust = input('Enter unit thrust (N): ').strip()
             try:
                 float(unitThrust)
                 return unitThrust
