@@ -235,6 +235,19 @@ formattið allt komið
 öll viluboð komin 
 og allir back og cancel takkar á sínum stað 
 Erla ætlar að byrja á kennslumyndbandinu í kvöld sem við stefnum á að klára á morgun ásamt því að vinna 
-í h0nnunanskýrslunni, gera nýtt klasarit og stöðurit 
+í hönnunanskýrslunni, gera nýtt klasarit og stöðurit 
 
 CODE FREEZE OFFICIALLY SET 
+
+
+-----------12.12.2019----------
+Morgunfundur kl 9:00
+Erla ætlar að klára videoið, hún þarf að taka smá upp aftur af því
+skjalið okkar var með skrýtnum gögnum eftir að hafa verið að prófa kóðann
+Hún ætlar svo að vinna í að klippa það í dag
+Kinga ætlar að gera wireframe
+Vala ætlar að bæta við að taka flugvél af vinnuferð og brjóta code freeze :@
+Helena ætlar að vinna í stöðuriti og klasariti og Vala mun
+svo hjálpa henni þegar hún er búin að bæta við þessari virkni
+Marinella ætlar að vinna í notkunartilvikum
+Sjáumst eftir hádegi kæra dagbók!!!!
