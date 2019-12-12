@@ -81,6 +81,7 @@ class ChangeOneVoyageMenu:
             print('3 - Change number of sold seats out')
             print('4 - Change number of sold seats home')
             print('5 - Remove all employees from voyage')
+            print('6 - Remove airplane from voyage')
 
             print('m - Back to edit menu voyage\n')
             user_selection = input('Please choose one of the above: ').strip()
@@ -105,10 +106,11 @@ class ChangeOneVoyageMenu:
             elif user_selection == '2':
                 # if no aircraft is assigned
                 if self.voyage.getAircraftID() == self.EMPTY:
-                    print('-'*45+'\n')
-                    print('No aircraft assigned to voyage')
-                    print('Aircraft must me assigned before staff can be added')
                     print('\n'+'-'*45)
+                    print('{:^45}'.format('No aircraft assigned to voyage'))
+                    print('{:^45}'.format('Aircraft must me assigned'))
+                    print('{:^45}'.format('before staff can be added'))
+                    print('-'*45+'\n')
 
                 else:
                     # go to add crew to voyage
@@ -124,6 +126,15 @@ class ChangeOneVoyageMenu:
 
             elif user_selection == '5':
                VoyageUI().removeCrewFromVoyage(self.voyage)
+            
+            elif user_selection == '6':
+                if self.voyage.getAircraftID() == self.EMPTY:
+                    print('\n'+'-'*45)
+                    print('No aircraft assigned to voyage')
+                    print('-'*45+'\n')
+                    
+                else: 
+                    VoyageUI().removeAirplaneFromVoyage(self.voyage)
 
 
 
