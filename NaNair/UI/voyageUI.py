@@ -396,7 +396,7 @@ class VoyageUI:
         aircraft_ID = AirplaneUI().getAirplaneInput(depart_datetime_object, arrival_datetime_object)
         voyage.setAircraftID(aircraft_ID)
 
-        print('Airplane has been added to voyage {}'.format(voyage.getVoyageID()))
+        print('\nAirplane has been added to voyage {}'.format(voyage.getVoyageID()))
         return LL_API().change_voyage(voyage)
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
@@ -559,16 +559,20 @@ class VoyageUI:
         else:
             print('\nInvalid input!\n')
 
-
-
-    def removeCrewFromVoyage(self,voyage):
-        ''' Removes all crewmembers from voyage'''
-
+    def countCrewmembers(self, voyage):
         crew_members_counter = 0
         crew_on_voyage = voyage.getCrewOnVoyage()
         for crew_member in crew_on_voyage:
             if crew_member != 'empty':
                 crew_members_counter += 1
+        return crew_members_counter
+
+
+
+    def removeCrewFromVoyage(self,voyage):
+        ''' Removes all crewmembers from voyage'''
+
+        crew_members_counter = self.countCrewmembers(voyage)
 
         if crew_members_counter == 0:
             # if no crewmembers are assinged the can not be removed
@@ -593,5 +597,55 @@ class VoyageUI:
                 return 
             else:
                 print('\nInvalid selection!\n')
+
+    def removeAirplaneFromVoyage(self,voyage):
+        ''' Removes airplane from voyage, staff assigned to the voyage 
+            will be removed '''
+
+        old_airplane_type = voyage.getAircraftID()
+        crew_members_counter = self.countCrewmembers(voyage)
+
+        if crew_members_counter > 0:
+            success = self.removeAirplaneFromVoyageWithStaff(voyage,crew_members_counter)
+            if success:
+                voyage.removeAirplaneFromVoyage()
+                voyage.removeCrewFromVoyage()
+                LL_API().change_voyage(voyage)
+            else: 
+                return 
+
+        else:
+            voyage.removeAirplaneFromVoyage()
+
+            LL_API().change_voyage(voyage)
+
+        print('\n'+'~'*45)
+        a_str = 'Airplane {} has been'.format(old_airplane_type)
+        b_str = 'removed from voyage {}'.format(voyage.getVoyageID())
+        print('{:^45}'.format(a_str))
+        print('{:^45}'.format(b_str))
+        print('~'*45+'\n')
+
+
+
+    def removeAirplaneFromVoyageWithStaff(self,voyage,crew_members_counter):
+        while True:
+            print('\n'+'-'*45)
+            a_str = '{} crewmembers are assigned to the voyage'.format(crew_members_counter)
+            print('{:^45}'.format(a_str))
+            print('{:^45}'.format('All crewmembers will be removed'))
+            print('-'*45+'\n')
+            print('Are you sure you want to remove the airplane?')
+            print('1 - Yes\n2 - No (Go back)\n')
+            selection = input('Input your selection: ').strip()
+
+            if selection == '1':
+                return True
+
+            if selection == '2':
+                return False
+            else: 
+                print('\nInvalid input!')
+                 
 
 

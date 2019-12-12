@@ -75,7 +75,7 @@ class AddExtraCrewmemberMenu:
                     return
                         
             elif selection == '2':
-                break 
+                return 
 
             else: 
                 print('\nInvalid selection!\n')
