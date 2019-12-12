@@ -187,7 +187,11 @@ class CrewUI:
 
     def changeEmployeeInfo(self,employee):
         '''Sends changed instance into LL layer'''
-        return LL_API().changeCrewInfo(employee)
+        
+        LL_API().changeCrewInfo(employee)
+        print('\n'+'~'*45)
+        print('Employee info has been updated!')
+        print('~'*45+'\n')
 
             
     def showOneCrewMember(self,crew_id):
