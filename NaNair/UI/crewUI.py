@@ -351,6 +351,7 @@ class CrewUI:
         elif rank == 'm':
             return
 
+        print('\nPress enter if you want to add this information later!\n')
         home_address = self.getHomeAddress()
         info_list.append(home_address)
 

@@ -54,7 +54,7 @@ class VoyageUI:
             minutes_now = time_now.minute
 
             # check if date has passed
-            if year_now<=year_int:
+            if year_now <= year_int:
                 # if it is the same year but input months are in the future
                 if year_now == year_int\
                     and month_now <= month_int \
