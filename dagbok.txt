@@ -1,5 +1,5 @@
-25.11.2019 
-Kl 10:20
+----------25.11.2019----------
+----------Kl 10:20
 
 Erla: Notendahópagreining
 Helena: Kröfulisti og notkunartilvik
@@ -7,7 +7,7 @@ Kinga: Notendahópagreining
 Vala: Kröfulisti og notkunartilvik
 
 
-Kl 15:30
+----------Kl 15:30
 
 Notendahópagreining, kröfulisti og notkunartilvik kláruð,
 á eftir að fínpússa.
@@ -17,15 +17,15 @@ Klárum klarasritið vonandi á morgun, eftir fyrirlesturinn um 3 laga högun!
 
 Sjáum fram að byrja á Wireframe grunnhönnun eftir að hafa fengið kynningu á TUI.
 
-26.11.2019 morgunfundur
-Kl 09:32
+----------26.11.2019----------
+----------Kl 09:32
 
 Við komumst að því að æskilegt er að gera notkunartilvik fyrir allar kröfur.
 Við gerðum bara fyrir A kröfur í gær þannig við ætlum að hjálpast að við að gera B kröfur fyrir fyrirlesturinn kl 11:30.
 Tökum stöðuna aftur þegar það er komið.
 
-26.11.2019
-Kl 12:20
+
+----------Kl 12:20
 
 Fyrirlestri dagsins lokið.
 Við höfum ákveðið að breyta klasaritinu okkar og vinna svo í viðmóti líka.
@@ -36,14 +36,14 @@ Marinella: Viðmót
 Kinga: Viðmót
 Vala: Klasarit og stöðurit
 
-Kl 17:26
+----------Kl 17:26
 Kláruðum nánast wireframe og ákváðum að gera Scrolling window.
 Við breyttum klasaritinu tvisvar, fengum góðar ábendingar og ætlum að halda áfram á morgun.
 Við ætlum einnig að byrja að notendaprófa á morgun.
 
 
-27.11.2019
-Kl 9:00
+----------27.11.2019----------
+----------Kl 9:00
 Við þurfum að fínpússa viðmót og klára klasaritið ásamt því að bæta stöðuritið.
 Erla: Viðmót
 Helena: Klasarit og stöðurit
@@ -51,7 +51,7 @@ Marinella: Viðmót
 Kinga: Viðmót
 Vala: Klasarit og stöðurit
 
-16:00
+----------16:00
 Kláruðum að mestu viðmótið og kláruðum klasaritið og stöðuritið. Settum allt þrennt inn í hönnunarskýsluna 
 og reyndum að láta það líta þokkalega út.
 Prófuðum viðmótið á einum notanda og fengum mjög góðar niðurstöður út úr því. Löguðum viðmótið út frá niðurstöðunum.
@@ -61,7 +61,8 @@ Planið fyrir morgundaginn er að taka fleiri notendaprófanir og laga viðmóti
 Að auki ætlum við að fínpússa skýrsluna.
 
 
-Morgunfundur 28.11
+----------28.11.2019----------
+----------Kl 9:00
 Við ætlum að byrja á því að taka notendaprófanir á amk einum öðrum notanda.
 Við ætlum að fínpússa skýrsluna og bæta við margföldunarþáttum í klasaritið.
 Erla: Fínpússun og notendaprófun
@@ -71,13 +72,14 @@ Kinga: Fínpússun og notendaprófun
 Vala: Fínpússun og klasarit
 
 
-Kl 12:00
+----------Kl 12:00
 Erum búnar með skýrsluna! 
 Skilum núna og ef eitthvað kemur upp munum við gera það á morgun.
 Við erum búnar með allt og munum ekki mæta á morgun nema eitthvað komi upp!
 
 
-Morgunfundur 2.12.2019
+----------2.12.2019----------
+----------Kl 9:00
 Byrja að skilgreina föllin og kommenta þau. 
 Við ætlum að vinna þetta saman af því við erum ekki alveg vissar um hvernig við eigum að gera þetta.
 Ætlum svo að skoða betur hvernig við getum skipt verkum eftir fyrirlesturinn.
@@ -90,7 +92,7 @@ Kinga: DestinationIO
 Marinella: PilotIO
 Vala: VoyageIO
 
-Kl 16:00
+----------Kl 16:00
 Erum búnar með IO klasana, erum bara bíða eftir að fá öll gögn svo við getum lagað klasana út
 fræa þeim. Einnig erum við byrjaðar að reyna að gera API klasana.
 
@@ -99,47 +101,50 @@ Einnig ætlum við að reyna að klára API klasa á morgun.
 
 
 
-Morgunfundur 3.12.2019 kl 9
+---------- 3.12.2019----------
+----------Kl 9:00
 
 Við ætlum að gera API klasana saman og reyna að klára þá í dag.
 Kinga ætlar að laga destination klasann og svo þurfum við að gera change fallið í öllum IO klösum.
 
 
-kl 11:45
+----------kl 11:45
 IO klasar eru tilbúnir
 Erla er að vinna í API tengingum
 Marinella og Vala eru að vinna í menus
 Helena og Kinga ætla núna að fara að hjálpa Erlu
 
-kl 16:00
+----------kl 16:00
 Við erum komnar langt með menus sem að verður UI hlið forrits.
 Löguðum CSV file-a og bættum við því sem vantaði (ss. email og emergency contact)
 Erum að auki komnar vel á leið með API tengingar og ætlum að halda áfram í þeim á morgun.
 
 
-Morgunfundur 4.12.2019 kl 09:00
+----------4.12.2019----------
+----------Kl 9:00
 Við ætlum að byrja daginn á því að laga IO og LL klasa og gera tengingar alla leið í gegn.
 Erla og Marinella: PilotIO og CrewLL
 Helena: DestinationIO og DestinationLL
 Valentína og Kinga: VoyageIO og VoyageLL
 
 
-kl 16:10
+----------kl 16:10
 Flestar IO og LL API tengingar komnar í stand. Hópurinn er byrjaður á að tengja menu
 viðmótið við UI klasana og reyna að láta allt virka. Erum komnar nokkuð langt á leið
 en þó fer mikill tími í að debugga :(
 Stefnum á að klára að tengja viðmótið á morgun og athuga virkni á öllum A kröfunum úr
 kröfulistanum.
 
-Morgunfundur 5.12.2019 kl 09:00
+----------5.12.2019----------
+----------Kl 9:00
 Erum enþá að vinna í UI klösum. Ætlum að halda áfram að tengja viðmótið og svo taka smá fund og 
 fara yfir allar A-kröfur.
 
-kl 19:00
+----------kl 19:00
 Við erum næstum því búnar með allar A-kröfur. Hópurinn er byrjaður að vinna í villuboðum.
 Við stefnum á því að klára allar A-kröfur fyrir helgi.
 
-kl 20:10 
+----------kl 20:10 
 Laaaangur daaaaguuuuuuur
 leeeengi að debugga
 erum komnar eitthvað á leið með að breyta employee info, byrjuðum að nota csv writer 
@@ -147,12 +152,13 @@ og næstum alveg komið að bæta við nýju voyagi
 
 ætlum að kíkja aðeins á þetta í kvöld og klára sem mesta virkni á morgun 
 
-Morgunfundur 6.12.2019 kl 09:00
+----------6.12.2019----------
+----------Kl 9:00
 Náðum að breyta info fyrir employee og að bæta nýjum employee í gærkvöldi.
 Stefnum á því að klára allar A-kröfur í dag og byrja á B-kröfum.
 
 
-kl 18:30
+----------kl 18:30
 Change föll komin fyrir employee, búið að lagfæra airplane klasa og bæta við
 að það sé hægt að skoða flugvélar sem eru lausnar á ákveðnum degi og tíma.
 Nánast allar A kröfur komnar, erum að vinna síðustu um leið og við gerum einhverjar B kröfur.
@@ -164,16 +170,17 @@ Hittumst á sunnudag
 - Laga breytunöfn og kommenta ef vantar
 - Laga fasta þar sem við á
 
-Fundur 07.12.2019 
+----------07.12.2019 ----------
 Marinella vann í skjalinu og lagaði GetNotworkingcrew og getworkingcrew, einnig náði hún að
 gera addemployee í voyage.
 
 
-Morgunfundur 08.12.2019 kl 12:00
+----------08.12.2019----------
+----------Kl 12:00
 Erum með 2 A-kröfur eftir, ætlum að klára þær í dag. Svo ætlum við að reyna klára
 allt það sem við minntumst á fyrir ofan.
 
-kl 20:00
+----------kl 20:00
 
 Vala er að vinna í síðustu A - kröfunum
 Lokuðum öllum skrám, löguðum fasta, löguðum menus í display
@@ -185,30 +192,74 @@ Breyttum nokkrum föllum og löguðum til
 - Klára B - kröfur
 - Skoða öll villuboð, vantar á marga staði!
 
-Morgunfundur 09.12.2019 kl 09:00
+----------09.12.2019----------
+----------Kl 9:00
 Eins og við minntumst á í gær þá ætlum við að laga allt forritið og gara það fínt.
 Við ætlum að funda aftur kl 12:00 til að fara yfir stöðuna.
 
-kl 16:20 
+----------kl 16:20 
 Fundur kl 12 gleymdist þar sem við duttum í forritið. Erum enþá að commenta og klára seinasta 
 A-kröfur. Eigum einnig bara með 2 b-kröfur eftir, fjör!
 
-kl 19:40
+----------kl 19:40
 Allt gengur vel, erum búin að gera villuboð. Erum núna stöðugt að commenta og laga og gera fínt.
 Þessi ein A-krafa er enþá eftir, annars er bara 1 b-krafa eftir sem ætti að vera mjög létt að gera um leið og við erum 
 búnar með þessa seinustu A-kröfu. 
 Við ætlum að hittast hressar á morgun, en vegna óveðurs ætlum við örugglega að fara heim og klára þar.
 
-Morgunfundur 10.12.2019 kl 9:00
+----------10.12.2019----------
+----------Kl 9:00----------
 Við ætlum heim klukkan 14 vegna óveðurs. 
 Við ætlum að klára allt forritið í dag!
 
-Kl 12:55
+----------Kl 12:55
 Erum að flýta okkur heim útaf veðri!! Vinnum heima í dag og KLÁRUM allt forritið!!
 Mjög lítið eftir
 
-Morgunfundur 11.12.2019 kl 11:44
+----------Kl 21:00
+CODE FREEZE
+öll virkni komin, ætlum ekki að bæta neinu við bara formatta og laga villuboð
+
+
+----------11.12.2019 ----------
+----------kl 11:44
 Gleymdum að gera morgunfund :(
 Erum á fullu að fínpússa forritið og laga hönnunarskýsluna.
 Allar A og B-kröfurnar eru ready, erum núna bara að bæta og laga og gera flott.
 Náðum einnig að gera 2 C-kröfur sem er frekar cool.
+
+----------kl 18:45
+Bættum við smá virki... code freeze ekki alveg framfylgt 
+en nú er hægt að taka starfsfólk af vinnuferð, bæta við nýrri flugvélatýpu oooog flugnúmerin breytast eftir tíma! 
+formattið allt komið 
+öll viluboð komin 
+og allir back og cancel takkar á sínum stað 
+Erla ætlar að byrja á kennslumyndbandinu í kvöld sem við stefnum á að klára á morgun ásamt því að vinna 
+í hönnunanskýrslunni, gera nýtt klasarit og stöðurit 
+
+CODE FREEZE OFFICIALLY SET 
+
+
+-----------12.12.2019----------
+Morgunfundur kl 9:00
+Erla ætlar að klára videoið, hún þarf að taka smá upp aftur af því
+skjalið okkar var með skrýtnum gögnum eftir að hafa verið að prófa kóðann
+Hún ætlar svo að vinna í að klippa það í dag
+Kinga ætlar að gera wireframe
+Vala ætlar að bæta við að taka flugvél af vinnuferð og brjóta code freeze :@
+Helena ætlar að vinna í stöðuriti og klasariti og Vala mun
+svo hjálpa henni þegar hún er búin að bæta við þessari virkni
+Marinella ætlar að vinna í notkunartilvikum
+Sjáumst eftir hádegi kæra dagbók!!!!
+
+Hádeigisfundur kl 12:25
+!!Núna er CODE FREEZE.!!
+Erla kláraði videoið!!! vúhú
+Forritið er núna tilbúið þannig Kinga ætlar að laga wireframe út frá þessum breytingum og bæta
+því við nýju hönnunarskýrsluna. YEY YEY
+Vala náði að klára að forrita að það sé hægt að bæta við og að taka flugvél af vinnuferð. VALA KING
+Helena kláraði stöðuritið. AMAZING
+Núna ætla Helena og Vala og gera notendaprófanir og laga klasaritið.
+Marinella kláraði notkunartilvikin. WHOOOP.
+Sjáumst á kvöld fundi kæra dagbók.
+

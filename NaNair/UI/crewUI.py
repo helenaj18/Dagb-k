@@ -6,25 +6,26 @@ from UI.destinationUI import DestinationUI
 import string
 
 class CrewUI:
-    pilot_header = '\n{:<25}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
-    pilot_header += '-'*85
-    flight_att_header = '\n{:<25}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
-    flight_att_header += '-'*70
+
+    pilot_header = '\n{:<40}{:<20}{:<25}{:10}\n'.format('Name','Employee ID','Position','License')
+    pilot_header += '-'*100
+    flight_att_header = '\n{:<40}{:<20}{:<25}\n'.format('Name','Employee ID','Position')
+    flight_att_header += '-'*85
 
     def showCrew(self):
         ''' Shows full list of crew, pilots and flight attendants'''
        
-        # lsit of instances of all crew members
+        # List of instances of all crew members
         crew = LL_API().get_crew()
         string = ''
         
         print(CrewUI.pilot_header)
 
         for employee in crew:
-            # name and ID appended to string
-            string = '{:<25}{:<20}'.format(employee.getName(),employee.getCrewID())
+            # Name and ID appended to string
+            string = '{:<40}{:<20}'.format(employee.getName(),employee.getCrewID())
 
-            # role appended to string, if employee is pilot license is also appended
+            # Role appended to string, if employee is pilot license is also appended
             if type(employee) == Pilot:
                 if employee.getBool():
                     string += '{:<25}{:<10}'.format('Captain', employee.getLicense())
@@ -43,29 +44,34 @@ class CrewUI:
 
     def showWorkingCrew(self,date_str):
         '''Gets a list of all crew working on a certain date and lists them'''
-        # str turned into datetime
+
+        # Str turned into datetime
         datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
-        # instance list of all working crew members
+        # Instance list of all working crew members
         working_crew_list = LL_API().get_working_crew(datetime_object)
-        # send info to be printed
+        # Send info to be printed
         self.printCrew(working_crew_list,True)
 
 
     def showNotWorkingCrew(self,date_str):
         '''Gets a list of all crew not working on a certain date inputted by user'''
-        # str turned into datetime
+
+        # Str turned into datetime
         datetime_object = LL_API().revertDatetimeStrtoDatetime(date_str)
-        # instance list of all crew not working
+        # Instance list of all crew not working
         not_working_crew_list = LL_API().get_not_working_crew(datetime_object)
         self.printCrew(not_working_crew_list, False)
 
     
 
     def queryShowNotWorkingCrew(self):
+        '''Asks a user to pick a staff member from a list,
+        returns the staff member'''
 
         while True:
             print('Pick a staff member from the list above\n')
-            print('1 - cancel and go back')
+            print('1 - Cancel and go back')
+            print('\tNo employees will be added to voyage')
             
             crew_id = input('What staff member do you want to pick from the list above (Employee ID): ').lower().strip()
             if crew_id != '1':
@@ -79,6 +85,7 @@ class CrewUI:
 
     def showQualifiedCrew(self, depart_time_str, plane_insignia):
         '''Prints a list of crew that can be assigned to new voyage'''
+
         # Get list of instances of all crew qualified to fly a certain type of aircraft
         qualified_crew_list = LL_API().getQualifiedCrew(depart_time_str, plane_insignia)
 
@@ -89,7 +96,8 @@ class CrewUI:
         
 
     def checkRank(self,crew_member):
-        '''Takes in instance of crew member and returns his rank (captain/copilot or head flight attendant/flight attendant)'''
+        '''Takes in instance of crew member and returns his rank 
+        (captain/copilot or head flight attendant/flight attendant)'''
         
         role = crew_member.getRole()
         if role == 'Pilot':
@@ -107,17 +115,20 @@ class CrewUI:
 
     def printCrew(self,crew_list, not_working):
         ''' Prints Crew'''
+
         header = 'Working Crew' if not_working else 'Not Working crew'
         format_str = ''
 
-        if crew_list != None:
+        if crew_list != None and crew_list != []:
             print('\n'+'-'*45)
             print('{:^45}'.format(header))
-            print()
             print('-'*45+'\n')
+
+            # Different prints for working and not working crew
+
             if header == 'Working Crew':
-                header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}'.format(
-                    'Role','Name','Employee Id','Position','Email',\
+                header_str = '{:<15}{:<40}{:<15}{:<15}{:<15}{:<20}{:<15}'.format(
+                    'Role','Name','Employee Id','Position',\
                         'Phone Number','Destination','License')
                 for crew_member_info in crew_list:
                     crew_member = crew_member_info[0]
@@ -130,20 +141,19 @@ class CrewUI:
                     else:
                         crew_license = crew_member.getLicense()
 
-                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<25}{:<15}{:<20}{:<15}\n'.format(
+                    format_str += '{:<15}{:<40}{:<15}{:<15}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
                     position,
-                    crew_member.getEmail(),
                     crew_member.getPhoneNumber(),
                     destination,
                     crew_license
                 )
 
             else:
-                header_str = '{:<15}{:<20}{:<15}{:<15}{:<25}{:<20}{:<15}'.format(
-                    'Role','Name','Employee Id','Position','Email',\
+                header_str = '{:<15}{:<40}{:<15}{:<15}{:<20}{:<15}'.format(
+                    'Role','Name','Employee Id','Position',\
                         'Phone Number','License')
 
                 for crew_member in crew_list:
@@ -154,12 +164,11 @@ class CrewUI:
                         crew_license = crew_member.getLicense()
 
                     position = self.checkRank(crew_member)
-                    format_str += '{:<15}{:<20}{:<15}{:<15}{:<25}{:<20}{:<15}\n'.format(
+                    format_str += '{:<15}{:<40}{:<15}{:<15}{:<20}{:<15}\n'.format(
                     crew_member.getRole(),
                     crew_member.getName(),
                     crew_member.getCrewID(),
                     position,
-                    crew_member.getEmail(),
                     crew_member.getPhoneNumber(),
                     crew_license
                 )
@@ -172,7 +181,7 @@ class CrewUI:
             print()
         else:
             print()
-            print('{:^45}'.fomat('No voyages on this day!'))
+            print('{:^45}'.format('No voyages on this day!'))
             print('-'*45)
 
 
@@ -180,16 +189,11 @@ class CrewUI:
         '''Sends changed instance into LL layer'''
         return LL_API().changeCrewInfo(employee)
 
-
-    # def changePilotLicense(self,crew_id,new_license):
-    #     '''Sends changed pilot instance '''
-    #     return LL_API().changePilotLicense(crew_id,new_license)
-
             
     def showOneCrewMember(self,crew_id):
         '''Prints info of one crew member found by ID'''
         
-        # get crew member instance
+        # Get crew member instance
         crew_member = LL_API().get_crew_member_by_id(crew_id)
         print('\n'+'-'*45)
 
@@ -204,7 +208,8 @@ class CrewUI:
             print('{:<15}{:<15}'.format('Phone number:',crew_member.getPhoneNumber()))
             print('{:<15}{:<15}'.format('Email:',crew_member.getEmail()))
 
-            # rank and license printed where it applies
+            # Rank and license printed where it applies
+
             if type(crew_member) == Pilot:
                 if crew_member.getBool():
                     print('{:<15}{:<15}'.format('Rank:','Captain'))
@@ -223,46 +228,49 @@ class CrewUI:
 
 
     def showAllPilots(self):
-        ''' returns full list of pilots registered'''
+        '''Returns a list of all pilot instances'''
+
         return LL_API().get_pilots()
 
 
     def showByLicense(self, license_ID):
         ''' Shows a list of pilots that have a specific licence '''
 
-        # list of instances of all pilots that have a license for inputted plane
+        # List of instances of all pilots that have a license for inputted plane
         licensed_pilots_list = LL_API().get_licensed_pilots(license_ID)
 
         print(CrewUI.pilot_header)
 
         for pilot_instance in licensed_pilots_list:
-            # rank of pilot found
+            # Rank of pilot found
             if pilot_instance.getBool():
                 rank = 'Captain'
             else:
                 rank = 'Copilot'
-            # info formatted
-            print('{:<25}{:<20}{:<25}{:<10}'.format(pilot_instance.getName(),\
+
+            # Info formatted
+            print('{:<40}{:<20}{:<25}{:<10}'.format(pilot_instance.getName(),\
                  pilot_instance.getCrewID(), rank, pilot_instance.getLicense()))
 
         print()
 
+
     def showSortedByLicense(self):
         '''Shows a list of all pilots sorted by license'''
 
-        # list of pilot instances sorted by licenses
+        # List of pilot instances sorted by licenses
         sorted_pilots_list =  LL_API().sortPilotsByLicense()
 
         print(CrewUI.pilot_header)
         
         for pilot in sorted_pilots_list:
-            # rank of pilot found
+            # Rank of pilot found
             if pilot.getBool():
                 rank = 'Captain'
             else:
                 rank = 'Copilot'
-            # info printed
-            print('{:<25}{:<20}{:<25}{:<10}'.format(pilot.getName(), pilot.getCrewID(), rank, pilot.getLicense()))
+            # Info printed
+            print('{:<40}{:<20}{:<25}{:<10}'.format(pilot.getName(), pilot.getCrewID(), rank, pilot.getLicense()))
     
         print()
 
@@ -271,22 +279,24 @@ class CrewUI:
         
         print(CrewUI.flight_att_header)
 
-        # instance list of all flight attendants
+        # Instance list of all flight attendants
         flight_att = LL_API().get_flight_att()
 
         for attendant in flight_att:
-            # rank found
+            # Rank found
             if attendant.getBool():
                 rank = 'Head service manager'
             else:
                 rank = 'Flight attendant'
 
-            # info printed
-            print('{:<25}{:<20}{:<20}'.format(attendant.getName(), attendant.getCrewID(), rank ))
+            # Info printed
+            print('{:<40}{:<20}{:<20}'.format(attendant.getName(), attendant.getCrewID(), rank ))
         print()
+
 
     def addCrew(self):
         '''Gets information about a new crew member and adds it to the crew file'''
+
         info_list = []
         print()
         print('-'*45)
@@ -296,7 +306,8 @@ class CrewUI:
         print()
 
         personal_id = self.getPersonalID()
-        # if personal id is not None
+
+        # If personal id is not None
         if personal_id:
             while LL_API().doesIDExist(personal_id):
 
@@ -309,7 +320,7 @@ class CrewUI:
         else:
             return
 
-        # id added to info list
+        # Id added to info list
         info_list.append(personal_id)
 
         employee_name = self.getName()
@@ -333,7 +344,7 @@ class CrewUI:
                 
         info_list.append(rank)
 
-        # if 1 or 2 is chosen new employee is a pilot and needs a license
+        # If 1 or 2 is chosen new employee is a pilot and needs a license
         if rank == '1' or rank == '2':
             pilot_license = self.getPilotLicense()
             info_list.append(pilot_license)
@@ -349,7 +360,8 @@ class CrewUI:
         email_address = self.getEmail()
         info_list.append(email_address)
         
-        # info list sent to logic layer to be structured correctly and sent to file
+        # Info list sent to logic layer to be 
+        # structured correctly and sent to file
         LL_API().addCrew(info_list)
 
         print()
@@ -366,7 +378,7 @@ class CrewUI:
         digits_list = []
         while True:
             home_address = input('Home address: ').strip()
-            # each letter examined if it is punctuation (!?, and more)
+            # Each letter examined if it is punctuation (!?, and more)
             for letter in home_address:
                 if letter in string.punctuation:
                     print('Invalid home address!')
@@ -374,16 +386,17 @@ class CrewUI:
                 elif letter.isdigit():
                     digits_list.append(letter)
             else:
-                # if user inputs only digits and no letters
+                # If user inputs only digits and no letters
                 if len(digits_list) != 0 and len(digits_list) == len(home_address):
                     print('Invalid home address!')
                     continue
                 else:
                     if home_address != '':
                         return home_address
-                    # if user chooses to skip
+                    # If user chooses to skip
                     else:
                         return 'empty'
+
 
     def getPilotLicense(self):
         '''Gets pilot license from user '''
@@ -399,7 +412,7 @@ class CrewUI:
         print()
         
         while True:
-            # counter is used to show which buttons the user can press
+            # Counter is used to show which buttons the user can press
             counter = 1
             for airplane_type in airplane_types:
                 print('{} - {}'.format(counter,airplane_type))
@@ -436,6 +449,7 @@ class CrewUI:
 
     def getEmail(self):
         '''Gets the employee's email address'''
+
         while True:
             email_address = input('Email: ').strip()
             if len(email_address) == 0:
@@ -446,6 +460,8 @@ class CrewUI:
                 print('\nInvalid email address!\n')
 
     def getName(self):
+        '''Gets the employee's name from user'''
+
         while True:
             employee_name = input("Enter the employee's name: ").capitalize().strip()
             for letter in employee_name:
@@ -464,7 +480,7 @@ class CrewUI:
 
         while True:
             print('\nInput personal ID of employee (SSN - 10 digits, no hyphen)')
-            print('You can also enter M to go back to main menu')
+            print('m - Back to main menu')
             personal_id = input('Input your choice: ').strip()
             if personal_id != 'm':
                 if DestinationUI().checkIfInt(personal_id):
@@ -479,6 +495,8 @@ class CrewUI:
            
 
     def getDateInput(self,a_string):
+        '''Gets a date inpute'''
+
         b_str = 'Enter the {} date for the period'.format(a_string)
         print('\n'+'-'*45)
         print('{:^45}'.format(b_str))
@@ -494,6 +512,7 @@ class CrewUI:
 
     def showSchedule(self, crew_ID):
         ''' Shows the schedule for a specific crew member '''
+
         employee = LL_API().get_crew_member_by_id(crew_ID)
         
         if employee != None:
@@ -541,7 +560,8 @@ class CrewUI:
             
     def prettyprint(self,voyage,flight_no_out,flight_no_home,voyage_duration_hrs,voyage_duration_min,\
         aircraft_ID):
-
+        '''Prints a voyage for a work schedule'''
+        
         print('To {}, {} on {} at {}'.format(voyage.getDestination().getDestinationName(), voyage.getDestination().getDestinationAirport(),\
                 voyage.getDepartureTime()[:10] ,voyage.getDepartureTime()[-8:-3]))
         print(45*'-')

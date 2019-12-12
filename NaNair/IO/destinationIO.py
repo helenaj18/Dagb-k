@@ -25,6 +25,7 @@ class DestinationIO:
             i += 1
         
         destination_file.close()
+
         return destination_list
 
 
@@ -38,6 +39,7 @@ class DestinationIO:
         with file_object:
             fieldnames = ['id','destination','flight_duration','distance',\
             'emergency_name','emergency_phone']
+
             writer = csv.DictWriter(file_object, fieldnames=fieldnames)
             writer.writeheader()
         
@@ -66,6 +68,8 @@ class DestinationIO:
                         'emergency_phone':destination.getDestinationEmergencyPhoneNumber()
                     })
 
+        file_object.close()
+
 
 
     def addDestinationToFile(self,destination):
@@ -78,6 +82,8 @@ class DestinationIO:
                     ','+destination.getDestinationDistance()+\
                         ','+destination.getDestinationContact()+\
                         ','+destination.getDestinationEmergencyPhoneNumber()+'\n')
+
+        file_object.close()
         
         return file_object
 

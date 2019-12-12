@@ -24,7 +24,7 @@ class SubMenuEdit:
             print('{:^45}'.format('What would you like to edit? '))
             print('-'*45)
             print()
-            print('1 - Existing voyage')
+            print('1 - Voyage')
             print('2 - Destination')
             print('3 - Employee')
             print('m - Main menu')

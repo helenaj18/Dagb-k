@@ -29,6 +29,7 @@ class AddExtraCrewmemberMenu:
                     if 'empty' in crew_on_voyage_list[-2]:
                         crew_member = CrewUI().queryShowNotWorkingCrew()
                         if self.isPilot(crew_member):
+                            # pilot can not be assigned as extra crewmember
                             continue
 
                         if crew_member:
@@ -74,7 +75,7 @@ class AddExtraCrewmemberMenu:
                     return
                         
             elif selection == '2':
-                break 
+                return 
 
             else: 
                 print('\nInvalid selection!\n')
@@ -83,6 +84,7 @@ class AddExtraCrewmemberMenu:
     def isPilot(self,crew_member):
         '''Checks if crewmember is a pilot, prints message 
             and returns True if crewmember is Pilot'''
+            
         if crew_member.getRole() == 'Pilot':
             print('-'*45)
             a_str = '\nCrewmember {} is a Pilot'.format(crew_member.getName())
@@ -94,7 +96,7 @@ class AddExtraCrewmemberMenu:
 
     def checkIfCrewmemberWorking(self,voyage,crew_member):
         '''Checks if crewmember is working on the day of the voyage'''
-        
+
         voyage_departuredate_str = voyage.getDepartureTime()
         voyage_departure_datetime = LL_API().revertDatetimeStrtoDatetime(voyage_departuredate_str)
 

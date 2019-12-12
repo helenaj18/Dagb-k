@@ -120,7 +120,11 @@ class AirplaneUI:
     def addAirplaneType(self):
         '''Gets information about a new airplane
         type and adds it to the file'''
-
+        print()
+        print('-'*45)
+        print('{:^45}'.format('Please fill in the following information.'))
+        print('-'*45)
+        print()
         planeTypeId = input('Enter plane type id: ').strip()
         manufacturer = input('Enter manufacturer: ').strip()
         model = input('Enter model: ').strip()
@@ -199,7 +203,7 @@ class AirplaneUI:
         
         # Checks if the input is an int
         while True:
-            unitThrust = input('Enter unit thrust: ').strip()
+            unitThrust = input('Enter unit thrust (N): ').strip()
             try:
                 float(unitThrust)
                 return unitThrust
@@ -301,17 +305,17 @@ class AirplaneUI:
             print('{:<10} {:<15}'.format(plane.get_planeInsignia(),\
                     plane.get_planeTypeID()))        
 
-        print()
-        plane_name = input('Enter Insignia of the plane (TF-XXX): ').upper().strip()
+        
+        plane_name = input('\nEnter Insignia of the plane (TF-XXX): ').upper().strip()
 
         # Checks if an airplane already exists
         check = LL_API().checkPlaneInput(plane_name, airplanes_list)
 
         while check == False:
-            print('-'*45)
-            print('{:^45}'.format('This plane is not available on this date,\
-            please choose one of the listed planes.'))
-            print('-'*45)
+            print('\n'+'-'*45)
+            print('{:^45}'.format('This plane is not available on this date'))
+            print('{:^45}'.format('please choose one of the listed planes.'))
+            print('-'*45+'\n')
 
             plane_name = input('Please try again: ').upper().strip()
             check = LL_API().checkPlaneInput(plane_name, airplanes_list)
@@ -326,7 +330,8 @@ class AirplaneUI:
             if len(planeInsignia) == 6 and planeInsignia[2] == '-' and planeInsignia[0:2]== 'TF':
                 return planeInsignia
             else:
-                print('Invalid Plane insignia! Please write it in this format (TF-XXX)')
+                print('\nInvalid Plane insignia!') 
+                print('Please write it in this format (TF-XXX)\n')
 
 
     def getAirplaneInsigniaList(self):

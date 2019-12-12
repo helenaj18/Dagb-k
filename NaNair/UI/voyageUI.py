@@ -29,7 +29,7 @@ class VoyageUI:
         if the user wants to quit'''
         
         while True:
-            print('Enter departure time: ')
+            print('Enter departure time\n')
             year_str = input('Year: ').strip()
             month_str = input('Month: ').strip()
             day_str = input('Day: ').strip()
@@ -66,22 +66,22 @@ class VoyageUI:
                                 if minutes_now <= minutes_int:
                                     return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                                 else:
-                                    print('Date has already passed!')
+                                    print('\nDate has already passed!\n')
                             else:
                                 return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                         else:
-                            print('Date has already passed!')
+                            print('\nDate has already passed!\n')
                     else:
                         return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
                 # if input is earlier this year
                 elif year_now == year_int\
                     and month_now > month_int:
-                        print('Date has already passed!')
+                        print('\nDate has already passed!\n')
                 else:
                     # if year_int is bigger than year now
                     return datetime.datetime(year_int, month_int, day_int, hour_int, minutes_int, 0)
             else:
-                print('Date has already passed!')
+                print('\nDate has already passed!\n')
 
 
 
@@ -396,7 +396,7 @@ class VoyageUI:
         aircraft_ID = AirplaneUI().getAirplaneInput(depart_datetime_object, arrival_datetime_object)
         voyage.setAircraftID(aircraft_ID)
 
-        print('Airplane has been added to voyage {}'.format(voyage.getVoyageID()))
+        print('\nAirplane has been added to voyage {}'.format(voyage.getVoyageID()))
         return LL_API().change_voyage(voyage)
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
@@ -442,7 +442,9 @@ class VoyageUI:
                 if VoyageUI.EMPTY in crew_on_voyage_list[0:3]: 
                     # not fully staffed if there is not one captain, one pilot and
                     # one flight attendant 
-                    voyage_staffed = 'Voyage not fully staffed'
+                    voyage_staffed = 'Voyage not staffed'
+                elif VoyageUI.EMPTY in crew_on_voyage_list[-2:]:
+                    voyage_staffed = 'Voyage has enough staff'
                 else: 
                     voyage_staffed = 'Voyage fully staffed'
                     
@@ -465,15 +467,23 @@ class VoyageUI:
         '''Gets user input for a 3 letter destination code'''
 
         # all destinations
-        destinations_class_list = LL_API().get_destinations()
+        destinations_list = LL_API().get_destinations()
         print()
-        print('Please choose a destination. Available destinations are:')
+        print('Please choose a destination.')
+        print('Available destinations are:')
+        print(45*'-')
 
         # print destinations with 3 letter IATA code
+<<<<<<< HEAD
         for destination in destinations_class_list:
             if destination.getDestinationAirport() != 'KEF':
                 print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
                     destination.getDestinationAirport()))
+=======
+        for destination in destinations_list:
+            print('\t{:<3}: {:<10}'.format(destination.getDestinationName(),\
+                 destination.getDestinationAirport()))
+>>>>>>> 1f7594aeb555793d646538737e657a7ea9a88471
 
         print()
         dest = input('Your destination (3 letters): ').upper().strip()
@@ -492,6 +502,10 @@ class VoyageUI:
 
     def addVoyage(self):
         '''Gets input from user to add voyage to file'''
+        print('\n'+'-'*45)
+        print('{:^45}'.format('Add new voyage'))
+        print('-'*45)
+
         dest = self.getDest()
         
         # put selection as 2 so while loop is entered
@@ -502,7 +516,8 @@ class VoyageUI:
             # get datetime input
             departure_datetime = self.getDateWithTime()
 
-            print('Please enter one of the following: ')
+            print('Are you sure you want to add this voyage?')
+            print('-'*45)
             print('1 - Confirm input')
             print('2 - Redo input')
             print('3 - Cancel voyage registration')
@@ -527,16 +542,17 @@ class VoyageUI:
                         else:
                             return
 
-                    print('Would you like to assign an airplane to this voyage? (Y/N)')
+                    print('Would you like to assign an airplane to this voyage?')
                     print('(You can also do this later)')
-                    selection = input('Y/N: ').lower().strip()
+                    print('1 - Yes\n2 - No')
+                    selection = input('Input your selection: ').lower().strip()
 
                     # while input is neither y or n
-                    while selection != 'y' and selection != 'n':
+                    while selection != '1' and selection != '2':
                         selection = input('Please enter Y or N to make your choice: ').lower().strip()
 
                     # if chosen to add airplane
-                    if selection == 'y':
+                    if selection == '1':
                         plane_name = AirplaneUI().getAirplaneInput(departure_datetime, arrival_time)
                     # if chosen to add airplane later
                     else:
@@ -560,15 +576,26 @@ class VoyageUI:
         else:
             print('\nInvalid input!\n')
 
+    def countCrewmembers(self, voyage):
+        '''counts crewmembrs on voyage'''
 
-
-    def removeCrewFromVoyage(self,voyage):
         crew_members_counter = 0
         crew_on_voyage = voyage.getCrewOnVoyage()
         for crew_member in crew_on_voyage:
             if crew_member != 'empty':
                 crew_members_counter += 1
+
+        return crew_members_counter
+
+
+
+    def removeCrewFromVoyage(self,voyage):
+        ''' Removes all crewmembers from voyage'''
+
+        crew_members_counter = self.countCrewmembers(voyage)
+
         if crew_members_counter == 0:
+            # if no crewmembers are assinged they can not be removed
             print('\n'+45*'-')
             print('No crewmembers are assigned to the voyage!')
             print(45*'-'+'\n')
@@ -590,5 +617,56 @@ class VoyageUI:
                 return 
             else:
                 print('\nInvalid selection!\n')
+
+    def removeAirplaneFromVoyage(self,voyage):
+        ''' Removes airplane from voyage, staff assigned to the voyage 
+            will be removed '''
+
+        old_airplane_type = voyage.getAircraftID()
+        crew_members_counter = self.countCrewmembers(voyage)
+
+        if crew_members_counter > 0:
+            success = self.removeAirplaneFromVoyageWithStaff(voyage,crew_members_counter)
+            if success:
+                voyage.removeAirplaneFromVoyage()
+                voyage.removeCrewFromVoyage()
+                LL_API().change_voyage(voyage)
+            else: 
+                return 
+
+        else:
+            voyage.removeAirplaneFromVoyage()
+
+            LL_API().change_voyage(voyage)
+
+        print('\n'+'~'*45)
+        a_str = 'Airplane {} has been'.format(old_airplane_type)
+        b_str = 'removed from voyage {}'.format(voyage.getVoyageID())
+        print('{:^45}'.format(a_str))
+        print('{:^45}'.format(b_str))
+        print('~'*45+'\n')
+
+
+
+    def removeAirplaneFromVoyageWithStaff(self,voyage,crew_members_counter):
+        ''''''
+        while True:
+            print('\n'+'-'*45)
+            a_str = '{} crewmembers are assigned to the voyage'.format(crew_members_counter)
+            print('{:^45}'.format(a_str))
+            print('{:^45}'.format('All crewmembers will be removed'))
+            print('-'*45+'\n')
+            print('Are you sure you want to remove the airplane?')
+            print('1 - Yes\n2 - No (Go back)\n')
+            selection = input('Input your selection: ').strip()
+
+            if selection == '1':
+                return True
+
+            if selection == '2':
+                return False
+            else: 
+                print('\nInvalid input!')
+                 
 
 

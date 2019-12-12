@@ -16,7 +16,7 @@ class DisplayMenuEmployee:
 
         while True: 
             print('What would you like to display?') 
-            print()
+            print('-'*45)
 
             print('1 - All employees')
             print('2 - Single employee')

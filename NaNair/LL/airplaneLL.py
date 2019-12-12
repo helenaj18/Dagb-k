@@ -173,7 +173,13 @@ class AirplaneLL:
                         airplane_type_dict[str(airplane_type)] += 1
                     else:
                         airplane_type_dict[str(airplane_type)] = 1
+                        
+        # If the airplane type has no licensed pilots
         
+        for airplane_type in airplane_type_list:
+            if str(airplane_type) not in airplane_type_dict:
+                airplane_type_dict[str(airplane_type)] = 0
+
         return airplane_type_dict
 
 
