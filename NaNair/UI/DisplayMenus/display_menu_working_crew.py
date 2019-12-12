@@ -7,8 +7,9 @@ class DisplayMenuWorkingCrew:
     def startDisplayMenuWorkingCrew(self):
         '''Menu for displaying working/nonworking crew'''
         while True:
-            print()
-            print('What would you like to see?')
+            
+            print('\nWhat would you like to display?')
+            print('-'*45)
             print('1 - Working crew on a specific day')
             print('2 - Nonworking crew on a specific day')
             print('m - Back to main menu')
