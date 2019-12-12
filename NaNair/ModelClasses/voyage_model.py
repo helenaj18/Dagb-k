@@ -2,12 +2,12 @@
 class Voyage:
     EMPTY = 'empty'
 
-    def __init__(self,voyage_ID,flight_no,seats_sold_out,flight_no_home,seats_sold_home,departure_location,destination,\
+    def __init__(self,voyage_ID,flight_no_out,seats_sold_out,flight_no_home,seats_sold_home,departure_location,destination,\
                     departure_time,departure_time_out,arrival_time_out,arrival_time_home,aircraft_ID,captain,copilot,\
                         head_flight_att,flight_att_one,flight_att_two):
 
         self.__voyage_ID = voyage_ID
-        self.__flight_no_out = flight_no
+        self.__flight_no_out = flight_no_out
         self.__flight_no_home = flight_no_home
         self.__departure_location = departure_location
         self.__destination = destination

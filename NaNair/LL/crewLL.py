@@ -73,46 +73,46 @@ class CrewLL:
         Returns a list of pilot instances'''
 
         pilots_instances_list = self.getPilots()
-        licensedPilots = []
+        licensed_pilot_list = []
 
         # Checks all pilots if they have inputted license. 
         # If they do they are added to a list
         for pilot in pilots_instances_list:
             if pilot_license == pilot.getLicense():
-                licensedPilots.append(pilot)
+                licensed_pilot_list.append(pilot)
         
-        return licensedPilots
+        return licensed_pilot_list
  
  
-    def addCrew(self, CrewData):
+    def addCrew(self, Crew_data_list):
         '''Takes in a list of data and formats 
         it to a string to add to file.'''
 
         # Add necessary data that can be found from user input
 
         # If 'Captain' was selected in UI layer
-        if CrewData[self.ROLE_const] == '1': 
-            CrewData.insert(self.ROLE_const, 'Pilot')
-            CrewData[self.RANK_const] = '1'
+        if Crew_data_list[self.ROLE_const] == '1': 
+            Crew_data_list.insert(self.ROLE_const, 'Pilot')
+            Crew_data_list[self.RANK_const] = '1'
 
         # If 'Copilot' was selected in UI layer
-        elif CrewData[self.ROLE_const] == '2':
-            CrewData.insert(self.ROLE_const, 'Pilot')
-            CrewData[self.RANK_const] = '0'
+        elif Crew_data_list[self.ROLE_const] == '2':
+            Crew_data_list.insert(self.ROLE_const, 'Pilot')
+            Crew_data_list[self.RANK_const] = '0'
 
         # If 'Head service manager' was selected in UI layer
-        elif CrewData[self.ROLE_const] == '3':
-            CrewData.insert(self.ROLE_const, 'Cabincrew')
-            CrewData.insert(self.LICENSE_const, 'N/A')
-            CrewData[self.RANK_const] = '1'
+        elif Crew_data_list[self.ROLE_const] == '3':
+            Crew_data_list.insert(self.ROLE_const, 'Cabincrew')
+            Crew_data_list.insert(self.LICENSE_const, 'N/A')
+            Crew_data_list[self.RANK_const] = '1'
         
         # If 'Flight Attendant' was selected in UI layer
         else:
-            CrewData.insert(self.ROLE_const, 'Cabincrew')
-            CrewData.insert(self.LICENSE_const, 'N/A')
-            CrewData[self.RANK_const] = '0'
+            Crew_data_list.insert(self.ROLE_const, 'Cabincrew')
+            Crew_data_list.insert(self.LICENSE_const, 'N/A')
+            Crew_data_list[self.RANK_const] = '0'
 
-        new_employee_str = ','.join(CrewData)
+        new_employee_str = ','.join(Crew_data_list)
 
         return IO_API().addCrew(new_employee_str)
 

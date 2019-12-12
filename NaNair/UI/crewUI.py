@@ -187,10 +187,11 @@ class CrewUI:
 
     def changeEmployeeInfo(self,employee):
         '''Sends changed instance into LL layer'''
-        print()
-        print('Employee information has been changed!')
-        return LL_API().changeCrewInfo(employee)
         
+        LL_API().changeCrewInfo(employee)
+        print('\n'+'~'*45)
+        print('Employee info has been updated!')
+        print('~'*45+'\n')
 
             
     def showOneCrewMember(self,crew_id):
@@ -354,7 +355,6 @@ class CrewUI:
         elif rank == 'm':
             return
 
-        print('\nPress enter if you want to add this information later!\n')
         home_address = self.getHomeAddress()
         info_list.append(home_address)
 
