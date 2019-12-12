@@ -30,7 +30,7 @@ class SubMenuEdit:
             print('m - Main menu')
             print()
 
-            selection = input('Please chose one of the above: ').strip()
+            selection = input('Please choose one of the above: ').strip()
 
             if selection == '1':
                 # edit existing voyage
@@ -43,16 +43,20 @@ class SubMenuEdit:
                 print('1 - Change emergency contact')
                 print('2 - Change emergency phone number')
                 print()
-                user_selection = input('Please choose one of the above:').strip()
+                user_selection = input('Please choose one of the above: ').strip()
 
+                while user_selection != '1' and user_selection != '2':
+                    print('Invalid selection!')
+                    user_selection = input('Please enter 1 or 2:').strip()
+
+                
                 if user_selection == '1':
                     # name of emergency contact changed
                     DestinationUI().changeEmergencyContactName()
                 elif user_selection == '2':
                     # phone number of emergency contact changed
                     DestinationUI().changeEmergencyContactPhoneNumber()
-                else:
-                    print('Invalid selection!')
+
 
             elif selection == '3':
                 while True:
