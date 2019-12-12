@@ -148,5 +148,4 @@ class VoyageIO:
 
         file_object.close()
 
-        #return file_object
 

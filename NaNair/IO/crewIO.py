@@ -80,8 +80,7 @@ class CrewIO:
                         'email':emp.getEmail()
                     })
 
-                 
-        
+        file_object.close()
 
     def addCrewToFile(self,new_employee_str):
         '''Adds new employee info into file'''
