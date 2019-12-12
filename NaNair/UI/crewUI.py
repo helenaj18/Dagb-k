@@ -119,10 +119,9 @@ class CrewUI:
         header = 'Working Crew' if not_working else 'Not Working crew'
         format_str = ''
 
-        if crew_list != None:
+        if crew_list != None and crew_list != []:
             print('\n'+'-'*45)
             print('{:^45}'.format(header))
-            print()
             print('-'*45+'\n')
 
             # Different prints for working and not working crew
