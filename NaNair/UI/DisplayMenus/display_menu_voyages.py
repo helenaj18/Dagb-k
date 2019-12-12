@@ -13,7 +13,7 @@ class DisplayMenuVoyages:
 
         while True: 
             print('What would you like to display?')
-            print()
+            print('-'*45)
             print('1 - All voyages')
             print('2 - A single voyage by ID')
             print('m - Back to main menu')
@@ -33,7 +33,9 @@ class DisplayMenuVoyages:
                 if VoyageUI().showOneVoyage() != None:
                     return
                 else:
-                    print('No voyage with this ID\n')
+                    print('\n'+'-'*45)
+                    print('No voyage with this ID!')
+                    print('-'*45+'\n')
 
 
             elif selection == 'm':
