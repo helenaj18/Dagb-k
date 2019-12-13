@@ -395,8 +395,9 @@ class VoyageUI:
         print()
         aircraft_ID = AirplaneUI().getAirplaneInput(depart_datetime_object, arrival_datetime_object)
         voyage.setAircraftID(aircraft_ID)
-
-        print('\nAirplane has been added to voyage {}'.format(voyage.getVoyageID()))
+        print('\n'+'~'*45)
+        print('Airplane has been added to voyage {}'.format(voyage.getVoyageID()))
+        print('~'*45+'\n')
         return LL_API().change_voyage(voyage)
 
     def showAllVoyagesInRange(self, start_datetime = '', end_datetime = ''):
