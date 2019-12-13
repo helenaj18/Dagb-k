@@ -82,7 +82,7 @@ class VoyageLL:
         Returns True if he is, else False.'''
 
         # all voyages on inputted date
-        voyages_intstance_list = self.getVoyageInDateRange(date, date)
+        voyages_intstance_list = self.getVoyageInDateRange(daBte, date)
         
         for voyage in voyages_intstance_list:
             # if employee is assigned to voyage

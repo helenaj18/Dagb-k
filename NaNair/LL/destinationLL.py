@@ -11,8 +11,7 @@ class DestinationLL:
         return IO_API().loadDestinationFromFile()
 
     def addDestination(self,new_destination):
-        '''Gets information about a new destination
-           and adds it to destination file'''
+        '''Adds new destination it to destination file'''
         IO_API().addDestinationToFile(new_destination)
 
 
