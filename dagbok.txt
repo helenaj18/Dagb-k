@@ -252,7 +252,11 @@ svo hjálpa henni þegar hún er búin að bæta við þessari virkni
 Marinella ætlar að vinna í notkunartilvikum
 Sjáumst eftir hádegi kæra dagbók!!!!
 
+<<<<<<< HEAD
+Hádegisfundur kl 12:25
+=======
 -----------Hádeigisfundur kl 12:25
+>>>>>>> a3b2e0ca5466875db5c13ec4fadd4e61a2fe8439
 !!Núna er CODE FREEZE.!!
 Erla kláraði videoið!!! vúhú
 Forritið er núna tilbúið þannig Kinga ætlar að laga wireframe út frá þessum breytingum og bæta
