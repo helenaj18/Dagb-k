@@ -190,7 +190,7 @@ class CrewUI:
         
         LL_API().changeCrewInfo(employee)
         print('\n'+'~'*45)
-        print('Employee info has been updated!')
+        print('{:^45}'.format('Employee info has been updated!'))
         print('~'*45+'\n')
 
             
