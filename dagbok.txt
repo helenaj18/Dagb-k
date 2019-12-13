@@ -270,5 +270,13 @@ eftir þær. Við bættum aðeins meira lýsandi texta á nokkra staði og nokkr
 Kláruðum líka klasarit og stöðurit sem lýsir kerfinu og bættum við viðeigangi 
 notkunartilvikum... 
 ætlum klára skýrsluna á morgun, lítið eftir, yfirfeð
-svo bara skila!!  
+svo bara skila!! 
+
+
+-----------13.12.2019-----------
+-----------Kl 10:00
+Kæra dagbók, ætlum að leggja lokahönd á skýrluna og myndbandið. 
+þurfum að gera happy path og taka upp smá inngang á videoið svo þarf bara að setja skýrluna fallega upp 
+og svona
+
 
