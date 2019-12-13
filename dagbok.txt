@@ -288,3 +288,8 @@ Kveðjumst í bili kæra dagbók </3
 Hæ erum ennþá hér og erum búnar að búa til mjög mörg pdf 
 en höldum að þetta sé í lagi núna
 Bless kæra dagbók <3
+
+
+GITHUB REPO 
+hér er linkur á GitHub repoið okkar
+https://github.com/helenaj18/Dagbok.git         (jáá það heitir Dagbok :) )
