@@ -147,7 +147,7 @@ class VoyageUI:
             else:
                 print('-'*45+'\n')
                 print('{:^45}'.format('All voyages in range are completed'))
-                print('{:^45}'.format('not possible to change'))
+                print('{:^45}'.format('only possible to change seats'))
                 print('\n'+'-'*45)
                 return None
 
