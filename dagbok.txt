@@ -218,7 +218,7 @@ Mjög lítið eftir
 
 ----------Kl 21:00
 CODE FREEZE
-öll virkni komin, ætlum ekki að bæta neinu við bara formatta og laga villuboð
+Öll virkni komin, ætlum ekki að bæta neinu við bara formatta og laga villuboð
 
 
 ----------11.12.2019 ----------
@@ -229,7 +229,7 @@ Allar A og B-kröfurnar eru ready, erum núna bara að bæta og laga og gera flo
 Náðum einnig að gera 2 C-kröfur sem er frekar cool.
 
 ----------kl 18:45
-Bættum við smá virki... code freeze ekki alveg framfylgt 
+Bættum við smá virkni... code freeze ekki alveg framfylgt 
 en nú er hægt að taka starfsfólk af vinnuferð, bæta við nýrri flugvélatýpu oooog flugnúmerin breytast eftir tíma! 
 formattið allt komið 
 öll viluboð komin 
@@ -252,11 +252,7 @@ svo hjálpa henni þegar hún er búin að bæta við þessari virkni
 Marinella ætlar að vinna í notkunartilvikum
 Sjáumst eftir hádegi kæra dagbók!!!!
 
-<<<<<<< HEAD
-Hádegisfundur kl 12:25
-=======
------------Hádeigisfundur kl 12:25
->>>>>>> a3b2e0ca5466875db5c13ec4fadd4e61a2fe8439
+-----------Hádegisfundur kl 12:25
 !!Núna er CODE FREEZE.!!
 Erla kláraði videoið!!! vúhú
 Forritið er núna tilbúið þannig Kinga ætlar að laga wireframe út frá þessum breytingum og bæta
@@ -283,4 +279,6 @@ Kæra dagbók, ætlum að leggja lokahönd á skýrluna og myndbandið.
 þurfum að gera happy path og taka upp smá inngang á videoið svo þarf bara að setja skýrluna fallega upp 
 og svona
 
-
+-----------Kl 12:00
+BÚNAR!!!! SO PROUD!!!!!
+Kveðjumst í bili kæra dagbók </3
